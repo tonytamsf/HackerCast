@@ -1,2 +1,4 @@
 requests
 beautifulsoup4
+goose3
+selenium

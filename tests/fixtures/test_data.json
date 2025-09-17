@@ -1,0 +1,60 @@
+{
+  "mock_stories": [
+    {
+      "id": 40001,
+      "title": "Revolutionary AI Framework Achieves Human-Level Performance",
+      "by": "techpioneer",
+      "score": 1250,
+      "time": 1694890800,
+      "url": "https://example.com/ai-framework-breakthrough",
+      "type": "story"
+    },
+    {
+      "id": 40002,
+      "title": "New Programming Language Promises 10x Performance Gains",
+      "by": "langdev",
+      "score": 980,
+      "time": 1694887200,
+      "url": "https://example.com/new-programming-language",
+      "type": "story"
+    },
+    {
+      "id": 40003,
+      "title": "Quantum Computing Breakthrough: 1000-Qubit Processor Unveiled",
+      "by": "quantumresearcher",
+      "score": 1500,
+      "time": 1694883600,
+      "url": "https://example.com/quantum-breakthrough",
+      "type": "story"
+    }
+  ],
+  "expected_outputs": {
+    "min_script_length": 500,
+    "min_word_count": 200,
+    "max_processing_time": 120,
+    "required_files": ["script", "data", "audio"]
+  },
+  "performance_thresholds": {
+    "fetch_stories_max_time": 30,
+    "scrape_articles_max_time": 60,
+    "generate_script_max_time": 10,
+    "full_pipeline_max_time": 120
+  },
+  "error_scenarios": [
+    {
+      "name": "network_timeout",
+      "description": "Simulate network timeout during API calls",
+      "trigger": "slow_network"
+    },
+    {
+      "name": "api_rate_limit",
+      "description": "Simulate API rate limiting",
+      "trigger": "too_many_requests"
+    },
+    {
+      "name": "invalid_content",
+      "description": "Simulate scraping failure due to invalid content",
+      "trigger": "malformed_html"
+    }
+  ]
+}

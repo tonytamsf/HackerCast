@@ -9,7 +9,7 @@ import pytest
 from main import HackerCastPipeline
 from tests.utils.test_helpers import (
     TemporaryTestEnvironment, PerformanceMonitor, FileValidator,
-    DataValidator, TestMetrics, CommandRunner
+    DataValidator, MetricsCollector, CommandRunner
 )
 from tests.utils.mock_services import E2ETestContext, create_test_config_file
 
@@ -19,7 +19,7 @@ class TestFullPipeline:
 
     def setup_method(self):
         """Setup for each test method."""
-        self.metrics = TestMetrics()
+        self.metrics = MetricsCollector()
         self.performance = PerformanceMonitor()
 
     @pytest.fixture

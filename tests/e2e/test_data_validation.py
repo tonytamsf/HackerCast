@@ -10,9 +10,10 @@ from hn_api import HackerNewsStory
 from scraper import ScrapedContent
 from main import HackerCastPipeline
 from tests.utils.test_helpers import (
-    DataValidator, FileValidator, PerformanceMonitor, TestMetrics
+    DataValidator, FileValidator, PerformanceMonitor, MetricsCollector
 )
-from tests.utils.mock_services import E2ETestContext, create_mock_hn_stories, create_mock_scraped_content
+from tests.utils.mock_services import E2ETestContext
+from tests.utils.test_helpers import create_mock_hn_stories, create_mock_scraped_content
 
 
 class TestDataValidation:
@@ -20,7 +21,7 @@ class TestDataValidation:
 
     def setup_method(self):
         """Setup for each test method."""
-        self.metrics = TestMetrics()
+        self.metrics = MetricsCollector()
 
     def test_hn_stories_data_structure(self):
         """Test HackerNews stories data structure validation."""

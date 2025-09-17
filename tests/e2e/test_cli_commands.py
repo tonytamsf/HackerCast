@@ -11,7 +11,7 @@ import subprocess
 
 from tests.utils.test_helpers import (
     CommandRunner, TemporaryTestEnvironment, FileValidator,
-    PerformanceMonitor, TestMetrics
+    PerformanceMonitor, MetricsCollector
 )
 from tests.utils.mock_services import E2ETestContext
 
@@ -21,7 +21,7 @@ class TestCLICommands:
 
     def setup_method(self):
         """Setup for each test method."""
-        self.metrics = TestMetrics()
+        self.metrics = MetricsCollector()
         self.performance = PerformanceMonitor()
 
     @pytest.fixture

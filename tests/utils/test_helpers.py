@@ -331,7 +331,7 @@ def create_mock_scraped_content(count: int = 3) -> List[ScrapedContent]:
     return content_list
 
 
-class TestMetrics:
+class MetricsCollector:
     """Collect and analyze test metrics."""
 
     def __init__(self):

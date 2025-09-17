@@ -8,7 +8,7 @@ import pytest
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 from main import HackerCastPipeline
-from tests.utils.test_helpers import PerformanceMonitor, TestMetrics, CommandRunner
+from tests.utils.test_helpers import PerformanceMonitor, MetricsCollector, CommandRunner
 from tests.utils.mock_services import E2ETestContext
 
 
@@ -17,7 +17,7 @@ class TestPerformance:
 
     def setup_method(self):
         """Setup for each test method."""
-        self.metrics = TestMetrics()
+        self.metrics = MetricsCollector()
         self.performance = PerformanceMonitor()
 
     @pytest.mark.performance

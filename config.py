@@ -5,6 +5,7 @@ import logging
 from typing import Optional, Dict, Any
 from dataclasses import dataclass, field
 from pathlib import Path
+from dotenv import load_dotenv
 
 # Configure logging
 logger = logging.getLogger(__name__)
@@ -100,6 +101,9 @@ class ConfigManager:
         Args:
             config_file: Optional path to configuration file
         """
+        # Load environment variables from .env file
+        load_dotenv()
+
         self._config = AppConfig()
         self._load_from_environment()
 

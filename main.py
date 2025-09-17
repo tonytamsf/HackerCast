@@ -269,11 +269,9 @@ class HackerCastPipeline:
         for i, article in enumerate(content, 1):
             script_parts.append(f"\n\nStory {i}: {article.title}")
 
-            # Add article summary (first few sentences)
-            sentences = article.content.split(".")[:3]  # First 3 sentences
-            summary = ". ".join(sentences).strip()
-            if summary:
-                script_parts.append(f"\n{summary}.")
+            # Add full article content
+            if article.content.strip():
+                script_parts.append(f"\n{article.content}")
 
             # Add transition
             if i < len(content):

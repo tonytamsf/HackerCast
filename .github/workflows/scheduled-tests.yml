@@ -125,7 +125,7 @@ jobs:
         HACKERCAST_OUTPUT_DIR: ./test_output
 
     - name: Upload daily test results
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       if: always()
       with:
         name: daily-test-results-${{ matrix.os }}-py${{ matrix.python-version }}
@@ -198,7 +198,7 @@ jobs:
         echo "- Memory: $(free -h | grep Mem)" >> benchmark_reports/report.md
 
     - name: Upload benchmark results
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       if: always()
       with:
         name: performance-benchmark-results
@@ -276,7 +276,7 @@ jobs:
         echo '```' >> stress_reports/system.md
 
     - name: Upload stress test results
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       if: always()
       with:
         name: stress-test-results
@@ -334,7 +334,7 @@ jobs:
         HACKERCAST_OUTPUT_DIR: ./test_output
 
     - name: Upload network test results
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       if: always()
       with:
         name: network-integration-results
@@ -378,7 +378,7 @@ jobs:
         echo "- Comprehensive: Daily at 3 AM UTC" >> summary.md
 
     - name: Upload summary
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: scheduled-test-summary
         path: summary.md

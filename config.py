@@ -119,6 +119,8 @@ class ConfigManager:
             self._config.tts.voice_name = os.getenv('TTS_VOICE_NAME')
         if os.getenv('TTS_SPEAKING_RATE'):
             self._config.tts.speaking_rate = float(os.getenv('TTS_SPEAKING_RATE'))
+        if os.getenv('TTS_PITCH'):
+            self._config.tts.pitch = float(os.getenv('TTS_PITCH'))
 
         # Google Cloud
         self._config.google_credentials_path = os.getenv('GOOGLE_APPLICATION_CREDENTIALS')

@@ -82,7 +82,7 @@ jobs:
         HACKERCAST_OUTPUT_DIR: ./test_output
 
     - name: Upload CLI E2E results
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       if: always()
       with:
         name: cli-e2e-results-${{ matrix.os }}
@@ -137,7 +137,7 @@ jobs:
         du -sh test_output/* >> pipeline-artifacts.log
 
     - name: Upload pipeline E2E results
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       if: always()
       with:
         name: pipeline-e2e-results
@@ -182,7 +182,7 @@ jobs:
         HACKERCAST_OUTPUT_DIR: ./test_output
 
     - name: Upload data validation results
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       if: always()
       with:
         name: data-validation-e2e-results
@@ -246,7 +246,7 @@ jobs:
         fi
 
     - name: Upload performance results
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       if: always()
       with:
         name: performance-e2e-results
@@ -313,7 +313,7 @@ jobs:
         find test_output -name "*.json" -o -name "*.txt" -o -name "*.mp3" | head -10 >> comprehensive_reports/report.md
 
     - name: Upload comprehensive results
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       if: always()
       with:
         name: comprehensive-e2e-results
@@ -331,7 +331,7 @@ jobs:
 
     steps:
     - name: Download all artifacts
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
         path: all-artifacts/
 
@@ -361,7 +361,7 @@ jobs:
         fi
 
     - name: Create summary artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: e2e-test-summary
         path: e2e-summary.md

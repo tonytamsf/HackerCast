@@ -549,3 +549,1225 @@ message: "Cloud Text-to-Speech API has not been used in project 144858501828 bef
 2025-09-16 17:47:57 - tts_converter - ERROR - Google Cloud API error: 400 Either `input.text` or `input.ssml` is longer than the limit of 5000 bytes. This limit is different from quotas. To fix, reduce the byte length of the characters in this request, or consider using the Long Audio API: https://cloud.google.com/text-to-speech/docs/create-audio-text-long-audio-synthesis.
 2025-09-16 17:47:57 - __main__ - INFO - Saved pipeline data to: output/data/pipeline_data_20250916_174757.json
 2025-09-16 17:47:58 - __main__ - INFO - Pipeline cleanup completed
+2025-09-16 17:55:48 - hn_api - INFO - Initialized HN API client with base URL: https://hacker-news.firebaseio.com/v0
+2025-09-16 17:55:48 - scraper - INFO - Initialized article scraper
+2025-09-16 17:55:48 - __main__ - INFO - HackerCast pipeline initialized
+2025-09-16 17:55:48 - hn_api - INFO - Fetching top 10 story IDs
+2025-09-16 17:55:48 - hn_api - DEBUG - Making request to: https://hacker-news.firebaseio.com/v0/topstories.json
+2025-09-16 17:55:48 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): hacker-news.firebaseio.com:443
+2025-09-16 17:55:49 - urllib3.connectionpool - DEBUG - https://hacker-news.firebaseio.com:443 "GET /v0/topstories.json HTTP/1.1" 200 4501
+2025-09-16 17:55:49 - hn_api - DEBUG - Successfully fetched data from: https://hacker-news.firebaseio.com/v0/topstories.json
+2025-09-16 17:55:49 - hn_api - INFO - Successfully fetched 10 story IDs
+2025-09-16 17:55:49 - hn_api - INFO - Fetching details for 10 stories
+2025-09-16 17:55:49 - hn_api - DEBUG - Fetching story details for ID: 45262835
+2025-09-16 17:55:49 - hn_api - DEBUG - Making request to: https://hacker-news.firebaseio.com/v0/item/45262835.json
+2025-09-16 17:55:49 - urllib3.connectionpool - DEBUG - https://hacker-news.firebaseio.com:443 "GET /v0/item/45262835.json HTTP/1.1" 200 500
+2025-09-16 17:55:49 - hn_api - DEBUG - Successfully fetched data from: https://hacker-news.firebaseio.com/v0/item/45262835.json
+2025-09-16 17:55:49 - hn_api - DEBUG - Successfully parsed story: Things you can do with a Software Defined Radio (2024)
+2025-09-16 17:55:49 - hn_api - DEBUG - Progress: 1/10 - Things you can do with a Software Defined Radio (2024)
+2025-09-16 17:55:49 - hn_api - DEBUG - Fetching story details for ID: 45270108
+2025-09-16 17:55:49 - hn_api - DEBUG - Making request to: https://hacker-news.firebaseio.com/v0/item/45270108.json
+2025-09-16 17:55:49 - urllib3.connectionpool - DEBUG - https://hacker-news.firebaseio.com:443 "GET /v0/item/45270108.json HTTP/1.1" 200 387
+2025-09-16 17:55:49 - hn_api - DEBUG - Successfully fetched data from: https://hacker-news.firebaseio.com/v0/item/45270108.json
+2025-09-16 17:55:49 - hn_api - DEBUG - Successfully parsed story: Apple releases iOS 15.8.5 security update for 10-year old iPhone 6s
+2025-09-16 17:55:49 - hn_api - DEBUG - Progress: 2/10 - Apple releases iOS 15.8.5 security update for 10-year old iPhone 6s
+2025-09-16 17:55:49 - hn_api - DEBUG - Fetching story details for ID: 45266039
+2025-09-16 17:55:49 - hn_api - DEBUG - Making request to: https://hacker-news.firebaseio.com/v0/item/45266039.json
+2025-09-16 17:55:49 - urllib3.connectionpool - DEBUG - https://hacker-news.firebaseio.com:443 "GET /v0/item/45266039.json HTTP/1.1" 200 368
+2025-09-16 17:55:49 - hn_api - DEBUG - Successfully fetched data from: https://hacker-news.firebaseio.com/v0/item/45266039.json
+2025-09-16 17:55:49 - hn_api - DEBUG - Successfully parsed story: How to make the Framework Desktop run even quieter
+2025-09-16 17:55:49 - hn_api - DEBUG - Progress: 3/10 - How to make the Framework Desktop run even quieter
+2025-09-16 17:55:49 - hn_api - DEBUG - Fetching story details for ID: 45270482
+2025-09-16 17:55:49 - hn_api - DEBUG - Making request to: https://hacker-news.firebaseio.com/v0/item/45270482.json
+2025-09-16 17:55:49 - urllib3.connectionpool - DEBUG - https://hacker-news.firebaseio.com:443 "GET /v0/item/45270482.json HTTP/1.1" 200 233
+2025-09-16 17:55:49 - hn_api - DEBUG - Successfully fetched data from: https://hacker-news.firebaseio.com/v0/item/45270482.json
+2025-09-16 17:55:49 - hn_api - DEBUG - Successfully parsed story: Irssi: IRC Client in a Docker Image
+2025-09-16 17:55:49 - hn_api - DEBUG - Progress: 4/10 - Irssi: IRC Client in a Docker Image
+2025-09-16 17:55:50 - hn_api - DEBUG - Fetching story details for ID: 45265745
+2025-09-16 17:55:50 - hn_api - DEBUG - Making request to: https://hacker-news.firebaseio.com/v0/item/45265745.json
+2025-09-16 17:55:50 - urllib3.connectionpool - DEBUG - https://hacker-news.firebaseio.com:443 "GET /v0/item/45265745.json HTTP/1.1" 200 500
+2025-09-16 17:55:50 - hn_api - DEBUG - Successfully fetched data from: https://hacker-news.firebaseio.com/v0/item/45265745.json
+2025-09-16 17:55:50 - hn_api - DEBUG - Successfully parsed story: Denmark close to wiping out cancer-causing HPV strains after vaccine roll-out
+2025-09-16 17:55:50 - hn_api - DEBUG - Progress: 5/10 - Denmark close to wiping out cancer-causing HPV strains after vaccine roll-out
+2025-09-16 17:55:50 - hn_api - DEBUG - Fetching story details for ID: 45268269
+2025-09-16 17:55:50 - hn_api - DEBUG - Making request to: https://hacker-news.firebaseio.com/v0/item/45268269.json
+2025-09-16 17:55:50 - urllib3.connectionpool - DEBUG - https://hacker-news.firebaseio.com:443 "GET /v0/item/45268269.json HTTP/1.1" 200 340
+2025-09-16 17:55:50 - hn_api - DEBUG - Successfully fetched data from: https://hacker-news.firebaseio.com/v0/item/45268269.json
+2025-09-16 17:55:50 - hn_api - DEBUG - Successfully parsed story: Doom crash after 2.5 years of real-world runtime confirmed on real hardware
+2025-09-16 17:55:50 - hn_api - DEBUG - Progress: 6/10 - Doom crash after 2.5 years of real-world runtime confirmed on real hardware
+2025-09-16 17:55:50 - hn_api - DEBUG - Fetching story details for ID: 45248558
+2025-09-16 17:55:50 - hn_api - DEBUG - Making request to: https://hacker-news.firebaseio.com/v0/item/45248558.json
+2025-09-16 17:55:50 - urllib3.connectionpool - DEBUG - https://hacker-news.firebaseio.com:443 "GET /v0/item/45248558.json HTTP/1.1" 200 250
+2025-09-16 17:55:50 - hn_api - DEBUG - Successfully fetched data from: https://hacker-news.firebaseio.com/v0/item/45248558.json
+2025-09-16 17:55:50 - hn_api - DEBUG - Successfully parsed story: A dumb introduction to z3
+2025-09-16 17:55:50 - hn_api - DEBUG - Progress: 7/10 - A dumb introduction to z3
+2025-09-16 17:55:50 - hn_api - DEBUG - Fetching story details for ID: 45232940
+2025-09-16 17:55:50 - hn_api - DEBUG - Making request to: https://hacker-news.firebaseio.com/v0/item/45232940.json
+2025-09-16 17:55:50 - urllib3.connectionpool - DEBUG - https://hacker-news.firebaseio.com:443 "GET /v0/item/45232940.json HTTP/1.1" 200 262
+2025-09-16 17:55:50 - hn_api - DEBUG - Successfully fetched data from: https://hacker-news.firebaseio.com/v0/item/45232940.json
+2025-09-16 17:55:50 - hn_api - DEBUG - Successfully parsed story: CubeSats are fascinating learning tools for space
+2025-09-16 17:55:50 - hn_api - DEBUG - Progress: 8/10 - CubeSats are fascinating learning tools for space
+2025-09-16 17:55:51 - hn_api - DEBUG - Fetching story details for ID: 45270676
+2025-09-16 17:55:51 - hn_api - DEBUG - Making request to: https://hacker-news.firebaseio.com/v0/item/45270676.json
+2025-09-16 17:55:51 - urllib3.connectionpool - DEBUG - https://hacker-news.firebaseio.com:443 "GET /v0/item/45270676.json HTTP/1.1" 200 257
+2025-09-16 17:55:51 - hn_api - DEBUG - Successfully fetched data from: https://hacker-news.firebaseio.com/v0/item/45270676.json
+2025-09-16 17:55:51 - hn_api - DEBUG - Successfully parsed story: Slow Social Media
+2025-09-16 17:55:51 - hn_api - DEBUG - Progress: 9/10 - Slow Social Media
+2025-09-16 17:55:51 - hn_api - DEBUG - Fetching story details for ID: 45260741
+2025-09-16 17:55:51 - hn_api - DEBUG - Making request to: https://hacker-news.firebaseio.com/v0/item/45260741.json
+2025-09-16 17:55:51 - urllib3.connectionpool - DEBUG - https://hacker-news.firebaseio.com:443 "GET /v0/item/45260741.json HTTP/1.1" 200 2475
+2025-09-16 17:55:51 - hn_api - DEBUG - Successfully fetched data from: https://hacker-news.firebaseio.com/v0/item/45260741.json
+2025-09-16 17:55:51 - hn_api - DEBUG - Successfully parsed story: Shai-Hulud malware attack: Tinycolor and over 40 NPM packages compromised
+2025-09-16 17:55:51 - hn_api - DEBUG - Progress: 10/10 - Shai-Hulud malware attack: Tinycolor and over 40 NPM packages compromised
+2025-09-16 17:55:51 - hn_api - INFO - Successfully fetched 10 stories, 0 failed
+2025-09-16 17:55:51 - __main__ - INFO - Successfully fetched 10 stories
+2025-09-16 17:55:51 - scraper - INFO - Scraping article: https://blinry.org/50-things-with-sdr/
+2025-09-16 17:55:51 - scraper - DEBUG - Extracting content with Goose: https://blinry.org/50-things-with-sdr/
+2025-09-16 17:55:51 - goose3.crawler - DEBUG - Fetching html from https://blinry.org/50-things-with-sdr/
+2025-09-16 17:55:51 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): blinry.org:443
+2025-09-16 17:55:52 - urllib3.connectionpool - DEBUG - https://blinry.org:443 "GET /50-things-with-sdr/ HTTP/1.1" 200 None
+2025-09-16 17:55:52 - scraper - DEBUG - Goose extracted 5244 words
+2025-09-16 17:55:52 - scraper - INFO - Successfully scraped with Goose: 5244 words
+2025-09-16 17:55:52 - __main__ - DEBUG - Scraped: Things you can do with a Software Defined Radio (2024)
+2025-09-16 17:55:52 - scraper - INFO - Scraping article: https://support.apple.com/en-us/125142
+2025-09-16 17:55:52 - scraper - DEBUG - Extracting content with Goose: https://support.apple.com/en-us/125142
+2025-09-16 17:55:52 - goose3.crawler - DEBUG - Fetching html from https://support.apple.com/en-us/125142
+2025-09-16 17:55:52 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): support.apple.com:443
+2025-09-16 17:55:53 - urllib3.connectionpool - DEBUG - https://support.apple.com:443 "GET /en-us/125142 HTTP/1.1" 200 26774
+2025-09-16 17:55:53 - scraper - ERROR - Goose extraction failed for https://support.apple.com/en-us/125142: 'str' object has no attribute 'isoformat'
+2025-09-16 17:55:53 - scraper - DEBUG - Fetching page: https://support.apple.com/en-us/125142
+2025-09-16 17:55:53 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): support.apple.com:443
+2025-09-16 17:55:53 - urllib3.connectionpool - DEBUG - https://support.apple.com:443 "GET /en-us/125142 HTTP/1.1" 200 26774
+2025-09-16 17:55:53 - scraper - DEBUG - Successfully fetched page: https://support.apple.com/en-us/125142
+2025-09-16 17:55:53 - scraper - DEBUG - Extracting content with BeautifulSoup: https://support.apple.com/en-us/125142
+2025-09-16 17:55:53 - scraper - DEBUG - BeautifulSoup extracted 221 words
+2025-09-16 17:55:53 - scraper - INFO - Successfully scraped with BeautifulSoup: 221 words
+2025-09-16 17:55:53 - __main__ - DEBUG - Scraped: Apple releases iOS 15.8.5 security update for 10-year old iPhone 6s
+2025-09-16 17:55:53 - scraper - INFO - Scraping article: https://noctua.at/en/how-to-make-the-framework-desktop-run-even-quieter
+2025-09-16 17:55:53 - scraper - DEBUG - Extracting content with Goose: https://noctua.at/en/how-to-make-the-framework-desktop-run-even-quieter
+2025-09-16 17:55:53 - goose3.crawler - DEBUG - Fetching html from https://noctua.at/en/how-to-make-the-framework-desktop-run-even-quieter
+2025-09-16 17:55:53 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): noctua.at:443
+2025-09-16 17:55:55 - urllib3.connectionpool - DEBUG - https://noctua.at:443 "GET /en/how-to-make-the-framework-desktop-run-even-quieter HTTP/1.1" 200 13920
+2025-09-16 17:55:55 - scraper - DEBUG - Goose extracted 800 words
+2025-09-16 17:55:55 - scraper - INFO - Successfully scraped with Goose: 800 words
+2025-09-16 17:55:55 - __main__ - DEBUG - Scraped: How to make the Framework Desktop run even quieter
+2025-09-16 17:55:55 - scraper - INFO - Scraping article: https://hub.docker.com/_/irssi
+2025-09-16 17:55:55 - scraper - DEBUG - Extracting content with Goose: https://hub.docker.com/_/irssi
+2025-09-16 17:55:55 - goose3.crawler - DEBUG - Fetching html from https://hub.docker.com/_/irssi
+2025-09-16 17:55:55 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): hub.docker.com:443
+2025-09-16 17:55:56 - urllib3.connectionpool - DEBUG - https://hub.docker.com:443 "GET /_/irssi HTTP/1.1" 200 None
+2025-09-16 17:55:56 - scraper - WARNING - Goose extracted no content from: https://hub.docker.com/_/irssi
+2025-09-16 17:55:56 - scraper - DEBUG - Fetching page: https://hub.docker.com/_/irssi
+2025-09-16 17:55:56 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): hub.docker.com:443
+2025-09-16 17:55:56 - urllib3.connectionpool - DEBUG - https://hub.docker.com:443 "GET /_/irssi HTTP/1.1" 200 None
+2025-09-16 17:55:56 - scraper - DEBUG - Successfully fetched page: https://hub.docker.com/_/irssi
+2025-09-16 17:55:56 - scraper - DEBUG - Extracting content with BeautifulSoup: https://hub.docker.com/_/irssi
+2025-09-16 17:55:57 - scraper - WARNING - No text content extracted from: https://hub.docker.com/_/irssi
+2025-09-16 17:55:57 - scraper - ERROR - Failed to scrape content from: https://hub.docker.com/_/irssi
+2025-09-16 17:55:57 - __main__ - WARNING - Failed to scrape: Irssi: IRC Client in a Docker Image
+2025-09-16 17:55:57 - scraper - INFO - Scraping article: https://www.gavi.org/vaccineswork/denmark-close-wiping-out-leading-cancer-causing-hpv-strains-after-vaccine-roll-out
+2025-09-16 17:55:57 - scraper - DEBUG - Extracting content with Goose: https://www.gavi.org/vaccineswork/denmark-close-wiping-out-leading-cancer-causing-hpv-strains-after-vaccine-roll-out
+2025-09-16 17:55:57 - goose3.crawler - DEBUG - Fetching html from https://www.gavi.org/vaccineswork/denmark-close-wiping-out-leading-cancer-causing-hpv-strains-after-vaccine-roll-out
+2025-09-16 17:55:57 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.gavi.org:443
+2025-09-16 17:55:57 - urllib3.connectionpool - DEBUG - https://www.gavi.org:443 "GET /vaccineswork/denmark-close-wiping-out-leading-cancer-causing-hpv-strains-after-vaccine-roll-out HTTP/1.1" 200 25938
+2025-09-16 17:55:57 - scraper - ERROR - Goose extraction failed for https://www.gavi.org/vaccineswork/denmark-close-wiping-out-leading-cancer-causing-hpv-strains-after-vaccine-roll-out: 'str' object has no attribute 'isoformat'
+2025-09-16 17:55:57 - scraper - DEBUG - Fetching page: https://www.gavi.org/vaccineswork/denmark-close-wiping-out-leading-cancer-causing-hpv-strains-after-vaccine-roll-out
+2025-09-16 17:55:57 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.gavi.org:443
+2025-09-16 17:55:57 - urllib3.connectionpool - DEBUG - https://www.gavi.org:443 "GET /vaccineswork/denmark-close-wiping-out-leading-cancer-causing-hpv-strains-after-vaccine-roll-out HTTP/1.1" 200 25938
+2025-09-16 17:55:58 - scraper - DEBUG - Successfully fetched page: https://www.gavi.org/vaccineswork/denmark-close-wiping-out-leading-cancer-causing-hpv-strains-after-vaccine-roll-out
+2025-09-16 17:55:58 - scraper - DEBUG - Extracting content with BeautifulSoup: https://www.gavi.org/vaccineswork/denmark-close-wiping-out-leading-cancer-causing-hpv-strains-after-vaccine-roll-out
+2025-09-16 17:55:58 - scraper - DEBUG - BeautifulSoup extracted 1489 words
+2025-09-16 17:55:58 - scraper - INFO - Successfully scraped with BeautifulSoup: 1489 words
+2025-09-16 17:55:58 - __main__ - DEBUG - Scraped: Denmark close to wiping out cancer-causing HPV strains after vaccine roll-out
+2025-09-16 17:55:58 - scraper - INFO - Scraping article: https://lenowo.org/viewtopic.php?t=31
+2025-09-16 17:55:58 - scraper - DEBUG - Extracting content with Goose: https://lenowo.org/viewtopic.php?t=31
+2025-09-16 17:55:58 - goose3.crawler - DEBUG - Fetching html from https://lenowo.org/viewtopic.php?t=31
+2025-09-16 17:55:58 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): lenowo.org:443
+2025-09-16 17:56:28 - scraper - ERROR - Goose extraction failed for https://lenowo.org/viewtopic.php?t=31: HTTPSConnectionPool(host='lenowo.org', port=443): Read timed out. (read timeout=30.0)
+2025-09-16 17:56:28 - scraper - DEBUG - Fetching page: https://lenowo.org/viewtopic.php?t=31
+2025-09-16 17:56:28 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): lenowo.org:443
+2025-09-16 17:57:05 - urllib3.util.retry - DEBUG - Incremented Retry for (url='/viewtopic.php?t=31'): Retry(total=2, connect=None, read=None, redirect=None, status=None)
+2025-09-16 17:57:05 - urllib3.connectionpool - WARNING - Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("HTTPSConnectionPool(host='lenowo.org', port=443): Read timed out. (read timeout=30)")': /viewtopic.php?t=31
+2025-09-16 17:57:05 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (2): lenowo.org:443
+2025-09-16 17:57:39 - urllib3.util.retry - DEBUG - Incremented Retry for (url='/viewtopic.php?t=31'): Retry(total=1, connect=None, read=None, redirect=None, status=None)
+2025-09-16 17:57:44 - urllib3.connectionpool - WARNING - Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("HTTPSConnectionPool(host='lenowo.org', port=443): Read timed out. (read timeout=30)")': /viewtopic.php?t=31
+2025-09-16 17:57:44 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (3): lenowo.org:443
+2025-09-16 17:58:21 - urllib3.util.retry - DEBUG - Incremented Retry for (url='/viewtopic.php?t=31'): Retry(total=0, connect=None, read=None, redirect=None, status=None)
+2025-09-16 17:58:29 - urllib3.connectionpool - WARNING - Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("HTTPSConnectionPool(host='lenowo.org', port=443): Read timed out. (read timeout=30)")': /viewtopic.php?t=31
+2025-09-16 17:58:29 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (4): lenowo.org:443
+2025-09-16 17:59:00 - scraper - ERROR - Connection error for https://lenowo.org/viewtopic.php?t=31: HTTPSConnectionPool(host='lenowo.org', port=443): Max retries exceeded with url: /viewtopic.php?t=31 (Caused by ReadTimeoutError("HTTPSConnectionPool(host='lenowo.org', port=443): Read timed out. (read timeout=30)"))
+2025-09-16 17:59:00 - scraper - ERROR - Failed to scrape content from: https://lenowo.org/viewtopic.php?t=31
+2025-09-16 17:59:00 - __main__ - WARNING - Failed to scrape: Doom crash after 2.5 years of real-world runtime confirmed on real hardware
+2025-09-16 17:59:00 - scraper - INFO - Scraping article: https://asibahi.github.io/thoughts/a-gentle-introduction-to-z3/
+2025-09-16 17:59:00 - scraper - DEBUG - Extracting content with Goose: https://asibahi.github.io/thoughts/a-gentle-introduction-to-z3/
+2025-09-16 17:59:00 - goose3.crawler - DEBUG - Fetching html from https://asibahi.github.io/thoughts/a-gentle-introduction-to-z3/
+2025-09-16 17:59:00 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): asibahi.github.io:443
+2025-09-16 17:59:01 - urllib3.connectionpool - DEBUG - https://asibahi.github.io:443 "GET /thoughts/a-gentle-introduction-to-z3/ HTTP/1.1" 200 12455
+2025-09-16 17:59:02 - scraper - DEBUG - Goose extracted 2115 words
+2025-09-16 17:59:02 - scraper - INFO - Successfully scraped with Goose: 2115 words
+2025-09-16 17:59:02 - __main__ - DEBUG - Scraped: A dumb introduction to z3
+2025-09-16 17:59:02 - scraper - INFO - Scraping article: https://www.jeffgeerling.com/blog/2025/cubesats-are-fascinating-learning-tools-space
+2025-09-16 17:59:02 - scraper - DEBUG - Extracting content with Goose: https://www.jeffgeerling.com/blog/2025/cubesats-are-fascinating-learning-tools-space
+2025-09-16 17:59:02 - goose3.crawler - DEBUG - Fetching html from https://www.jeffgeerling.com/blog/2025/cubesats-are-fascinating-learning-tools-space
+2025-09-16 17:59:02 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.jeffgeerling.com:443
+2025-09-16 17:59:02 - urllib3.connectionpool - DEBUG - https://www.jeffgeerling.com:443 "GET /blog/2025/cubesats-are-fascinating-learning-tools-space HTTP/1.1" 200 None
+2025-09-16 17:59:02 - scraper - ERROR - Goose extraction failed for https://www.jeffgeerling.com/blog/2025/cubesats-are-fascinating-learning-tools-space: 'str' object has no attribute 'isoformat'
+2025-09-16 17:59:02 - scraper - DEBUG - Fetching page: https://www.jeffgeerling.com/blog/2025/cubesats-are-fascinating-learning-tools-space
+2025-09-16 17:59:02 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.jeffgeerling.com:443
+2025-09-16 17:59:02 - urllib3.connectionpool - DEBUG - https://www.jeffgeerling.com:443 "GET /blog/2025/cubesats-are-fascinating-learning-tools-space HTTP/1.1" 200 None
+2025-09-16 17:59:02 - scraper - DEBUG - Successfully fetched page: https://www.jeffgeerling.com/blog/2025/cubesats-are-fascinating-learning-tools-space
+2025-09-16 17:59:02 - scraper - DEBUG - Extracting content with BeautifulSoup: https://www.jeffgeerling.com/blog/2025/cubesats-are-fascinating-learning-tools-space
+2025-09-16 17:59:02 - scraper - DEBUG - BeautifulSoup extracted 2056 words
+2025-09-16 17:59:02 - scraper - INFO - Successfully scraped with BeautifulSoup: 2056 words
+2025-09-16 17:59:02 - __main__ - DEBUG - Scraped: CubeSats are fascinating learning tools for space
+2025-09-16 17:59:02 - scraper - INFO - Scraping article: https://herman.bearblog.dev/slow-social-media/
+2025-09-16 17:59:02 - scraper - DEBUG - Extracting content with Goose: https://herman.bearblog.dev/slow-social-media/
+2025-09-16 17:59:02 - goose3.crawler - DEBUG - Fetching html from https://herman.bearblog.dev/slow-social-media/
+2025-09-16 17:59:02 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): herman.bearblog.dev:443
+2025-09-16 17:59:03 - urllib3.connectionpool - DEBUG - https://herman.bearblog.dev:443 "GET /slow-social-media/ HTTP/1.1" 200 6232
+2025-09-16 17:59:03 - scraper - ERROR - Goose extraction failed for https://herman.bearblog.dev/slow-social-media/: 'str' object has no attribute 'isoformat'
+2025-09-16 17:59:03 - scraper - DEBUG - Fetching page: https://herman.bearblog.dev/slow-social-media/
+2025-09-16 17:59:03 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): herman.bearblog.dev:443
+2025-09-16 17:59:04 - urllib3.connectionpool - DEBUG - https://herman.bearblog.dev:443 "GET /slow-social-media/ HTTP/1.1" 200 6204
+2025-09-16 17:59:04 - scraper - DEBUG - Successfully fetched page: https://herman.bearblog.dev/slow-social-media/
+2025-09-16 17:59:04 - scraper - DEBUG - Extracting content with BeautifulSoup: https://herman.bearblog.dev/slow-social-media/
+2025-09-16 17:59:04 - scraper - DEBUG - BeautifulSoup extracted 1036 words
+2025-09-16 17:59:04 - scraper - INFO - Successfully scraped with BeautifulSoup: 1036 words
+2025-09-16 17:59:04 - __main__ - DEBUG - Scraped: Slow Social Media
+2025-09-16 17:59:04 - scraper - INFO - Scraping article: https://www.stepsecurity.io/blog/ctrl-tinycolor-and-40-npm-packages-compromised
+2025-09-16 17:59:04 - scraper - DEBUG - Extracting content with Goose: https://www.stepsecurity.io/blog/ctrl-tinycolor-and-40-npm-packages-compromised
+2025-09-16 17:59:04 - goose3.crawler - DEBUG - Fetching html from https://www.stepsecurity.io/blog/ctrl-tinycolor-and-40-npm-packages-compromised
+2025-09-16 17:59:04 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.stepsecurity.io:443
+2025-09-16 17:59:04 - urllib3.connectionpool - DEBUG - https://www.stepsecurity.io:443 "GET /blog/ctrl-tinycolor-and-40-npm-packages-compromised HTTP/1.1" 200 None
+2025-09-16 17:59:05 - scraper - DEBUG - Goose extracted 1841 words
+2025-09-16 17:59:05 - scraper - INFO - Successfully scraped with Goose: 1841 words
+2025-09-16 17:59:05 - __main__ - DEBUG - Scraped: Shai-Hulud malware attack: Tinycolor and over 40 NPM packages compromised
+2025-09-16 17:59:05 - __main__ - INFO - Generated script with 91000 characters
+2025-09-16 17:59:05 - tts_converter - INFO - TTS clients initialized successfully
+2025-09-16 17:59:05 - __main__ - INFO - TTS converter initialized
+2025-09-16 17:59:05 - tts_converter - INFO - Text length (91720 bytes) exceeds standard limit. Using Long Audio API.
+2025-09-16 17:59:05 - tts_converter - ERROR - GCS bucket not configured. Required for Long Audio API.
+2025-09-16 17:59:05 - __main__ - INFO - Saved pipeline data to: output/data/pipeline_data_20250916_175905.json
+2025-09-16 17:59:06 - __main__ - INFO - Pipeline cleanup completed
+2025-09-16 17:59:27 - hn_api - INFO - Initialized HN API client with base URL: https://hacker-news.firebaseio.com/v0
+2025-09-16 17:59:27 - scraper - INFO - Initialized article scraper
+2025-09-16 17:59:27 - __main__ - INFO - HackerCast pipeline initialized
+2025-09-16 17:59:27 - hn_api - INFO - Fetching top 10 story IDs
+2025-09-16 17:59:27 - hn_api - DEBUG - Making request to: https://hacker-news.firebaseio.com/v0/topstories.json
+2025-09-16 17:59:27 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): hacker-news.firebaseio.com:443
+2025-09-16 17:59:28 - urllib3.connectionpool - DEBUG - https://hacker-news.firebaseio.com:443 "GET /v0/topstories.json HTTP/1.1" 200 4501
+2025-09-16 17:59:28 - hn_api - DEBUG - Successfully fetched data from: https://hacker-news.firebaseio.com/v0/topstories.json
+2025-09-16 17:59:28 - hn_api - INFO - Successfully fetched 10 story IDs
+2025-09-16 17:59:28 - hn_api - INFO - Fetching details for 10 stories
+2025-09-16 17:59:28 - hn_api - DEBUG - Fetching story details for ID: 45262835
+2025-09-16 17:59:28 - hn_api - DEBUG - Making request to: https://hacker-news.firebaseio.com/v0/item/45262835.json
+2025-09-16 17:59:28 - urllib3.connectionpool - DEBUG - https://hacker-news.firebaseio.com:443 "GET /v0/item/45262835.json HTTP/1.1" 200 509
+2025-09-16 17:59:28 - hn_api - DEBUG - Successfully fetched data from: https://hacker-news.firebaseio.com/v0/item/45262835.json
+2025-09-16 17:59:28 - hn_api - DEBUG - Successfully parsed story: Things you can do with a Software Defined Radio (2024)
+2025-09-16 17:59:28 - hn_api - DEBUG - Progress: 1/10 - Things you can do with a Software Defined Radio (2024)
+2025-09-16 17:59:28 - hn_api - DEBUG - Fetching story details for ID: 45270108
+2025-09-16 17:59:28 - hn_api - DEBUG - Making request to: https://hacker-news.firebaseio.com/v0/item/45270108.json
+2025-09-16 17:59:28 - urllib3.connectionpool - DEBUG - https://hacker-news.firebaseio.com:443 "GET /v0/item/45270108.json HTTP/1.1" 200 396
+2025-09-16 17:59:28 - hn_api - DEBUG - Successfully fetched data from: https://hacker-news.firebaseio.com/v0/item/45270108.json
+2025-09-16 17:59:28 - hn_api - DEBUG - Successfully parsed story: Apple releases iOS 15.8.5 security update for 10-year old iPhone 6s
+2025-09-16 17:59:28 - hn_api - DEBUG - Progress: 2/10 - Apple releases iOS 15.8.5 security update for 10-year old iPhone 6s
+2025-09-16 17:59:29 - hn_api - DEBUG - Fetching story details for ID: 45266039
+2025-09-16 17:59:29 - hn_api - DEBUG - Making request to: https://hacker-news.firebaseio.com/v0/item/45266039.json
+2025-09-16 17:59:29 - urllib3.connectionpool - DEBUG - https://hacker-news.firebaseio.com:443 "GET /v0/item/45266039.json HTTP/1.1" 200 368
+2025-09-16 17:59:29 - hn_api - DEBUG - Successfully fetched data from: https://hacker-news.firebaseio.com/v0/item/45266039.json
+2025-09-16 17:59:29 - hn_api - DEBUG - Successfully parsed story: How to make the Framework Desktop run even quieter
+2025-09-16 17:59:29 - hn_api - DEBUG - Progress: 3/10 - How to make the Framework Desktop run even quieter
+2025-09-16 17:59:29 - hn_api - DEBUG - Fetching story details for ID: 45270482
+2025-09-16 17:59:29 - hn_api - DEBUG - Making request to: https://hacker-news.firebaseio.com/v0/item/45270482.json
+2025-09-16 17:59:29 - urllib3.connectionpool - DEBUG - https://hacker-news.firebaseio.com:443 "GET /v0/item/45270482.json HTTP/1.1" 200 233
+2025-09-16 17:59:29 - hn_api - DEBUG - Successfully fetched data from: https://hacker-news.firebaseio.com/v0/item/45270482.json
+2025-09-16 17:59:29 - hn_api - DEBUG - Successfully parsed story: Irssi: IRC Client in a Docker Image
+2025-09-16 17:59:29 - hn_api - DEBUG - Progress: 4/10 - Irssi: IRC Client in a Docker Image
+2025-09-16 17:59:29 - hn_api - DEBUG - Fetching story details for ID: 45265745
+2025-09-16 17:59:29 - hn_api - DEBUG - Making request to: https://hacker-news.firebaseio.com/v0/item/45265745.json
+2025-09-16 17:59:29 - urllib3.connectionpool - DEBUG - https://hacker-news.firebaseio.com:443 "GET /v0/item/45265745.json HTTP/1.1" 200 500
+2025-09-16 17:59:29 - hn_api - DEBUG - Successfully fetched data from: https://hacker-news.firebaseio.com/v0/item/45265745.json
+2025-09-16 17:59:29 - hn_api - DEBUG - Successfully parsed story: Denmark close to wiping out cancer-causing HPV strains after vaccine roll-out
+2025-09-16 17:59:29 - hn_api - DEBUG - Progress: 5/10 - Denmark close to wiping out cancer-causing HPV strains after vaccine roll-out
+2025-09-16 17:59:29 - hn_api - DEBUG - Fetching story details for ID: 45268269
+2025-09-16 17:59:29 - hn_api - DEBUG - Making request to: https://hacker-news.firebaseio.com/v0/item/45268269.json
+2025-09-16 17:59:29 - urllib3.connectionpool - DEBUG - https://hacker-news.firebaseio.com:443 "GET /v0/item/45268269.json HTTP/1.1" 200 340
+2025-09-16 17:59:29 - hn_api - DEBUG - Successfully fetched data from: https://hacker-news.firebaseio.com/v0/item/45268269.json
+2025-09-16 17:59:29 - hn_api - DEBUG - Successfully parsed story: Doom crash after 2.5 years of real-world runtime confirmed on real hardware
+2025-09-16 17:59:29 - hn_api - DEBUG - Progress: 6/10 - Doom crash after 2.5 years of real-world runtime confirmed on real hardware
+2025-09-16 17:59:30 - hn_api - DEBUG - Fetching story details for ID: 45248558
+2025-09-16 17:59:30 - hn_api - DEBUG - Making request to: https://hacker-news.firebaseio.com/v0/item/45248558.json
+2025-09-16 17:59:30 - urllib3.connectionpool - DEBUG - https://hacker-news.firebaseio.com:443 "GET /v0/item/45248558.json HTTP/1.1" 200 259
+2025-09-16 17:59:30 - hn_api - DEBUG - Successfully fetched data from: https://hacker-news.firebaseio.com/v0/item/45248558.json
+2025-09-16 17:59:30 - hn_api - DEBUG - Successfully parsed story: A dumb introduction to z3
+2025-09-16 17:59:30 - hn_api - DEBUG - Progress: 7/10 - A dumb introduction to z3
+2025-09-16 17:59:30 - hn_api - DEBUG - Fetching story details for ID: 45232940
+2025-09-16 17:59:30 - hn_api - DEBUG - Making request to: https://hacker-news.firebaseio.com/v0/item/45232940.json
+2025-09-16 17:59:30 - urllib3.connectionpool - DEBUG - https://hacker-news.firebaseio.com:443 "GET /v0/item/45232940.json HTTP/1.1" 200 262
+2025-09-16 17:59:30 - hn_api - DEBUG - Successfully fetched data from: https://hacker-news.firebaseio.com/v0/item/45232940.json
+2025-09-16 17:59:30 - hn_api - DEBUG - Successfully parsed story: CubeSats are fascinating learning tools for space
+2025-09-16 17:59:30 - hn_api - DEBUG - Progress: 8/10 - CubeSats are fascinating learning tools for space
+2025-09-16 17:59:30 - hn_api - DEBUG - Fetching story details for ID: 45270676
+2025-09-16 17:59:30 - hn_api - DEBUG - Making request to: https://hacker-news.firebaseio.com/v0/item/45270676.json
+2025-09-16 17:59:30 - urllib3.connectionpool - DEBUG - https://hacker-news.firebaseio.com:443 "GET /v0/item/45270676.json HTTP/1.1" 200 257
+2025-09-16 17:59:30 - hn_api - DEBUG - Successfully fetched data from: https://hacker-news.firebaseio.com/v0/item/45270676.json
+2025-09-16 17:59:30 - hn_api - DEBUG - Successfully parsed story: Slow Social Media
+2025-09-16 17:59:30 - hn_api - DEBUG - Progress: 9/10 - Slow Social Media
+2025-09-16 17:59:30 - hn_api - DEBUG - Fetching story details for ID: 45260741
+2025-09-16 17:59:30 - hn_api - DEBUG - Making request to: https://hacker-news.firebaseio.com/v0/item/45260741.json
+2025-09-16 17:59:30 - urllib3.connectionpool - DEBUG - https://hacker-news.firebaseio.com:443 "GET /v0/item/45260741.json HTTP/1.1" 200 2475
+2025-09-16 17:59:30 - hn_api - DEBUG - Successfully fetched data from: https://hacker-news.firebaseio.com/v0/item/45260741.json
+2025-09-16 17:59:30 - hn_api - DEBUG - Successfully parsed story: Shai-Hulud malware attack: Tinycolor and over 40 NPM packages compromised
+2025-09-16 17:59:30 - hn_api - DEBUG - Progress: 10/10 - Shai-Hulud malware attack: Tinycolor and over 40 NPM packages compromised
+2025-09-16 17:59:30 - hn_api - INFO - Successfully fetched 10 stories, 0 failed
+2025-09-16 17:59:30 - __main__ - INFO - Successfully fetched 10 stories
+2025-09-16 17:59:30 - scraper - INFO - Scraping article: https://blinry.org/50-things-with-sdr/
+2025-09-16 17:59:30 - scraper - DEBUG - Extracting content with Goose: https://blinry.org/50-things-with-sdr/
+2025-09-16 17:59:30 - goose3.crawler - DEBUG - Fetching html from https://blinry.org/50-things-with-sdr/
+2025-09-16 17:59:30 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): blinry.org:443
+2025-09-16 17:59:32 - urllib3.connectionpool - DEBUG - https://blinry.org:443 "GET /50-things-with-sdr/ HTTP/1.1" 200 None
+2025-09-16 17:59:32 - scraper - DEBUG - Goose extracted 5244 words
+2025-09-16 17:59:32 - scraper - INFO - Successfully scraped with Goose: 5244 words
+2025-09-16 17:59:32 - __main__ - DEBUG - Scraped: Things you can do with a Software Defined Radio (2024)
+2025-09-16 17:59:32 - scraper - INFO - Scraping article: https://support.apple.com/en-us/125142
+2025-09-16 17:59:32 - scraper - DEBUG - Extracting content with Goose: https://support.apple.com/en-us/125142
+2025-09-16 17:59:32 - goose3.crawler - DEBUG - Fetching html from https://support.apple.com/en-us/125142
+2025-09-16 17:59:32 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): support.apple.com:443
+2025-09-16 17:59:32 - urllib3.connectionpool - DEBUG - https://support.apple.com:443 "GET /en-us/125142 HTTP/1.1" 200 26774
+2025-09-16 17:59:32 - scraper - ERROR - Goose extraction failed for https://support.apple.com/en-us/125142: 'str' object has no attribute 'isoformat'
+2025-09-16 17:59:32 - scraper - DEBUG - Fetching page: https://support.apple.com/en-us/125142
+2025-09-16 17:59:32 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): support.apple.com:443
+2025-09-16 17:59:33 - urllib3.connectionpool - DEBUG - https://support.apple.com:443 "GET /en-us/125142 HTTP/1.1" 200 26774
+2025-09-16 17:59:33 - scraper - DEBUG - Successfully fetched page: https://support.apple.com/en-us/125142
+2025-09-16 17:59:33 - scraper - DEBUG - Extracting content with BeautifulSoup: https://support.apple.com/en-us/125142
+2025-09-16 17:59:33 - scraper - DEBUG - BeautifulSoup extracted 221 words
+2025-09-16 17:59:33 - scraper - INFO - Successfully scraped with BeautifulSoup: 221 words
+2025-09-16 17:59:33 - __main__ - DEBUG - Scraped: Apple releases iOS 15.8.5 security update for 10-year old iPhone 6s
+2025-09-16 17:59:33 - scraper - INFO - Scraping article: https://noctua.at/en/how-to-make-the-framework-desktop-run-even-quieter
+2025-09-16 17:59:33 - scraper - DEBUG - Extracting content with Goose: https://noctua.at/en/how-to-make-the-framework-desktop-run-even-quieter
+2025-09-16 17:59:33 - goose3.crawler - DEBUG - Fetching html from https://noctua.at/en/how-to-make-the-framework-desktop-run-even-quieter
+2025-09-16 17:59:33 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): noctua.at:443
+2025-09-16 17:59:34 - urllib3.connectionpool - DEBUG - https://noctua.at:443 "GET /en/how-to-make-the-framework-desktop-run-even-quieter HTTP/1.1" 200 13919
+2025-09-16 17:59:35 - scraper - DEBUG - Goose extracted 800 words
+2025-09-16 17:59:35 - scraper - INFO - Successfully scraped with Goose: 800 words
+2025-09-16 17:59:35 - __main__ - DEBUG - Scraped: How to make the Framework Desktop run even quieter
+2025-09-16 17:59:35 - scraper - INFO - Scraping article: https://hub.docker.com/_/irssi
+2025-09-16 17:59:35 - scraper - DEBUG - Extracting content with Goose: https://hub.docker.com/_/irssi
+2025-09-16 17:59:35 - goose3.crawler - DEBUG - Fetching html from https://hub.docker.com/_/irssi
+2025-09-16 17:59:35 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): hub.docker.com:443
+2025-09-16 17:59:35 - urllib3.connectionpool - DEBUG - https://hub.docker.com:443 "GET /_/irssi HTTP/1.1" 200 None
+2025-09-16 17:59:36 - scraper - WARNING - Goose extracted no content from: https://hub.docker.com/_/irssi
+2025-09-16 17:59:36 - scraper - DEBUG - Fetching page: https://hub.docker.com/_/irssi
+2025-09-16 17:59:36 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): hub.docker.com:443
+2025-09-16 17:59:36 - urllib3.connectionpool - DEBUG - https://hub.docker.com:443 "GET /_/irssi HTTP/1.1" 200 None
+2025-09-16 17:59:36 - scraper - DEBUG - Successfully fetched page: https://hub.docker.com/_/irssi
+2025-09-16 17:59:36 - scraper - DEBUG - Extracting content with BeautifulSoup: https://hub.docker.com/_/irssi
+2025-09-16 17:59:36 - scraper - WARNING - No text content extracted from: https://hub.docker.com/_/irssi
+2025-09-16 17:59:36 - scraper - ERROR - Failed to scrape content from: https://hub.docker.com/_/irssi
+2025-09-16 17:59:36 - __main__ - WARNING - Failed to scrape: Irssi: IRC Client in a Docker Image
+2025-09-16 17:59:36 - scraper - INFO - Scraping article: https://www.gavi.org/vaccineswork/denmark-close-wiping-out-leading-cancer-causing-hpv-strains-after-vaccine-roll-out
+2025-09-16 17:59:36 - scraper - DEBUG - Extracting content with Goose: https://www.gavi.org/vaccineswork/denmark-close-wiping-out-leading-cancer-causing-hpv-strains-after-vaccine-roll-out
+2025-09-16 17:59:36 - goose3.crawler - DEBUG - Fetching html from https://www.gavi.org/vaccineswork/denmark-close-wiping-out-leading-cancer-causing-hpv-strains-after-vaccine-roll-out
+2025-09-16 17:59:36 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.gavi.org:443
+2025-09-16 17:59:37 - urllib3.connectionpool - DEBUG - https://www.gavi.org:443 "GET /vaccineswork/denmark-close-wiping-out-leading-cancer-causing-hpv-strains-after-vaccine-roll-out HTTP/1.1" 200 25938
+2025-09-16 17:59:37 - scraper - ERROR - Goose extraction failed for https://www.gavi.org/vaccineswork/denmark-close-wiping-out-leading-cancer-causing-hpv-strains-after-vaccine-roll-out: 'str' object has no attribute 'isoformat'
+2025-09-16 17:59:37 - scraper - DEBUG - Fetching page: https://www.gavi.org/vaccineswork/denmark-close-wiping-out-leading-cancer-causing-hpv-strains-after-vaccine-roll-out
+2025-09-16 17:59:37 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.gavi.org:443
+2025-09-16 17:59:37 - urllib3.connectionpool - DEBUG - https://www.gavi.org:443 "GET /vaccineswork/denmark-close-wiping-out-leading-cancer-causing-hpv-strains-after-vaccine-roll-out HTTP/1.1" 200 25938
+2025-09-16 17:59:37 - scraper - DEBUG - Successfully fetched page: https://www.gavi.org/vaccineswork/denmark-close-wiping-out-leading-cancer-causing-hpv-strains-after-vaccine-roll-out
+2025-09-16 17:59:37 - scraper - DEBUG - Extracting content with BeautifulSoup: https://www.gavi.org/vaccineswork/denmark-close-wiping-out-leading-cancer-causing-hpv-strains-after-vaccine-roll-out
+2025-09-16 17:59:38 - scraper - DEBUG - BeautifulSoup extracted 1489 words
+2025-09-16 17:59:38 - scraper - INFO - Successfully scraped with BeautifulSoup: 1489 words
+2025-09-16 17:59:38 - __main__ - DEBUG - Scraped: Denmark close to wiping out cancer-causing HPV strains after vaccine roll-out
+2025-09-16 17:59:38 - scraper - INFO - Scraping article: https://lenowo.org/viewtopic.php?t=31
+2025-09-16 17:59:38 - scraper - DEBUG - Extracting content with Goose: https://lenowo.org/viewtopic.php?t=31
+2025-09-16 17:59:38 - goose3.crawler - DEBUG - Fetching html from https://lenowo.org/viewtopic.php?t=31
+2025-09-16 17:59:38 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): lenowo.org:443
+2025-09-16 18:00:12 - scraper - ERROR - Goose extraction failed for https://lenowo.org/viewtopic.php?t=31: HTTPSConnectionPool(host='lenowo.org', port=443): Read timed out. (read timeout=30.0)
+2025-09-16 18:00:12 - scraper - DEBUG - Fetching page: https://lenowo.org/viewtopic.php?t=31
+2025-09-16 18:00:12 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): lenowo.org:443
+2025-09-16 18:00:42 - urllib3.util.retry - DEBUG - Incremented Retry for (url='/viewtopic.php?t=31'): Retry(total=1, connect=None, read=None, redirect=None, status=None)
+2025-09-16 18:00:42 - urllib3.connectionpool - WARNING - Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x1057874d0>, 'Connection to lenowo.org timed out. (connect timeout=30)')': /viewtopic.php?t=31
+2025-09-16 18:00:42 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (2): lenowo.org:443
+2025-09-16 18:01:12 - urllib3.util.retry - DEBUG - Incremented Retry for (url='/viewtopic.php?t=31'): Retry(total=0, connect=None, read=None, redirect=None, status=None)
+2025-09-16 18:01:16 - urllib3.connectionpool - WARNING - Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x105786350>, 'Connection to lenowo.org timed out. (connect timeout=30)')': /viewtopic.php?t=31
+2025-09-16 18:01:16 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (3): lenowo.org:443
+2025-09-16 18:01:46 - scraper - ERROR - Connection error for https://lenowo.org/viewtopic.php?t=31: HTTPSConnectionPool(host='lenowo.org', port=443): Max retries exceeded with url: /viewtopic.php?t=31 (Caused by ReadTimeoutError("HTTPSConnectionPool(host='lenowo.org', port=443): Read timed out. (read timeout=30)"))
+2025-09-16 18:01:46 - scraper - ERROR - Failed to scrape content from: https://lenowo.org/viewtopic.php?t=31
+2025-09-16 18:01:46 - __main__ - WARNING - Failed to scrape: Doom crash after 2.5 years of real-world runtime confirmed on real hardware
+2025-09-16 18:01:46 - scraper - INFO - Scraping article: https://asibahi.github.io/thoughts/a-gentle-introduction-to-z3/
+2025-09-16 18:01:46 - scraper - DEBUG - Extracting content with Goose: https://asibahi.github.io/thoughts/a-gentle-introduction-to-z3/
+2025-09-16 18:01:46 - goose3.crawler - DEBUG - Fetching html from https://asibahi.github.io/thoughts/a-gentle-introduction-to-z3/
+2025-09-16 18:01:46 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): asibahi.github.io:443
+2025-09-16 18:01:47 - urllib3.connectionpool - DEBUG - https://asibahi.github.io:443 "GET /thoughts/a-gentle-introduction-to-z3/ HTTP/1.1" 200 12455
+2025-09-16 18:01:51 - scraper - DEBUG - Goose extracted 2115 words
+2025-09-16 18:01:51 - scraper - INFO - Successfully scraped with Goose: 2115 words
+2025-09-16 18:01:51 - __main__ - DEBUG - Scraped: A dumb introduction to z3
+2025-09-16 18:01:51 - scraper - INFO - Scraping article: https://www.jeffgeerling.com/blog/2025/cubesats-are-fascinating-learning-tools-space
+2025-09-16 18:01:51 - scraper - DEBUG - Extracting content with Goose: https://www.jeffgeerling.com/blog/2025/cubesats-are-fascinating-learning-tools-space
+2025-09-16 18:01:51 - goose3.crawler - DEBUG - Fetching html from https://www.jeffgeerling.com/blog/2025/cubesats-are-fascinating-learning-tools-space
+2025-09-16 18:01:51 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.jeffgeerling.com:443
+2025-09-16 18:01:51 - urllib3.connectionpool - DEBUG - https://www.jeffgeerling.com:443 "GET /blog/2025/cubesats-are-fascinating-learning-tools-space HTTP/1.1" 200 None
+2025-09-16 18:01:52 - scraper - ERROR - Goose extraction failed for https://www.jeffgeerling.com/blog/2025/cubesats-are-fascinating-learning-tools-space: 'str' object has no attribute 'isoformat'
+2025-09-16 18:01:52 - scraper - DEBUG - Fetching page: https://www.jeffgeerling.com/blog/2025/cubesats-are-fascinating-learning-tools-space
+2025-09-16 18:01:52 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.jeffgeerling.com:443
+2025-09-16 18:01:52 - urllib3.connectionpool - DEBUG - https://www.jeffgeerling.com:443 "GET /blog/2025/cubesats-are-fascinating-learning-tools-space HTTP/1.1" 200 None
+2025-09-16 18:01:52 - scraper - DEBUG - Successfully fetched page: https://www.jeffgeerling.com/blog/2025/cubesats-are-fascinating-learning-tools-space
+2025-09-16 18:01:52 - scraper - DEBUG - Extracting content with BeautifulSoup: https://www.jeffgeerling.com/blog/2025/cubesats-are-fascinating-learning-tools-space
+2025-09-16 18:01:52 - scraper - DEBUG - BeautifulSoup extracted 2056 words
+2025-09-16 18:01:52 - scraper - INFO - Successfully scraped with BeautifulSoup: 2056 words
+2025-09-16 18:01:52 - __main__ - DEBUG - Scraped: CubeSats are fascinating learning tools for space
+2025-09-16 18:01:52 - scraper - INFO - Scraping article: https://herman.bearblog.dev/slow-social-media/
+2025-09-16 18:01:52 - scraper - DEBUG - Extracting content with Goose: https://herman.bearblog.dev/slow-social-media/
+2025-09-16 18:01:52 - goose3.crawler - DEBUG - Fetching html from https://herman.bearblog.dev/slow-social-media/
+2025-09-16 18:01:52 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): herman.bearblog.dev:443
+2025-09-16 18:01:52 - urllib3.connectionpool - DEBUG - https://herman.bearblog.dev:443 "GET /slow-social-media/ HTTP/1.1" 200 6189
+2025-09-16 18:01:52 - scraper - ERROR - Goose extraction failed for https://herman.bearblog.dev/slow-social-media/: 'str' object has no attribute 'isoformat'
+2025-09-16 18:01:52 - scraper - DEBUG - Fetching page: https://herman.bearblog.dev/slow-social-media/
+2025-09-16 18:01:52 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): herman.bearblog.dev:443
+2025-09-16 18:01:53 - urllib3.connectionpool - DEBUG - https://herman.bearblog.dev:443 "GET /slow-social-media/ HTTP/1.1" 200 6189
+2025-09-16 18:01:53 - scraper - DEBUG - Successfully fetched page: https://herman.bearblog.dev/slow-social-media/
+2025-09-16 18:01:53 - scraper - DEBUG - Extracting content with BeautifulSoup: https://herman.bearblog.dev/slow-social-media/
+2025-09-16 18:01:53 - scraper - DEBUG - BeautifulSoup extracted 1036 words
+2025-09-16 18:01:53 - scraper - INFO - Successfully scraped with BeautifulSoup: 1036 words
+2025-09-16 18:01:53 - __main__ - DEBUG - Scraped: Slow Social Media
+2025-09-16 18:01:53 - scraper - INFO - Scraping article: https://www.stepsecurity.io/blog/ctrl-tinycolor-and-40-npm-packages-compromised
+2025-09-16 18:01:53 - scraper - DEBUG - Extracting content with Goose: https://www.stepsecurity.io/blog/ctrl-tinycolor-and-40-npm-packages-compromised
+2025-09-16 18:01:53 - goose3.crawler - DEBUG - Fetching html from https://www.stepsecurity.io/blog/ctrl-tinycolor-and-40-npm-packages-compromised
+2025-09-16 18:01:53 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.stepsecurity.io:443
+2025-09-16 18:01:53 - urllib3.connectionpool - DEBUG - https://www.stepsecurity.io:443 "GET /blog/ctrl-tinycolor-and-40-npm-packages-compromised HTTP/1.1" 200 None
+2025-09-16 18:01:55 - scraper - DEBUG - Goose extracted 1841 words
+2025-09-16 18:01:55 - scraper - INFO - Successfully scraped with Goose: 1841 words
+2025-09-16 18:01:55 - __main__ - DEBUG - Scraped: Shai-Hulud malware attack: Tinycolor and over 40 NPM packages compromised
+2025-09-16 18:01:55 - __main__ - INFO - Generated script with 91000 characters
+2025-09-16 18:01:55 - tts_converter - INFO - TTS clients initialized successfully
+2025-09-16 18:01:55 - __main__ - INFO - TTS converter initialized
+2025-09-16 18:01:55 - tts_converter - INFO - Text length (91720 bytes) exceeds standard limit. Using Long Audio API.
+2025-09-16 18:01:55 - tts_converter - ERROR - GCS bucket not configured. Required for Long Audio API.
+2025-09-16 18:01:55 - __main__ - INFO - Saved pipeline data to: output/data/pipeline_data_20250916_180155.json
+2025-09-16 18:01:56 - __main__ - INFO - Pipeline cleanup completed
+2025-09-16 18:02:18 - hn_api - INFO - Initialized HN API client with base URL: https://hacker-news.firebaseio.com/v0
+2025-09-16 18:02:18 - scraper - INFO - Initialized article scraper
+2025-09-16 18:02:18 - __main__ - INFO - HackerCast pipeline initialized
+2025-09-16 18:02:18 - hn_api - INFO - Fetching top 10 story IDs
+2025-09-16 18:02:18 - hn_api - DEBUG - Making request to: https://hacker-news.firebaseio.com/v0/topstories.json
+2025-09-16 18:02:18 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): hacker-news.firebaseio.com:443
+2025-09-16 18:02:18 - urllib3.connectionpool - DEBUG - https://hacker-news.firebaseio.com:443 "GET /v0/topstories.json HTTP/1.1" 200 4501
+2025-09-16 18:02:18 - hn_api - DEBUG - Successfully fetched data from: https://hacker-news.firebaseio.com/v0/topstories.json
+2025-09-16 18:02:18 - hn_api - INFO - Successfully fetched 10 story IDs
+2025-09-16 18:02:18 - hn_api - INFO - Fetching details for 10 stories
+2025-09-16 18:02:18 - hn_api - DEBUG - Fetching story details for ID: 45262835
+2025-09-16 18:02:18 - hn_api - DEBUG - Making request to: https://hacker-news.firebaseio.com/v0/item/45262835.json
+2025-09-16 18:02:19 - urllib3.connectionpool - DEBUG - https://hacker-news.firebaseio.com:443 "GET /v0/item/45262835.json HTTP/1.1" 200 509
+2025-09-16 18:02:19 - hn_api - DEBUG - Successfully fetched data from: https://hacker-news.firebaseio.com/v0/item/45262835.json
+2025-09-16 18:02:19 - hn_api - DEBUG - Successfully parsed story: Things you can do with a Software Defined Radio (2024)
+2025-09-16 18:02:19 - hn_api - DEBUG - Progress: 1/10 - Things you can do with a Software Defined Radio (2024)
+2025-09-16 18:02:19 - hn_api - DEBUG - Fetching story details for ID: 45270108
+2025-09-16 18:02:19 - hn_api - DEBUG - Making request to: https://hacker-news.firebaseio.com/v0/item/45270108.json
+2025-09-16 18:02:19 - urllib3.connectionpool - DEBUG - https://hacker-news.firebaseio.com:443 "GET /v0/item/45270108.json HTTP/1.1" 200 396
+2025-09-16 18:02:19 - hn_api - DEBUG - Successfully fetched data from: https://hacker-news.firebaseio.com/v0/item/45270108.json
+2025-09-16 18:02:19 - hn_api - DEBUG - Successfully parsed story: Apple releases iOS 15.8.5 security update for 10-year old iPhone 6s
+2025-09-16 18:02:19 - hn_api - DEBUG - Progress: 2/10 - Apple releases iOS 15.8.5 security update for 10-year old iPhone 6s
+2025-09-16 18:02:19 - hn_api - DEBUG - Fetching story details for ID: 45266039
+2025-09-16 18:02:19 - hn_api - DEBUG - Making request to: https://hacker-news.firebaseio.com/v0/item/45266039.json
+2025-09-16 18:02:19 - urllib3.connectionpool - DEBUG - https://hacker-news.firebaseio.com:443 "GET /v0/item/45266039.json HTTP/1.1" 200 368
+2025-09-16 18:02:19 - hn_api - DEBUG - Successfully fetched data from: https://hacker-news.firebaseio.com/v0/item/45266039.json
+2025-09-16 18:02:19 - hn_api - DEBUG - Successfully parsed story: How to make the Framework Desktop run even quieter
+2025-09-16 18:02:19 - hn_api - DEBUG - Progress: 3/10 - How to make the Framework Desktop run even quieter
+2025-09-16 18:02:19 - hn_api - DEBUG - Fetching story details for ID: 45270482
+2025-09-16 18:02:19 - hn_api - DEBUG - Making request to: https://hacker-news.firebaseio.com/v0/item/45270482.json
+2025-09-16 18:02:19 - urllib3.connectionpool - DEBUG - https://hacker-news.firebaseio.com:443 "GET /v0/item/45270482.json HTTP/1.1" 200 233
+2025-09-16 18:02:19 - hn_api - DEBUG - Successfully fetched data from: https://hacker-news.firebaseio.com/v0/item/45270482.json
+2025-09-16 18:02:19 - hn_api - DEBUG - Successfully parsed story: Irssi: IRC Client in a Docker Image
+2025-09-16 18:02:19 - hn_api - DEBUG - Progress: 4/10 - Irssi: IRC Client in a Docker Image
+2025-09-16 18:02:19 - hn_api - DEBUG - Fetching story details for ID: 45271481
+2025-09-16 18:02:19 - hn_api - DEBUG - Making request to: https://hacker-news.firebaseio.com/v0/item/45271481.json
+2025-09-16 18:02:19 - urllib3.connectionpool - DEBUG - https://hacker-news.firebaseio.com:443 "GET /v0/item/45271481.json HTTP/1.1" 200 162
+2025-09-16 18:02:19 - hn_api - DEBUG - Successfully fetched data from: https://hacker-news.firebaseio.com/v0/item/45271481.json
+2025-09-16 18:02:19 - hn_api - DEBUG - Successfully parsed story: GNU Midnight Commander
+2025-09-16 18:02:19 - hn_api - DEBUG - Progress: 5/10 - GNU Midnight Commander
+2025-09-16 18:02:20 - hn_api - DEBUG - Fetching story details for ID: 45265745
+2025-09-16 18:02:20 - hn_api - DEBUG - Making request to: https://hacker-news.firebaseio.com/v0/item/45265745.json
+2025-09-16 18:02:20 - urllib3.connectionpool - DEBUG - https://hacker-news.firebaseio.com:443 "GET /v0/item/45265745.json HTTP/1.1" 200 500
+2025-09-16 18:02:20 - hn_api - DEBUG - Successfully fetched data from: https://hacker-news.firebaseio.com/v0/item/45265745.json
+2025-09-16 18:02:20 - hn_api - DEBUG - Successfully parsed story: Denmark close to wiping out cancer-causing HPV strains after vaccine roll-out
+2025-09-16 18:02:20 - hn_api - DEBUG - Progress: 6/10 - Denmark close to wiping out cancer-causing HPV strains after vaccine roll-out
+2025-09-16 18:02:20 - hn_api - DEBUG - Fetching story details for ID: 45268269
+2025-09-16 18:02:20 - hn_api - DEBUG - Making request to: https://hacker-news.firebaseio.com/v0/item/45268269.json
+2025-09-16 18:02:20 - urllib3.connectionpool - DEBUG - https://hacker-news.firebaseio.com:443 "GET /v0/item/45268269.json HTTP/1.1" 200 349
+2025-09-16 18:02:20 - hn_api - DEBUG - Successfully fetched data from: https://hacker-news.firebaseio.com/v0/item/45268269.json
+2025-09-16 18:02:20 - hn_api - DEBUG - Successfully parsed story: Doom crash after 2.5 years of real-world runtime confirmed on real hardware
+2025-09-16 18:02:20 - hn_api - DEBUG - Progress: 7/10 - Doom crash after 2.5 years of real-world runtime confirmed on real hardware
+2025-09-16 18:02:20 - hn_api - DEBUG - Fetching story details for ID: 45248558
+2025-09-16 18:02:20 - hn_api - DEBUG - Making request to: https://hacker-news.firebaseio.com/v0/item/45248558.json
+2025-09-16 18:02:20 - urllib3.connectionpool - DEBUG - https://hacker-news.firebaseio.com:443 "GET /v0/item/45248558.json HTTP/1.1" 200 259
+2025-09-16 18:02:20 - hn_api - DEBUG - Successfully fetched data from: https://hacker-news.firebaseio.com/v0/item/45248558.json
+2025-09-16 18:02:20 - hn_api - DEBUG - Successfully parsed story: A dumb introduction to z3
+2025-09-16 18:02:20 - hn_api - DEBUG - Progress: 8/10 - A dumb introduction to z3
+2025-09-16 18:02:20 - hn_api - DEBUG - Fetching story details for ID: 45270676
+2025-09-16 18:02:20 - hn_api - DEBUG - Making request to: https://hacker-news.firebaseio.com/v0/item/45270676.json
+2025-09-16 18:02:20 - urllib3.connectionpool - DEBUG - https://hacker-news.firebaseio.com:443 "GET /v0/item/45270676.json HTTP/1.1" 200 257
+2025-09-16 18:02:21 - hn_api - DEBUG - Successfully fetched data from: https://hacker-news.firebaseio.com/v0/item/45270676.json
+2025-09-16 18:02:21 - hn_api - DEBUG - Successfully parsed story: Slow Social Media
+2025-09-16 18:02:21 - hn_api - DEBUG - Progress: 9/10 - Slow Social Media
+2025-09-16 18:02:21 - hn_api - DEBUG - Fetching story details for ID: 45232940
+2025-09-16 18:02:21 - hn_api - DEBUG - Making request to: https://hacker-news.firebaseio.com/v0/item/45232940.json
+2025-09-16 18:02:21 - urllib3.connectionpool - DEBUG - https://hacker-news.firebaseio.com:443 "GET /v0/item/45232940.json HTTP/1.1" 200 262
+2025-09-16 18:02:21 - hn_api - DEBUG - Successfully fetched data from: https://hacker-news.firebaseio.com/v0/item/45232940.json
+2025-09-16 18:02:21 - hn_api - DEBUG - Successfully parsed story: CubeSats are fascinating learning tools for space
+2025-09-16 18:02:21 - hn_api - DEBUG - Progress: 10/10 - CubeSats are fascinating learning tools for space
+2025-09-16 18:02:21 - hn_api - INFO - Successfully fetched 10 stories, 0 failed
+2025-09-16 18:02:21 - __main__ - INFO - Successfully fetched 10 stories
+2025-09-16 18:02:21 - scraper - INFO - Scraping article: https://blinry.org/50-things-with-sdr/
+2025-09-16 18:02:21 - scraper - DEBUG - Extracting content with Goose: https://blinry.org/50-things-with-sdr/
+2025-09-16 18:02:21 - goose3.crawler - DEBUG - Fetching html from https://blinry.org/50-things-with-sdr/
+2025-09-16 18:02:21 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): blinry.org:443
+2025-09-16 18:02:22 - urllib3.connectionpool - DEBUG - https://blinry.org:443 "GET /50-things-with-sdr/ HTTP/1.1" 200 None
+2025-09-16 18:02:22 - scraper - DEBUG - Goose extracted 5244 words
+2025-09-16 18:02:22 - scraper - INFO - Successfully scraped with Goose: 5244 words
+2025-09-16 18:02:22 - __main__ - DEBUG - Scraped: Things you can do with a Software Defined Radio (2024)
+2025-09-16 18:02:22 - scraper - INFO - Scraping article: https://support.apple.com/en-us/125142
+2025-09-16 18:02:22 - scraper - DEBUG - Extracting content with Goose: https://support.apple.com/en-us/125142
+2025-09-16 18:02:22 - goose3.crawler - DEBUG - Fetching html from https://support.apple.com/en-us/125142
+2025-09-16 18:02:22 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): support.apple.com:443
+2025-09-16 18:02:23 - urllib3.connectionpool - DEBUG - https://support.apple.com:443 "GET /en-us/125142 HTTP/1.1" 200 26774
+2025-09-16 18:02:23 - scraper - ERROR - Goose extraction failed for https://support.apple.com/en-us/125142: 'str' object has no attribute 'isoformat'
+2025-09-16 18:02:23 - scraper - DEBUG - Fetching page: https://support.apple.com/en-us/125142
+2025-09-16 18:02:23 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): support.apple.com:443
+2025-09-16 18:02:23 - urllib3.connectionpool - DEBUG - https://support.apple.com:443 "GET /en-us/125142 HTTP/1.1" 200 26774
+2025-09-16 18:02:23 - scraper - DEBUG - Successfully fetched page: https://support.apple.com/en-us/125142
+2025-09-16 18:02:23 - scraper - DEBUG - Extracting content with BeautifulSoup: https://support.apple.com/en-us/125142
+2025-09-16 18:02:23 - scraper - DEBUG - BeautifulSoup extracted 221 words
+2025-09-16 18:02:23 - scraper - INFO - Successfully scraped with BeautifulSoup: 221 words
+2025-09-16 18:02:23 - __main__ - DEBUG - Scraped: Apple releases iOS 15.8.5 security update for 10-year old iPhone 6s
+2025-09-16 18:02:23 - scraper - INFO - Scraping article: https://noctua.at/en/how-to-make-the-framework-desktop-run-even-quieter
+2025-09-16 18:02:23 - scraper - DEBUG - Extracting content with Goose: https://noctua.at/en/how-to-make-the-framework-desktop-run-even-quieter
+2025-09-16 18:02:23 - goose3.crawler - DEBUG - Fetching html from https://noctua.at/en/how-to-make-the-framework-desktop-run-even-quieter
+2025-09-16 18:02:23 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): noctua.at:443
+2025-09-16 18:02:25 - urllib3.connectionpool - DEBUG - https://noctua.at:443 "GET /en/how-to-make-the-framework-desktop-run-even-quieter HTTP/1.1" 200 13918
+2025-09-16 18:02:25 - scraper - DEBUG - Goose extracted 800 words
+2025-09-16 18:02:25 - scraper - INFO - Successfully scraped with Goose: 800 words
+2025-09-16 18:02:25 - __main__ - DEBUG - Scraped: How to make the Framework Desktop run even quieter
+2025-09-16 18:02:25 - scraper - INFO - Scraping article: https://hub.docker.com/_/irssi
+2025-09-16 18:02:25 - scraper - DEBUG - Extracting content with Goose: https://hub.docker.com/_/irssi
+2025-09-16 18:02:25 - goose3.crawler - DEBUG - Fetching html from https://hub.docker.com/_/irssi
+2025-09-16 18:02:25 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): hub.docker.com:443
+2025-09-16 18:02:26 - urllib3.connectionpool - DEBUG - https://hub.docker.com:443 "GET /_/irssi HTTP/1.1" 200 None
+2025-09-16 18:02:26 - scraper - WARNING - Goose extracted no content from: https://hub.docker.com/_/irssi
+2025-09-16 18:02:26 - scraper - DEBUG - Fetching page: https://hub.docker.com/_/irssi
+2025-09-16 18:02:26 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): hub.docker.com:443
+2025-09-16 18:02:26 - urllib3.connectionpool - DEBUG - https://hub.docker.com:443 "GET /_/irssi HTTP/1.1" 200 None
+2025-09-16 18:02:26 - scraper - DEBUG - Successfully fetched page: https://hub.docker.com/_/irssi
+2025-09-16 18:02:26 - scraper - DEBUG - Extracting content with BeautifulSoup: https://hub.docker.com/_/irssi
+2025-09-16 18:02:26 - scraper - WARNING - No text content extracted from: https://hub.docker.com/_/irssi
+2025-09-16 18:02:26 - scraper - ERROR - Failed to scrape content from: https://hub.docker.com/_/irssi
+2025-09-16 18:02:26 - __main__ - WARNING - Failed to scrape: Irssi: IRC Client in a Docker Image
+2025-09-16 18:02:26 - scraper - INFO - Scraping article: https://midnight-commander.org/
+2025-09-16 18:02:26 - scraper - DEBUG - Extracting content with Goose: https://midnight-commander.org/
+2025-09-16 18:02:27 - goose3.crawler - DEBUG - Fetching html from https://midnight-commander.org/
+2025-09-16 18:02:27 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): midnight-commander.org:443
+2025-09-16 18:02:27 - urllib3.connectionpool - DEBUG - https://midnight-commander.org:443 "GET / HTTP/1.1" 200 7461
+2025-09-16 18:02:27 - scraper - DEBUG - Goose extracted 208 words
+2025-09-16 18:02:27 - scraper - INFO - Successfully scraped with Goose: 208 words
+2025-09-16 18:02:27 - __main__ - DEBUG - Scraped: GNU Midnight Commander
+2025-09-16 18:02:27 - scraper - INFO - Scraping article: https://www.gavi.org/vaccineswork/denmark-close-wiping-out-leading-cancer-causing-hpv-strains-after-vaccine-roll-out
+2025-09-16 18:02:27 - scraper - DEBUG - Extracting content with Goose: https://www.gavi.org/vaccineswork/denmark-close-wiping-out-leading-cancer-causing-hpv-strains-after-vaccine-roll-out
+2025-09-16 18:02:27 - goose3.crawler - DEBUG - Fetching html from https://www.gavi.org/vaccineswork/denmark-close-wiping-out-leading-cancer-causing-hpv-strains-after-vaccine-roll-out
+2025-09-16 18:02:27 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.gavi.org:443
+2025-09-16 18:02:28 - urllib3.connectionpool - DEBUG - https://www.gavi.org:443 "GET /vaccineswork/denmark-close-wiping-out-leading-cancer-causing-hpv-strains-after-vaccine-roll-out HTTP/1.1" 200 25938
+2025-09-16 18:02:28 - scraper - ERROR - Goose extraction failed for https://www.gavi.org/vaccineswork/denmark-close-wiping-out-leading-cancer-causing-hpv-strains-after-vaccine-roll-out: 'str' object has no attribute 'isoformat'
+2025-09-16 18:02:28 - scraper - DEBUG - Fetching page: https://www.gavi.org/vaccineswork/denmark-close-wiping-out-leading-cancer-causing-hpv-strains-after-vaccine-roll-out
+2025-09-16 18:02:28 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.gavi.org:443
+2025-09-16 18:02:28 - urllib3.connectionpool - DEBUG - https://www.gavi.org:443 "GET /vaccineswork/denmark-close-wiping-out-leading-cancer-causing-hpv-strains-after-vaccine-roll-out HTTP/1.1" 200 25938
+2025-09-16 18:02:28 - scraper - DEBUG - Successfully fetched page: https://www.gavi.org/vaccineswork/denmark-close-wiping-out-leading-cancer-causing-hpv-strains-after-vaccine-roll-out
+2025-09-16 18:02:28 - scraper - DEBUG - Extracting content with BeautifulSoup: https://www.gavi.org/vaccineswork/denmark-close-wiping-out-leading-cancer-causing-hpv-strains-after-vaccine-roll-out
+2025-09-16 18:02:28 - scraper - DEBUG - BeautifulSoup extracted 1489 words
+2025-09-16 18:02:28 - scraper - INFO - Successfully scraped with BeautifulSoup: 1489 words
+2025-09-16 18:02:28 - __main__ - DEBUG - Scraped: Denmark close to wiping out cancer-causing HPV strains after vaccine roll-out
+2025-09-16 18:02:28 - scraper - INFO - Scraping article: https://lenowo.org/viewtopic.php?t=31
+2025-09-16 18:02:28 - scraper - DEBUG - Extracting content with Goose: https://lenowo.org/viewtopic.php?t=31
+2025-09-16 18:02:28 - goose3.crawler - DEBUG - Fetching html from https://lenowo.org/viewtopic.php?t=31
+2025-09-16 18:02:28 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): lenowo.org:443
+2025-09-16 18:03:01 - scraper - ERROR - Goose extraction failed for https://lenowo.org/viewtopic.php?t=31: HTTPSConnectionPool(host='lenowo.org', port=443): Read timed out. (read timeout=30.0)
+2025-09-16 18:03:01 - scraper - DEBUG - Fetching page: https://lenowo.org/viewtopic.php?t=31
+2025-09-16 18:03:01 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): lenowo.org:443
+2025-09-16 18:03:33 - urllib3.util.retry - DEBUG - Incremented Retry for (url='/viewtopic.php?t=31'): Retry(total=1, connect=None, read=None, redirect=None, status=None)
+2025-09-16 18:03:33 - urllib3.connectionpool - WARNING - Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("HTTPSConnectionPool(host='lenowo.org', port=443): Read timed out. (read timeout=30)")': /viewtopic.php?t=31
+2025-09-16 18:03:33 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (2): lenowo.org:443
+2025-09-16 18:04:10 - urllib3.util.retry - DEBUG - Incremented Retry for (url='/viewtopic.php?t=31'): Retry(total=0, connect=None, read=None, redirect=None, status=None)
+2025-09-16 18:04:14 - urllib3.connectionpool - WARNING - Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'ReadTimeoutError("HTTPSConnectionPool(host='lenowo.org', port=443): Read timed out. (read timeout=30)")': /viewtopic.php?t=31
+2025-09-16 18:04:14 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (3): lenowo.org:443
+2025-09-16 18:04:15 - __main__ - INFO - Pipeline cleanup completed
+2025-09-16 18:04:17 - hn_api - INFO - Initialized HN API client with base URL: https://hacker-news.firebaseio.com/v0
+2025-09-16 18:04:17 - scraper - INFO - Initialized article scraper
+2025-09-16 18:04:17 - __main__ - INFO - HackerCast pipeline initialized
+2025-09-16 18:04:17 - hn_api - INFO - Fetching top 10 story IDs
+2025-09-16 18:04:17 - hn_api - DEBUG - Making request to: https://hacker-news.firebaseio.com/v0/topstories.json
+2025-09-16 18:04:17 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): hacker-news.firebaseio.com:443
+2025-09-16 18:04:18 - urllib3.connectionpool - DEBUG - https://hacker-news.firebaseio.com:443 "GET /v0/topstories.json HTTP/1.1" 200 4501
+2025-09-16 18:04:18 - hn_api - DEBUG - Successfully fetched data from: https://hacker-news.firebaseio.com/v0/topstories.json
+2025-09-16 18:04:18 - hn_api - INFO - Successfully fetched 10 story IDs
+2025-09-16 18:04:18 - hn_api - INFO - Fetching details for 10 stories
+2025-09-16 18:04:18 - hn_api - DEBUG - Fetching story details for ID: 45262835
+2025-09-16 18:04:18 - hn_api - DEBUG - Making request to: https://hacker-news.firebaseio.com/v0/item/45262835.json
+2025-09-16 18:04:18 - urllib3.connectionpool - DEBUG - https://hacker-news.firebaseio.com:443 "GET /v0/item/45262835.json HTTP/1.1" 200 509
+2025-09-16 18:04:18 - hn_api - DEBUG - Successfully fetched data from: https://hacker-news.firebaseio.com/v0/item/45262835.json
+2025-09-16 18:04:18 - hn_api - DEBUG - Successfully parsed story: Things you can do with a Software Defined Radio (2024)
+2025-09-16 18:04:18 - hn_api - DEBUG - Progress: 1/10 - Things you can do with a Software Defined Radio (2024)
+2025-09-16 18:04:18 - hn_api - DEBUG - Fetching story details for ID: 45270108
+2025-09-16 18:04:18 - hn_api - DEBUG - Making request to: https://hacker-news.firebaseio.com/v0/item/45270108.json
+2025-09-16 18:04:18 - urllib3.connectionpool - DEBUG - https://hacker-news.firebaseio.com:443 "GET /v0/item/45270108.json HTTP/1.1" 200 396
+2025-09-16 18:04:18 - hn_api - DEBUG - Successfully fetched data from: https://hacker-news.firebaseio.com/v0/item/45270108.json
+2025-09-16 18:04:18 - hn_api - DEBUG - Successfully parsed story: Apple releases iOS 15.8.5 security update for 10-year old iPhone 6s
+2025-09-16 18:04:18 - hn_api - DEBUG - Progress: 2/10 - Apple releases iOS 15.8.5 security update for 10-year old iPhone 6s
+2025-09-16 18:04:18 - hn_api - DEBUG - Fetching story details for ID: 45266039
+2025-09-16 18:04:18 - hn_api - DEBUG - Making request to: https://hacker-news.firebaseio.com/v0/item/45266039.json
+2025-09-16 18:04:18 - urllib3.connectionpool - DEBUG - https://hacker-news.firebaseio.com:443 "GET /v0/item/45266039.json HTTP/1.1" 200 368
+2025-09-16 18:04:18 - hn_api - DEBUG - Successfully fetched data from: https://hacker-news.firebaseio.com/v0/item/45266039.json
+2025-09-16 18:04:18 - hn_api - DEBUG - Successfully parsed story: How to make the Framework Desktop run even quieter
+2025-09-16 18:04:18 - hn_api - DEBUG - Progress: 3/10 - How to make the Framework Desktop run even quieter
+2025-09-16 18:04:18 - hn_api - DEBUG - Fetching story details for ID: 45270482
+2025-09-16 18:04:18 - hn_api - DEBUG - Making request to: https://hacker-news.firebaseio.com/v0/item/45270482.json
+2025-09-16 18:04:18 - urllib3.connectionpool - DEBUG - https://hacker-news.firebaseio.com:443 "GET /v0/item/45270482.json HTTP/1.1" 200 233
+2025-09-16 18:04:18 - hn_api - DEBUG - Successfully fetched data from: https://hacker-news.firebaseio.com/v0/item/45270482.json
+2025-09-16 18:04:18 - hn_api - DEBUG - Successfully parsed story: Irssi: IRC Client in a Docker Image
+2025-09-16 18:04:18 - hn_api - DEBUG - Progress: 4/10 - Irssi: IRC Client in a Docker Image
+2025-09-16 18:04:19 - hn_api - DEBUG - Fetching story details for ID: 45265745
+2025-09-16 18:04:19 - hn_api - DEBUG - Making request to: https://hacker-news.firebaseio.com/v0/item/45265745.json
+2025-09-16 18:04:19 - urllib3.connectionpool - DEBUG - https://hacker-news.firebaseio.com:443 "GET /v0/item/45265745.json HTTP/1.1" 200 500
+2025-09-16 18:04:19 - hn_api - DEBUG - Successfully fetched data from: https://hacker-news.firebaseio.com/v0/item/45265745.json
+2025-09-16 18:04:19 - hn_api - DEBUG - Successfully parsed story: Denmark close to wiping out cancer-causing HPV strains after vaccine roll-out
+2025-09-16 18:04:19 - hn_api - DEBUG - Progress: 5/10 - Denmark close to wiping out cancer-causing HPV strains after vaccine roll-out
+2025-09-16 18:04:19 - hn_api - DEBUG - Fetching story details for ID: 45271481
+2025-09-16 18:04:19 - hn_api - DEBUG - Making request to: https://hacker-news.firebaseio.com/v0/item/45271481.json
+2025-09-16 18:04:19 - urllib3.connectionpool - DEBUG - https://hacker-news.firebaseio.com:443 "GET /v0/item/45271481.json HTTP/1.1" 200 162
+2025-09-16 18:04:19 - hn_api - DEBUG - Successfully fetched data from: https://hacker-news.firebaseio.com/v0/item/45271481.json
+2025-09-16 18:04:19 - hn_api - DEBUG - Successfully parsed story: GNU Midnight Commander
+2025-09-16 18:04:19 - hn_api - DEBUG - Progress: 6/10 - GNU Midnight Commander
+2025-09-16 18:04:19 - hn_api - DEBUG - Fetching story details for ID: 45268269
+2025-09-16 18:04:19 - hn_api - DEBUG - Making request to: https://hacker-news.firebaseio.com/v0/item/45268269.json
+2025-09-16 18:04:19 - urllib3.connectionpool - DEBUG - https://hacker-news.firebaseio.com:443 "GET /v0/item/45268269.json HTTP/1.1" 200 349
+2025-09-16 18:04:19 - hn_api - DEBUG - Successfully fetched data from: https://hacker-news.firebaseio.com/v0/item/45268269.json
+2025-09-16 18:04:19 - hn_api - DEBUG - Successfully parsed story: Doom crash after 2.5 years of real-world runtime confirmed on real hardware
+2025-09-16 18:04:19 - hn_api - DEBUG - Progress: 7/10 - Doom crash after 2.5 years of real-world runtime confirmed on real hardware
+2025-09-16 18:04:19 - hn_api - DEBUG - Fetching story details for ID: 45248558
+2025-09-16 18:04:19 - hn_api - DEBUG - Making request to: https://hacker-news.firebaseio.com/v0/item/45248558.json
+2025-09-16 18:04:20 - urllib3.connectionpool - DEBUG - https://hacker-news.firebaseio.com:443 "GET /v0/item/45248558.json HTTP/1.1" 200 259
+2025-09-16 18:04:20 - hn_api - DEBUG - Successfully fetched data from: https://hacker-news.firebaseio.com/v0/item/45248558.json
+2025-09-16 18:04:20 - hn_api - DEBUG - Successfully parsed story: A dumb introduction to z3
+2025-09-16 18:04:20 - hn_api - DEBUG - Progress: 8/10 - A dumb introduction to z3
+2025-09-16 18:04:20 - hn_api - DEBUG - Fetching story details for ID: 45270676
+2025-09-16 18:04:20 - hn_api - DEBUG - Making request to: https://hacker-news.firebaseio.com/v0/item/45270676.json
+2025-09-16 18:04:20 - urllib3.connectionpool - DEBUG - https://hacker-news.firebaseio.com:443 "GET /v0/item/45270676.json HTTP/1.1" 200 257
+2025-09-16 18:04:20 - hn_api - DEBUG - Successfully fetched data from: https://hacker-news.firebaseio.com/v0/item/45270676.json
+2025-09-16 18:04:20 - hn_api - DEBUG - Successfully parsed story: Slow Social Media
+2025-09-16 18:04:20 - hn_api - DEBUG - Progress: 9/10 - Slow Social Media
+2025-09-16 18:04:20 - hn_api - DEBUG - Fetching story details for ID: 45232940
+2025-09-16 18:04:20 - hn_api - DEBUG - Making request to: https://hacker-news.firebaseio.com/v0/item/45232940.json
+2025-09-16 18:04:20 - urllib3.connectionpool - DEBUG - https://hacker-news.firebaseio.com:443 "GET /v0/item/45232940.json HTTP/1.1" 200 262
+2025-09-16 18:04:20 - hn_api - DEBUG - Successfully fetched data from: https://hacker-news.firebaseio.com/v0/item/45232940.json
+2025-09-16 18:04:20 - hn_api - DEBUG - Successfully parsed story: CubeSats are fascinating learning tools for space
+2025-09-16 18:04:20 - hn_api - DEBUG - Progress: 10/10 - CubeSats are fascinating learning tools for space
+2025-09-16 18:04:20 - hn_api - INFO - Successfully fetched 10 stories, 0 failed
+2025-09-16 18:04:20 - __main__ - INFO - Successfully fetched 10 stories
+2025-09-16 18:04:20 - scraper - INFO - Scraping article: https://blinry.org/50-things-with-sdr/
+2025-09-16 18:04:20 - scraper - DEBUG - Extracting content with Goose: https://blinry.org/50-things-with-sdr/
+2025-09-16 18:04:20 - goose3.crawler - DEBUG - Fetching html from https://blinry.org/50-things-with-sdr/
+2025-09-16 18:04:20 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): blinry.org:443
+2025-09-16 18:04:21 - urllib3.connectionpool - DEBUG - https://blinry.org:443 "GET /50-things-with-sdr/ HTTP/1.1" 200 None
+2025-09-16 18:04:22 - scraper - DEBUG - Goose extracted 5244 words
+2025-09-16 18:04:22 - scraper - INFO - Successfully scraped with Goose: 5244 words
+2025-09-16 18:04:22 - __main__ - DEBUG - Scraped: Things you can do with a Software Defined Radio (2024)
+2025-09-16 18:04:22 - scraper - INFO - Scraping article: https://support.apple.com/en-us/125142
+2025-09-16 18:04:22 - scraper - DEBUG - Extracting content with Goose: https://support.apple.com/en-us/125142
+2025-09-16 18:04:22 - goose3.crawler - DEBUG - Fetching html from https://support.apple.com/en-us/125142
+2025-09-16 18:04:22 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): support.apple.com:443
+2025-09-16 18:04:22 - urllib3.connectionpool - DEBUG - https://support.apple.com:443 "GET /en-us/125142 HTTP/1.1" 200 26774
+2025-09-16 18:04:22 - scraper - ERROR - Goose extraction failed for https://support.apple.com/en-us/125142: 'str' object has no attribute 'isoformat'
+2025-09-16 18:04:22 - scraper - DEBUG - Fetching page: https://support.apple.com/en-us/125142
+2025-09-16 18:04:22 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): support.apple.com:443
+2025-09-16 18:04:22 - urllib3.connectionpool - DEBUG - https://support.apple.com:443 "GET /en-us/125142 HTTP/1.1" 200 26774
+2025-09-16 18:04:22 - scraper - DEBUG - Successfully fetched page: https://support.apple.com/en-us/125142
+2025-09-16 18:04:22 - scraper - DEBUG - Extracting content with BeautifulSoup: https://support.apple.com/en-us/125142
+2025-09-16 18:04:22 - scraper - DEBUG - BeautifulSoup extracted 221 words
+2025-09-16 18:04:22 - scraper - INFO - Successfully scraped with BeautifulSoup: 221 words
+2025-09-16 18:04:22 - __main__ - DEBUG - Scraped: Apple releases iOS 15.8.5 security update for 10-year old iPhone 6s
+2025-09-16 18:04:22 - scraper - INFO - Scraping article: https://noctua.at/en/how-to-make-the-framework-desktop-run-even-quieter
+2025-09-16 18:04:22 - scraper - DEBUG - Extracting content with Goose: https://noctua.at/en/how-to-make-the-framework-desktop-run-even-quieter
+2025-09-16 18:04:22 - goose3.crawler - DEBUG - Fetching html from https://noctua.at/en/how-to-make-the-framework-desktop-run-even-quieter
+2025-09-16 18:04:22 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): noctua.at:443
+2025-09-16 18:04:24 - urllib3.connectionpool - DEBUG - https://noctua.at:443 "GET /en/how-to-make-the-framework-desktop-run-even-quieter HTTP/1.1" 200 13919
+2025-09-16 18:04:24 - scraper - DEBUG - Goose extracted 800 words
+2025-09-16 18:04:24 - scraper - INFO - Successfully scraped with Goose: 800 words
+2025-09-16 18:04:24 - __main__ - DEBUG - Scraped: How to make the Framework Desktop run even quieter
+2025-09-16 18:04:24 - scraper - INFO - Scraping article: https://hub.docker.com/_/irssi
+2025-09-16 18:04:24 - scraper - DEBUG - Extracting content with Goose: https://hub.docker.com/_/irssi
+2025-09-16 18:04:24 - goose3.crawler - DEBUG - Fetching html from https://hub.docker.com/_/irssi
+2025-09-16 18:04:24 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): hub.docker.com:443
+2025-09-16 18:04:25 - urllib3.connectionpool - DEBUG - https://hub.docker.com:443 "GET /_/irssi HTTP/1.1" 200 None
+2025-09-16 18:04:25 - scraper - WARNING - Goose extracted no content from: https://hub.docker.com/_/irssi
+2025-09-16 18:04:25 - scraper - DEBUG - Fetching page: https://hub.docker.com/_/irssi
+2025-09-16 18:04:25 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): hub.docker.com:443
+2025-09-16 18:04:25 - urllib3.connectionpool - DEBUG - https://hub.docker.com:443 "GET /_/irssi HTTP/1.1" 200 None
+2025-09-16 18:04:25 - scraper - DEBUG - Successfully fetched page: https://hub.docker.com/_/irssi
+2025-09-16 18:04:25 - scraper - DEBUG - Extracting content with BeautifulSoup: https://hub.docker.com/_/irssi
+2025-09-16 18:04:25 - scraper - WARNING - No text content extracted from: https://hub.docker.com/_/irssi
+2025-09-16 18:04:25 - scraper - ERROR - Failed to scrape content from: https://hub.docker.com/_/irssi
+2025-09-16 18:04:25 - __main__ - WARNING - Failed to scrape: Irssi: IRC Client in a Docker Image
+2025-09-16 18:04:26 - scraper - INFO - Scraping article: https://www.gavi.org/vaccineswork/denmark-close-wiping-out-leading-cancer-causing-hpv-strains-after-vaccine-roll-out
+2025-09-16 18:04:26 - scraper - DEBUG - Extracting content with Goose: https://www.gavi.org/vaccineswork/denmark-close-wiping-out-leading-cancer-causing-hpv-strains-after-vaccine-roll-out
+2025-09-16 18:04:26 - goose3.crawler - DEBUG - Fetching html from https://www.gavi.org/vaccineswork/denmark-close-wiping-out-leading-cancer-causing-hpv-strains-after-vaccine-roll-out
+2025-09-16 18:04:26 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.gavi.org:443
+2025-09-16 18:04:26 - urllib3.connectionpool - DEBUG - https://www.gavi.org:443 "GET /vaccineswork/denmark-close-wiping-out-leading-cancer-causing-hpv-strains-after-vaccine-roll-out HTTP/1.1" 200 25938
+2025-09-16 18:04:27 - scraper - ERROR - Goose extraction failed for https://www.gavi.org/vaccineswork/denmark-close-wiping-out-leading-cancer-causing-hpv-strains-after-vaccine-roll-out: 'str' object has no attribute 'isoformat'
+2025-09-16 18:04:27 - scraper - DEBUG - Fetching page: https://www.gavi.org/vaccineswork/denmark-close-wiping-out-leading-cancer-causing-hpv-strains-after-vaccine-roll-out
+2025-09-16 18:04:27 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.gavi.org:443
+2025-09-16 18:04:27 - urllib3.connectionpool - DEBUG - https://www.gavi.org:443 "GET /vaccineswork/denmark-close-wiping-out-leading-cancer-causing-hpv-strains-after-vaccine-roll-out HTTP/1.1" 200 25938
+2025-09-16 18:04:27 - scraper - DEBUG - Successfully fetched page: https://www.gavi.org/vaccineswork/denmark-close-wiping-out-leading-cancer-causing-hpv-strains-after-vaccine-roll-out
+2025-09-16 18:04:27 - scraper - DEBUG - Extracting content with BeautifulSoup: https://www.gavi.org/vaccineswork/denmark-close-wiping-out-leading-cancer-causing-hpv-strains-after-vaccine-roll-out
+2025-09-16 18:04:27 - scraper - DEBUG - BeautifulSoup extracted 1489 words
+2025-09-16 18:04:27 - scraper - INFO - Successfully scraped with BeautifulSoup: 1489 words
+2025-09-16 18:04:27 - __main__ - DEBUG - Scraped: Denmark close to wiping out cancer-causing HPV strains after vaccine roll-out
+2025-09-16 18:04:27 - scraper - INFO - Scraping article: https://midnight-commander.org/
+2025-09-16 18:04:27 - scraper - DEBUG - Extracting content with Goose: https://midnight-commander.org/
+2025-09-16 18:04:27 - goose3.crawler - DEBUG - Fetching html from https://midnight-commander.org/
+2025-09-16 18:04:27 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): midnight-commander.org:443
+2025-09-16 18:04:27 - urllib3.connectionpool - DEBUG - https://midnight-commander.org:443 "GET / HTTP/1.1" 200 7461
+2025-09-16 18:04:27 - scraper - DEBUG - Goose extracted 208 words
+2025-09-16 18:04:27 - scraper - INFO - Successfully scraped with Goose: 208 words
+2025-09-16 18:04:27 - __main__ - DEBUG - Scraped: GNU Midnight Commander
+2025-09-16 18:04:27 - scraper - INFO - Scraping article: https://lenowo.org/viewtopic.php?t=31
+2025-09-16 18:04:27 - scraper - DEBUG - Extracting content with Goose: https://lenowo.org/viewtopic.php?t=31
+2025-09-16 18:04:27 - goose3.crawler - DEBUG - Fetching html from https://lenowo.org/viewtopic.php?t=31
+2025-09-16 18:04:27 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): lenowo.org:443
+2025-09-16 18:04:50 - __main__ - INFO - Pipeline cleanup completed
+2025-09-16 18:04:54 - hn_api - INFO - Initialized HN API client with base URL: https://hacker-news.firebaseio.com/v0
+2025-09-16 18:04:54 - scraper - INFO - Initialized article scraper
+2025-09-16 18:04:54 - __main__ - INFO - HackerCast pipeline initialized
+2025-09-16 18:04:54 - hn_api - INFO - Fetching top 5 story IDs
+2025-09-16 18:04:54 - hn_api - DEBUG - Making request to: https://hacker-news.firebaseio.com/v0/topstories.json
+2025-09-16 18:04:54 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): hacker-news.firebaseio.com:443
+2025-09-16 18:04:55 - urllib3.connectionpool - DEBUG - https://hacker-news.firebaseio.com:443 "GET /v0/topstories.json HTTP/1.1" 200 4501
+2025-09-16 18:04:55 - hn_api - DEBUG - Successfully fetched data from: https://hacker-news.firebaseio.com/v0/topstories.json
+2025-09-16 18:04:55 - hn_api - INFO - Successfully fetched 5 story IDs
+2025-09-16 18:04:55 - hn_api - INFO - Fetching details for 5 stories
+2025-09-16 18:04:55 - hn_api - DEBUG - Fetching story details for ID: 45262835
+2025-09-16 18:04:55 - hn_api - DEBUG - Making request to: https://hacker-news.firebaseio.com/v0/item/45262835.json
+2025-09-16 18:04:55 - urllib3.connectionpool - DEBUG - https://hacker-news.firebaseio.com:443 "GET /v0/item/45262835.json HTTP/1.1" 200 509
+2025-09-16 18:04:55 - hn_api - DEBUG - Successfully fetched data from: https://hacker-news.firebaseio.com/v0/item/45262835.json
+2025-09-16 18:04:55 - hn_api - DEBUG - Successfully parsed story: Things you can do with a Software Defined Radio (2024)
+2025-09-16 18:04:55 - hn_api - DEBUG - Progress: 1/5 - Things you can do with a Software Defined Radio (2024)
+2025-09-16 18:04:55 - hn_api - DEBUG - Fetching story details for ID: 45270108
+2025-09-16 18:04:55 - hn_api - DEBUG - Making request to: https://hacker-news.firebaseio.com/v0/item/45270108.json
+2025-09-16 18:04:55 - urllib3.connectionpool - DEBUG - https://hacker-news.firebaseio.com:443 "GET /v0/item/45270108.json HTTP/1.1" 200 396
+2025-09-16 18:04:55 - hn_api - DEBUG - Successfully fetched data from: https://hacker-news.firebaseio.com/v0/item/45270108.json
+2025-09-16 18:04:55 - hn_api - DEBUG - Successfully parsed story: Apple releases iOS 15.8.5 security update for 10-year old iPhone 6s
+2025-09-16 18:04:55 - hn_api - DEBUG - Progress: 2/5 - Apple releases iOS 15.8.5 security update for 10-year old iPhone 6s
+2025-09-16 18:04:55 - hn_api - DEBUG - Fetching story details for ID: 45266039
+2025-09-16 18:04:55 - hn_api - DEBUG - Making request to: https://hacker-news.firebaseio.com/v0/item/45266039.json
+2025-09-16 18:04:55 - urllib3.connectionpool - DEBUG - https://hacker-news.firebaseio.com:443 "GET /v0/item/45266039.json HTTP/1.1" 200 368
+2025-09-16 18:04:55 - hn_api - DEBUG - Successfully fetched data from: https://hacker-news.firebaseio.com/v0/item/45266039.json
+2025-09-16 18:04:55 - hn_api - DEBUG - Successfully parsed story: How to make the Framework Desktop run even quieter
+2025-09-16 18:04:55 - hn_api - DEBUG - Progress: 3/5 - How to make the Framework Desktop run even quieter
+2025-09-16 18:04:55 - hn_api - DEBUG - Fetching story details for ID: 45270482
+2025-09-16 18:04:55 - hn_api - DEBUG - Making request to: https://hacker-news.firebaseio.com/v0/item/45270482.json
+2025-09-16 18:04:55 - urllib3.connectionpool - DEBUG - https://hacker-news.firebaseio.com:443 "GET /v0/item/45270482.json HTTP/1.1" 200 233
+2025-09-16 18:04:55 - hn_api - DEBUG - Successfully fetched data from: https://hacker-news.firebaseio.com/v0/item/45270482.json
+2025-09-16 18:04:55 - hn_api - DEBUG - Successfully parsed story: Irssi: IRC Client in a Docker Image
+2025-09-16 18:04:55 - hn_api - DEBUG - Progress: 4/5 - Irssi: IRC Client in a Docker Image
+2025-09-16 18:04:56 - hn_api - DEBUG - Fetching story details for ID: 45265745
+2025-09-16 18:04:56 - hn_api - DEBUG - Making request to: https://hacker-news.firebaseio.com/v0/item/45265745.json
+2025-09-16 18:04:56 - urllib3.connectionpool - DEBUG - https://hacker-news.firebaseio.com:443 "GET /v0/item/45265745.json HTTP/1.1" 200 500
+2025-09-16 18:04:56 - hn_api - DEBUG - Successfully fetched data from: https://hacker-news.firebaseio.com/v0/item/45265745.json
+2025-09-16 18:04:56 - hn_api - DEBUG - Successfully parsed story: Denmark close to wiping out cancer-causing HPV strains after vaccine roll-out
+2025-09-16 18:04:56 - hn_api - DEBUG - Progress: 5/5 - Denmark close to wiping out cancer-causing HPV strains after vaccine roll-out
+2025-09-16 18:04:56 - hn_api - INFO - Successfully fetched 5 stories, 0 failed
+2025-09-16 18:04:56 - __main__ - INFO - Successfully fetched 5 stories
+2025-09-16 18:04:56 - scraper - INFO - Scraping article: https://blinry.org/50-things-with-sdr/
+2025-09-16 18:04:56 - scraper - DEBUG - Extracting content with Goose: https://blinry.org/50-things-with-sdr/
+2025-09-16 18:04:56 - goose3.crawler - DEBUG - Fetching html from https://blinry.org/50-things-with-sdr/
+2025-09-16 18:04:56 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): blinry.org:443
+2025-09-16 18:04:57 - urllib3.connectionpool - DEBUG - https://blinry.org:443 "GET /50-things-with-sdr/ HTTP/1.1" 200 None
+2025-09-16 18:04:57 - scraper - DEBUG - Goose extracted 5244 words
+2025-09-16 18:04:57 - scraper - INFO - Successfully scraped with Goose: 5244 words
+2025-09-16 18:04:57 - __main__ - DEBUG - Scraped: Things you can do with a Software Defined Radio (2024)
+2025-09-16 18:04:57 - scraper - INFO - Scraping article: https://support.apple.com/en-us/125142
+2025-09-16 18:04:57 - scraper - DEBUG - Extracting content with Goose: https://support.apple.com/en-us/125142
+2025-09-16 18:04:57 - goose3.crawler - DEBUG - Fetching html from https://support.apple.com/en-us/125142
+2025-09-16 18:04:57 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): support.apple.com:443
+2025-09-16 18:04:58 - urllib3.connectionpool - DEBUG - https://support.apple.com:443 "GET /en-us/125142 HTTP/1.1" 200 26774
+2025-09-16 18:04:58 - scraper - ERROR - Goose extraction failed for https://support.apple.com/en-us/125142: 'str' object has no attribute 'isoformat'
+2025-09-16 18:04:58 - scraper - DEBUG - Fetching page: https://support.apple.com/en-us/125142
+2025-09-16 18:04:58 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): support.apple.com:443
+2025-09-16 18:04:58 - urllib3.connectionpool - DEBUG - https://support.apple.com:443 "GET /en-us/125142 HTTP/1.1" 200 26774
+2025-09-16 18:04:58 - scraper - DEBUG - Successfully fetched page: https://support.apple.com/en-us/125142
+2025-09-16 18:04:58 - scraper - DEBUG - Extracting content with BeautifulSoup: https://support.apple.com/en-us/125142
+2025-09-16 18:04:58 - scraper - DEBUG - BeautifulSoup extracted 221 words
+2025-09-16 18:04:58 - scraper - INFO - Successfully scraped with BeautifulSoup: 221 words
+2025-09-16 18:04:58 - __main__ - DEBUG - Scraped: Apple releases iOS 15.8.5 security update for 10-year old iPhone 6s
+2025-09-16 18:04:58 - scraper - INFO - Scraping article: https://noctua.at/en/how-to-make-the-framework-desktop-run-even-quieter
+2025-09-16 18:04:58 - scraper - DEBUG - Extracting content with Goose: https://noctua.at/en/how-to-make-the-framework-desktop-run-even-quieter
+2025-09-16 18:04:58 - goose3.crawler - DEBUG - Fetching html from https://noctua.at/en/how-to-make-the-framework-desktop-run-even-quieter
+2025-09-16 18:04:58 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): noctua.at:443
+2025-09-16 18:05:00 - urllib3.connectionpool - DEBUG - https://noctua.at:443 "GET /en/how-to-make-the-framework-desktop-run-even-quieter HTTP/1.1" 200 13919
+2025-09-16 18:05:00 - scraper - DEBUG - Goose extracted 800 words
+2025-09-16 18:05:00 - scraper - INFO - Successfully scraped with Goose: 800 words
+2025-09-16 18:05:00 - __main__ - DEBUG - Scraped: How to make the Framework Desktop run even quieter
+2025-09-16 18:05:00 - scraper - INFO - Scraping article: https://hub.docker.com/_/irssi
+2025-09-16 18:05:00 - scraper - DEBUG - Extracting content with Goose: https://hub.docker.com/_/irssi
+2025-09-16 18:05:00 - goose3.crawler - DEBUG - Fetching html from https://hub.docker.com/_/irssi
+2025-09-16 18:05:00 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): hub.docker.com:443
+2025-09-16 18:05:01 - urllib3.connectionpool - DEBUG - https://hub.docker.com:443 "GET /_/irssi HTTP/1.1" 200 None
+2025-09-16 18:05:01 - scraper - WARNING - Goose extracted no content from: https://hub.docker.com/_/irssi
+2025-09-16 18:05:01 - scraper - DEBUG - Fetching page: https://hub.docker.com/_/irssi
+2025-09-16 18:05:01 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): hub.docker.com:443
+2025-09-16 18:05:01 - urllib3.connectionpool - DEBUG - https://hub.docker.com:443 "GET /_/irssi HTTP/1.1" 200 None
+2025-09-16 18:05:01 - scraper - DEBUG - Successfully fetched page: https://hub.docker.com/_/irssi
+2025-09-16 18:05:01 - scraper - DEBUG - Extracting content with BeautifulSoup: https://hub.docker.com/_/irssi
+2025-09-16 18:05:01 - scraper - WARNING - No text content extracted from: https://hub.docker.com/_/irssi
+2025-09-16 18:05:01 - scraper - ERROR - Failed to scrape content from: https://hub.docker.com/_/irssi
+2025-09-16 18:05:01 - __main__ - WARNING - Failed to scrape: Irssi: IRC Client in a Docker Image
+2025-09-16 18:05:01 - scraper - INFO - Scraping article: https://www.gavi.org/vaccineswork/denmark-close-wiping-out-leading-cancer-causing-hpv-strains-after-vaccine-roll-out
+2025-09-16 18:05:01 - scraper - DEBUG - Extracting content with Goose: https://www.gavi.org/vaccineswork/denmark-close-wiping-out-leading-cancer-causing-hpv-strains-after-vaccine-roll-out
+2025-09-16 18:05:01 - goose3.crawler - DEBUG - Fetching html from https://www.gavi.org/vaccineswork/denmark-close-wiping-out-leading-cancer-causing-hpv-strains-after-vaccine-roll-out
+2025-09-16 18:05:01 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.gavi.org:443
+2025-09-16 18:05:02 - urllib3.connectionpool - DEBUG - https://www.gavi.org:443 "GET /vaccineswork/denmark-close-wiping-out-leading-cancer-causing-hpv-strains-after-vaccine-roll-out HTTP/1.1" 200 25938
+2025-09-16 18:05:02 - scraper - ERROR - Goose extraction failed for https://www.gavi.org/vaccineswork/denmark-close-wiping-out-leading-cancer-causing-hpv-strains-after-vaccine-roll-out: 'str' object has no attribute 'isoformat'
+2025-09-16 18:05:02 - scraper - DEBUG - Fetching page: https://www.gavi.org/vaccineswork/denmark-close-wiping-out-leading-cancer-causing-hpv-strains-after-vaccine-roll-out
+2025-09-16 18:05:02 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.gavi.org:443
+2025-09-16 18:05:02 - urllib3.connectionpool - DEBUG - https://www.gavi.org:443 "GET /vaccineswork/denmark-close-wiping-out-leading-cancer-causing-hpv-strains-after-vaccine-roll-out HTTP/1.1" 200 25938
+2025-09-16 18:05:02 - scraper - DEBUG - Successfully fetched page: https://www.gavi.org/vaccineswork/denmark-close-wiping-out-leading-cancer-causing-hpv-strains-after-vaccine-roll-out
+2025-09-16 18:05:02 - scraper - DEBUG - Extracting content with BeautifulSoup: https://www.gavi.org/vaccineswork/denmark-close-wiping-out-leading-cancer-causing-hpv-strains-after-vaccine-roll-out
+2025-09-16 18:05:02 - scraper - DEBUG - BeautifulSoup extracted 1489 words
+2025-09-16 18:05:02 - scraper - INFO - Successfully scraped with BeautifulSoup: 1489 words
+2025-09-16 18:05:02 - __main__ - DEBUG - Scraped: Denmark close to wiping out cancer-causing HPV strains after vaccine roll-out
+2025-09-16 18:05:02 - __main__ - INFO - Generated script with 47835 characters
+2025-09-16 18:05:02 - tts_converter - INFO - TTS clients initialized successfully
+2025-09-16 18:05:02 - __main__ - INFO - TTS converter initialized
+2025-09-16 18:05:02 - tts_converter - INFO - Text length (48498 bytes) exceeds standard limit. Using Long Audio API.
+2025-09-16 18:05:02 - tts_converter - ERROR - GCS bucket not configured. Required for Long Audio API.
+2025-09-16 18:05:02 - __main__ - INFO - Saved pipeline data to: output/data/pipeline_data_20250916_180502.json
+2025-09-16 18:05:02 - __main__ - INFO - Pipeline cleanup completed
+2025-09-16 18:08:31 - hn_api - INFO - Initialized HN API client with base URL: https://hacker-news.firebaseio.com/v0
+2025-09-16 18:08:31 - scraper - INFO - Initialized article scraper
+2025-09-16 18:08:31 - __main__ - INFO - HackerCast pipeline initialized
+2025-09-16 18:08:31 - hn_api - INFO - Fetching top 5 story IDs
+2025-09-16 18:08:31 - hn_api - DEBUG - Making request to: https://hacker-news.firebaseio.com/v0/topstories.json
+2025-09-16 18:08:31 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): hacker-news.firebaseio.com:443
+2025-09-16 18:08:32 - urllib3.connectionpool - DEBUG - https://hacker-news.firebaseio.com:443 "GET /v0/topstories.json HTTP/1.1" 200 4501
+2025-09-16 18:08:32 - hn_api - DEBUG - Successfully fetched data from: https://hacker-news.firebaseio.com/v0/topstories.json
+2025-09-16 18:08:32 - hn_api - INFO - Successfully fetched 5 story IDs
+2025-09-16 18:08:32 - hn_api - INFO - Fetching details for 5 stories
+2025-09-16 18:08:32 - hn_api - DEBUG - Fetching story details for ID: 45262835
+2025-09-16 18:08:32 - hn_api - DEBUG - Making request to: https://hacker-news.firebaseio.com/v0/item/45262835.json
+2025-09-16 18:08:32 - urllib3.connectionpool - DEBUG - https://hacker-news.firebaseio.com:443 "GET /v0/item/45262835.json HTTP/1.1" 200 509
+2025-09-16 18:08:32 - hn_api - DEBUG - Successfully fetched data from: https://hacker-news.firebaseio.com/v0/item/45262835.json
+2025-09-16 18:08:32 - hn_api - DEBUG - Successfully parsed story: Things you can do with a Software Defined Radio (2024)
+2025-09-16 18:08:32 - hn_api - DEBUG - Progress: 1/5 - Things you can do with a Software Defined Radio (2024)
+2025-09-16 18:08:32 - hn_api - DEBUG - Fetching story details for ID: 45270108
+2025-09-16 18:08:32 - hn_api - DEBUG - Making request to: https://hacker-news.firebaseio.com/v0/item/45270108.json
+2025-09-16 18:08:32 - urllib3.connectionpool - DEBUG - https://hacker-news.firebaseio.com:443 "GET /v0/item/45270108.json HTTP/1.1" 200 396
+2025-09-16 18:08:32 - hn_api - DEBUG - Successfully fetched data from: https://hacker-news.firebaseio.com/v0/item/45270108.json
+2025-09-16 18:08:32 - hn_api - DEBUG - Successfully parsed story: Apple releases iOS 15.8.5 security update for 10-year old iPhone 6s
+2025-09-16 18:08:32 - hn_api - DEBUG - Progress: 2/5 - Apple releases iOS 15.8.5 security update for 10-year old iPhone 6s
+2025-09-16 18:08:32 - hn_api - DEBUG - Fetching story details for ID: 45266039
+2025-09-16 18:08:32 - hn_api - DEBUG - Making request to: https://hacker-news.firebaseio.com/v0/item/45266039.json
+2025-09-16 18:08:33 - urllib3.connectionpool - DEBUG - https://hacker-news.firebaseio.com:443 "GET /v0/item/45266039.json HTTP/1.1" 200 368
+2025-09-16 18:08:33 - hn_api - DEBUG - Successfully fetched data from: https://hacker-news.firebaseio.com/v0/item/45266039.json
+2025-09-16 18:08:33 - hn_api - DEBUG - Successfully parsed story: How to make the Framework Desktop run even quieter
+2025-09-16 18:08:33 - hn_api - DEBUG - Progress: 3/5 - How to make the Framework Desktop run even quieter
+2025-09-16 18:08:33 - hn_api - DEBUG - Fetching story details for ID: 45270482
+2025-09-16 18:08:33 - hn_api - DEBUG - Making request to: https://hacker-news.firebaseio.com/v0/item/45270482.json
+2025-09-16 18:08:33 - urllib3.connectionpool - DEBUG - https://hacker-news.firebaseio.com:443 "GET /v0/item/45270482.json HTTP/1.1" 200 233
+2025-09-16 18:08:33 - hn_api - DEBUG - Successfully fetched data from: https://hacker-news.firebaseio.com/v0/item/45270482.json
+2025-09-16 18:08:33 - hn_api - DEBUG - Successfully parsed story: Irssi: IRC Client in a Docker Image
+2025-09-16 18:08:33 - hn_api - DEBUG - Progress: 4/5 - Irssi: IRC Client in a Docker Image
+2025-09-16 18:08:33 - hn_api - DEBUG - Fetching story details for ID: 45265745
+2025-09-16 18:08:33 - hn_api - DEBUG - Making request to: https://hacker-news.firebaseio.com/v0/item/45265745.json
+2025-09-16 18:08:33 - urllib3.connectionpool - DEBUG - https://hacker-news.firebaseio.com:443 "GET /v0/item/45265745.json HTTP/1.1" 200 500
+2025-09-16 18:08:33 - hn_api - DEBUG - Successfully fetched data from: https://hacker-news.firebaseio.com/v0/item/45265745.json
+2025-09-16 18:08:33 - hn_api - DEBUG - Successfully parsed story: Denmark close to wiping out cancer-causing HPV strains after vaccine roll-out
+2025-09-16 18:08:33 - hn_api - DEBUG - Progress: 5/5 - Denmark close to wiping out cancer-causing HPV strains after vaccine roll-out
+2025-09-16 18:08:33 - hn_api - INFO - Successfully fetched 5 stories, 0 failed
+2025-09-16 18:08:33 - __main__ - INFO - Successfully fetched 5 stories
+2025-09-16 18:08:33 - scraper - INFO - Scraping article: https://blinry.org/50-things-with-sdr/
+2025-09-16 18:08:33 - scraper - DEBUG - Extracting content with Goose: https://blinry.org/50-things-with-sdr/
+2025-09-16 18:08:33 - goose3.crawler - DEBUG - Fetching html from https://blinry.org/50-things-with-sdr/
+2025-09-16 18:08:33 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): blinry.org:443
+2025-09-16 18:08:34 - urllib3.connectionpool - DEBUG - https://blinry.org:443 "GET /50-things-with-sdr/ HTTP/1.1" 200 None
+2025-09-16 18:08:35 - scraper - DEBUG - Goose extracted 5244 words
+2025-09-16 18:08:35 - scraper - INFO - Successfully scraped with Goose: 5244 words
+2025-09-16 18:08:35 - __main__ - DEBUG - Scraped: Things you can do with a Software Defined Radio (2024)
+2025-09-16 18:08:35 - scraper - INFO - Scraping article: https://support.apple.com/en-us/125142
+2025-09-16 18:08:35 - scraper - DEBUG - Extracting content with Goose: https://support.apple.com/en-us/125142
+2025-09-16 18:08:35 - goose3.crawler - DEBUG - Fetching html from https://support.apple.com/en-us/125142
+2025-09-16 18:08:35 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): support.apple.com:443
+2025-09-16 18:08:36 - urllib3.connectionpool - DEBUG - https://support.apple.com:443 "GET /en-us/125142 HTTP/1.1" 200 26774
+2025-09-16 18:08:36 - scraper - ERROR - Goose extraction failed for https://support.apple.com/en-us/125142: 'str' object has no attribute 'isoformat'
+2025-09-16 18:08:36 - scraper - DEBUG - Fetching page: https://support.apple.com/en-us/125142
+2025-09-16 18:08:36 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): support.apple.com:443
+2025-09-16 18:08:37 - urllib3.connectionpool - DEBUG - https://support.apple.com:443 "GET /en-us/125142 HTTP/1.1" 200 26774
+2025-09-16 18:08:37 - scraper - DEBUG - Successfully fetched page: https://support.apple.com/en-us/125142
+2025-09-16 18:08:37 - scraper - DEBUG - Extracting content with BeautifulSoup: https://support.apple.com/en-us/125142
+2025-09-16 18:08:37 - scraper - DEBUG - BeautifulSoup extracted 221 words
+2025-09-16 18:08:37 - scraper - INFO - Successfully scraped with BeautifulSoup: 221 words
+2025-09-16 18:08:37 - __main__ - DEBUG - Scraped: Apple releases iOS 15.8.5 security update for 10-year old iPhone 6s
+2025-09-16 18:08:37 - scraper - INFO - Scraping article: https://noctua.at/en/how-to-make-the-framework-desktop-run-even-quieter
+2025-09-16 18:08:37 - scraper - DEBUG - Extracting content with Goose: https://noctua.at/en/how-to-make-the-framework-desktop-run-even-quieter
+2025-09-16 18:08:37 - goose3.crawler - DEBUG - Fetching html from https://noctua.at/en/how-to-make-the-framework-desktop-run-even-quieter
+2025-09-16 18:08:37 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): noctua.at:443
+2025-09-16 18:08:39 - urllib3.connectionpool - DEBUG - https://noctua.at:443 "GET /en/how-to-make-the-framework-desktop-run-even-quieter HTTP/1.1" 200 13920
+2025-09-16 18:08:39 - scraper - DEBUG - Goose extracted 800 words
+2025-09-16 18:08:39 - scraper - INFO - Successfully scraped with Goose: 800 words
+2025-09-16 18:08:39 - __main__ - DEBUG - Scraped: How to make the Framework Desktop run even quieter
+2025-09-16 18:08:39 - scraper - INFO - Scraping article: https://hub.docker.com/_/irssi
+2025-09-16 18:08:39 - scraper - DEBUG - Extracting content with Goose: https://hub.docker.com/_/irssi
+2025-09-16 18:08:39 - goose3.crawler - DEBUG - Fetching html from https://hub.docker.com/_/irssi
+2025-09-16 18:08:39 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): hub.docker.com:443
+2025-09-16 18:08:40 - urllib3.connectionpool - DEBUG - https://hub.docker.com:443 "GET /_/irssi HTTP/1.1" 200 None
+2025-09-16 18:08:40 - scraper - WARNING - Goose extracted no content from: https://hub.docker.com/_/irssi
+2025-09-16 18:08:40 - scraper - DEBUG - Fetching page: https://hub.docker.com/_/irssi
+2025-09-16 18:08:40 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): hub.docker.com:443
+2025-09-16 18:08:41 - urllib3.connectionpool - DEBUG - https://hub.docker.com:443 "GET /_/irssi HTTP/1.1" 200 None
+2025-09-16 18:08:41 - scraper - DEBUG - Successfully fetched page: https://hub.docker.com/_/irssi
+2025-09-16 18:08:41 - scraper - DEBUG - Extracting content with BeautifulSoup: https://hub.docker.com/_/irssi
+2025-09-16 18:08:41 - scraper - WARNING - No text content extracted from: https://hub.docker.com/_/irssi
+2025-09-16 18:08:41 - scraper - ERROR - Failed to scrape content from: https://hub.docker.com/_/irssi
+2025-09-16 18:08:41 - __main__ - WARNING - Failed to scrape: Irssi: IRC Client in a Docker Image
+2025-09-16 18:08:41 - scraper - INFO - Scraping article: https://www.gavi.org/vaccineswork/denmark-close-wiping-out-leading-cancer-causing-hpv-strains-after-vaccine-roll-out
+2025-09-16 18:08:41 - scraper - DEBUG - Extracting content with Goose: https://www.gavi.org/vaccineswork/denmark-close-wiping-out-leading-cancer-causing-hpv-strains-after-vaccine-roll-out
+2025-09-16 18:08:41 - goose3.crawler - DEBUG - Fetching html from https://www.gavi.org/vaccineswork/denmark-close-wiping-out-leading-cancer-causing-hpv-strains-after-vaccine-roll-out
+2025-09-16 18:08:41 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.gavi.org:443
+2025-09-16 18:08:42 - urllib3.connectionpool - DEBUG - https://www.gavi.org:443 "GET /vaccineswork/denmark-close-wiping-out-leading-cancer-causing-hpv-strains-after-vaccine-roll-out HTTP/1.1" 200 25938
+2025-09-16 18:08:42 - scraper - ERROR - Goose extraction failed for https://www.gavi.org/vaccineswork/denmark-close-wiping-out-leading-cancer-causing-hpv-strains-after-vaccine-roll-out: 'str' object has no attribute 'isoformat'
+2025-09-16 18:08:43 - scraper - DEBUG - Fetching page: https://www.gavi.org/vaccineswork/denmark-close-wiping-out-leading-cancer-causing-hpv-strains-after-vaccine-roll-out
+2025-09-16 18:08:43 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): www.gavi.org:443
+2025-09-16 18:08:43 - urllib3.connectionpool - DEBUG - https://www.gavi.org:443 "GET /vaccineswork/denmark-close-wiping-out-leading-cancer-causing-hpv-strains-after-vaccine-roll-out HTTP/1.1" 200 25938
+2025-09-16 18:08:43 - scraper - DEBUG - Successfully fetched page: https://www.gavi.org/vaccineswork/denmark-close-wiping-out-leading-cancer-causing-hpv-strains-after-vaccine-roll-out
+2025-09-16 18:08:43 - scraper - DEBUG - Extracting content with BeautifulSoup: https://www.gavi.org/vaccineswork/denmark-close-wiping-out-leading-cancer-causing-hpv-strains-after-vaccine-roll-out
+2025-09-16 18:08:43 - scraper - DEBUG - BeautifulSoup extracted 1489 words
+2025-09-16 18:08:43 - scraper - INFO - Successfully scraped with BeautifulSoup: 1489 words
+2025-09-16 18:08:43 - __main__ - DEBUG - Scraped: Denmark close to wiping out cancer-causing HPV strains after vaccine roll-out
+2025-09-16 18:08:43 - __main__ - INFO - Generated script with 47835 characters
+2025-09-16 18:08:43 - tts_converter - INFO - TTS clients initialized successfully
+2025-09-16 18:08:43 - __main__ - INFO - TTS converter initialized
+2025-09-16 18:08:43 - tts_converter - INFO - Text length (48498 bytes) exceeds standard limit. Using Long Audio API.
+2025-09-16 18:08:43 - tts_converter - INFO - Starting long audio synthesis: 47835 characters
+2025-09-16 18:08:44 - tts_converter - ERROR - Error during long audio synthesis: 400 Audio encoding MP3 is currently unsupported. Temporarily, only LINEAR16 audio encodings are supported for Long Audio Synthesis. More information can be found at: https://cloud.google.com/text-to-speech/docs/create-audio-text-long-audio-synthesis.
+2025-09-16 18:08:44 - __main__ - INFO - Saved pipeline data to: output/data/pipeline_data_20250916_180844.json
+2025-09-16 18:08:44 - __main__ - INFO - Pipeline cleanup completed
+2025-09-16 18:11:47 - hn_api - INFO - Initialized HN API client with base URL: https://hacker-news.firebaseio.com/v0
+2025-09-16 18:11:47 - scraper - INFO - Initialized article scraper
+2025-09-16 18:11:48 - __main__ - INFO - HackerCast pipeline initialized
+2025-09-16 18:11:48 - hn_api - INFO - Fetching top 5 story IDs
+2025-09-16 18:11:48 - hn_api - DEBUG - Making request to: https://hacker-news.firebaseio.com/v0/topstories.json
+2025-09-16 18:11:48 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): hacker-news.firebaseio.com:443
+2025-09-16 18:11:48 - urllib3.connectionpool - DEBUG - https://hacker-news.firebaseio.com:443 "GET /v0/topstories.json HTTP/1.1" 200 4501
+2025-09-16 18:11:48 - hn_api - DEBUG - Successfully fetched data from: https://hacker-news.firebaseio.com/v0/topstories.json
+2025-09-16 18:11:48 - hn_api - INFO - Successfully fetched 5 story IDs
+2025-09-16 18:11:48 - hn_api - INFO - Fetching details for 5 stories
+2025-09-16 18:11:48 - hn_api - DEBUG - Fetching story details for ID: 45262835
+2025-09-16 18:11:48 - hn_api - DEBUG - Making request to: https://hacker-news.firebaseio.com/v0/item/45262835.json
+2025-09-16 18:11:48 - urllib3.connectionpool - DEBUG - https://hacker-news.firebaseio.com:443 "GET /v0/item/45262835.json HTTP/1.1" 200 509
+2025-09-16 18:11:48 - hn_api - DEBUG - Successfully fetched data from: https://hacker-news.firebaseio.com/v0/item/45262835.json
+2025-09-16 18:11:48 - hn_api - DEBUG - Successfully parsed story: Things you can do with a Software Defined Radio (2024)
+2025-09-16 18:11:48 - hn_api - DEBUG - Progress: 1/5 - Things you can do with a Software Defined Radio (2024)
+2025-09-16 18:11:49 - hn_api - DEBUG - Fetching story details for ID: 45271481
+2025-09-16 18:11:49 - hn_api - DEBUG - Making request to: https://hacker-news.firebaseio.com/v0/item/45271481.json
+2025-09-16 18:11:49 - urllib3.connectionpool - DEBUG - https://hacker-news.firebaseio.com:443 "GET /v0/item/45271481.json HTTP/1.1" 200 198
+2025-09-16 18:11:49 - hn_api - DEBUG - Successfully fetched data from: https://hacker-news.firebaseio.com/v0/item/45271481.json
+2025-09-16 18:11:49 - hn_api - DEBUG - Successfully parsed story: GNU Midnight Commander
+2025-09-16 18:11:49 - hn_api - DEBUG - Progress: 2/5 - GNU Midnight Commander
+2025-09-16 18:11:49 - hn_api - DEBUG - Fetching story details for ID: 45270108
+2025-09-16 18:11:49 - hn_api - DEBUG - Making request to: https://hacker-news.firebaseio.com/v0/item/45270108.json
+2025-09-16 18:11:49 - urllib3.connectionpool - DEBUG - https://hacker-news.firebaseio.com:443 "GET /v0/item/45270108.json HTTP/1.1" 200 396
+2025-09-16 18:11:49 - hn_api - DEBUG - Successfully fetched data from: https://hacker-news.firebaseio.com/v0/item/45270108.json
+2025-09-16 18:11:49 - hn_api - DEBUG - Successfully parsed story: Apple releases iOS 15.8.5 security update for 10-year old iPhone 6s
+2025-09-16 18:11:49 - hn_api - DEBUG - Progress: 3/5 - Apple releases iOS 15.8.5 security update for 10-year old iPhone 6s
+2025-09-16 18:11:49 - hn_api - DEBUG - Fetching story details for ID: 45266039
+2025-09-16 18:11:49 - hn_api - DEBUG - Making request to: https://hacker-news.firebaseio.com/v0/item/45266039.json
+2025-09-16 18:11:50 - urllib3.connectionpool - DEBUG - https://hacker-news.firebaseio.com:443 "GET /v0/item/45266039.json HTTP/1.1" 200 368
+2025-09-16 18:11:50 - hn_api - DEBUG - Successfully fetched data from: https://hacker-news.firebaseio.com/v0/item/45266039.json
+2025-09-16 18:11:50 - hn_api - DEBUG - Successfully parsed story: How to make the Framework Desktop run even quieter
+2025-09-16 18:11:50 - hn_api - DEBUG - Progress: 4/5 - How to make the Framework Desktop run even quieter
+2025-09-16 18:11:50 - hn_api - DEBUG - Fetching story details for ID: 45270482
+2025-09-16 18:11:50 - hn_api - DEBUG - Making request to: https://hacker-news.firebaseio.com/v0/item/45270482.json
+2025-09-16 18:11:50 - urllib3.connectionpool - DEBUG - https://hacker-news.firebaseio.com:443 "GET /v0/item/45270482.json HTTP/1.1" 200 233
+2025-09-16 18:11:50 - hn_api - DEBUG - Successfully fetched data from: https://hacker-news.firebaseio.com/v0/item/45270482.json
+2025-09-16 18:11:50 - hn_api - DEBUG - Successfully parsed story: Irssi: IRC Client in a Docker Image
+2025-09-16 18:11:50 - hn_api - DEBUG - Progress: 5/5 - Irssi: IRC Client in a Docker Image
+2025-09-16 18:11:50 - hn_api - INFO - Successfully fetched 5 stories, 0 failed
+2025-09-16 18:11:50 - __main__ - INFO - Successfully fetched 5 stories
+2025-09-16 18:11:50 - scraper - INFO - Scraping article: https://blinry.org/50-things-with-sdr/
+2025-09-16 18:11:50 - scraper - DEBUG - Extracting content with Goose: https://blinry.org/50-things-with-sdr/
+2025-09-16 18:11:50 - goose3.crawler - DEBUG - Fetching html from https://blinry.org/50-things-with-sdr/
+2025-09-16 18:11:50 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): blinry.org:443
+2025-09-16 18:11:51 - urllib3.connectionpool - DEBUG - https://blinry.org:443 "GET /50-things-with-sdr/ HTTP/1.1" 200 None
+2025-09-16 18:11:52 - scraper - DEBUG - Goose extracted 5244 words
+2025-09-16 18:11:52 - scraper - INFO - Successfully scraped with Goose: 5244 words
+2025-09-16 18:11:52 - __main__ - DEBUG - Scraped: Things you can do with a Software Defined Radio (2024)
+2025-09-16 18:11:52 - scraper - INFO - Scraping article: https://midnight-commander.org/
+2025-09-16 18:11:52 - scraper - DEBUG - Extracting content with Goose: https://midnight-commander.org/
+2025-09-16 18:11:52 - goose3.crawler - DEBUG - Fetching html from https://midnight-commander.org/
+2025-09-16 18:11:52 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): midnight-commander.org:443
+2025-09-16 18:11:52 - urllib3.connectionpool - DEBUG - https://midnight-commander.org:443 "GET / HTTP/1.1" 200 7461
+2025-09-16 18:11:53 - scraper - DEBUG - Goose extracted 208 words
+2025-09-16 18:11:53 - scraper - INFO - Successfully scraped with Goose: 208 words
+2025-09-16 18:11:53 - __main__ - DEBUG - Scraped: GNU Midnight Commander
+2025-09-16 18:11:53 - scraper - INFO - Scraping article: https://support.apple.com/en-us/125142
+2025-09-16 18:11:53 - scraper - DEBUG - Extracting content with Goose: https://support.apple.com/en-us/125142
+2025-09-16 18:11:53 - goose3.crawler - DEBUG - Fetching html from https://support.apple.com/en-us/125142
+2025-09-16 18:11:53 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): support.apple.com:443
+2025-09-16 18:11:53 - urllib3.connectionpool - DEBUG - https://support.apple.com:443 "GET /en-us/125142 HTTP/1.1" 200 26774
+2025-09-16 18:11:54 - scraper - ERROR - Goose extraction failed for https://support.apple.com/en-us/125142: 'str' object has no attribute 'isoformat'
+2025-09-16 18:11:54 - scraper - DEBUG - Fetching page: https://support.apple.com/en-us/125142
+2025-09-16 18:11:54 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): support.apple.com:443
+2025-09-16 18:11:54 - urllib3.connectionpool - DEBUG - https://support.apple.com:443 "GET /en-us/125142 HTTP/1.1" 200 26774
+2025-09-16 18:11:54 - scraper - DEBUG - Successfully fetched page: https://support.apple.com/en-us/125142
+2025-09-16 18:11:54 - scraper - DEBUG - Extracting content with BeautifulSoup: https://support.apple.com/en-us/125142
+2025-09-16 18:11:54 - scraper - DEBUG - BeautifulSoup extracted 221 words
+2025-09-16 18:11:54 - scraper - INFO - Successfully scraped with BeautifulSoup: 221 words
+2025-09-16 18:11:54 - __main__ - DEBUG - Scraped: Apple releases iOS 15.8.5 security update for 10-year old iPhone 6s
+2025-09-16 18:11:54 - scraper - INFO - Scraping article: https://noctua.at/en/how-to-make-the-framework-desktop-run-even-quieter
+2025-09-16 18:11:54 - scraper - DEBUG - Extracting content with Goose: https://noctua.at/en/how-to-make-the-framework-desktop-run-even-quieter
+2025-09-16 18:11:54 - goose3.crawler - DEBUG - Fetching html from https://noctua.at/en/how-to-make-the-framework-desktop-run-even-quieter
+2025-09-16 18:11:54 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): noctua.at:443
+2025-09-16 18:11:56 - urllib3.connectionpool - DEBUG - https://noctua.at:443 "GET /en/how-to-make-the-framework-desktop-run-even-quieter HTTP/1.1" 200 13919
+2025-09-16 18:11:57 - scraper - DEBUG - Goose extracted 800 words
+2025-09-16 18:11:57 - scraper - INFO - Successfully scraped with Goose: 800 words
+2025-09-16 18:11:57 - __main__ - DEBUG - Scraped: How to make the Framework Desktop run even quieter
+2025-09-16 18:11:57 - scraper - INFO - Scraping article: https://hub.docker.com/_/irssi
+2025-09-16 18:11:57 - scraper - DEBUG - Extracting content with Goose: https://hub.docker.com/_/irssi
+2025-09-16 18:11:57 - goose3.crawler - DEBUG - Fetching html from https://hub.docker.com/_/irssi
+2025-09-16 18:11:57 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): hub.docker.com:443
+2025-09-16 18:11:57 - urllib3.connectionpool - DEBUG - https://hub.docker.com:443 "GET /_/irssi HTTP/1.1" 200 None
+2025-09-16 18:11:57 - scraper - WARNING - Goose extracted no content from: https://hub.docker.com/_/irssi
+2025-09-16 18:11:57 - scraper - DEBUG - Fetching page: https://hub.docker.com/_/irssi
+2025-09-16 18:11:57 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): hub.docker.com:443
+2025-09-16 18:11:58 - urllib3.connectionpool - DEBUG - https://hub.docker.com:443 "GET /_/irssi HTTP/1.1" 200 None
+2025-09-16 18:11:58 - scraper - DEBUG - Successfully fetched page: https://hub.docker.com/_/irssi
+2025-09-16 18:11:58 - scraper - DEBUG - Extracting content with BeautifulSoup: https://hub.docker.com/_/irssi
+2025-09-16 18:11:58 - scraper - WARNING - No text content extracted from: https://hub.docker.com/_/irssi
+2025-09-16 18:11:58 - scraper - ERROR - Failed to scrape content from: https://hub.docker.com/_/irssi
+2025-09-16 18:11:58 - __main__ - WARNING - Failed to scrape: Irssi: IRC Client in a Docker Image
+2025-09-16 18:11:58 - __main__ - INFO - Generated script with 37998 characters
+2025-09-16 18:11:59 - tts_converter - INFO - TTS clients initialized successfully
+2025-09-16 18:11:59 - __main__ - INFO - TTS converter initialized
+2025-09-16 18:11:59 - tts_converter - INFO - Text length (38576 bytes) exceeds standard limit. Using Long Audio API.
+2025-09-16 18:11:59 - tts_converter - INFO - Starting long audio synthesis: 37998 characters
+2025-09-16 18:12:00 - tts_converter - ERROR - Error during long audio synthesis: 400 Can't write to GCS uri `gs://hackercast-1/tts_output_ed2e49e0575b42d09d6d9545344b0730.mp3`. Make sure to follow the steps at https://cloud.google.com/text-to-speech/docs/create-audio-text-long-audio-synthesis#before-you-begin. texttospeach@hackercast-472403.iam.gserviceaccount.com does not have storage.objects.get access to the Google Cloud Storage object. Permission 'storage.objects.get' denied on resource (or it may not exist). texttospeach@hackercast-472403.iam.gserviceaccount.com does not have storage.objects.get access to the Google Cloud Storage object. Permission 'storage.objects.get' denied on resource (or it may not exist).
+2025-09-16 18:12:00 - __main__ - INFO - Saved pipeline data to: output/data/pipeline_data_20250916_181200.json
+2025-09-16 18:12:00 - __main__ - INFO - Pipeline cleanup completed
+2025-09-16 18:21:17 - hn_api - INFO - Initialized HN API client with base URL: https://hacker-news.firebaseio.com/v0
+2025-09-16 18:21:17 - scraper - INFO - Initialized article scraper
+2025-09-16 18:21:17 - __main__ - INFO - HackerCast pipeline initialized
+2025-09-16 18:21:17 - hn_api - INFO - Fetching top 5 story IDs
+2025-09-16 18:21:17 - hn_api - DEBUG - Making request to: https://hacker-news.firebaseio.com/v0/topstories.json
+2025-09-16 18:21:17 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): hacker-news.firebaseio.com:443
+2025-09-16 18:21:18 - urllib3.connectionpool - DEBUG - https://hacker-news.firebaseio.com:443 "GET /v0/topstories.json HTTP/1.1" 200 4501
+2025-09-16 18:21:18 - hn_api - DEBUG - Successfully fetched data from: https://hacker-news.firebaseio.com/v0/topstories.json
+2025-09-16 18:21:18 - hn_api - INFO - Successfully fetched 5 story IDs
+2025-09-16 18:21:18 - hn_api - INFO - Fetching details for 5 stories
+2025-09-16 18:21:18 - hn_api - DEBUG - Fetching story details for ID: 45271481
+2025-09-16 18:21:18 - hn_api - DEBUG - Making request to: https://hacker-news.firebaseio.com/v0/item/45271481.json
+2025-09-16 18:21:18 - urllib3.connectionpool - DEBUG - https://hacker-news.firebaseio.com:443 "GET /v0/item/45271481.json HTTP/1.1" 200 217
+2025-09-16 18:21:18 - hn_api - DEBUG - Successfully fetched data from: https://hacker-news.firebaseio.com/v0/item/45271481.json
+2025-09-16 18:21:18 - hn_api - DEBUG - Successfully parsed story: GNU Midnight Commander
+2025-09-16 18:21:18 - hn_api - DEBUG - Progress: 1/5 - GNU Midnight Commander
+2025-09-16 18:21:18 - hn_api - DEBUG - Fetching story details for ID: 45262835
+2025-09-16 18:21:18 - hn_api - DEBUG - Making request to: https://hacker-news.firebaseio.com/v0/item/45262835.json
+2025-09-16 18:21:18 - urllib3.connectionpool - DEBUG - https://hacker-news.firebaseio.com:443 "GET /v0/item/45262835.json HTTP/1.1" 200 518
+2025-09-16 18:21:18 - hn_api - DEBUG - Successfully fetched data from: https://hacker-news.firebaseio.com/v0/item/45262835.json
+2025-09-16 18:21:18 - hn_api - DEBUG - Successfully parsed story: Things you can do with a Software Defined Radio (2024)
+2025-09-16 18:21:18 - hn_api - DEBUG - Progress: 2/5 - Things you can do with a Software Defined Radio (2024)
+2025-09-16 18:21:18 - hn_api - DEBUG - Fetching story details for ID: 45270108
+2025-09-16 18:21:18 - hn_api - DEBUG - Making request to: https://hacker-news.firebaseio.com/v0/item/45270108.json
+2025-09-16 18:21:18 - urllib3.connectionpool - DEBUG - https://hacker-news.firebaseio.com:443 "GET /v0/item/45270108.json HTTP/1.1" 200 414
+2025-09-16 18:21:18 - hn_api - DEBUG - Successfully fetched data from: https://hacker-news.firebaseio.com/v0/item/45270108.json
+2025-09-16 18:21:18 - hn_api - DEBUG - Successfully parsed story: Apple releases iOS 15.8.5 security update for 10-year old iPhone 6s
+2025-09-16 18:21:18 - hn_api - DEBUG - Progress: 3/5 - Apple releases iOS 15.8.5 security update for 10-year old iPhone 6s
+2025-09-16 18:21:18 - hn_api - DEBUG - Fetching story details for ID: 45270482
+2025-09-16 18:21:18 - hn_api - DEBUG - Making request to: https://hacker-news.firebaseio.com/v0/item/45270482.json
+2025-09-16 18:21:19 - urllib3.connectionpool - DEBUG - https://hacker-news.firebaseio.com:443 "GET /v0/item/45270482.json HTTP/1.1" 200 233
+2025-09-16 18:21:19 - hn_api - DEBUG - Successfully fetched data from: https://hacker-news.firebaseio.com/v0/item/45270482.json
+2025-09-16 18:21:19 - hn_api - DEBUG - Successfully parsed story: Irssi: IRC Client in a Docker Image
+2025-09-16 18:21:19 - hn_api - DEBUG - Progress: 4/5 - Irssi: IRC Client in a Docker Image
+2025-09-16 18:21:19 - hn_api - DEBUG - Fetching story details for ID: 45266039
+2025-09-16 18:21:19 - hn_api - DEBUG - Making request to: https://hacker-news.firebaseio.com/v0/item/45266039.json
+2025-09-16 18:21:19 - urllib3.connectionpool - DEBUG - https://hacker-news.firebaseio.com:443 "GET /v0/item/45266039.json HTTP/1.1" 200 368
+2025-09-16 18:21:19 - hn_api - DEBUG - Successfully fetched data from: https://hacker-news.firebaseio.com/v0/item/45266039.json
+2025-09-16 18:21:19 - hn_api - DEBUG - Successfully parsed story: How to make the Framework Desktop run even quieter
+2025-09-16 18:21:19 - hn_api - DEBUG - Progress: 5/5 - How to make the Framework Desktop run even quieter
+2025-09-16 18:21:19 - hn_api - INFO - Successfully fetched 5 stories, 0 failed
+2025-09-16 18:21:19 - __main__ - INFO - Successfully fetched 5 stories
+2025-09-16 18:21:19 - scraper - INFO - Scraping article: https://midnight-commander.org/
+2025-09-16 18:21:19 - scraper - DEBUG - Extracting content with Goose: https://midnight-commander.org/
+2025-09-16 18:21:19 - goose3.crawler - DEBUG - Fetching html from https://midnight-commander.org/
+2025-09-16 18:21:19 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): midnight-commander.org:443
+2025-09-16 18:21:19 - urllib3.connectionpool - DEBUG - https://midnight-commander.org:443 "GET / HTTP/1.1" 200 7461
+2025-09-16 18:21:19 - scraper - DEBUG - Goose extracted 208 words
+2025-09-16 18:21:19 - scraper - INFO - Successfully scraped with Goose: 208 words
+2025-09-16 18:21:19 - __main__ - DEBUG - Scraped: GNU Midnight Commander
+2025-09-16 18:21:19 - scraper - INFO - Scraping article: https://blinry.org/50-things-with-sdr/
+2025-09-16 18:21:19 - scraper - DEBUG - Extracting content with Goose: https://blinry.org/50-things-with-sdr/
+2025-09-16 18:21:19 - goose3.crawler - DEBUG - Fetching html from https://blinry.org/50-things-with-sdr/
+2025-09-16 18:21:19 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): blinry.org:443
+2025-09-16 18:21:20 - urllib3.connectionpool - DEBUG - https://blinry.org:443 "GET /50-things-with-sdr/ HTTP/1.1" 200 None
+2025-09-16 18:21:21 - scraper - DEBUG - Goose extracted 5244 words
+2025-09-16 18:21:21 - scraper - INFO - Successfully scraped with Goose: 5244 words
+2025-09-16 18:21:21 - __main__ - DEBUG - Scraped: Things you can do with a Software Defined Radio (2024)
+2025-09-16 18:21:21 - scraper - INFO - Scraping article: https://support.apple.com/en-us/125142
+2025-09-16 18:21:21 - scraper - DEBUG - Extracting content with Goose: https://support.apple.com/en-us/125142
+2025-09-16 18:21:21 - goose3.crawler - DEBUG - Fetching html from https://support.apple.com/en-us/125142
+2025-09-16 18:21:21 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): support.apple.com:443
+2025-09-16 18:21:21 - urllib3.connectionpool - DEBUG - https://support.apple.com:443 "GET /en-us/125142 HTTP/1.1" 200 26774
+2025-09-16 18:21:21 - scraper - ERROR - Goose extraction failed for https://support.apple.com/en-us/125142: 'str' object has no attribute 'isoformat'
+2025-09-16 18:21:21 - scraper - DEBUG - Fetching page: https://support.apple.com/en-us/125142
+2025-09-16 18:21:21 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): support.apple.com:443
+2025-09-16 18:21:21 - urllib3.connectionpool - DEBUG - https://support.apple.com:443 "GET /en-us/125142 HTTP/1.1" 200 26774
+2025-09-16 18:21:21 - scraper - DEBUG - Successfully fetched page: https://support.apple.com/en-us/125142
+2025-09-16 18:21:21 - scraper - DEBUG - Extracting content with BeautifulSoup: https://support.apple.com/en-us/125142
+2025-09-16 18:21:22 - scraper - DEBUG - BeautifulSoup extracted 221 words
+2025-09-16 18:21:22 - scraper - INFO - Successfully scraped with BeautifulSoup: 221 words
+2025-09-16 18:21:22 - __main__ - DEBUG - Scraped: Apple releases iOS 15.8.5 security update for 10-year old iPhone 6s
+2025-09-16 18:21:22 - scraper - INFO - Scraping article: https://hub.docker.com/_/irssi
+2025-09-16 18:21:22 - scraper - DEBUG - Extracting content with Goose: https://hub.docker.com/_/irssi
+2025-09-16 18:21:22 - goose3.crawler - DEBUG - Fetching html from https://hub.docker.com/_/irssi
+2025-09-16 18:21:22 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): hub.docker.com:443
+2025-09-16 18:21:22 - urllib3.connectionpool - DEBUG - https://hub.docker.com:443 "GET /_/irssi HTTP/1.1" 200 None
+2025-09-16 18:21:22 - scraper - WARNING - Goose extracted no content from: https://hub.docker.com/_/irssi
+2025-09-16 18:21:22 - scraper - DEBUG - Fetching page: https://hub.docker.com/_/irssi
+2025-09-16 18:21:22 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): hub.docker.com:443
+2025-09-16 18:21:23 - urllib3.connectionpool - DEBUG - https://hub.docker.com:443 "GET /_/irssi HTTP/1.1" 200 None
+2025-09-16 18:21:23 - scraper - DEBUG - Successfully fetched page: https://hub.docker.com/_/irssi
+2025-09-16 18:21:23 - scraper - DEBUG - Extracting content with BeautifulSoup: https://hub.docker.com/_/irssi
+2025-09-16 18:21:23 - scraper - WARNING - No text content extracted from: https://hub.docker.com/_/irssi
+2025-09-16 18:21:23 - scraper - ERROR - Failed to scrape content from: https://hub.docker.com/_/irssi
+2025-09-16 18:21:23 - __main__ - WARNING - Failed to scrape: Irssi: IRC Client in a Docker Image
+2025-09-16 18:21:23 - scraper - INFO - Scraping article: https://noctua.at/en/how-to-make-the-framework-desktop-run-even-quieter
+2025-09-16 18:21:23 - scraper - DEBUG - Extracting content with Goose: https://noctua.at/en/how-to-make-the-framework-desktop-run-even-quieter
+2025-09-16 18:21:23 - goose3.crawler - DEBUG - Fetching html from https://noctua.at/en/how-to-make-the-framework-desktop-run-even-quieter
+2025-09-16 18:21:23 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): noctua.at:443
+2025-09-16 18:21:24 - urllib3.connectionpool - DEBUG - https://noctua.at:443 "GET /en/how-to-make-the-framework-desktop-run-even-quieter HTTP/1.1" 200 13919
+2025-09-16 18:21:25 - scraper - DEBUG - Goose extracted 800 words
+2025-09-16 18:21:25 - scraper - INFO - Successfully scraped with Goose: 800 words
+2025-09-16 18:21:25 - __main__ - DEBUG - Scraped: How to make the Framework Desktop run even quieter
+2025-09-16 18:21:25 - __main__ - INFO - Generated script with 37998 characters
+2025-09-16 18:21:25 - tts_converter - INFO - TTS clients initialized successfully
+2025-09-16 18:21:25 - __main__ - INFO - TTS converter initialized
+2025-09-16 18:21:25 - tts_converter - INFO - Text length (38576 bytes) exceeds standard limit. Using Long Audio API.
+2025-09-16 18:21:25 - tts_converter - INFO - Starting long audio synthesis: 37998 characters
+2025-09-16 18:21:27 - tts_converter - INFO - Waiting for long audio synthesis to complete...
+2025-09-16 18:21:50 - tts_converter - ERROR - Error during long audio synthesis: 403 texttospeach@hackercast-472403.iam.gserviceaccount.com does not have storage.objects.get access to the Google Cloud Storage object. Permission 'storage.objects.get' denied on resource (or it may not exist). texttospeach@hackercast-472403.iam.gserviceaccount.com does not have storage.objects.get access to the Google Cloud Storage object. Permission 'storage.objects.get' denied on resource (or it may not exist).; Failed to read file from GCS: gs://hackercast-1/tts_output_113bee8cdda54351ad2afa6c31c02779.mp3_5685359288860337770_0000.wav 7: texttospeach@hackercast-472403.iam.gserviceaccount.com does not have storage.objects.get access to the Google Cloud Storage object. Permission 'storage.objects.get' denied on resource (or it may not exist). texttospeach@hackercast-472403.iam.gserviceaccount.com does not have storage.objects.get access to the Google Cloud Storage object. Permission 'storage.objects.get' denied on resource (or it may not exist).; Failed to read file from GCS: gs://hackercast-1/tts_output_113bee8cdda54351ad2afa6c31c02779.mp3_5685359288860337770_0000.wav
+2025-09-16 18:21:50 - __main__ - INFO - Saved pipeline data to: output/data/pipeline_data_20250916_182150.json
+2025-09-16 18:21:50 - __main__ - INFO - Pipeline cleanup completed
+2025-09-16 20:50:38 - hn_api - INFO - Initialized HN API client with base URL: https://hacker-news.firebaseio.com/v0
+2025-09-16 20:50:38 - scraper - INFO - Initialized article scraper
+2025-09-16 20:50:38 - __main__ - INFO - HackerCast pipeline initialized
+2025-09-16 20:50:38 - hn_api - INFO - Fetching top 5 story IDs
+2025-09-16 20:50:38 - hn_api - DEBUG - Making request to: https://hacker-news.firebaseio.com/v0/topstories.json
+2025-09-16 20:50:38 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): hacker-news.firebaseio.com:443
+2025-09-16 20:50:39 - urllib3.connectionpool - DEBUG - https://hacker-news.firebaseio.com:443 "GET /v0/topstories.json HTTP/1.1" 200 4501
+2025-09-16 20:50:39 - hn_api - DEBUG - Successfully fetched data from: https://hacker-news.firebaseio.com/v0/topstories.json
+2025-09-16 20:50:39 - hn_api - INFO - Successfully fetched 5 story IDs
+2025-09-16 20:50:39 - hn_api - INFO - Fetching details for 5 stories
+2025-09-16 20:50:39 - hn_api - DEBUG - Fetching story details for ID: 45271481
+2025-09-16 20:50:39 - hn_api - DEBUG - Making request to: https://hacker-news.firebaseio.com/v0/item/45271481.json
+2025-09-16 20:50:39 - urllib3.connectionpool - DEBUG - https://hacker-news.firebaseio.com:443 "GET /v0/item/45271481.json HTTP/1.1" 200 471
+2025-09-16 20:50:39 - hn_api - DEBUG - Successfully fetched data from: https://hacker-news.firebaseio.com/v0/item/45271481.json
+2025-09-16 20:50:39 - hn_api - DEBUG - Successfully parsed story: GNU Midnight Commander
+2025-09-16 20:50:39 - hn_api - DEBUG - Progress: 1/5 - GNU Midnight Commander
+2025-09-16 20:50:39 - hn_api - DEBUG - Fetching story details for ID: 45271942
+2025-09-16 20:50:39 - hn_api - DEBUG - Making request to: https://hacker-news.firebaseio.com/v0/item/45271942.json
+2025-09-16 20:50:39 - urllib3.connectionpool - DEBUG - https://hacker-news.firebaseio.com:443 "GET /v0/item/45271942.json HTTP/1.1" 200 273
+2025-09-16 20:50:39 - hn_api - DEBUG - Successfully fetched data from: https://hacker-news.firebaseio.com/v0/item/45271942.json
+2025-09-16 20:50:39 - hn_api - DEBUG - Successfully parsed story: Notion API importer, with Databases to Bases conversion bounty
+2025-09-16 20:50:39 - hn_api - DEBUG - Progress: 2/5 - Notion API importer, with Databases to Bases conversion bounty
+2025-09-16 20:50:39 - hn_api - DEBUG - Fetching story details for ID: 45271484
+2025-09-16 20:50:39 - hn_api - DEBUG - Making request to: https://hacker-news.firebaseio.com/v0/item/45271484.json
+2025-09-16 20:50:39 - urllib3.connectionpool - DEBUG - https://hacker-news.firebaseio.com:443 "GET /v0/item/45271484.json HTTP/1.1" 200 376
+2025-09-16 20:50:39 - hn_api - DEBUG - Successfully fetched data from: https://hacker-news.firebaseio.com/v0/item/45271484.json
+2025-09-16 20:50:39 - hn_api - DEBUG - Successfully parsed story: The Asus Gaming Laptop ACPI Firmware Bug: A Deep Technical Investigation
+2025-09-16 20:50:39 - hn_api - DEBUG - Progress: 3/5 - The Asus Gaming Laptop ACPI Firmware Bug: A Deep Technical Investigation
+2025-09-16 20:50:39 - hn_api - DEBUG - Fetching story details for ID: 45260741
+2025-09-16 20:50:39 - hn_api - DEBUG - Making request to: https://hacker-news.firebaseio.com/v0/item/45260741.json
+2025-09-16 20:50:39 - urllib3.connectionpool - DEBUG - https://hacker-news.firebaseio.com:443 "GET /v0/item/45260741.json HTTP/1.1" 200 3018
+2025-09-16 20:50:39 - hn_api - DEBUG - Successfully fetched data from: https://hacker-news.firebaseio.com/v0/item/45260741.json
+2025-09-16 20:50:39 - hn_api - DEBUG - Successfully parsed story: Shai-Hulud malware attack: Tinycolor and over 40 NPM packages compromised
+2025-09-16 20:50:39 - hn_api - DEBUG - Progress: 4/5 - Shai-Hulud malware attack: Tinycolor and over 40 NPM packages compromised
+2025-09-16 20:50:40 - hn_api - DEBUG - Fetching story details for ID: 45271664
+2025-09-16 20:50:40 - hn_api - DEBUG - Making request to: https://hacker-news.firebaseio.com/v0/item/45271664.json
+2025-09-16 20:50:40 - urllib3.connectionpool - DEBUG - https://hacker-news.firebaseio.com:443 "GET /v0/item/45271664.json HTTP/1.1" 200 408
+2025-09-16 20:50:40 - hn_api - DEBUG - Successfully fetched data from: https://hacker-news.firebaseio.com/v0/item/45271664.json
+2025-09-16 20:50:40 - hn_api - DEBUG - Successfully parsed story: I just want an 80×25 console, but that's no longer possible
+2025-09-16 20:50:40 - hn_api - DEBUG - Progress: 5/5 - I just want an 80×25 console, but that's no longer possible
+2025-09-16 20:50:40 - hn_api - INFO - Successfully fetched 5 stories, 0 failed
+2025-09-16 20:50:40 - __main__ - INFO - Successfully fetched 5 stories
+2025-09-16 20:50:40 - scraper - INFO - Scraping article: https://midnight-commander.org/
+2025-09-16 20:50:40 - scraper - DEBUG - Extracting content with Goose: https://midnight-commander.org/
+2025-09-16 20:50:40 - goose3.crawler - DEBUG - Fetching html from https://midnight-commander.org/
+2025-09-16 20:50:40 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): midnight-commander.org:443
+2025-09-16 20:50:40 - urllib3.connectionpool - DEBUG - https://midnight-commander.org:443 "GET / HTTP/1.1" 200 7461
+2025-09-16 20:50:40 - scraper - DEBUG - Goose extracted 208 words
+2025-09-16 20:50:40 - scraper - INFO - Successfully scraped with Goose: 208 words
+2025-09-16 20:50:40 - __main__ - DEBUG - Scraped: GNU Midnight Commander
+2025-09-16 20:50:40 - scraper - INFO - Scraping article: https://github.com/obsidianmd/obsidian-importer/issues/421
+2025-09-16 20:50:40 - scraper - DEBUG - Extracting content with Goose: https://github.com/obsidianmd/obsidian-importer/issues/421
+2025-09-16 20:50:40 - goose3.crawler - DEBUG - Fetching html from https://github.com/obsidianmd/obsidian-importer/issues/421
+2025-09-16 20:50:40 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): github.com:443
+2025-09-16 20:50:41 - urllib3.connectionpool - DEBUG - https://github.com:443 "GET /obsidianmd/obsidian-importer/issues/421 HTTP/1.1" 200 None
+2025-09-16 20:50:42 - scraper - DEBUG - Goose extracted 202 words
+2025-09-16 20:50:42 - scraper - INFO - Successfully scraped with Goose: 202 words
+2025-09-16 20:50:42 - __main__ - DEBUG - Scraped: Notion API importer, with Databases to Bases conversion bounty
+2025-09-16 20:50:42 - scraper - INFO - Scraping article: https://github.com/Zephkek/Asus-ROG-Aml-Deep-Dive
+2025-09-16 20:50:42 - scraper - DEBUG - Extracting content with Goose: https://github.com/Zephkek/Asus-ROG-Aml-Deep-Dive
+2025-09-16 20:50:42 - goose3.crawler - DEBUG - Fetching html from https://github.com/Zephkek/Asus-ROG-Aml-Deep-Dive
+2025-09-16 20:50:43 - urllib3.connectionpool - DEBUG - https://github.com:443 "GET /Zephkek/Asus-ROG-Aml-Deep-Dive HTTP/1.1" 200 None
+2025-09-16 20:50:43 - scraper - DEBUG - Goose extracted 2243 words
+2025-09-16 20:50:43 - scraper - INFO - Successfully scraped with Goose: 2243 words
+2025-09-16 20:50:43 - __main__ - DEBUG - Scraped: The Asus Gaming Laptop ACPI Firmware Bug: A Deep Technical Investigation
+2025-09-16 20:50:43 - scraper - INFO - Scraping article: https://socket.dev/blog/ongoing-supply-chain-attack-targets-crowdstrike-npm-packages
+2025-09-16 20:50:43 - scraper - DEBUG - Extracting content with Goose: https://socket.dev/blog/ongoing-supply-chain-attack-targets-crowdstrike-npm-packages
+2025-09-16 20:50:43 - goose3.crawler - DEBUG - Fetching html from https://socket.dev/blog/ongoing-supply-chain-attack-targets-crowdstrike-npm-packages
+2025-09-16 20:50:43 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): socket.dev:443
+2025-09-16 20:50:43 - urllib3.connectionpool - DEBUG - https://socket.dev:443 "GET /blog/ongoing-supply-chain-attack-targets-crowdstrike-npm-packages HTTP/1.1" 200 None
+2025-09-16 20:50:44 - scraper - DEBUG - Goose extracted 35 words
+2025-09-16 20:50:44 - scraper - DEBUG - Fetching page: https://socket.dev/blog/ongoing-supply-chain-attack-targets-crowdstrike-npm-packages
+2025-09-16 20:50:44 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): socket.dev:443
+2025-09-16 20:50:44 - urllib3.connectionpool - DEBUG - https://socket.dev:443 "GET /blog/ongoing-supply-chain-attack-targets-crowdstrike-npm-packages HTTP/1.1" 200 None
+2025-09-16 20:50:44 - scraper - DEBUG - Successfully fetched page: https://socket.dev/blog/ongoing-supply-chain-attack-targets-crowdstrike-npm-packages
+2025-09-16 20:50:44 - scraper - DEBUG - Extracting content with BeautifulSoup: https://socket.dev/blog/ongoing-supply-chain-attack-targets-crowdstrike-npm-packages
+2025-09-16 20:50:44 - scraper - DEBUG - BeautifulSoup extracted 55 words
+2025-09-16 20:50:44 - scraper - INFO - Successfully scraped with BeautifulSoup: 55 words
+2025-09-16 20:50:44 - __main__ - DEBUG - Scraped: Shai-Hulud malware attack: Tinycolor and over 40 NPM packages compromised
+2025-09-16 20:50:44 - scraper - INFO - Scraping article: https://changelog.complete.org/archives/10881-i-just-want-an-80x25-console-but-thats-no-longer-possible
+2025-09-16 20:50:44 - scraper - DEBUG - Extracting content with Goose: https://changelog.complete.org/archives/10881-i-just-want-an-80x25-console-but-thats-no-longer-possible
+2025-09-16 20:50:44 - goose3.crawler - DEBUG - Fetching html from https://changelog.complete.org/archives/10881-i-just-want-an-80x25-console-but-thats-no-longer-possible
+2025-09-16 20:50:44 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): changelog.complete.org:443
+2025-09-16 20:50:45 - urllib3.connectionpool - DEBUG - https://changelog.complete.org:443 "GET /archives/10881-i-just-want-an-80x25-console-but-thats-no-longer-possible HTTP/1.1" 200 16118
+2025-09-16 20:50:46 - scraper - ERROR - Goose extraction failed for https://changelog.complete.org/archives/10881-i-just-want-an-80x25-console-but-thats-no-longer-possible: 'str' object has no attribute 'isoformat'
+2025-09-16 20:50:46 - scraper - DEBUG - Fetching page: https://changelog.complete.org/archives/10881-i-just-want-an-80x25-console-but-thats-no-longer-possible
+2025-09-16 20:50:46 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): changelog.complete.org:443
+2025-09-16 20:50:47 - urllib3.connectionpool - DEBUG - https://changelog.complete.org:443 "GET /archives/10881-i-just-want-an-80x25-console-but-thats-no-longer-possible HTTP/1.1" 200 16118
+2025-09-16 20:50:47 - scraper - DEBUG - Successfully fetched page: https://changelog.complete.org/archives/10881-i-just-want-an-80x25-console-but-thats-no-longer-possible
+2025-09-16 20:50:47 - scraper - DEBUG - Extracting content with BeautifulSoup: https://changelog.complete.org/archives/10881-i-just-want-an-80x25-console-but-thats-no-longer-possible
+2025-09-16 20:50:47 - scraper - DEBUG - BeautifulSoup extracted 431 words
+2025-09-16 20:50:47 - scraper - INFO - Successfully scraped with BeautifulSoup: 431 words
+2025-09-16 20:50:47 - __main__ - DEBUG - Scraped: I just want an 80×25 console, but that's no longer possible
+2025-09-16 20:50:47 - __main__ - INFO - Generated script with 20054 characters
+2025-09-16 20:50:47 - tts_converter - INFO - TTS clients initialized successfully
+2025-09-16 20:50:47 - __main__ - INFO - TTS converter initialized
+2025-09-16 20:50:47 - tts_converter - INFO - Text length (20158 bytes) exceeds standard limit. Using Long Audio API.
+2025-09-16 20:50:47 - tts_converter - INFO - Starting long audio synthesis: 20054 characters
+2025-09-16 20:50:49 - tts_converter - INFO - Waiting for long audio synthesis to complete...
+2025-09-16 20:51:28 - urllib3.util.retry - DEBUG - Converted retries value: 3 -> Retry(total=3, connect=None, read=None, redirect=None, status=None)
+2025-09-16 20:51:28 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): oauth2.googleapis.com:443
+2025-09-16 20:51:29 - urllib3.connectionpool - DEBUG - https://oauth2.googleapis.com:443 "POST /token HTTP/1.1" 200 None
+2025-09-16 20:51:29 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): storage.googleapis.com:443
+2025-09-16 20:51:29 - urllib3.connectionpool - DEBUG - https://storage.googleapis.com:443 "GET /download/storage/v1/b/hackercast-1/o/tts_output_a629ec90d1c1410797dac2021c59fa58.mp3?alt=media HTTP/1.1" 200 64128692
+2025-09-16 20:53:20 - tts_converter - INFO - Audio content downloaded to: output/audio/hackercast_20250916_205047.mp3
+2025-09-16 20:53:21 - urllib3.connectionpool - DEBUG - https://storage.googleapis.com:443 "DELETE /storage/v1/b/hackercast-1/o/tts_output_a629ec90d1c1410797dac2021c59fa58.mp3?generation=1758091870410918&prettyPrint=false HTTP/1.1" 204 0
+2025-09-16 20:53:21 - tts_converter - INFO - Cleaned up temporary file: gs://hackercast-1/tts_output_a629ec90d1c1410797dac2021c59fa58.mp3
+2025-09-16 20:53:21 - __main__ - INFO - Generated audio file: output/audio/hackercast_20250916_205047.mp3
+2025-09-16 20:53:21 - __main__ - INFO - Saved pipeline data to: output/data/pipeline_data_20250916_205321.json
+2025-09-16 20:53:21 - __main__ - INFO - Pipeline cleanup completed

@@ -17,8 +17,8 @@ class HackerNewsConfig:
 
     base_url: str = "https://hacker-news.firebaseio.com/v0"
     max_stories: int = 20
-    timeout: int = 30
-    retry_attempts: int = 3
+    timeout: int = 10
+    retry_attempts: int = 2
     retry_delay: float = 1.0
 
 
@@ -27,8 +27,8 @@ class ScrapingConfig:
     """Configuration for web scraping."""
 
     user_agent: str = "HackerCast/1.0 (https://github.com/tonytam/hackercast)"
-    timeout: int = 30
-    retry_attempts: int = 3
+    timeout: int = 10
+    retry_attempts: int = 2
     retry_delay: float = 2.0
     max_content_length: int = 1048576  # 1MB
     allowed_content_types: list = field(
@@ -89,6 +89,7 @@ class AppConfig:
     # Google Cloud
     google_credentials_path: Optional[str] = None
     google_project_id: Optional[str] = None
+    gcs_bucket: Optional[str] = None
 
 
 class ConfigManager:
@@ -150,6 +151,7 @@ class ConfigManager:
             "GOOGLE_APPLICATION_CREDENTIALS"
         )
         self._config.google_project_id = os.getenv("GOOGLE_CLOUD_PROJECT")
+        self._config.gcs_bucket = os.getenv("GCS_BUCKET")
 
         # Logging
         if os.getenv("LOG_LEVEL"):

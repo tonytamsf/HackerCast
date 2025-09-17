@@ -79,7 +79,8 @@ class HackerCastPipeline:
         if self.tts_converter is None:
             try:
                 self.tts_converter = TTSConverter(
-                    credentials_path=self.config.google_credentials_path
+                    credentials_path=self.config.google_credentials_path,
+                    gcs_bucket=self.config.gcs_bucket
                 )
                 self.logger.info("TTS converter initialized")
             except Exception as e:

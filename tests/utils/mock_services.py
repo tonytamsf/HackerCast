@@ -10,6 +10,7 @@ import tempfile
 
 from hn_api import HackerNewsStory
 from scraper import ScrapedContent
+from .test_helpers import TemporaryTestEnvironment
 
 
 class MockHackerNewsAPI:
@@ -263,10 +264,8 @@ class MockArticleScraper:
                 title=article_data["title"],
                 content=article_data["content"].strip(),
                 author=article_data["author"],
-                publish_date=None,
-                word_count=article_data["word_count"],
+                published_date=None,
                 scraping_method="mock",
-                success=True,
             )
             articles[article_data["url"]] = content
 
@@ -288,10 +287,8 @@ class MockArticleScraper:
             title="Generic Test Article",
             content="This is generic test content for URL: " + url + ". " * 50,
             author="Test Author",
-            publish_date=None,
-            word_count=200,
+            published_date=None,
             scraping_method="mock",
-            success=True,
         )
 
     def set_failure_mode(self, should_fail: bool = True, failure_rate: float = 0.0):

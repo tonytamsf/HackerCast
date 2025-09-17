@@ -330,10 +330,8 @@ def create_mock_scraped_content(count: int = 3) -> List[ScrapedContent]:
             title=f"Test Article {i+1}",
             content=f"This is test content for article {i+1}. " * 50,  # ~250 words
             author=f"Test Author {i+1}",
-            publish_date=None,
-            word_count=250,
+            published_date=None,
             scraping_method="mock",
-            success=True,
         )
         content_list.append(content)
     return content_list

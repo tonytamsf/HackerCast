@@ -8,10 +8,26 @@ class HackerNewsFixtures:
     """Fixtures for Hacker News API responses."""
 
     TOP_STORIES_RESPONSE = [
-        40001, 40002, 40003, 40004, 40005,
-        40006, 40007, 40008, 40009, 40010,
-        40011, 40012, 40013, 40014, 40015,
-        40016, 40017, 40018, 40019, 40020
+        40001,
+        40002,
+        40003,
+        40004,
+        40005,
+        40006,
+        40007,
+        40008,
+        40009,
+        40010,
+        40011,
+        40012,
+        40013,
+        40014,
+        40015,
+        40016,
+        40017,
+        40018,
+        40019,
+        40020,
     ]
 
     STORY_ITEMS = {
@@ -23,7 +39,7 @@ class HackerNewsFixtures:
             "title": "Revolutionary AI Framework Achieves Human-Level Performance",
             "url": "https://example.com/ai-framework-breakthrough",
             "score": 1250,
-            "descendants": 234
+            "descendants": 234,
         },
         40002: {
             "id": 40002,
@@ -33,7 +49,7 @@ class HackerNewsFixtures:
             "title": "New Programming Language Promises 10x Performance Gains",
             "url": "https://example.com/new-programming-language",
             "score": 980,
-            "descendants": 156
+            "descendants": 156,
         },
         40003: {
             "id": 40003,
@@ -43,7 +59,7 @@ class HackerNewsFixtures:
             "title": "Quantum Computing Breakthrough: 1000-Qubit Processor Unveiled",
             "url": "https://example.com/quantum-breakthrough",
             "score": 1500,
-            "descendants": 312
+            "descendants": 312,
         },
         40004: {
             "id": 40004,
@@ -53,7 +69,7 @@ class HackerNewsFixtures:
             "title": "Open Source Security Tool Prevents 99% of Cyber Attacks",
             "url": "https://example.com/security-tool",
             "score": 750,
-            "descendants": 89
+            "descendants": 89,
         },
         40005: {
             "id": 40005,
@@ -63,8 +79,8 @@ class HackerNewsFixtures:
             "title": "Startup Disrupts Cloud Computing with Edge-First Architecture",
             "url": "https://example.com/edge-computing",
             "score": 650,
-            "descendants": 67
-        }
+            "descendants": 67,
+        },
     }
 
     @classmethod
@@ -99,7 +115,6 @@ class ScrapingFixtures:
         </body>
         </html>
         """,
-
         "https://example.com/new-programming-language": """
         <html>
         <head><title>New Programming Language Promises 10x Performance Gains</title></head>
@@ -122,13 +137,15 @@ class ScrapingFixtures:
             </article>
         </body>
         </html>
-        """
+        """,
     }
 
     @classmethod
     def get_article_html(cls, url: str) -> str:
         """Get article HTML by URL."""
-        return cls.ARTICLE_CONTENT.get(url, "<html><body><p>Default test content</p></body></html>")
+        return cls.ARTICLE_CONTENT.get(
+            url, "<html><body><p>Default test content</p></body></html>"
+        )
 
 
 class ErrorFixtures:
@@ -138,20 +155,20 @@ class ErrorFixtures:
         "Connection timeout",
         "Name resolution failed",
         "Connection refused",
-        "SSL certificate verification failed"
+        "SSL certificate verification failed",
     ]
 
     HTTP_ERRORS = {
         404: "Not Found",
         500: "Internal Server Error",
         503: "Service Unavailable",
-        429: "Too Many Requests"
+        429: "Too Many Requests",
     }
 
     API_ERRORS = {
         "rate_limit": {"error": "Rate limit exceeded", "retry_after": 3600},
         "invalid_id": {"error": "Invalid item ID"},
-        "service_down": {"error": "Service temporarily unavailable"}
+        "service_down": {"error": "Service temporarily unavailable"},
     }
 
 
@@ -164,7 +181,7 @@ class TestDataFixtures:
         "config": {
             "environment": "test",
             "max_stories": 5,
-            "tts_voice": "en-US-Standard-A"
+            "tts_voice": "en-US-Standard-A",
         },
         "stories": [
             {
@@ -172,7 +189,7 @@ class TestDataFixtures:
                 "title": "Test Story 1",
                 "by": "testuser",
                 "score": 100,
-                "url": "https://example.com/story1"
+                "url": "https://example.com/story1",
             }
         ],
         "scraped_content": [
@@ -181,7 +198,7 @@ class TestDataFixtures:
                 "title": "Test Story 1",
                 "content": "Test content",
                 "word_count": 100,
-                "success": True
+                "success": True,
             }
         ],
         "audio_files": ["output/audio/test_audio.mp3"],
@@ -189,8 +206,8 @@ class TestDataFixtures:
             "stories_fetched": 1,
             "articles_scraped": 1,
             "total_words": 100,
-            "audio_files_generated": 1
-        }
+            "audio_files_generated": 1,
+        },
     }
 
     VALID_PODCAST_SCRIPT = """
@@ -221,23 +238,23 @@ class TestDataFixtures:
         "fetch_stories": {
             "max_duration_seconds": 30,
             "max_api_calls": 25,
-            "min_success_rate": 0.95
+            "min_success_rate": 0.95,
         },
         "scrape_articles": {
             "max_duration_seconds": 60,
             "max_requests_per_second": 5,
-            "min_success_rate": 0.80
+            "min_success_rate": 0.80,
         },
         "generate_script": {
             "max_duration_seconds": 10,
             "min_word_count": 200,
-            "max_word_count": 5000
+            "max_word_count": 5000,
         },
         "full_pipeline": {
             "max_duration_seconds": 120,
             "min_output_files": 2,  # script + data
-            "max_memory_mb": 500
-        }
+            "max_memory_mb": 500,
+        },
     }
 
 
@@ -249,19 +266,13 @@ def load_test_config() -> Dict[str, Any]:
         "hackernews": {
             "api_base_url": "https://hacker-news.firebaseio.com/v0",
             "max_stories": 5,
-            "request_timeout": 10
-        },
-        "scraping": {
             "request_timeout": 10,
-            "max_retries": 2,
-            "retry_delay": 0.5
         },
+        "scraping": {"request_timeout": 10, "max_retries": 2, "retry_delay": 0.5},
         "tts": {
             "enabled": False,
             "language_code": "en-US",
-            "voice_name": "en-US-Standard-A"
+            "voice_name": "en-US-Standard-A",
         },
-        "output": {
-            "base_directory": "/tmp/hackercast_test"
-        }
+        "output": {"base_directory": "/tmp/hackercast_test"},
     }

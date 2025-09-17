@@ -11,7 +11,13 @@ from typing import List, Dict, Any, Optional
 
 import click
 from rich.console import Console
-from rich.progress import Progress, SpinnerColumn, TextColumn, BarColumn, TimeElapsedColumn
+from rich.progress import (
+    Progress,
+    SpinnerColumn,
+    TextColumn,
+    BarColumn,
+    TimeElapsedColumn,
+)
 from rich.table import Table
 from rich.logging import RichHandler
 
@@ -25,6 +31,7 @@ console = Console()
 
 # Global application state
 app_start_time = datetime.now()
+
 
 class HackerCastPipeline:
     """Main orchestrator for the HackerCast pipeline."""
@@ -92,12 +99,14 @@ class HackerCastPipeline:
         if limit is None:
             limit = self.config.hackernews.max_stories
 
-        console.print(f"[bold blue]Fetching top {limit} stories from Hacker News...[/bold blue]")
+        console.print(
+            f"[bold blue]Fetching top {limit} stories from Hacker News...[/bold blue]"
+        )
 
         with Progress(
             SpinnerColumn(),
             TextColumn("[progress.description]{task.description}"),
-            console=console
+            console=console,
         ) as progress:
             task = progress.add_task("Fetching stories...", total=None)
 
@@ -108,7 +117,9 @@ class HackerCastPipeline:
                     console.print("[red]No stories fetched![/red]")
                     return []
 
-                progress.update(task, description=f"Fetched {len(self.stories)} stories")
+                progress.update(
+                    task, description=f"Fetched {len(self.stories)} stories"
+                )
 
                 # Display stories table
                 table = Table(title="Top Hacker News Stories")
@@ -124,7 +135,11 @@ class HackerCastPipeline:
                         story.title,
                         str(story.score),
                         story.by,
-                        story.url[:30] + "..." if story.url and len(story.url) > 30 else story.url or "N/A"
+                        (
+                            story.url[:30] + "..."
+                            if story.url and len(story.url) > 30
+                            else story.url or "N/A"
+                        ),
                     )
 
                 console.print(table)
@@ -137,7 +152,9 @@ class HackerCastPipeline:
                 self.logger.error(f"Error fetching stories: {e}")
                 return []
 
-    def scrape_articles(self, stories: Optional[List[HackerNewsStory]] = None) -> List[ScrapedContent]:
+    def scrape_articles(
+        self, stories: Optional[List[HackerNewsStory]] = None
+    ) -> List[ScrapedContent]:
         """
         Scrape article content from stories.
 
@@ -156,7 +173,9 @@ class HackerCastPipeline:
 
         # Filter stories that have URLs
         stories_with_urls = [story for story in stories if story.url]
-        console.print(f"[bold blue]Scraping {len(stories_with_urls)} articles...[/bold blue]")
+        console.print(
+            f"[bold blue]Scraping {len(stories_with_urls)} articles...[/bold blue]"
+        )
 
         scraped_content = []
 
@@ -166,13 +185,17 @@ class HackerCastPipeline:
             BarColumn(),
             TextColumn("[progress.percentage]{task.percentage:>3.0f}%"),
             TimeElapsedColumn(),
-            console=console
+            console=console,
         ) as progress:
-            task = progress.add_task("Scraping articles...", total=len(stories_with_urls))
+            task = progress.add_task(
+                "Scraping articles...", total=len(stories_with_urls)
+            )
 
             for i, story in enumerate(stories_with_urls):
                 try:
-                    progress.update(task, description=f"Scraping: {story.title[:30]}...")
+                    progress.update(
+                        task, description=f"Scraping: {story.title[:30]}..."
+                    )
 
                     content = self.scraper.scrape_article(story.url)
                     if content:
@@ -189,7 +212,9 @@ class HackerCastPipeline:
                     self.logger.error(f"Error scraping {story.title}: {e}")
                     progress.advance(task)
 
-        console.print(f"[green]Successfully scraped {len(scraped_content)} articles[/green]")
+        console.print(
+            f"[green]Successfully scraped {len(scraped_content)} articles[/green]"
+        )
 
         # Display scraping results
         if scraped_content:
@@ -201,10 +226,14 @@ class HackerCastPipeline:
 
             for content in scraped_content[:10]:  # Show first 10
                 table.add_row(
-                    content.title[:40] + "..." if len(content.title) > 40 else content.title,
+                    (
+                        content.title[:40] + "..."
+                        if len(content.title) > 40
+                        else content.title
+                    ),
                     str(content.word_count),
                     content.scraping_method,
-                    content.author or "Unknown"
+                    content.author or "Unknown",
                 )
 
             console.print(table)
@@ -241,8 +270,8 @@ class HackerCastPipeline:
             script_parts.append(f"\n\nStory {i}: {article.title}")
 
             # Add article summary (first few sentences)
-            sentences = article.content.split('.')[:3]  # First 3 sentences
-            summary = '. '.join(sentences).strip()
+            sentences = article.content.split(".")[:3]  # First 3 sentences
+            summary = ". ".join(sentences).strip()
             if summary:
                 script_parts.append(f"\n{summary}.")
 
@@ -256,11 +285,13 @@ class HackerCastPipeline:
             f"and we'll see you tomorrow with more stories from the world of technology."
         )
 
-        script = ''.join(script_parts)
+        script = "".join(script_parts)
 
         # Save script to file
-        script_file = self.config_manager.get_output_path('data', f'script_{datetime.now().strftime("%Y%m%d")}.txt')
-        with open(script_file, 'w', encoding='utf-8') as f:
+        script_file = self.config_manager.get_output_path(
+            "data", f'script_{datetime.now().strftime("%Y%m%d")}.txt'
+        )
+        with open(script_file, "w", encoding="utf-8") as f:
             f.write(script)
 
         console.print(f"[green]Script generated and saved to: {script_file}[/green]")
@@ -289,12 +320,14 @@ class HackerCastPipeline:
 
             # Generate filename
             timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-            audio_file = self.config_manager.get_output_path('audio', f'hackercast_{timestamp}.mp3')
+            audio_file = self.config_manager.get_output_path(
+                "audio", f"hackercast_{timestamp}.mp3"
+            )
 
             with Progress(
                 SpinnerColumn(),
                 TextColumn("[progress.description]{task.description}"),
-                console=console
+                console=console,
             ) as progress:
                 task = progress.add_task("Converting to speech...", total=None)
 
@@ -304,12 +337,14 @@ class HackerCastPipeline:
                     language_code=self.config.tts.language_code,
                     voice_name=self.config.tts.voice_name,
                     speaking_rate=self.config.tts.speaking_rate,
-                    pitch=self.config.tts.pitch
+                    pitch=self.config.tts.pitch,
                 )
 
                 if success:
                     progress.update(task, description=f"Audio saved: {audio_file.name}")
-                    console.print(f"[green]Audio generated successfully: {audio_file}[/green]")
+                    console.print(
+                        f"[green]Audio generated successfully: {audio_file}[/green]"
+                    )
                     self.logger.info(f"Generated audio file: {audio_file}")
                     self.audio_files.append(audio_file)
                     return audio_file
@@ -332,28 +367,32 @@ class HackerCastPipeline:
         console.print("[bold blue]Saving pipeline data...[/bold blue]")
 
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        data_file = self.config_manager.get_output_path('data', f'pipeline_data_{timestamp}.json')
+        data_file = self.config_manager.get_output_path(
+            "data", f"pipeline_data_{timestamp}.json"
+        )
 
         pipeline_data = {
-            'timestamp': timestamp,
-            'run_date': datetime.now().isoformat(),
-            'config': {
-                'environment': self.config.environment,
-                'max_stories': self.config.hackernews.max_stories,
-                'tts_voice': self.config.tts.voice_name
+            "timestamp": timestamp,
+            "run_date": datetime.now().isoformat(),
+            "config": {
+                "environment": self.config.environment,
+                "max_stories": self.config.hackernews.max_stories,
+                "tts_voice": self.config.tts.voice_name,
             },
-            'stories': [story.to_dict() for story in self.stories],
-            'scraped_content': [content.to_dict() for content in self.scraped_content],
-            'audio_files': [str(file) for file in self.audio_files],
-            'stats': {
-                'stories_fetched': len(self.stories),
-                'articles_scraped': len(self.scraped_content),
-                'total_words': sum(content.word_count for content in self.scraped_content),
-                'audio_files_generated': len(self.audio_files)
-            }
+            "stories": [story.to_dict() for story in self.stories],
+            "scraped_content": [content.to_dict() for content in self.scraped_content],
+            "audio_files": [str(file) for file in self.audio_files],
+            "stats": {
+                "stories_fetched": len(self.stories),
+                "articles_scraped": len(self.scraped_content),
+                "total_words": sum(
+                    content.word_count for content in self.scraped_content
+                ),
+                "audio_files_generated": len(self.audio_files),
+            },
         }
 
-        with open(data_file, 'w', encoding='utf-8') as f:
+        with open(data_file, "w", encoding="utf-8") as f:
             json.dump(pipeline_data, f, indent=2, ensure_ascii=False)
 
         console.print(f"[green]Pipeline data saved: {data_file}[/green]")
@@ -403,22 +442,22 @@ class HackerCastPipeline:
             self._display_pipeline_summary(runtime, audio_file is not None)
 
             return {
-                'success': True,
-                'stories_count': len(stories),
-                'scraped_count': len(content),
-                'script_length': len(script),
-                'audio_file': str(audio_file) if audio_file else None,
-                'data_file': str(data_file),
-                'runtime': runtime
+                "success": True,
+                "stories_count": len(stories),
+                "scraped_count": len(content),
+                "script_length": len(script),
+                "audio_file": str(audio_file) if audio_file else None,
+                "data_file": str(data_file),
+                "runtime": runtime,
             }
 
         except Exception as e:
             console.print(f"[red]Pipeline failed: {e}[/red]")
             self.logger.error(f"Pipeline failed: {e}")
             return {
-                'success': False,
-                'error': str(e),
-                'runtime': time.time() - pipeline_start
+                "success": False,
+                "error": str(e),
+                "runtime": time.time() - pipeline_start,
             }
 
     def _display_pipeline_summary(self, runtime: float, audio_success: bool):
@@ -429,7 +468,9 @@ class HackerCastPipeline:
 
         table.add_row("Stories Fetched", str(len(self.stories)))
         table.add_row("Articles Scraped", str(len(self.scraped_content)))
-        table.add_row("Total Words", str(sum(c.word_count for c in self.scraped_content)))
+        table.add_row(
+            "Total Words", str(sum(c.word_count for c in self.scraped_content))
+        )
         table.add_row("Audio Generated", "Yes" if audio_success else "No")
         table.add_row("Runtime", f"{runtime:.2f} seconds")
 
@@ -438,37 +479,41 @@ class HackerCastPipeline:
     def cleanup(self):
         """Clean up resources."""
         try:
-            if hasattr(self.scraper, 'cleanup'):
+            if hasattr(self.scraper, "cleanup"):
                 self.scraper.cleanup()
             self.logger.info("Pipeline cleanup completed")
         except Exception as e:
             self.logger.error(f"Error during cleanup: {e}")
 
+
 # CLI Interface
 @click.group()
-@click.option('--config', help='Configuration file path')
-@click.option('--debug', is_flag=True, help='Enable debug mode')
+@click.option("--config", help="Configuration file path")
+@click.option("--debug", is_flag=True, help="Enable debug mode")
 @click.pass_context
 def cli(ctx, config, debug):
     """HackerCast: Generate daily podcasts from Hacker News stories."""
     ctx.ensure_object(dict)
-    ctx.obj['config'] = config
-    ctx.obj['debug'] = debug
+    ctx.obj["config"] = config
+    ctx.obj["debug"] = debug
+
 
 @cli.command()
-@click.option('--limit', '-l', default=None, type=int, help='Number of stories to fetch')
+@click.option(
+    "--limit", "-l", default=None, type=int, help="Number of stories to fetch"
+)
 @click.pass_context
 def run(ctx, limit):
     """Run the complete HackerCast pipeline."""
     pipeline = None
     try:
-        pipeline = HackerCastPipeline(ctx.obj['config'])
-        if ctx.obj['debug']:
+        pipeline = HackerCastPipeline(ctx.obj["config"])
+        if ctx.obj["debug"]:
             pipeline.config.debug = True
 
         result = pipeline.run_full_pipeline(limit)
 
-        if result['success']:
+        if result["success"]:
             console.print("[bold green]Pipeline completed successfully![/bold green]")
             sys.exit(0)
         else:
@@ -485,46 +530,55 @@ def run(ctx, limit):
         if pipeline:
             pipeline.cleanup()
 
+
 @cli.command()
-@click.option('--limit', '-l', default=10, type=int, help='Number of stories to fetch')
+@click.option("--limit", "-l", default=10, type=int, help="Number of stories to fetch")
 @click.pass_context
 def fetch(ctx, limit):
     """Fetch top stories from Hacker News."""
+    if limit <= 0:
+        console.print("[red]Error: Limit must be a positive integer[/red]")
+        raise click.Exit(1)
+
     pipeline = None
     try:
-        pipeline = HackerCastPipeline(ctx.obj['config'])
+        pipeline = HackerCastPipeline(ctx.obj["config"])
         stories = pipeline.fetch_top_stories(limit)
         console.print(f"[green]Fetched {len(stories)} stories[/green]")
     finally:
         if pipeline:
             pipeline.cleanup()
 
+
 @cli.command()
-@click.argument('url')
+@click.argument("url")
 @click.pass_context
 def scrape(ctx, url):
     """Scrape content from a single URL."""
     pipeline = None
     try:
-        pipeline = HackerCastPipeline(ctx.obj['config'])
+        pipeline = HackerCastPipeline(ctx.obj["config"])
         content = pipeline.scraper.scrape_article(url)
         if content:
-            console.print(f"[green]Scraped {content.word_count} words from: {content.title}[/green]")
+            console.print(
+                f"[green]Scraped {content.word_count} words from: {content.title}[/green]"
+            )
         else:
             console.print("[red]Failed to scrape content[/red]")
     finally:
         if pipeline:
             pipeline.cleanup()
 
+
 @cli.command()
-@click.argument('text')
-@click.argument('output_file')
+@click.argument("text")
+@click.argument("output_file")
 @click.pass_context
 def tts(ctx, text, output_file):
     """Convert text to speech."""
     pipeline = None
     try:
-        pipeline = HackerCastPipeline(ctx.obj['config'])
+        pipeline = HackerCastPipeline(ctx.obj["config"])
         pipeline._initialize_tts()
         success = pipeline.tts_converter.convert_text_to_speech(text, output_file)
         if success:
@@ -534,6 +588,7 @@ def tts(ctx, text, output_file):
     finally:
         if pipeline:
             pipeline.cleanup()
+
 
 if __name__ == "__main__":
     cli()

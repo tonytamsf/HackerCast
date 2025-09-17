@@ -38,10 +38,10 @@ class TestHackerNewsStory:
         story = HackerNewsStory(**mock_hn_story_data)
         story_dict = story.to_dict()
 
-        assert story_dict['id'] == 12345
-        assert story_dict['title'] == "Test Story Title"
-        assert story_dict['url'] == "https://example.com/test-article"
-        assert 'created_at' in story_dict
+        assert story_dict["id"] == 12345
+        assert story_dict["title"] == "Test Story Title"
+        assert story_dict["url"] == "https://example.com/test-article"
+        assert "created_at" in story_dict
 
 
 class TestHackerNewsAPI:
@@ -49,61 +49,68 @@ class TestHackerNewsAPI:
 
     def test_api_initialization(self, test_config):
         """Test API client initialization."""
-        with patch('hn_api.get_config', return_value=test_config):
+        with patch("hn_api.get_config", return_value=test_config):
             api = HackerNewsAPI()
 
             assert api.base_url == "https://hacker-news.firebaseio.com/v0"
             assert api.timeout == test_config.hackernews.timeout
 
-    @patch('hn_api.requests.Session.get')
+    @patch("hn_api.requests.Session.get")
     def test_make_request_success(self, mock_get, test_config):
         """Test successful API request."""
         # Setup mock response
         mock_response = Mock()
-        mock_response.json.return_value = {'test': 'data'}
+        mock_response.json.return_value = {"test": "data"}
         mock_response.raise_for_status.return_value = None
         mock_get.return_value = mock_response
 
-        with patch('hn_api.get_config', return_value=test_config):
+        with patch("hn_api.get_config", return_value=test_config):
             api = HackerNewsAPI()
             result = api._make_request("test.json")
 
-            assert result == {'test': 'data'}
+            assert result == {"test": "data"}
             mock_get.assert_called_once()
 
-    @patch('hn_api.requests.Session.get')
+    @patch("hn_api.requests.Session.get")
     def test_make_request_timeout(self, mock_get, test_config):
         """Test API request timeout."""
         mock_get.side_effect = requests.exceptions.Timeout("Timeout")
 
-        with patch('hn_api.get_config', return_value=test_config):
+        with patch("hn_api.get_config", return_value=test_config):
             api = HackerNewsAPI()
             result = api._make_request("test.json")
 
             assert result is None
 
-    @patch('hn_api.requests.Session.get')
+    @patch("hn_api.requests.Session.get")
     def test_make_request_http_error(self, mock_get, test_config):
         """Test API request HTTP error."""
         mock_response = Mock()
-        mock_response.raise_for_status.side_effect = requests.exceptions.HTTPError("404")
+        mock_response.raise_for_status.side_effect = requests.exceptions.HTTPError(
+            "404"
+        )
         mock_get.return_value = mock_response
 
-        with patch('hn_api.get_config', return_value=test_config):
+        with patch("hn_api.get_config", return_value=test_config):
             api = HackerNewsAPI()
             result = api._make_request("test.json")
 
             assert result is None
 
-    @patch('hn_api.requests.Session.get')
-    def test_get_top_story_ids_success(self, mock_get, test_config, mock_hn_stories_list):
+    @patch("hn_api.requests.Session.get")
+    def test_get_top_story_ids_success(
+        self, mock_get, test_config, mock_hn_stories_list
+    ):
         """Test getting top story IDs successfully."""
         mock_response = Mock()
-        mock_response.json.return_value = mock_hn_stories_list + [12350, 12351]  # Extra stories
+        mock_response.json.return_value = mock_hn_stories_list + [
+            12350,
+            12351,
+        ]  # Extra stories
         mock_response.raise_for_status.return_value = None
         mock_get.return_value = mock_response
 
-        with patch('hn_api.get_config', return_value=test_config):
+        with patch("hn_api.get_config", return_value=test_config):
             api = HackerNewsAPI()
             story_ids = api.get_top_story_ids(5)
 
@@ -112,13 +119,13 @@ class TestHackerNewsAPI:
 
     def test_get_top_story_ids_invalid_limit(self, test_config):
         """Test getting story IDs with invalid limit."""
-        with patch('hn_api.get_config', return_value=test_config):
+        with patch("hn_api.get_config", return_value=test_config):
             api = HackerNewsAPI()
             story_ids = api.get_top_story_ids(-1)
 
             assert story_ids is None
 
-    @patch('hn_api.requests.Session.get')
+    @patch("hn_api.requests.Session.get")
     def test_get_story_details_success(self, mock_get, test_config, mock_hn_story_data):
         """Test getting story details successfully."""
         mock_response = Mock()
@@ -126,7 +133,7 @@ class TestHackerNewsAPI:
         mock_response.raise_for_status.return_value = None
         mock_get.return_value = mock_response
 
-        with patch('hn_api.get_config', return_value=test_config):
+        with patch("hn_api.get_config", return_value=test_config):
             api = HackerNewsAPI()
             story = api.get_story_details(12345)
 
@@ -134,38 +141,40 @@ class TestHackerNewsAPI:
             assert story.id == 12345
             assert story.title == "Test Story Title"
 
-    @patch('hn_api.requests.Session.get')
+    @patch("hn_api.requests.Session.get")
     def test_get_story_details_missing_fields(self, mock_get, test_config):
         """Test getting story details with missing required fields."""
-        incomplete_data = {'id': 12345, 'title': 'Test'}  # Missing required fields
+        incomplete_data = {"id": 12345, "title": "Test"}  # Missing required fields
 
         mock_response = Mock()
         mock_response.json.return_value = incomplete_data
         mock_response.raise_for_status.return_value = None
         mock_get.return_value = mock_response
 
-        with patch('hn_api.get_config', return_value=test_config):
+        with patch("hn_api.get_config", return_value=test_config):
             api = HackerNewsAPI()
             story = api.get_story_details(12345)
 
             assert story is None
 
-    @patch('hn_api.HackerNewsAPI.get_story_details')
-    @patch('hn_api.HackerNewsAPI.get_top_story_ids')
-    def test_get_top_stories_success(self, mock_get_ids, mock_get_details, test_config, mock_hn_story_data):
+    @patch("hn_api.HackerNewsAPI.get_story_details")
+    @patch("hn_api.HackerNewsAPI.get_top_story_ids")
+    def test_get_top_stories_success(
+        self, mock_get_ids, mock_get_details, test_config, mock_hn_story_data
+    ):
         """Test getting complete top stories."""
         mock_get_ids.return_value = [12345, 12346]
 
         # Create story objects
         story1 = HackerNewsStory(**mock_hn_story_data)
         story2_data = mock_hn_story_data.copy()
-        story2_data['id'] = 12346
-        story2_data['title'] = 'Second Story'
+        story2_data["id"] = 12346
+        story2_data["title"] = "Second Story"
         story2 = HackerNewsStory(**story2_data)
 
         mock_get_details.side_effect = [story1, story2]
 
-        with patch('hn_api.get_config', return_value=test_config):
+        with patch("hn_api.get_config", return_value=test_config):
             api = HackerNewsAPI()
             stories = api.get_top_stories(2)
 
@@ -173,12 +182,12 @@ class TestHackerNewsAPI:
             assert stories[0].title == "Test Story Title"
             assert stories[1].title == "Second Story"
 
-    @patch('hn_api.HackerNewsAPI.get_top_story_ids')
+    @patch("hn_api.HackerNewsAPI.get_top_story_ids")
     def test_get_top_stories_no_ids(self, mock_get_ids, test_config):
         """Test getting top stories when no IDs are returned."""
         mock_get_ids.return_value = None
 
-        with patch('hn_api.get_config', return_value=test_config):
+        with patch("hn_api.get_config", return_value=test_config):
             api = HackerNewsAPI()
             stories = api.get_top_stories(5)
 
@@ -188,7 +197,7 @@ class TestHackerNewsAPI:
 class TestLegacyFunctions:
     """Test legacy backward compatibility functions."""
 
-    @patch('hn_api.HackerNewsAPI')
+    @patch("hn_api.HackerNewsAPI")
     def test_get_top_story_ids_legacy(self, mock_api_class):
         """Test legacy get_top_story_ids function."""
         mock_api = Mock()

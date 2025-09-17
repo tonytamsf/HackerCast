@@ -42,13 +42,21 @@ class TestPerformance:
                 self.metrics.record_count(f"stories_fetched_{limit}", len(stories))
 
                 # Performance assertions
-                assert duration < 30.0, f"Fetching {limit} stories too slow: {duration}s"
-                assert len(stories) == limit, f"Wrong number of stories fetched for limit {limit}"
+                assert (
+                    duration < 30.0
+                ), f"Fetching {limit} stories too slow: {duration}s"
+                assert (
+                    len(stories) == limit
+                ), f"Wrong number of stories fetched for limit {limit}"
 
                 # API efficiency check - should be roughly O(n) but with some overhead
                 if limit > 1:
-                    expected_max_time = 5.0 + (limit * 0.5)  # 5s overhead + 0.5s per story
-                    assert duration < expected_max_time, f"Fetch time not scaling efficiently: {duration}s for {limit} stories"
+                    expected_max_time = 5.0 + (
+                        limit * 0.5
+                    )  # 5s overhead + 0.5s per story
+                    assert (
+                        duration < expected_max_time
+                    ), f"Fetch time not scaling efficiently: {duration}s for {limit} stories"
 
     @pytest.mark.performance
     def test_scraping_performance(self):
@@ -77,7 +85,9 @@ class TestPerformance:
 
             # Efficiency check - should not take more than 15s per article on average
             avg_time_per_article = duration / max(len(content), 1)
-            assert avg_time_per_article < 15.0, f"Average scraping time too high: {avg_time_per_article}s per article"
+            assert (
+                avg_time_per_article < 15.0
+            ), f"Average scraping time too high: {avg_time_per_article}s per article"
 
     @pytest.mark.performance
     def test_script_generation_performance(self):
@@ -129,11 +139,15 @@ class TestPerformance:
 
                 # Assertions
                 assert result["success"], f"Pipeline failed for limit {limit}"
-                assert duration < 120.0, f"Full pipeline too slow for {limit} stories: {duration}s"
+                assert (
+                    duration < 120.0
+                ), f"Full pipeline too slow for {limit} stories: {duration}s"
 
                 # Scalability check
                 if limit <= 3:
-                    assert duration < 60.0, f"Pipeline inefficient for small dataset: {duration}s"
+                    assert (
+                        duration < 60.0
+                    ), f"Pipeline inefficient for small dataset: {duration}s"
 
     @pytest.mark.performance
     def test_memory_usage_patterns(self):
@@ -174,14 +188,23 @@ class TestPerformance:
             self.metrics.record_count("memory_after_script_mb", int(script_increase))
 
             # Memory usage assertions
-            assert init_increase < 50, f"Initialization uses too much memory: {init_increase}MB"
-            assert fetch_increase < 100, f"Story fetching uses too much memory: {fetch_increase}MB"
-            assert scrape_increase < 200, f"Scraping uses too much memory: {scrape_increase}MB"
-            assert script_increase < 250, f"Script generation uses too much memory: {script_increase}MB"
+            assert (
+                init_increase < 50
+            ), f"Initialization uses too much memory: {init_increase}MB"
+            assert (
+                fetch_increase < 100
+            ), f"Story fetching uses too much memory: {fetch_increase}MB"
+            assert (
+                scrape_increase < 200
+            ), f"Scraping uses too much memory: {scrape_increase}MB"
+            assert (
+                script_increase < 250
+            ), f"Script generation uses too much memory: {script_increase}MB"
 
     @pytest.mark.performance
     def test_concurrent_pipeline_performance(self):
         """Test performance under concurrent execution."""
+
         def run_pipeline():
             with E2ETestContext() as ctx:
                 pipeline = HackerCastPipeline(str(ctx.config_file))
@@ -193,7 +216,7 @@ class TestPerformance:
                 return {
                     "success": result["success"],
                     "duration": end_time - start_time,
-                    "stories": result.get("stories_count", 0)
+                    "stories": result.get("stories_count", 0),
                 }
 
         # Run concurrent pipelines
@@ -210,7 +233,11 @@ class TestPerformance:
 
         # Analyze results
         successful_runs = [r for r in results if r["success"]]
-        avg_duration = sum(r["duration"] for r in successful_runs) / len(successful_runs) if successful_runs else 0
+        avg_duration = (
+            sum(r["duration"] for r in successful_runs) / len(successful_runs)
+            if successful_runs
+            else 0
+        )
 
         # Record metrics
         self.metrics.record_timing("concurrent_execution", total_duration)
@@ -218,9 +245,15 @@ class TestPerformance:
         self.metrics.record_count("concurrent_success_rate", len(successful_runs))
 
         # Assertions
-        assert len(successful_runs) >= 2, f"Too many concurrent failures: {len(successful_runs)}/{num_concurrent}"
-        assert total_duration < 180.0, f"Concurrent execution too slow: {total_duration}s"
-        assert avg_duration < 120.0, f"Average concurrent pipeline too slow: {avg_duration}s"
+        assert (
+            len(successful_runs) >= 2
+        ), f"Too many concurrent failures: {len(successful_runs)}/{num_concurrent}"
+        assert (
+            total_duration < 180.0
+        ), f"Concurrent execution too slow: {total_duration}s"
+        assert (
+            avg_duration < 120.0
+        ), f"Average concurrent pipeline too slow: {avg_duration}s"
 
     @pytest.mark.performance
     def test_cli_command_performance(self):
@@ -241,9 +274,9 @@ class TestPerformance:
         for cmd_args, metric_name, max_time in commands:
             self.performance.start()
 
-            return_code, stdout, stderr = CommandRunner.run_command([
-                python_executable, main_script
-            ] + cmd_args, timeout=int(max_time + 10))
+            return_code, stdout, stderr = CommandRunner.run_command(
+                [python_executable, main_script] + cmd_args, timeout=int(max_time + 10)
+            )
 
             self.performance.stop()
             duration = self.performance.get_metrics()["duration"]
@@ -279,8 +312,12 @@ class TestPerformance:
             expected_min_time = 3.0
             expected_max_time = 45.0  # Should still complete within timeout
 
-            assert duration >= expected_min_time, f"Duration too short for latency: {duration}s"
-            assert duration < expected_max_time, f"Failed to handle latency efficiently: {duration}s"
+            assert (
+                duration >= expected_min_time
+            ), f"Duration too short for latency: {duration}s"
+            assert (
+                duration < expected_max_time
+            ), f"Failed to handle latency efficiently: {duration}s"
             assert len(stories) == 5, "Should still fetch all stories despite latency"
 
     @pytest.mark.performance
@@ -307,7 +344,9 @@ class TestPerformance:
 
             # Should handle failures efficiently
             assert duration < 90.0, f"Error recovery too slow: {duration}s"
-            assert len(content) >= 5, "Should scrape majority of articles despite failures"  # At least 70% success
+            assert (
+                len(content) >= 5
+            ), "Should scrape majority of articles despite failures"  # At least 70% success
 
     @pytest.mark.performance
     def test_large_dataset_performance(self):
@@ -333,7 +372,9 @@ class TestPerformance:
             # Should scale reasonably
             assert duration < 120.0, f"Large dataset processing too slow: {duration}s"
             assert len(stories) == large_limit, "Should fetch all requested stories"
-            assert len(script) > 1000, "Should generate substantial script for larger dataset"
+            assert (
+                len(script) > 1000
+            ), "Should generate substantial script for larger dataset"
 
     @pytest.mark.performance
     def test_startup_performance(self):
@@ -345,8 +386,8 @@ class TestPerformance:
         self.performance.start()
 
         # Simulate fresh import
-        if 'main' in sys.modules:
-            del sys.modules['main']
+        if "main" in sys.modules:
+            del sys.modules["main"]
 
         import main
 
@@ -368,7 +409,9 @@ class TestPerformance:
 
         # Performance assertions
         assert import_duration < 5.0, f"Module import too slow: {import_duration}s"
-        assert init_duration < 3.0, f"Pipeline initialization too slow: {init_duration}s"
+        assert (
+            init_duration < 3.0
+        ), f"Pipeline initialization too slow: {init_duration}s"
 
     def teardown_method(self):
         """Cleanup and report performance metrics."""

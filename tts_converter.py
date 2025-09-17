@@ -11,6 +11,7 @@ from google.api_core import exceptions as gcloud_exceptions
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+
 class TTSConverter:
     """Text-to-Speech converter using Google Cloud Text-to-Speech API."""
 
@@ -23,7 +24,7 @@ class TTSConverter:
                             If None, uses GOOGLE_APPLICATION_CREDENTIALS env var.
         """
         if credentials_path:
-            os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = credentials_path
+            os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = credentials_path
 
         try:
             self.client = texttospeech.TextToSpeechClient()
@@ -36,10 +37,10 @@ class TTSConverter:
         self,
         text: str,
         output_file: str,
-        language_code: str = 'en-US',
-        voice_name: str = 'en-US-Neural2-D',
+        language_code: str = "en-US",
+        voice_name: str = "en-US-Neural2-D",
         speaking_rate: float = 1.0,
-        pitch: float = 0.0
+        pitch: float = 0.0,
     ) -> bool:
         """
         Convert text to speech and save as MP3.
@@ -62,35 +63,34 @@ class TTSConverter:
                 return False
 
             if len(text) > 5000:
-                logger.warning(f"Text length ({len(text)}) exceeds recommended limit (5000 chars)")
+                logger.warning(
+                    f"Text length ({len(text)}) exceeds recommended limit (5000 chars)"
+                )
 
             # Set the text input to be synthesized
             synthesis_input = texttospeech.SynthesisInput(text=text)
 
             # Build the voice request
             voice = texttospeech.VoiceSelectionParams(
-                language_code=language_code,
-                name=voice_name
+                language_code=language_code, name=voice_name
             )
 
             # Select the type of audio file you want returned
             audio_config = texttospeech.AudioConfig(
                 audio_encoding=texttospeech.AudioEncoding.MP3,
                 speaking_rate=speaking_rate,
-                pitch=pitch
+                pitch=pitch,
             )
 
             # Perform the text-to-speech request
             logger.info(f"Converting text to speech: {len(text)} characters")
             response = self.client.synthesize_speech(
-                input=synthesis_input,
-                voice=voice,
-                audio_config=audio_config
+                input=synthesis_input, voice=voice, audio_config=audio_config
             )
 
             # Write the response to the output file
             os.makedirs(os.path.dirname(output_file), exist_ok=True)
-            with open(output_file, 'wb') as out:
+            with open(output_file, "wb") as out:
                 out.write(response.audio_content)
 
             logger.info(f"Audio content written to file: {output_file}")
@@ -106,7 +106,7 @@ class TTSConverter:
             logger.error(f"Unexpected error during TTS conversion: {e}")
             return False
 
-    def get_available_voices(self, language_code: str = 'en-US') -> list:
+    def get_available_voices(self, language_code: str = "en-US") -> list:
         """
         Get list of available voices for a language.
 
@@ -123,23 +123,29 @@ class TTSConverter:
             logger.error(f"Error fetching available voices: {e}")
             return []
 
+
 def main():
     """Command-line interface for TTS conversion."""
     if len(sys.argv) != 3:
-        print("Usage: python tts_converter.py '<text>' <output_file.mp3>", file=sys.stderr)
+        print(
+            "Usage: python tts_converter.py '<text>' <output_file.mp3>", file=sys.stderr
+        )
         sys.exit(1)
 
     text = sys.argv[1]
     output_file = sys.argv[2]
 
     # Validate output file extension
-    if not output_file.lower().endswith('.mp3'):
+    if not output_file.lower().endswith(".mp3"):
         print("Error: Output file must have .mp3 extension", file=sys.stderr)
         sys.exit(1)
 
     # Check for Google Cloud credentials
-    if not os.environ.get('GOOGLE_APPLICATION_CREDENTIALS'):
-        print("Warning: GOOGLE_APPLICATION_CREDENTIALS environment variable not set", file=sys.stderr)
+    if not os.environ.get("GOOGLE_APPLICATION_CREDENTIALS"):
+        print(
+            "Warning: GOOGLE_APPLICATION_CREDENTIALS environment variable not set",
+            file=sys.stderr,
+        )
 
     try:
         converter = TTSConverter()
@@ -154,6 +160,7 @@ def main():
     except Exception as e:
         print(f"Error: {e}", file=sys.stderr)
         sys.exit(1)
+
 
 if __name__ == "__main__":
     main()

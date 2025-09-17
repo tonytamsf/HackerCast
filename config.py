@@ -9,59 +9,73 @@ from pathlib import Path
 # Configure logging
 logger = logging.getLogger(__name__)
 
+
 @dataclass
 class HackerNewsConfig:
     """Configuration for Hacker News API."""
+
     base_url: str = "https://hacker-news.firebaseio.com/v0"
     max_stories: int = 20
     timeout: int = 30
     retry_attempts: int = 3
     retry_delay: float = 1.0
 
+
 @dataclass
 class ScrapingConfig:
     """Configuration for web scraping."""
+
     user_agent: str = "HackerCast/1.0 (https://github.com/tonytam/hackercast)"
     timeout: int = 30
     retry_attempts: int = 3
     retry_delay: float = 2.0
     max_content_length: int = 1048576  # 1MB
-    allowed_content_types: list = field(default_factory=lambda: ['text/html', 'application/xhtml+xml'])
+    allowed_content_types: list = field(
+        default_factory=lambda: ["text/html", "application/xhtml+xml"]
+    )
+
 
 @dataclass
 class TTSConfig:
     """Configuration for Text-to-Speech."""
-    language_code: str = 'en-US'
-    voice_name: str = 'en-US-Neural2-D'
+
+    language_code: str = "en-US"
+    voice_name: str = "en-US-Neural2-D"
     speaking_rate: float = 1.0
     pitch: float = 0.0
     max_text_length: int = 5000
-    audio_format: str = 'MP3'
+    audio_format: str = "MP3"
+
 
 @dataclass
 class LoggingConfig:
     """Configuration for logging."""
-    level: str = 'INFO'
-    format: str = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-    date_format: str = '%Y-%m-%d %H:%M:%S'
+
+    level: str = "INFO"
+    format: str = "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+    date_format: str = "%Y-%m-%d %H:%M:%S"
     log_file: Optional[str] = None
     max_log_size: int = 10485760  # 10MB
     backup_count: int = 5
 
+
 @dataclass
 class OutputConfig:
     """Configuration for output files."""
-    base_dir: str = 'output'
-    audio_dir: str = 'audio'
-    data_dir: str = 'data'
-    logs_dir: str = 'logs'
-    date_format: str = '%Y-%m-%d'
+
+    base_dir: str = "output"
+    audio_dir: str = "audio"
+    data_dir: str = "data"
+    logs_dir: str = "logs"
+    date_format: str = "%Y-%m-%d"
+
 
 @dataclass
 class AppConfig:
     """Main application configuration."""
+
     # Environment
-    environment: str = 'development'
+    environment: str = "development"
     debug: bool = False
 
     # Component configurations
@@ -74,6 +88,7 @@ class AppConfig:
     # Google Cloud
     google_credentials_path: Optional[str] = None
     google_project_id: Optional[str] = None
+
 
 class ConfigManager:
     """Centralized configuration manager."""
@@ -97,44 +112,50 @@ class ConfigManager:
     def _load_from_environment(self) -> None:
         """Load configuration from environment variables."""
         # Environment
-        self._config.environment = os.getenv('HACKERCAST_ENV', self._config.environment)
-        self._config.debug = os.getenv('HACKERCAST_DEBUG', '').lower() in ('true', '1', 'yes')
+        self._config.environment = os.getenv("HACKERCAST_ENV", self._config.environment)
+        self._config.debug = os.getenv("HACKERCAST_DEBUG", "").lower() in (
+            "true",
+            "1",
+            "yes",
+        )
 
         # Hacker News API
-        if os.getenv('HN_MAX_STORIES'):
-            self._config.hackernews.max_stories = int(os.getenv('HN_MAX_STORIES'))
-        if os.getenv('HN_TIMEOUT'):
-            self._config.hackernews.timeout = int(os.getenv('HN_TIMEOUT'))
+        if os.getenv("HN_MAX_STORIES"):
+            self._config.hackernews.max_stories = int(os.getenv("HN_MAX_STORIES"))
+        if os.getenv("HN_TIMEOUT"):
+            self._config.hackernews.timeout = int(os.getenv("HN_TIMEOUT"))
 
         # Scraping
-        if os.getenv('SCRAPING_USER_AGENT'):
-            self._config.scraping.user_agent = os.getenv('SCRAPING_USER_AGENT')
-        if os.getenv('SCRAPING_TIMEOUT'):
-            self._config.scraping.timeout = int(os.getenv('SCRAPING_TIMEOUT'))
+        if os.getenv("SCRAPING_USER_AGENT"):
+            self._config.scraping.user_agent = os.getenv("SCRAPING_USER_AGENT")
+        if os.getenv("SCRAPING_TIMEOUT"):
+            self._config.scraping.timeout = int(os.getenv("SCRAPING_TIMEOUT"))
 
         # TTS
-        if os.getenv('TTS_LANGUAGE_CODE'):
-            self._config.tts.language_code = os.getenv('TTS_LANGUAGE_CODE')
-        if os.getenv('TTS_VOICE_NAME'):
-            self._config.tts.voice_name = os.getenv('TTS_VOICE_NAME')
-        if os.getenv('TTS_SPEAKING_RATE'):
-            self._config.tts.speaking_rate = float(os.getenv('TTS_SPEAKING_RATE'))
-        if os.getenv('TTS_PITCH'):
-            self._config.tts.pitch = float(os.getenv('TTS_PITCH'))
+        if os.getenv("TTS_LANGUAGE_CODE"):
+            self._config.tts.language_code = os.getenv("TTS_LANGUAGE_CODE")
+        if os.getenv("TTS_VOICE_NAME"):
+            self._config.tts.voice_name = os.getenv("TTS_VOICE_NAME")
+        if os.getenv("TTS_SPEAKING_RATE"):
+            self._config.tts.speaking_rate = float(os.getenv("TTS_SPEAKING_RATE"))
+        if os.getenv("TTS_PITCH"):
+            self._config.tts.pitch = float(os.getenv("TTS_PITCH"))
 
         # Google Cloud
-        self._config.google_credentials_path = os.getenv('GOOGLE_APPLICATION_CREDENTIALS')
-        self._config.google_project_id = os.getenv('GOOGLE_CLOUD_PROJECT')
+        self._config.google_credentials_path = os.getenv(
+            "GOOGLE_APPLICATION_CREDENTIALS"
+        )
+        self._config.google_project_id = os.getenv("GOOGLE_CLOUD_PROJECT")
 
         # Logging
-        if os.getenv('LOG_LEVEL'):
-            self._config.logging.level = os.getenv('LOG_LEVEL').upper()
-        if os.getenv('LOG_FILE'):
-            self._config.logging.log_file = os.getenv('LOG_FILE')
+        if os.getenv("LOG_LEVEL"):
+            self._config.logging.level = os.getenv("LOG_LEVEL").upper()
+        if os.getenv("LOG_FILE"):
+            self._config.logging.log_file = os.getenv("LOG_FILE")
 
         # Output
-        if os.getenv('OUTPUT_BASE_DIR'):
-            self._config.output.base_dir = os.getenv('OUTPUT_BASE_DIR')
+        if os.getenv("OUTPUT_BASE_DIR"):
+            self._config.output.base_dir = os.getenv("OUTPUT_BASE_DIR")
 
     def _load_from_file(self, config_file: str) -> None:
         """Load configuration from file (JSON/YAML)."""
@@ -165,7 +186,7 @@ class ConfigManager:
             errors.append("TTS pitch must be between -20.0 and 20.0")
 
         # Validate logging config
-        valid_log_levels = ['DEBUG', 'INFO', 'WARNING', 'ERROR', 'CRITICAL']
+        valid_log_levels = ["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"]
         if self._config.logging.level not in valid_log_levels:
             errors.append(f"Log level must be one of: {valid_log_levels}")
 
@@ -204,11 +225,11 @@ class ConfigManager:
         """
         base_path = Path(self._config.output.base_dir)
 
-        if file_type == 'audio':
+        if file_type == "audio":
             return base_path / self._config.output.audio_dir / filename
-        elif file_type == 'data':
+        elif file_type == "data":
             return base_path / self._config.output.data_dir / filename
-        elif file_type == 'logs':
+        elif file_type == "logs":
             return base_path / self._config.output.logs_dir / filename
         else:
             raise ValueError(f"Unknown file type: {file_type}")
@@ -216,48 +237,50 @@ class ConfigManager:
     def get_log_config_dict(self) -> Dict[str, Any]:
         """Get logging configuration as a dictionary for logging.dictConfig."""
         config_dict = {
-            'version': 1,
-            'disable_existing_loggers': False,
-            'formatters': {
-                'standard': {
-                    'format': self._config.logging.format,
-                    'datefmt': self._config.logging.date_format,
+            "version": 1,
+            "disable_existing_loggers": False,
+            "formatters": {
+                "standard": {
+                    "format": self._config.logging.format,
+                    "datefmt": self._config.logging.date_format,
                 },
             },
-            'handlers': {
-                'console': {
-                    'class': 'logging.StreamHandler',
-                    'level': self._config.logging.level,
-                    'formatter': 'standard',
-                    'stream': 'ext://sys.stdout',
+            "handlers": {
+                "console": {
+                    "class": "logging.StreamHandler",
+                    "level": self._config.logging.level,
+                    "formatter": "standard",
+                    "stream": "ext://sys.stdout",
                 },
             },
-            'loggers': {
-                '': {  # root logger
-                    'level': self._config.logging.level,
-                    'handlers': ['console'],
-                    'propagate': False,
+            "loggers": {
+                "": {  # root logger
+                    "level": self._config.logging.level,
+                    "handlers": ["console"],
+                    "propagate": False,
                 },
             },
         }
 
         # Add file handler if log file is specified
         if self._config.logging.log_file:
-            log_path = self.get_output_path('logs', self._config.logging.log_file)
-            config_dict['handlers']['file'] = {
-                'class': 'logging.handlers.RotatingFileHandler',
-                'level': self._config.logging.level,
-                'formatter': 'standard',
-                'filename': str(log_path),
-                'maxBytes': self._config.logging.max_log_size,
-                'backupCount': self._config.logging.backup_count,
+            log_path = self.get_output_path("logs", self._config.logging.log_file)
+            config_dict["handlers"]["file"] = {
+                "class": "logging.handlers.RotatingFileHandler",
+                "level": self._config.logging.level,
+                "formatter": "standard",
+                "filename": str(log_path),
+                "maxBytes": self._config.logging.max_log_size,
+                "backupCount": self._config.logging.backup_count,
             }
-            config_dict['loggers']['']['handlers'].append('file')
+            config_dict["loggers"][""]["handlers"].append("file")
 
         return config_dict
 
+
 # Global configuration instance
 _config_manager: Optional[ConfigManager] = None
+
 
 def get_config() -> AppConfig:
     """Get the global configuration instance."""
@@ -266,6 +289,7 @@ def get_config() -> AppConfig:
         _config_manager = ConfigManager()
     return _config_manager.config
 
+
 def get_config_manager() -> ConfigManager:
     """Get the global configuration manager."""
     global _config_manager
@@ -273,11 +297,13 @@ def get_config_manager() -> ConfigManager:
         _config_manager = ConfigManager()
     return _config_manager
 
+
 def initialize_config(config_file: Optional[str] = None) -> ConfigManager:
     """Initialize the global configuration."""
     global _config_manager
     _config_manager = ConfigManager(config_file)
     return _config_manager
+
 
 if __name__ == "__main__":
     # Test configuration loading

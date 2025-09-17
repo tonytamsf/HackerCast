@@ -19,9 +19,11 @@ from config import get_config
 # Configure logging
 logger = logging.getLogger(__name__)
 
+
 @dataclass
 class ScrapedContent:
     """Represents scraped content from a web page."""
+
     url: str
     title: str
     content: str
@@ -39,15 +41,16 @@ class ScrapedContent:
     def to_dict(self) -> Dict[str, Any]:
         """Convert to dictionary."""
         return {
-            'url': self.url,
-            'title': self.title,
-            'content': self.content,
-            'author': self.author,
-            'published_date': self.published_date,
-            'meta_description': self.meta_description,
-            'word_count': self.word_count,
-            'scraping_method': self.scraping_method
+            "url": self.url,
+            "title": self.title,
+            "content": self.content,
+            "author": self.author,
+            "published_date": self.published_date,
+            "meta_description": self.meta_description,
+            "word_count": self.word_count,
+            "scraping_method": self.scraping_method,
         }
+
 
 class ArticleScraper:
     """Enhanced web scraper with multiple extraction strategies and fallbacks."""
@@ -68,13 +71,15 @@ class ArticleScraper:
         self.session.mount("https://", adapter)
 
         # Set headers
-        self.session.headers.update({
-            'User-Agent': self.config.scraping.user_agent,
-            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-            'Accept-Language': 'en-US,en;q=0.5',
-            'Accept-Encoding': 'gzip, deflate',
-            'Connection': 'keep-alive',
-        })
+        self.session.headers.update(
+            {
+                "User-Agent": self.config.scraping.user_agent,
+                "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+                "Accept-Language": "en-US,en;q=0.5",
+                "Accept-Encoding": "gzip, deflate",
+                "Connection": "keep-alive",
+            }
+        )
 
         # Initialize Goose for content extraction
         self.goose = Goose()
@@ -111,22 +116,25 @@ class ArticleScraper:
             logger.debug(f"Fetching page: {url}")
 
             response = self.session.get(
-                url,
-                timeout=self.config.scraping.timeout,
-                stream=True
+                url, timeout=self.config.scraping.timeout, stream=True
             )
             response.raise_for_status()
 
             # Check content type
-            content_type = response.headers.get('content-type', '').lower()
-            if not any(allowed_type in content_type
-                      for allowed_type in self.config.scraping.allowed_content_types):
+            content_type = response.headers.get("content-type", "").lower()
+            if not any(
+                allowed_type in content_type
+                for allowed_type in self.config.scraping.allowed_content_types
+            ):
                 logger.warning(f"Unsupported content type: {content_type}")
                 return None
 
             # Check content length
-            content_length = response.headers.get('content-length')
-            if content_length and int(content_length) > self.config.scraping.max_content_length:
+            content_length = response.headers.get("content-length")
+            if (
+                content_length
+                and int(content_length) > self.config.scraping.max_content_length
+            ):
                 logger.warning(f"Content too large: {content_length} bytes")
                 return None
 
@@ -169,9 +177,11 @@ class ArticleScraper:
                 title=article.title or "No Title",
                 content=article.cleaned_text,
                 author=article.authors[0] if article.authors else None,
-                published_date=article.publish_date.isoformat() if article.publish_date else None,
+                published_date=(
+                    article.publish_date.isoformat() if article.publish_date else None
+                ),
                 meta_description=article.meta_description,
-                scraping_method="goose3"
+                scraping_method="goose3",
             )
 
             logger.debug(f"Goose extracted {content.word_count} words")
@@ -181,7 +191,9 @@ class ArticleScraper:
             logger.error(f"Goose extraction failed for {url}: {e}")
             return None
 
-    def _extract_with_beautifulsoup(self, url: str, response: requests.Response) -> Optional[ScrapedContent]:
+    def _extract_with_beautifulsoup(
+        self, url: str, response: requests.Response
+    ) -> Optional[ScrapedContent]:
         """
         Extract content using BeautifulSoup as fallback.
 
@@ -194,30 +206,38 @@ class ArticleScraper:
         """
         try:
             logger.debug(f"Extracting content with BeautifulSoup: {url}")
-            soup = BeautifulSoup(response.content, 'html.parser')
+            soup = BeautifulSoup(response.content, "html.parser")
 
             # Extract title
-            title_tag = soup.find('title')
+            title_tag = soup.find("title")
             title = title_tag.get_text().strip() if title_tag else "No Title"
 
             # Extract meta description
-            meta_desc_tag = soup.find('meta', attrs={'name': 'description'})
-            meta_description = meta_desc_tag.get('content') if meta_desc_tag else None
+            meta_desc_tag = soup.find("meta", attrs={"name": "description"})
+            meta_description = meta_desc_tag.get("content") if meta_desc_tag else None
 
             # Extract author
             author = None
-            author_tag = soup.find('meta', attrs={'name': 'author'})
+            author_tag = soup.find("meta", attrs={"name": "author"})
             if author_tag:
-                author = author_tag.get('content')
+                author = author_tag.get("content")
 
             # Remove unwanted elements
-            for element in soup(['script', 'style', 'nav', 'header', 'footer', 'aside', 'form']):
+            for element in soup(
+                ["script", "style", "nav", "header", "footer", "aside", "form"]
+            ):
                 element.decompose()
 
             # Try to find main content area
             content_selectors = [
-                'article', '[role="main"]', '.content', '.post-content',
-                '.entry-content', '.article-content', 'main', '.main'
+                "article",
+                '[role="main"]',
+                ".content",
+                ".post-content",
+                ".entry-content",
+                ".article-content",
+                "main",
+                ".main",
             ]
 
             content_element = None
@@ -228,7 +248,7 @@ class ArticleScraper:
 
             # Fallback to body if no content area found
             if not content_element:
-                content_element = soup.find('body')
+                content_element = soup.find("body")
 
             if not content_element:
                 logger.warning(f"No content element found for: {url}")
@@ -240,10 +260,10 @@ class ArticleScraper:
             # Clean up whitespace
             lines = (line.strip() for line in text.splitlines())
             chunks = (phrase.strip() for line in lines for phrase in line.split("  "))
-            cleaned_text = '\n'.join(chunk for chunk in chunks if chunk)
+            cleaned_text = "\n".join(chunk for chunk in chunks if chunk)
 
             # Remove excessive whitespace
-            cleaned_text = re.sub(r'\n{3,}', '\n\n', cleaned_text)
+            cleaned_text = re.sub(r"\n{3,}", "\n\n", cleaned_text)
 
             if not cleaned_text.strip():
                 logger.warning(f"No text content extracted from: {url}")
@@ -255,7 +275,7 @@ class ArticleScraper:
                 content=cleaned_text,
                 author=author,
                 meta_description=meta_description,
-                scraping_method="beautifulsoup"
+                scraping_method="beautifulsoup",
             )
 
             logger.debug(f"BeautifulSoup extracted {content.word_count} words")
@@ -292,7 +312,9 @@ class ArticleScraper:
         if response:
             content = self._extract_with_beautifulsoup(url, response)
             if content and content.word_count > 50:
-                logger.info(f"Successfully scraped with BeautifulSoup: {content.word_count} words")
+                logger.info(
+                    f"Successfully scraped with BeautifulSoup: {content.word_count} words"
+                )
                 return content
 
         logger.error(f"Failed to scrape content from: {url}")
@@ -331,13 +353,16 @@ class ArticleScraper:
                 failed_count += 1
                 logger.error(f"Error scraping {url}: {e}")
 
-        logger.info(f"Scraped {len(results)} articles successfully, {failed_count} failed")
+        logger.info(
+            f"Scraped {len(results)} articles successfully, {failed_count} failed"
+        )
         return results
 
     def cleanup(self):
         """Clean up resources."""
         self.goose.close()
         self.session.close()
+
 
 def scrape_article(url: str) -> Optional[str]:
     """
@@ -355,6 +380,7 @@ def scrape_article(url: str) -> Optional[str]:
         return content.content if content else None
     finally:
         scraper.cleanup()
+
 
 def main():
     """Command-line interface for the scraper."""
@@ -384,8 +410,9 @@ def main():
         print(f"Error: {e}", file=sys.stderr)
         sys.exit(1)
     finally:
-        if 'scraper' in locals():
+        if "scraper" in locals():
             scraper.cleanup()
+
 
 if __name__ == "__main__":
     main()

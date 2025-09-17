@@ -10,7 +10,10 @@ from hn_api import HackerNewsStory
 from scraper import ScrapedContent
 from main import HackerCastPipeline
 from tests.utils.test_helpers import (
-    DataValidator, FileValidator, PerformanceMonitor, MetricsCollector
+    DataValidator,
+    FileValidator,
+    PerformanceMonitor,
+    MetricsCollector,
 )
 from tests.utils.mock_services import E2ETestContext
 from tests.utils.test_helpers import create_mock_hn_stories, create_mock_scraped_content
@@ -34,7 +37,8 @@ class TestDataValidation:
                 score=100,
                 time=int(time.time()),
                 url="https://example.com/story1",
-                type="story"
+                descendants=10,
+                type="story",
             ),
             HackerNewsStory(
                 id=1002,
@@ -43,8 +47,9 @@ class TestDataValidation:
                 score=0,  # Edge case: zero score
                 time=int(time.time()) - 3600,
                 url="https://example.com/story2",
-                type="story"
-            )
+                descendants=5,
+                type="story",
+            ),
         ]
 
         # Validate stories
@@ -60,7 +65,8 @@ class TestDataValidation:
                 score=100,
                 time=int(time.time()),
                 url="https://example.com/invalid",
-                type="story"
+                descendants=0,
+                type="story",
             )
         ]
 
@@ -80,7 +86,7 @@ class TestDataValidation:
                 publish_date=None,
                 word_count=300,
                 scraping_method="test",
-                success=True
+                success=True,
             )
         ]
 
@@ -97,7 +103,7 @@ class TestDataValidation:
                 publish_date=None,
                 word_count=2,
                 scraping_method="test",
-                success=True
+                success=True,
             )
         ]
 
@@ -148,32 +154,35 @@ class TestDataValidation:
             test_data = {
                 "timestamp": "20230916_120000",
                 "stories": [{"id": 1, "title": "Test"}],
-                "stats": {"count": 1}
+                "stats": {"count": 1},
             }
-            with open(json_file, 'w') as f:
+            with open(json_file, "w") as f:
                 json.dump(test_data, f)
 
             # Validate JSON file
             is_valid, error = FileValidator.validate_json_file(
-                json_file,
-                required_keys=["timestamp", "stories", "stats"]
+                json_file, required_keys=["timestamp", "stories", "stats"]
             )
             assert is_valid, f"JSON validation failed: {error}"
 
             # Create text file
-            with open(text_file, 'w') as f:
+            with open(text_file, "w") as f:
                 f.write("This is a test script with sufficient content. " * 20)
 
             # Validate text file
-            is_valid, error = FileValidator.validate_text_file(text_file, min_length=100)
+            is_valid, error = FileValidator.validate_text_file(
+                text_file, min_length=100
+            )
             assert is_valid, f"Text validation failed: {error}"
 
             # Create mock audio file
-            with open(audio_file, 'wb') as f:
-                f.write(b'ID3' + b'\x00' * 1000)  # Minimal MP3-like structure
+            with open(audio_file, "wb") as f:
+                f.write(b"ID3" + b"\x00" * 1000)  # Minimal MP3-like structure
 
             # Validate audio file
-            is_valid, error = FileValidator.validate_audio_file(audio_file, min_size_bytes=500)
+            is_valid, error = FileValidator.validate_audio_file(
+                audio_file, min_size_bytes=500
+            )
             assert is_valid, f"Audio validation failed: {error}"
 
     def test_content_completeness_validation(self):
@@ -225,7 +234,7 @@ class TestDataValidation:
 
             # Load saved data
             data_file = Path(result["data_file"])
-            with open(data_file, 'r') as f:
+            with open(data_file, "r") as f:
                 saved_data = json.load(f)
 
             # Validate data consistency
@@ -234,8 +243,12 @@ class TestDataValidation:
             stats_data = saved_data["stats"]
 
             # Story count consistency
-            assert len(stories_data) == stats_data["stories_fetched"], "Story count mismatch"
-            assert len(scraped_data) == stats_data["articles_scraped"], "Content count mismatch"
+            assert (
+                len(stories_data) == stats_data["stories_fetched"]
+            ), "Story count mismatch"
+            assert (
+                len(scraped_data) == stats_data["articles_scraped"]
+            ), "Content count mismatch"
 
             # Word count consistency
             total_words = sum(content["word_count"] for content in scraped_data)
@@ -246,7 +259,9 @@ class TestDataValidation:
             scraped_urls = {content["url"] for content in scraped_data}
 
             # Scraped URLs should be subset of story URLs
-            assert scraped_urls.issubset(story_urls), "URL mismatch between stories and content"
+            assert scraped_urls.issubset(
+                story_urls
+            ), "URL mismatch between stories and content"
 
     def test_edge_case_data_handling(self):
         """Test handling of edge cases in data processing."""
@@ -259,7 +274,8 @@ class TestDataValidation:
                 score=50,
                 time=int(time.time()),
                 url=None,  # No URL
-                type="story"
+                descendants=15,
+                type="story",
             )
         ]
 
@@ -275,7 +291,8 @@ class TestDataValidation:
                 score=1,
                 time=int(time.time()),
                 url="https://example.com/brief",
-                type="story"
+                descendants=3,
+                type="story",
             )
         ]
 
@@ -287,12 +304,13 @@ class TestDataValidation:
             ScrapedContent(
                 url="https://example.com/special",
                 title="Special Characters: àáâãäå æç èéêë",
-                content="Content with special characters: àáâãäå æç èéêë ìíîï ñ òóôõö ùúûü ý " * 10,
+                content="Content with special characters: àáâãäå æç èéêë ìíîï ñ òóôõö ùúûü ý "
+                * 10,
                 author="Special Author",
                 publish_date=None,
                 word_count=100,
                 scraping_method="test",
-                success=True
+                success=True,
             )
         ]
 
@@ -315,19 +333,24 @@ class TestDataValidation:
 
         # Check memory efficiency
         import sys
+
         stories_size = sys.getsizeof(large_stories)
         content_size = sys.getsizeof(large_content)
 
         # Basic size checks (not too strict, just ensuring reasonable memory usage)
-        assert stories_size < 1024 * 1024, "Stories dataset using too much memory"  # < 1MB
-        assert content_size < 5 * 1024 * 1024, "Content dataset using too much memory"  # < 5MB
+        assert (
+            stories_size < 1024 * 1024
+        ), "Stories dataset using too much memory"  # < 1MB
+        assert (
+            content_size < 5 * 1024 * 1024
+        ), "Content dataset using too much memory"  # < 5MB
 
     def test_corrupted_data_handling(self):
         """Test handling of corrupted or malformed data."""
         with E2ETestContext() as ctx:
             # Create corrupted JSON file
             corrupted_file = ctx.output_dir / "corrupted.json"
-            with open(corrupted_file, 'w') as f:
+            with open(corrupted_file, "w") as f:
                 f.write('{"invalid": json, content}')  # Invalid JSON
 
             # Validate corrupted file
@@ -337,13 +360,12 @@ class TestDataValidation:
 
             # Create file with missing required keys
             incomplete_file = ctx.output_dir / "incomplete.json"
-            with open(incomplete_file, 'w') as f:
+            with open(incomplete_file, "w") as f:
                 json.dump({"partial": "data"}, f)
 
             # Validate incomplete file
             is_valid, error = FileValidator.validate_json_file(
-                incomplete_file,
-                required_keys=["timestamp", "stories"]
+                incomplete_file, required_keys=["timestamp", "stories"]
             )
             assert not is_valid, "Incomplete JSON should fail validation"
             assert "Missing required keys" in error
@@ -355,12 +377,13 @@ class TestDataValidation:
             ScrapedContent(
                 url="https://example.com/unicode",
                 title="Unicode Test: 你好世界 こんにちは Здравствуй мир",
-                content="Content with Unicode: 你好世界 こんにちは Здравствуй мир 🚀 🌟 ⭐ " * 10,
+                content="Content with Unicode: 你好世界 こんにちは Здравствуй мир 🚀 🌟 ⭐ "
+                * 10,
                 author="Unicode Author 🌍",
                 publish_date=None,
                 word_count=150,
                 scraping_method="test",
-                success=True
+                success=True,
             )
         ]
 
@@ -385,7 +408,7 @@ class TestDataValidation:
 
             # Load and validate metadata
             data_file = Path(result["data_file"])
-            with open(data_file, 'r') as f:
+            with open(data_file, "r") as f:
                 data = json.load(f)
 
             # Validate timestamp format
@@ -396,8 +419,9 @@ class TestDataValidation:
             # Validate run_date ISO format
             run_date = data["run_date"]
             from datetime import datetime
+
             try:
-                datetime.fromisoformat(run_date.replace('Z', '+00:00'))
+                datetime.fromisoformat(run_date.replace("Z", "+00:00"))
             except ValueError:
                 pytest.fail(f"Invalid ISO date format: {run_date}")
 

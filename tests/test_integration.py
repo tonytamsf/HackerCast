@@ -17,9 +17,9 @@ class TestHackerCastPipelineIntegration:
     @pytest.fixture
     def mock_pipeline_components(self):
         """Mock all external dependencies for integration tests."""
-        with patch('main.HackerNewsAPI') as mock_hn_api, \
-             patch('main.ArticleScraper') as mock_scraper, \
-             patch('main.TTSConverter') as mock_tts:
+        with patch("main.HackerNewsAPI") as mock_hn_api, patch(
+            "main.ArticleScraper"
+        ) as mock_scraper, patch("main.TTSConverter") as mock_tts:
 
             # Mock HN API
             mock_hn_instance = Mock()
@@ -34,22 +34,27 @@ class TestHackerCastPipelineIntegration:
             mock_tts.return_value = mock_tts_instance
 
             yield {
-                'hn_api': mock_hn_instance,
-                'scraper': mock_scraper_instance,
-                'tts': mock_tts_instance
+                "hn_api": mock_hn_instance,
+                "scraper": mock_scraper_instance,
+                "tts": mock_tts_instance,
             }
 
     def test_pipeline_initialization(self, test_config):
         """Test pipeline initialization."""
-        with patch('main.initialize_config') as mock_init_config:
+        with patch("main.initialize_config") as mock_init_config:
             mock_config_manager = Mock()
             mock_config_manager.config = test_config
             mock_config_manager.get_log_config_dict.return_value = {
-                'version': 1,
-                'disable_existing_loggers': False,
-                'formatters': {'standard': {'format': '%(message)s'}},
-                'handlers': {'console': {'class': 'logging.StreamHandler', 'formatter': 'standard'}},
-                'loggers': {'': {'level': 'INFO', 'handlers': ['console']}}
+                "version": 1,
+                "disable_existing_loggers": False,
+                "formatters": {"standard": {"format": "%(message)s"}},
+                "handlers": {
+                    "console": {
+                        "class": "logging.StreamHandler",
+                        "formatter": "standard",
+                    }
+                },
+                "loggers": {"": {"level": "INFO", "handlers": ["console"]}},
             }
             mock_init_config.return_value = mock_config_manager
 
@@ -71,7 +76,7 @@ class TestHackerCastPipelineIntegration:
                 score=100,
                 by="user1",
                 time=1642608000,
-                descendants=10
+                descendants=10,
             ),
             HackerNewsStory(
                 id=12346,
@@ -80,19 +85,19 @@ class TestHackerCastPipelineIntegration:
                 score=200,
                 by="user2",
                 time=1642608100,
-                descendants=20
-            )
+                descendants=20,
+            ),
         ]
 
-        mock_pipeline_components['hn_api'].get_top_stories.return_value = mock_stories
+        mock_pipeline_components["hn_api"].get_top_stories.return_value = mock_stories
 
-        with patch('main.initialize_config') as mock_init_config:
+        with patch("main.initialize_config") as mock_init_config:
             mock_config_manager = Mock()
             mock_config_manager.config = test_config
             mock_init_config.return_value = mock_config_manager
 
             pipeline = HackerCastPipeline()
-            pipeline.hn_api = mock_pipeline_components['hn_api']
+            pipeline.hn_api = mock_pipeline_components["hn_api"]
 
             stories = pipeline.fetch_top_stories(2)
 
@@ -103,15 +108,15 @@ class TestHackerCastPipelineIntegration:
 
     def test_fetch_top_stories_failure(self, mock_pipeline_components, test_config):
         """Test story fetching failure."""
-        mock_pipeline_components['hn_api'].get_top_stories.return_value = []
+        mock_pipeline_components["hn_api"].get_top_stories.return_value = []
 
-        with patch('main.initialize_config') as mock_init_config:
+        with patch("main.initialize_config") as mock_init_config:
             mock_config_manager = Mock()
             mock_config_manager.config = test_config
             mock_init_config.return_value = mock_config_manager
 
             pipeline = HackerCastPipeline()
-            pipeline.hn_api = mock_pipeline_components['hn_api']
+            pipeline.hn_api = mock_pipeline_components["hn_api"]
 
             stories = pipeline.fetch_top_stories(5)
 
@@ -129,7 +134,7 @@ class TestHackerCastPipelineIntegration:
                 score=100,
                 by="user1",
                 time=1642608000,
-                descendants=10
+                descendants=10,
             ),
             HackerNewsStory(
                 id=12346,
@@ -138,8 +143,8 @@ class TestHackerCastPipelineIntegration:
                 score=200,
                 by="user2",
                 time=1642608100,
-                descendants=20
-            )
+                descendants=20,
+            ),
         ]
 
         # Create mock scraped content
@@ -148,25 +153,25 @@ class TestHackerCastPipelineIntegration:
                 url="https://example1.com",
                 title="Test Story 1",
                 content="This is test content for story 1. " * 20,
-                scraping_method="mock"
+                scraping_method="mock",
             ),
             ScrapedContent(
                 url="https://example2.com",
                 title="Test Story 2",
                 content="This is test content for story 2. " * 25,
-                scraping_method="mock"
-            )
+                scraping_method="mock",
+            ),
         ]
 
-        mock_pipeline_components['scraper'].scrape_article.side_effect = mock_content
+        mock_pipeline_components["scraper"].scrape_article.side_effect = mock_content
 
-        with patch('main.initialize_config') as mock_init_config:
+        with patch("main.initialize_config") as mock_init_config:
             mock_config_manager = Mock()
             mock_config_manager.config = test_config
             mock_init_config.return_value = mock_config_manager
 
             pipeline = HackerCastPipeline()
-            pipeline.scraper = mock_pipeline_components['scraper']
+            pipeline.scraper = mock_pipeline_components["scraper"]
 
             content = pipeline.scrape_articles(mock_stories)
 
@@ -186,23 +191,23 @@ class TestHackerCastPipelineIntegration:
                 score=100,
                 by="user1",
                 time=1642608000,
-                descendants=10
+                descendants=10,
             )
         ]
 
-        with patch('main.initialize_config') as mock_init_config:
+        with patch("main.initialize_config") as mock_init_config:
             mock_config_manager = Mock()
             mock_config_manager.config = test_config
             mock_init_config.return_value = mock_config_manager
 
             pipeline = HackerCastPipeline()
-            pipeline.scraper = mock_pipeline_components['scraper']
+            pipeline.scraper = mock_pipeline_components["scraper"]
 
             content = pipeline.scrape_articles(mock_stories)
 
             assert content == []
             # Scraper should not be called since no URLs
-            mock_pipeline_components['scraper'].scrape_article.assert_not_called()
+            mock_pipeline_components["scraper"].scrape_article.assert_not_called()
 
     def test_generate_podcast_script(self, test_config):
         """Test podcast script generation."""
@@ -211,21 +216,23 @@ class TestHackerCastPipelineIntegration:
                 url="https://example1.com",
                 title="AI Breakthrough",
                 content="Scientists have made a breakthrough in AI. This could revolutionize technology. The implications are vast.",
-                scraping_method="mock"
+                scraping_method="mock",
             ),
             ScrapedContent(
                 url="https://example2.com",
                 title="Space Discovery",
                 content="New planet discovered. It has unique properties. Could support life.",
-                scraping_method="mock"
-            )
+                scraping_method="mock",
+            ),
         ]
 
         with tempfile.TemporaryDirectory() as temp_dir:
-            with patch('main.initialize_config') as mock_init_config:
+            with patch("main.initialize_config") as mock_init_config:
                 mock_config_manager = Mock()
                 mock_config_manager.config = test_config
-                mock_config_manager.get_output_path.return_value = Path(temp_dir) / 'script.txt'
+                mock_config_manager.get_output_path.return_value = (
+                    Path(temp_dir) / "script.txt"
+                )
                 mock_init_config.return_value = mock_config_manager
 
                 pipeline = HackerCastPipeline()
@@ -241,7 +248,7 @@ class TestHackerCastPipelineIntegration:
 
     def test_generate_podcast_script_empty_content(self, test_config):
         """Test script generation with empty content."""
-        with patch('main.initialize_config') as mock_init_config:
+        with patch("main.initialize_config") as mock_init_config:
             mock_config_manager = Mock()
             mock_config_manager.config = test_config
             mock_init_config.return_value = mock_config_manager
@@ -257,11 +264,11 @@ class TestHackerCastPipelineIntegration:
         test_script = "Welcome to HackerCast. Today we have great stories."
 
         with tempfile.TemporaryDirectory() as temp_dir:
-            audio_file_path = Path(temp_dir) / 'test_audio.mp3'
+            audio_file_path = Path(temp_dir) / "test_audio.mp3"
 
-            mock_pipeline_components['tts'].convert_text_to_speech.return_value = True
+            mock_pipeline_components["tts"].convert_text_to_speech.return_value = True
 
-            with patch('main.initialize_config') as mock_init_config:
+            with patch("main.initialize_config") as mock_init_config:
                 mock_config_manager = Mock()
                 mock_config_manager.config = test_config
                 mock_config_manager.get_output_path.return_value = audio_file_path
@@ -269,29 +276,31 @@ class TestHackerCastPipelineIntegration:
 
                 pipeline = HackerCastPipeline()
                 pipeline.config_manager = mock_config_manager
-                pipeline.tts_converter = mock_pipeline_components['tts']
+                pipeline.tts_converter = mock_pipeline_components["tts"]
 
                 result_path = pipeline.convert_to_audio(test_script)
 
                 assert result_path == audio_file_path
                 assert audio_file_path in pipeline.audio_files
-                mock_pipeline_components['tts'].convert_text_to_speech.assert_called_once()
+                mock_pipeline_components[
+                    "tts"
+                ].convert_text_to_speech.assert_called_once()
 
     def test_convert_to_audio_failure(self, mock_pipeline_components, test_config):
         """Test audio conversion failure."""
         test_script = "Test script"
 
-        mock_pipeline_components['tts'].convert_text_to_speech.return_value = False
+        mock_pipeline_components["tts"].convert_text_to_speech.return_value = False
 
-        with patch('main.initialize_config') as mock_init_config:
+        with patch("main.initialize_config") as mock_init_config:
             mock_config_manager = Mock()
             mock_config_manager.config = test_config
-            mock_config_manager.get_output_path.return_value = Path('/tmp/test.mp3')
+            mock_config_manager.get_output_path.return_value = Path("/tmp/test.mp3")
             mock_init_config.return_value = mock_config_manager
 
             pipeline = HackerCastPipeline()
             pipeline.config_manager = mock_config_manager
-            pipeline.tts_converter = mock_pipeline_components['tts']
+            pipeline.tts_converter = mock_pipeline_components["tts"]
 
             result_path = pipeline.convert_to_audio(test_script)
 
@@ -300,7 +309,7 @@ class TestHackerCastPipelineIntegration:
 
     def test_convert_to_audio_empty_script(self, test_config):
         """Test audio conversion with empty script."""
-        with patch('main.initialize_config') as mock_init_config:
+        with patch("main.initialize_config") as mock_init_config:
             mock_config_manager = Mock()
             mock_config_manager.config = test_config
             mock_init_config.return_value = mock_config_manager
@@ -314,9 +323,9 @@ class TestHackerCastPipelineIntegration:
     def test_save_pipeline_data(self, test_config):
         """Test saving pipeline data to file."""
         with tempfile.TemporaryDirectory() as temp_dir:
-            data_file_path = Path(temp_dir) / 'pipeline_data.json'
+            data_file_path = Path(temp_dir) / "pipeline_data.json"
 
-            with patch('main.initialize_config') as mock_init_config:
+            with patch("main.initialize_config") as mock_init_config:
                 mock_config_manager = Mock()
                 mock_config_manager.config = test_config
                 mock_config_manager.get_output_path.return_value = data_file_path
@@ -334,7 +343,7 @@ class TestHackerCastPipelineIntegration:
                         score=100,
                         by="user",
                         time=1642608000,
-                        descendants=10
+                        descendants=10,
                     )
                 ]
                 pipeline.scraped_content = [
@@ -342,10 +351,10 @@ class TestHackerCastPipelineIntegration:
                         url="https://example.com",
                         title="Test Story",
                         content="Test content",
-                        scraping_method="mock"
+                        scraping_method="mock",
                     )
                 ]
-                pipeline.audio_files = [Path('/tmp/audio.mp3')]
+                pipeline.audio_files = [Path("/tmp/audio.mp3")]
 
                 result_path = pipeline.save_pipeline_data()
 
@@ -353,16 +362,16 @@ class TestHackerCastPipelineIntegration:
                 assert data_file_path.exists()
 
                 # Verify the saved data
-                with open(data_file_path, 'r') as f:
+                with open(data_file_path, "r") as f:
                     saved_data = json.load(f)
 
-                assert 'timestamp' in saved_data
-                assert 'stories' in saved_data
-                assert 'scraped_content' in saved_data
-                assert 'audio_files' in saved_data
-                assert 'stats' in saved_data
-                assert len(saved_data['stories']) == 1
-                assert len(saved_data['scraped_content']) == 1
+                assert "timestamp" in saved_data
+                assert "stories" in saved_data
+                assert "scraped_content" in saved_data
+                assert "audio_files" in saved_data
+                assert "stats" in saved_data
+                assert len(saved_data["stories"]) == 1
+                assert len(saved_data["scraped_content"]) == 1
 
     def test_run_full_pipeline_success(self, mock_pipeline_components, test_config):
         """Test complete successful pipeline execution."""
@@ -375,7 +384,7 @@ class TestHackerCastPipelineIntegration:
                 score=100,
                 by="user",
                 time=1642608000,
-                descendants=10
+                descendants=10,
             )
         ]
 
@@ -385,55 +394,59 @@ class TestHackerCastPipelineIntegration:
                 url="https://example.com",
                 title="Test Story",
                 content="This is test content. " * 30,
-                scraping_method="mock"
+                scraping_method="mock",
             )
         ]
 
         # Configure mocks
-        mock_pipeline_components['hn_api'].get_top_stories.return_value = mock_stories
-        mock_pipeline_components['scraper'].scrape_article.return_value = mock_content[0]
-        mock_pipeline_components['tts'].convert_text_to_speech.return_value = True
+        mock_pipeline_components["hn_api"].get_top_stories.return_value = mock_stories
+        mock_pipeline_components["scraper"].scrape_article.return_value = mock_content[
+            0
+        ]
+        mock_pipeline_components["tts"].convert_text_to_speech.return_value = True
 
         with tempfile.TemporaryDirectory() as temp_dir:
-            with patch('main.initialize_config') as mock_init_config:
+            with patch("main.initialize_config") as mock_init_config:
                 mock_config_manager = Mock()
                 mock_config_manager.config = test_config
-                mock_config_manager.get_output_path.side_effect = lambda file_type, filename: Path(temp_dir) / filename
+                mock_config_manager.get_output_path.side_effect = (
+                    lambda file_type, filename: Path(temp_dir) / filename
+                )
                 mock_init_config.return_value = mock_config_manager
 
                 pipeline = HackerCastPipeline()
                 pipeline.config_manager = mock_config_manager
-                pipeline.hn_api = mock_pipeline_components['hn_api']
-                pipeline.scraper = mock_pipeline_components['scraper']
-                pipeline.tts_converter = mock_pipeline_components['tts']
+                pipeline.hn_api = mock_pipeline_components["hn_api"]
+                pipeline.scraper = mock_pipeline_components["scraper"]
+                pipeline.tts_converter = mock_pipeline_components["tts"]
 
                 result = pipeline.run_full_pipeline(1)
 
-                assert result['success'] is True
-                assert result['stories_count'] == 1
-                assert result['scraped_count'] == 1
-                assert result['script_length'] > 0
-                assert result['audio_file'] is not None
-                assert result['data_file'] is not None
-                assert 'runtime' in result
+                assert result["success"] is True
+                assert result["stories_count"] == 1
+                assert result["scraped_count"] == 1
+                assert result["script_length"] > 0
+                assert result["audio_file"] is not None
+                assert result["data_file"] is not None
+                assert "runtime" in result
 
     def test_run_full_pipeline_no_stories(self, mock_pipeline_components, test_config):
         """Test pipeline execution when no stories are fetched."""
-        mock_pipeline_components['hn_api'].get_top_stories.return_value = []
+        mock_pipeline_components["hn_api"].get_top_stories.return_value = []
 
-        with patch('main.initialize_config') as mock_init_config:
+        with patch("main.initialize_config") as mock_init_config:
             mock_config_manager = Mock()
             mock_config_manager.config = test_config
             mock_init_config.return_value = mock_config_manager
 
             pipeline = HackerCastPipeline()
             pipeline.config_manager = mock_config_manager
-            pipeline.hn_api = mock_pipeline_components['hn_api']
+            pipeline.hn_api = mock_pipeline_components["hn_api"]
 
             result = pipeline.run_full_pipeline(5)
 
-            assert result['success'] is False
-            assert 'No stories fetched' in result['error']
+            assert result["success"] is False
+            assert "No stories fetched" in result["error"]
 
     def test_run_full_pipeline_no_content(self, mock_pipeline_components, test_config):
         """Test pipeline execution when no content is scraped."""
@@ -446,38 +459,38 @@ class TestHackerCastPipelineIntegration:
                 score=100,
                 by="user",
                 time=1642608000,
-                descendants=10
+                descendants=10,
             )
         ]
 
-        mock_pipeline_components['hn_api'].get_top_stories.return_value = mock_stories
-        mock_pipeline_components['scraper'].scrape_article.return_value = None
+        mock_pipeline_components["hn_api"].get_top_stories.return_value = mock_stories
+        mock_pipeline_components["scraper"].scrape_article.return_value = None
 
-        with patch('main.initialize_config') as mock_init_config:
+        with patch("main.initialize_config") as mock_init_config:
             mock_config_manager = Mock()
             mock_config_manager.config = test_config
             mock_init_config.return_value = mock_config_manager
 
             pipeline = HackerCastPipeline()
             pipeline.config_manager = mock_config_manager
-            pipeline.hn_api = mock_pipeline_components['hn_api']
-            pipeline.scraper = mock_pipeline_components['scraper']
+            pipeline.hn_api = mock_pipeline_components["hn_api"]
+            pipeline.scraper = mock_pipeline_components["scraper"]
 
             result = pipeline.run_full_pipeline(1)
 
-            assert result['success'] is False
-            assert 'No articles scraped' in result['error']
+            assert result["success"] is False
+            assert "No articles scraped" in result["error"]
 
     def test_pipeline_cleanup(self, mock_pipeline_components, test_config):
         """Test pipeline cleanup."""
-        with patch('main.initialize_config') as mock_init_config:
+        with patch("main.initialize_config") as mock_init_config:
             mock_config_manager = Mock()
             mock_config_manager.config = test_config
             mock_init_config.return_value = mock_config_manager
 
             pipeline = HackerCastPipeline()
-            pipeline.scraper = mock_pipeline_components['scraper']
+            pipeline.scraper = mock_pipeline_components["scraper"]
 
             pipeline.cleanup()
 
-            mock_pipeline_components['scraper'].cleanup.assert_called_once()
+            mock_pipeline_components["scraper"].cleanup.assert_called_once()

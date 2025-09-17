@@ -8,8 +8,12 @@ import pytest
 
 from main import HackerCastPipeline
 from tests.utils.test_helpers import (
-    TemporaryTestEnvironment, PerformanceMonitor, FileValidator,
-    DataValidator, MetricsCollector, CommandRunner
+    TemporaryTestEnvironment,
+    PerformanceMonitor,
+    FileValidator,
+    DataValidator,
+    MetricsCollector,
+    CommandRunner,
 )
 from tests.utils.mock_services import E2ETestContext, create_test_config_file
 
@@ -39,7 +43,9 @@ class TestFullPipeline:
             result = pipeline.run_full_pipeline(limit=3)
 
             self.performance.stop()
-            self.metrics.record_timing("full_pipeline", self.performance.get_metrics()["duration"])
+            self.metrics.record_timing(
+                "full_pipeline", self.performance.get_metrics()["duration"]
+            )
 
             # Verify success
             assert result["success"], f"Pipeline failed: {result.get('error')}"
@@ -54,12 +60,14 @@ class TestFullPipeline:
             # Validate data file structure
             is_valid, error = FileValidator.validate_json_file(
                 data_file,
-                required_keys=["timestamp", "stories", "scraped_content", "stats"]
+                required_keys=["timestamp", "stories", "scraped_content", "stats"],
             )
             assert is_valid, f"Invalid data file: {error}"
 
             # Performance check
-            assert self.performance.get_metrics()["duration"] < 60.0, "Pipeline too slow"
+            assert (
+                self.performance.get_metrics()["duration"] < 60.0
+            ), "Pipeline too slow"
 
             # Record metrics
             self.metrics.record_count("stories_fetched", result["stories_count"])
@@ -100,7 +108,9 @@ class TestFullPipeline:
 
             # Pipeline should succeed even with some scraping failures
             assert result["success"], "Pipeline should handle partial failures"
-            assert result["scraped_count"] >= 1, "At least some articles should be scraped"
+            assert (
+                result["scraped_count"] >= 1
+            ), "At least some articles should be scraped"
 
     def test_pipeline_performance_benchmarks(self):
         """Test pipeline performance against benchmarks."""
@@ -169,7 +179,9 @@ class TestFullPipeline:
 
         # All pipelines should succeed independently
         for i, result in enumerate(results):
-            assert result["success"], f"Concurrent pipeline {i} failed: {result.get('error')}"
+            assert result[
+                "success"
+            ], f"Concurrent pipeline {i} failed: {result.get('error')}"
 
     def test_pipeline_output_validation(self):
         """Test comprehensive validation of pipeline outputs."""
@@ -181,11 +193,18 @@ class TestFullPipeline:
 
             # Validate data file content
             data_file = Path(result["data_file"])
-            with open(data_file, 'r') as f:
+            with open(data_file, "r") as f:
                 data = json.load(f)
 
             # Validate structure
-            required_keys = ["timestamp", "run_date", "config", "stories", "scraped_content", "stats"]
+            required_keys = [
+                "timestamp",
+                "run_date",
+                "config",
+                "stories",
+                "scraped_content",
+                "stats",
+            ]
             for key in required_keys:
                 assert key in data, f"Missing key in data file: {key}"
 
@@ -233,7 +252,9 @@ class TestFullPipeline:
             assert len(script_files) >= 1, "Script file not created"
 
             script_file = script_files[0]
-            is_valid, error = FileValidator.validate_text_file(script_file, min_length=500)
+            is_valid, error = FileValidator.validate_text_file(
+                script_file, min_length=500
+            )
             assert is_valid, f"Invalid script file: {error}"
 
     def test_pipeline_configuration_variations(self):
@@ -242,13 +263,13 @@ class TestFullPipeline:
             {"hackernews": {"max_stories": 1}},
             {"hackernews": {"max_stories": 5}},
             {"scraping": {"max_retries": 1}},
-            {"scraping": {"request_timeout": 5}}
+            {"scraping": {"request_timeout": 5}},
         ]
 
         for config_override in configurations:
             with E2ETestContext() as ctx:
                 # Modify config file
-                with open(ctx.config_file, 'r') as f:
+                with open(ctx.config_file, "r") as f:
                     config = json.load(f)
 
                 # Apply override
@@ -258,14 +279,16 @@ class TestFullPipeline:
                     else:
                         config[key] = value
 
-                with open(ctx.config_file, 'w') as f:
+                with open(ctx.config_file, "w") as f:
                     json.dump(config, f)
 
                 # Run pipeline
                 pipeline = HackerCastPipeline(str(ctx.config_file))
                 result = pipeline.run_full_pipeline(limit=2)
 
-                assert result["success"], f"Pipeline failed with config {config_override}: {result.get('error')}"
+                assert result[
+                    "success"
+                ], f"Pipeline failed with config {config_override}: {result.get('error')}"
 
     def test_pipeline_cleanup_behavior(self):
         """Test pipeline cleanup and resource management."""
@@ -298,14 +321,23 @@ class TestFullPipeline:
             self.performance.start()
 
             # Run CLI command
-            return_code, stdout, stderr = CommandRunner.run_command([
-                python_executable, main_script,
-                "--config", str(config_file),
-                "run", "--limit", "2"
-            ], timeout=120)
+            return_code, stdout, stderr = CommandRunner.run_command(
+                [
+                    python_executable,
+                    main_script,
+                    "--config",
+                    str(config_file),
+                    "run",
+                    "--limit",
+                    "2",
+                ],
+                timeout=120,
+            )
 
             self.performance.stop()
-            self.metrics.record_timing("cli_run_command", self.performance.get_metrics()["duration"])
+            self.metrics.record_timing(
+                "cli_run_command", self.performance.get_metrics()["duration"]
+            )
 
             # CLI run might fail due to missing real APIs, but should not crash
             assert return_code in [0, 1], f"CLI run crashed: {stderr}"
@@ -315,7 +347,9 @@ class TestFullPipeline:
                 assert "Pipeline completed" in stdout or "success" in stdout.lower()
 
             # Performance check
-            assert self.performance.get_metrics()["duration"] < 120.0, "CLI run too slow"
+            assert (
+                self.performance.get_metrics()["duration"] < 120.0
+            ), "CLI run too slow"
 
     def test_pipeline_data_persistence(self):
         """Test pipeline data persistence and reload."""
@@ -330,7 +364,7 @@ class TestFullPipeline:
             assert data_file.exists(), "Data file should be created"
 
             # Load saved data and validate
-            with open(data_file, 'r') as f:
+            with open(data_file, "r") as f:
                 saved_data = json.load(f)
 
             # Verify data integrity

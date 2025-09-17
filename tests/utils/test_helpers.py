@@ -27,15 +27,15 @@ class TemporaryTestEnvironment:
         self.temp_dir = tempfile.mkdtemp(prefix="hackercast_test_")
 
         # Store original environment variables
-        env_vars = ['HACKERCAST_OUTPUT_DIR', 'GOOGLE_APPLICATION_CREDENTIALS']
+        env_vars = ["HACKERCAST_OUTPUT_DIR", "GOOGLE_APPLICATION_CREDENTIALS"]
         for var in env_vars:
             self.original_env[var] = os.environ.get(var)
 
         # Set test environment
-        os.environ['HACKERCAST_OUTPUT_DIR'] = self.temp_dir
+        os.environ["HACKERCAST_OUTPUT_DIR"] = self.temp_dir
 
         # Create test output directories
-        for subdir in ['data', 'audio', 'logs']:
+        for subdir in ["data", "audio", "logs"]:
             Path(self.temp_dir, subdir).mkdir(parents=True, exist_ok=True)
 
         return Path(self.temp_dir)
@@ -52,6 +52,7 @@ class TemporaryTestEnvironment:
         # Cleanup temp directory
         if self.temp_dir and Path(self.temp_dir).exists():
             import shutil
+
             shutil.rmtree(self.temp_dir, ignore_errors=True)
 
 
@@ -63,7 +64,7 @@ class CommandRunner:
         cmd: List[str],
         cwd: Optional[str] = None,
         timeout: int = 60,
-        capture_output: bool = True
+        capture_output: bool = True,
     ) -> Tuple[int, str, str]:
         """
         Run a command and return (return_code, stdout, stderr).
@@ -87,7 +88,7 @@ class CommandRunner:
                 timeout=timeout,
                 capture_output=capture_output,
                 text=True,
-                env=dict(os.environ)
+                env=dict(os.environ),
             )
             return result.returncode, result.stdout or "", result.stderr or ""
         except subprocess.TimeoutExpired:
@@ -111,7 +112,7 @@ class PerformanceMonitor:
     def stop(self):
         """Stop performance monitoring."""
         self.end_time = time.time()
-        self.metrics['duration'] = self.end_time - self.start_time
+        self.metrics["duration"] = self.end_time - self.start_time
 
     def add_metric(self, name: str, value: Any):
         """Add a custom metric."""
@@ -126,7 +127,9 @@ class FileValidator:
     """Validate file outputs and content."""
 
     @staticmethod
-    def validate_json_file(file_path: Path, required_keys: List[str] = None) -> Tuple[bool, str]:
+    def validate_json_file(
+        file_path: Path, required_keys: List[str] = None
+    ) -> Tuple[bool, str]:
         """
         Validate JSON file exists and has required structure.
 
@@ -141,7 +144,7 @@ class FileValidator:
             if not file_path.exists():
                 return False, f"File does not exist: {file_path}"
 
-            with open(file_path, 'r', encoding='utf-8') as f:
+            with open(file_path, "r", encoding="utf-8") as f:
                 data = json.load(f)
 
             if required_keys:
@@ -171,7 +174,7 @@ class FileValidator:
             if not file_path.exists():
                 return False, f"File does not exist: {file_path}"
 
-            with open(file_path, 'r', encoding='utf-8') as f:
+            with open(file_path, "r", encoding="utf-8") as f:
                 content = f.read()
 
             if len(content) < min_length:
@@ -182,7 +185,9 @@ class FileValidator:
             return False, f"Validation error: {e}"
 
     @staticmethod
-    def validate_audio_file(file_path: Path, min_size_bytes: int = 1000) -> Tuple[bool, str]:
+    def validate_audio_file(
+        file_path: Path, min_size_bytes: int = 1000
+    ) -> Tuple[bool, str]:
         """
         Validate audio file exists and meets basic criteria.
 
@@ -202,7 +207,7 @@ class FileValidator:
                 return False, f"File too small: {file_size} < {min_size_bytes} bytes"
 
             # Check file extension
-            if not file_path.suffix.lower() in ['.mp3', '.wav', '.m4a']:
+            if not file_path.suffix.lower() in [".mp3", ".wav", ".m4a"]:
                 return False, f"Invalid audio file extension: {file_path.suffix}"
 
             return True, ""
@@ -240,7 +245,9 @@ class DataValidator:
         return True, ""
 
     @staticmethod
-    def validate_scraped_content(content_list: List[ScrapedContent]) -> Tuple[bool, str]:
+    def validate_scraped_content(
+        content_list: List[ScrapedContent],
+    ) -> Tuple[bool, str]:
         """
         Validate scraped content quality.
 
@@ -307,7 +314,8 @@ def create_mock_hn_stories(count: int = 5) -> List[HackerNewsStory]:
             score=100 + i * 10,
             time=int(time.time()) - i * 3600,
             url=f"https://example.com/article-{i+1}",
-            type="story"
+            descendants=10 + i * 5,
+            type="story",
         )
         stories.append(story)
     return stories
@@ -325,7 +333,7 @@ def create_mock_scraped_content(count: int = 3) -> List[ScrapedContent]:
             publish_date=None,
             word_count=250,
             scraping_method="mock",
-            success=True
+            success=True,
         )
         content_list.append(content)
     return content_list
@@ -339,15 +347,15 @@ class MetricsCollector:
 
     def record_timing(self, operation: str, duration: float):
         """Record operation timing."""
-        if 'timings' not in self.metrics:
-            self.metrics['timings'] = {}
-        self.metrics['timings'][operation] = duration
+        if "timings" not in self.metrics:
+            self.metrics["timings"] = {}
+        self.metrics["timings"][operation] = duration
 
     def record_count(self, category: str, count: int):
         """Record count metrics."""
-        if 'counts' not in self.metrics:
-            self.metrics['counts'] = {}
-        self.metrics['counts'][category] = count
+        if "counts" not in self.metrics:
+            self.metrics["counts"] = {}
+        self.metrics["counts"][category] = count
 
     def get_summary(self) -> Dict[str, Any]:
         """Get metrics summary."""
@@ -355,17 +363,19 @@ class MetricsCollector:
 
     def assert_performance_thresholds(self):
         """Assert performance meets acceptable thresholds."""
-        timings = self.metrics.get('timings', {})
+        timings = self.metrics.get("timings", {})
 
         # Define performance thresholds (in seconds)
         thresholds = {
-            'fetch_stories': 30.0,
-            'scrape_articles': 60.0,
-            'generate_script': 10.0,
-            'full_pipeline': 120.0
+            "fetch_stories": 30.0,
+            "scrape_articles": 60.0,
+            "generate_script": 10.0,
+            "full_pipeline": 120.0,
         }
 
         for operation, threshold in thresholds.items():
             if operation in timings:
                 actual = timings[operation]
-                assert actual <= threshold, f"{operation} took {actual:.2f}s, exceeds threshold {threshold}s"
+                assert (
+                    actual <= threshold
+                ), f"{operation} took {actual:.2f}s, exceeds threshold {threshold}s"

@@ -17,9 +17,11 @@ from config import get_config
 # Configure logging
 logger = logging.getLogger(__name__)
 
+
 @dataclass
 class HackerNewsStory:
     """Represents a Hacker News story."""
+
     id: int
     title: str
     url: Optional[str]
@@ -37,16 +39,17 @@ class HackerNewsStory:
     def to_dict(self) -> Dict[str, Any]:
         """Convert story to dictionary."""
         return {
-            'id': self.id,
-            'title': self.title,
-            'url': self.url,
-            'score': self.score,
-            'by': self.by,
-            'time': self.time,
-            'descendants': self.descendants,
-            'type': self.type,
-            'created_at': self.created_at.isoformat()
+            "id": self.id,
+            "title": self.title,
+            "url": self.url,
+            "score": self.score,
+            "by": self.by,
+            "time": self.time,
+            "descendants": self.descendants,
+            "type": self.type,
+            "created_at": self.created_at.isoformat(),
         }
+
 
 class HackerNewsAPI:
     """Enhanced Hacker News API client with retry logic and error handling."""
@@ -162,7 +165,7 @@ class HackerNewsAPI:
             return None
 
         # Validate required fields
-        required_fields = ['id', 'title', 'score', 'by', 'time', 'descendants']
+        required_fields = ["id", "title", "score", "by", "time", "descendants"]
         missing_fields = [field for field in required_fields if field not in data]
 
         if missing_fields:
@@ -172,14 +175,14 @@ class HackerNewsAPI:
         # Create story object
         try:
             story = HackerNewsStory(
-                id=data['id'],
-                title=data['title'],
-                url=data.get('url'),  # URL is optional for some stories
-                score=data['score'],
-                by=data['by'],
-                time=data['time'],
-                descendants=data['descendants'],
-                type=data.get('type', 'story')
+                id=data["id"],
+                title=data["title"],
+                url=data.get("url"),  # URL is optional for some stories
+                score=data["score"],
+                by=data["by"],
+                time=data["time"],
+                descendants=data["descendants"],
+                type=data.get("type", "story"),
             )
 
             logger.debug(f"Successfully parsed story: {story.title}")
@@ -222,8 +225,11 @@ class HackerNewsAPI:
             if i < len(story_ids):
                 time.sleep(0.1)
 
-        logger.info(f"Successfully fetched {len(stories)} stories, {failed_count} failed")
+        logger.info(
+            f"Successfully fetched {len(stories)} stories, {failed_count} failed"
+        )
         return stories
+
 
 def get_top_story_ids(limit: int = 20) -> Optional[List[int]]:
     """
@@ -237,6 +243,7 @@ def get_top_story_ids(limit: int = 20) -> Optional[List[int]]:
     """
     api = HackerNewsAPI()
     return api.get_top_story_ids(limit)
+
 
 def main():
     """Command-line interface for the HN API."""
@@ -267,6 +274,7 @@ def main():
         logger.error(f"Unexpected error: {e}")
         print(f"Error: {e}", file=sys.stderr)
         sys.exit(1)
+
 
 if __name__ == "__main__":
     main()

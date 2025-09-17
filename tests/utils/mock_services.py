@@ -34,7 +34,7 @@ class MockHackerNewsAPI:
                 "score": 1250,
                 "url": "https://example.com/ai-framework-breakthrough",
                 "type": "story",
-                "time": base_time - 1800
+                "time": base_time - 1800,
             },
             {
                 "id": 40002,
@@ -43,7 +43,7 @@ class MockHackerNewsAPI:
                 "score": 980,
                 "url": "https://example.com/new-programming-language",
                 "type": "story",
-                "time": base_time - 3600
+                "time": base_time - 3600,
             },
             {
                 "id": 40003,
@@ -52,7 +52,7 @@ class MockHackerNewsAPI:
                 "score": 1500,
                 "url": "https://example.com/quantum-breakthrough",
                 "type": "story",
-                "time": base_time - 5400
+                "time": base_time - 5400,
             },
             {
                 "id": 40004,
@@ -61,7 +61,7 @@ class MockHackerNewsAPI:
                 "score": 750,
                 "url": "https://example.com/security-tool",
                 "type": "story",
-                "time": base_time - 7200
+                "time": base_time - 7200,
             },
             {
                 "id": 40005,
@@ -70,7 +70,7 @@ class MockHackerNewsAPI:
                 "score": 650,
                 "url": "https://example.com/edge-computing",
                 "type": "story",
-                "time": base_time - 9000
+                "time": base_time - 9000,
             },
             {
                 "id": 40006,
@@ -79,7 +79,7 @@ class MockHackerNewsAPI:
                 "score": 820,
                 "url": "https://example.com/ml-bug-prediction",
                 "type": "story",
-                "time": base_time - 10800
+                "time": base_time - 10800,
             },
             {
                 "id": 40007,
@@ -88,7 +88,7 @@ class MockHackerNewsAPI:
                 "score": 590,
                 "url": "https://example.com/blockchain-supply-chain",
                 "type": "story",
-                "time": base_time - 12600
+                "time": base_time - 12600,
             },
             {
                 "id": 40008,
@@ -97,7 +97,7 @@ class MockHackerNewsAPI:
                 "score": 420,
                 "url": "https://example.com/developer-tools-funding",
                 "type": "story",
-                "time": base_time - 14400
+                "time": base_time - 14400,
             },
             {
                 "id": 40009,
@@ -106,7 +106,7 @@ class MockHackerNewsAPI:
                 "score": 380,
                 "url": "https://example.com/wasm-performance",
                 "type": "story",
-                "time": base_time - 16200
+                "time": base_time - 16200,
             },
             {
                 "id": 40010,
@@ -115,8 +115,8 @@ class MockHackerNewsAPI:
                 "score": 710,
                 "url": "https://example.com/database-innovation",
                 "type": "story",
-                "time": base_time - 18000
-            }
+                "time": base_time - 18000,
+            },
         ]
 
         return mock_data
@@ -142,7 +142,9 @@ class MockHackerNewsAPI:
         elif "item" in url:
             # Extract story ID from URL
             story_id = int(url.split("/")[-1].replace(".json", ""))
-            story_data = next((s for s in self.mock_stories if s["id"] == story_id), None)
+            story_data = next(
+                (s for s in self.mock_stories if s["id"] == story_id), None
+            )
             if story_data:
                 response.json.return_value = story_data
             else:
@@ -200,7 +202,7 @@ class MockArticleScraper:
                 rare diseases from medical imaging.
                 """,
                 "author": "Tech Reporter",
-                "word_count": 150
+                "word_count": 150,
             },
             {
                 "url": "https://example.com/new-programming-language",
@@ -225,7 +227,7 @@ class MockArticleScraper:
                 support for parallel processing, making it ideal for modern multi-core architectures.
                 """,
                 "author": "Language Design Team",
-                "word_count": 165
+                "word_count": 165,
             },
             {
                 "url": "https://example.com/quantum-breakthrough",
@@ -251,8 +253,8 @@ class MockArticleScraper:
                 it's a fundamental shift in what's computationally possible."
                 """,
                 "author": "Quantum Physics Reporter",
-                "word_count": 175
-            }
+                "word_count": 175,
+            },
         ]
 
         for article_data in mock_content_data:
@@ -264,7 +266,7 @@ class MockArticleScraper:
                 publish_date=None,
                 word_count=article_data["word_count"],
                 scraping_method="mock",
-                success=True
+                success=True,
             )
             articles[article_data["url"]] = content
 
@@ -289,7 +291,7 @@ class MockArticleScraper:
             publish_date=None,
             word_count=200,
             scraping_method="mock",
-            success=True
+            success=True,
         )
 
     def set_failure_mode(self, should_fail: bool = True, failure_rate: float = 0.0):
@@ -313,7 +315,7 @@ class MockTTSConverter:
         language_code: str = "en-US",
         voice_name: str = "en-US-Standard-A",
         speaking_rate: float = 1.0,
-        pitch: float = 0.0
+        pitch: float = 0.0,
     ) -> bool:
         """Mock TTS conversion."""
         self.conversion_count += 1
@@ -326,12 +328,12 @@ class MockTTSConverter:
         output_path.parent.mkdir(parents=True, exist_ok=True)
 
         # Write minimal MP3-like header and some data
-        with open(output_path, 'wb') as f:
+        with open(output_path, "wb") as f:
             # Write a minimal fake MP3 header
-            f.write(b'ID3\x03\x00\x00\x00')
-            f.write(b'\x00' * 100)  # Padding
-            f.write(f"Mock TTS audio for: {text[:50]}...".encode('utf-8'))
-            f.write(b'\x00' * 1000)  # More padding to make it look like audio
+            f.write(b"ID3\x03\x00\x00\x00")
+            f.write(b"\x00" * 100)  # Padding
+            f.write(f"Mock TTS audio for: {text[:50]}...".encode("utf-8"))
+            f.write(b"\x00" * 1000)  # More padding to make it look like audio
 
         self.generated_files.append(output_path)
         return True
@@ -374,6 +376,7 @@ class MockNetworkConditions:
 
     def apply_to_request(self, original_function):
         """Apply network conditions to a request function."""
+
         def wrapper(*args, **kwargs):
             import random
 
@@ -399,36 +402,36 @@ def create_test_config_file(temp_dir: Path) -> Path:
         "hackernews": {
             "api_base_url": "https://hacker-news.firebaseio.com/v0",
             "max_stories": 10,
-            "request_timeout": 30
+            "request_timeout": 30,
         },
         "scraping": {
             "request_timeout": 30,
             "max_retries": 3,
             "retry_delay": 1.0,
-            "user_agent": "HackerCast-Test/1.0"
+            "user_agent": "HackerCast-Test/1.0",
         },
         "tts": {
             "enabled": False,  # Disable for most tests
             "language_code": "en-US",
             "voice_name": "en-US-Standard-A",
             "speaking_rate": 1.0,
-            "pitch": 0.0
+            "pitch": 0.0,
         },
         "output": {
             "base_directory": str(temp_dir),
             "data_subdir": "data",
             "audio_subdir": "audio",
-            "logs_subdir": "logs"
+            "logs_subdir": "logs",
         },
         "logging": {
             "level": "INFO",
             "format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s",
-            "file_enabled": True
-        }
+            "file_enabled": True,
+        },
     }
 
     config_file = temp_dir / "test_config.json"
-    with open(config_file, 'w') as f:
+    with open(config_file, "w") as f:
         json.dump(config_content, f, indent=2)
 
     return config_file
@@ -455,11 +458,15 @@ class E2ETestContext:
         from unittest.mock import patch
 
         self.patches = [
-            patch('requests.get', side_effect=self.mock_hn_api.mock_requests_get),
-            patch('scraper.ArticleScraper.scrape_article',
-                  side_effect=self.mock_scraper.mock_scrape_article),
-            patch('tts_converter.TTSConverter.convert_text_to_speech',
-                  side_effect=self.mock_tts.mock_convert_text_to_speech)
+            patch("requests.get", side_effect=self.mock_hn_api.mock_requests_get),
+            patch(
+                "scraper.ArticleScraper.scrape_article",
+                side_effect=self.mock_scraper.mock_scrape_article,
+            ),
+            patch(
+                "tts_converter.TTSConverter.convert_text_to_speech",
+                side_effect=self.mock_tts.mock_convert_text_to_speech,
+            ),
         ]
 
         for p in self.patches:

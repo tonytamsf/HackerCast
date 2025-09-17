@@ -1,2 +1,5 @@
 requests
 beautifulsoup4
+goose3
+selenium
+google-cloud-texttospeech

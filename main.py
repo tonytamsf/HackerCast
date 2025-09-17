@@ -25,6 +25,7 @@ from config import initialize_config, get_config_manager
 from hn_api import HackerNewsAPI, HackerNewsStory
 from scraper import ArticleScraper, ScrapedContent
 from tts_converter import TTSConverter
+from notebooklm_client import NotebookLMPodcastGenerator
 
 # Initialize rich console
 console = Console()
@@ -54,6 +55,7 @@ class HackerCastPipeline:
         self.hn_api = HackerNewsAPI()
         self.scraper = ArticleScraper()
         self.tts_converter = None  # Initialize when needed
+        self.notebooklm_generator = None  # Initialize when needed
 
         self.logger = logging.getLogger(__name__)
         self.logger.info("HackerCast pipeline initialized")
@@ -84,6 +86,21 @@ class HackerCastPipeline:
                 self.logger.info("TTS converter initialized")
             except Exception as e:
                 self.logger.error(f"Failed to initialize TTS converter: {e}")
+                raise
+
+    def _initialize_notebooklm(self):
+        """Initialize NotebookLM generator when needed."""
+        if self.notebooklm_generator is None:
+            try:
+                self.notebooklm_generator = NotebookLMPodcastGenerator(
+                    project_number=self.config.notebooklm.project_number,
+                    location=self.config.notebooklm.location,
+                    endpoint_location=self.config.notebooklm.endpoint_location,
+                    credentials_path=self.config.google_credentials_path,
+                )
+                self.logger.info("NotebookLM generator initialized")
+            except Exception as e:
+                self.logger.error(f"Failed to initialize NotebookLM generator: {e}")
                 raise
 
     def fetch_top_stories(self, limit: Optional[int] = None) -> List[HackerNewsStory]:
@@ -297,21 +314,29 @@ class HackerCastPipeline:
 
         return script
 
-    def convert_to_audio(self, script: str) -> Optional[Path]:
+    def convert_to_audio(self, script: str = None, content: List[ScrapedContent] = None) -> Optional[Path]:
         """
-        Convert script to audio using TTS.
+        Convert script to audio using either TTS or NotebookLM.
 
         Args:
-            script: Podcast script text
+            script: Podcast script text (for TTS)
+            content: List of scraped content (for NotebookLM)
 
         Returns:
             Path to generated audio file or None if failed
         """
-        if not script.strip():
+        if self.config.audio_generator == "notebooklm":
+            return self._convert_with_notebooklm(content or self.scraped_content)
+        else:
+            return self._convert_with_tts(script)
+
+    def _convert_with_tts(self, script: str) -> Optional[Path]:
+        """Convert script to audio using TTS."""
+        if not script or not script.strip():
             console.print("[red]No script to convert![/red]")
             return None
 
-        console.print("[bold blue]Converting script to audio...[/bold blue]")
+        console.print("[bold blue]Converting script to audio with TTS...[/bold blue]")
 
         try:
             self._initialize_tts()
@@ -319,7 +344,7 @@ class HackerCastPipeline:
             # Generate filename
             timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
             audio_file = self.config_manager.get_output_path(
-                "audio", f"hackercast_{timestamp}.mp3"
+                "audio", f"hackercast_tts_{timestamp}.mp3"
             )
 
             with Progress(
@@ -353,6 +378,69 @@ class HackerCastPipeline:
         except Exception as e:
             console.print(f"[red]Error generating audio: {e}[/red]")
             self.logger.error(f"Error generating audio: {e}")
+            return None
+
+    def _convert_with_notebooklm(self, content: List[ScrapedContent]) -> Optional[Path]:
+        """Convert content to audio using NotebookLM."""
+        if not content:
+            console.print("[red]No content to convert![/red]")
+            return None
+
+        console.print("[bold blue]Generating podcast with NotebookLM...[/bold blue]")
+
+        try:
+            self._initialize_notebooklm()
+
+            # Prepare articles data for NotebookLM
+            articles = []
+            for article in content:
+                articles.append({
+                    "title": article.title,
+                    "content": article.content
+                })
+
+            # Generate podcast title
+            timestamp = datetime.now().strftime("%Y%m%d")
+            title = f"HackerCast - {timestamp}"
+            description = f"Daily tech podcast from top {len(articles)} Hacker News stories"
+
+            # Generate filename
+            timestamp_full = datetime.now().strftime("%Y%m%d_%H%M%S")
+            audio_file = self.config_manager.get_output_path(
+                "audio", f"hackercast_notebooklm_{timestamp_full}.mp3"
+            )
+
+            with Progress(
+                SpinnerColumn(),
+                TextColumn("[progress.description]{task.description}"),
+                console=console,
+            ) as progress:
+                task = progress.add_task("Generating podcast...", total=None)
+
+                result_path = self.notebooklm_generator.create_podcast_from_articles(
+                    articles=articles,
+                    title=title,
+                    description=description,
+                    focus_prompt=self.config.notebooklm.focus_prompt,
+                    length=self.config.notebooklm.podcast_length,
+                    output_file=str(audio_file),
+                )
+
+                if result_path:
+                    progress.update(task, description=f"Podcast saved: {Path(result_path).name}")
+                    console.print(
+                        f"[green]Podcast generated successfully: {result_path}[/green]"
+                    )
+                    self.logger.info(f"Generated podcast file: {result_path}")
+                    self.audio_files.append(Path(result_path))
+                    return Path(result_path)
+                else:
+                    console.print("[red]Failed to generate podcast![/red]")
+                    return None
+
+        except Exception as e:
+            console.print(f"[red]Error generating podcast: {e}[/red]")
+            self.logger.error(f"Error generating podcast: {e}")
             return None
 
     def save_pipeline_data(self) -> Path:
@@ -422,13 +510,15 @@ class HackerCastPipeline:
             if not content:
                 raise ValueError("No articles scraped")
 
-            # Step 3: Generate script
-            script = self.generate_podcast_script(content)
-            if not script:
-                raise ValueError("No script generated")
+            # Step 3: Generate script (only needed for TTS)
+            script = ""
+            if self.config.audio_generator == "tts":
+                script = self.generate_podcast_script(content)
+                if not script:
+                    raise ValueError("No script generated")
 
             # Step 4: Convert to audio
-            audio_file = self.convert_to_audio(script)
+            audio_file = self.convert_to_audio(script=script, content=content)
 
             # Step 5: Save pipeline data
             data_file = self.save_pipeline_data()
@@ -583,6 +673,45 @@ def tts(ctx, text, output_file):
             console.print(f"[green]Audio saved to: {output_file}[/green]")
         else:
             console.print("[red]Failed to generate audio[/red]")
+    finally:
+        if pipeline:
+            pipeline.cleanup()
+
+
+@cli.command()
+@click.option("--limit", "-l", default=5, type=int, help="Number of stories to use")
+@click.option("--length", default="STANDARD", type=click.Choice(["SHORT", "STANDARD"]), help="Podcast length")
+@click.pass_context
+def notebooklm(ctx, limit, length):
+    """Generate podcast using NotebookLM."""
+    pipeline = None
+    try:
+        pipeline = HackerCastPipeline(ctx.obj["config"])
+
+        # Override audio generator to use NotebookLM
+        pipeline.config.audio_generator = "notebooklm"
+        pipeline.config.notebooklm.podcast_length = length
+
+        console.print("[bold blue]Testing NotebookLM podcast generation...[/bold blue]")
+
+        # Fetch and scrape stories
+        stories = pipeline.fetch_top_stories(limit)
+        if not stories:
+            console.print("[red]No stories fetched[/red]")
+            return
+
+        content = pipeline.scrape_articles(stories)
+        if not content:
+            console.print("[red]No content scraped[/red]")
+            return
+
+        # Generate podcast
+        audio_file = pipeline.convert_to_audio(content=content)
+        if audio_file:
+            console.print(f"[green]NotebookLM podcast generated: {audio_file}[/green]")
+        else:
+            console.print("[red]Failed to generate NotebookLM podcast[/red]")
+
     finally:
         if pipeline:
             pipeline.cleanup()

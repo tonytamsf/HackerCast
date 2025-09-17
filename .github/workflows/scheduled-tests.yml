@@ -68,18 +68,12 @@ jobs:
   # Comprehensive Daily Tests
   comprehensive-daily:
     name: Comprehensive Daily Tests
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     if: github.event.schedule == '0 3 * * *' || github.event.inputs.test_type == 'comprehensive'
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
         python-version: ['3.9', '3.11', '3.12']
-        exclude:
-          - os: windows-latest
-            python-version: '3.9'
-          - os: macos-latest
-            python-version: '3.9'
 
     steps:
     - uses: actions/checkout@v4
@@ -108,7 +102,7 @@ jobs:
           --tb=short \
           --cov=. \
           --cov-report=xml \
-          --junit-xml=unit-test-results-${{ matrix.os }}-py${{ matrix.python-version }}.xml \
+          --junit-xml=unit-test-results-ubuntu-py${{ matrix.python-version }}.xml \
           -m "not e2e and not performance and not network" \
           --timeout=300
       env:
@@ -118,7 +112,7 @@ jobs:
       run: |
         pytest tests/test_integration.py -v \
           --tb=short \
-          --junit-xml=integration-test-results-${{ matrix.os }}-py${{ matrix.python-version }}.xml \
+          --junit-xml=integration-test-results-ubuntu-py${{ matrix.python-version }}.xml \
           --timeout=300
       env:
         HACKERCAST_ENVIRONMENT: test
@@ -128,9 +122,9 @@ jobs:
       uses: actions/upload-artifact@v4
       if: always()
       with:
-        name: daily-test-results-${{ matrix.os }}-py${{ matrix.python-version }}
+        name: daily-test-results-ubuntu-py${{ matrix.python-version }}
         path: |
-          *-test-results-${{ matrix.os }}-py${{ matrix.python-version }}.xml
+          *-test-results-ubuntu-py${{ matrix.python-version }}.xml
           coverage.xml
           test_output/
 

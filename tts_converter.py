@@ -6,7 +6,7 @@ import logging
 import tempfile
 import re
 import subprocess
-from typing import Optional, List, Tuple
+from typing import Optional, List, Tuple, Dict, NamedTuple
 from datetime import datetime
 from pathlib import Path
 from google.cloud import texttospeech
@@ -16,6 +16,21 @@ from podcast_transformer import PodcastTransformer
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
+
+
+class DialogueSegment(NamedTuple):
+    """Represents a dialogue segment with speaker and text."""
+    speaker: str
+    text: str
+    voice_config: dict
+
+
+class VoiceConfig(NamedTuple):
+    """Voice configuration for a speaker."""
+    language_code: str = "en-US"
+    voice_name: str = "en-US-Neural2-D"
+    speaking_rate: float = 1.0
+    pitch: float = 0.0
 
 
 class TTSConverter:
@@ -53,6 +68,28 @@ class TTSConverter:
             except Exception as e:
                 logger.warning(f"Failed to initialize podcast transformer: {e}. Continuing without podcast transformation.")
                 self.enable_podcast_transformation = False
+
+        # Define voice configurations for different speakers
+        self.voice_configs = {
+            "chloe": VoiceConfig(
+                language_code="en-US",
+                voice_name="en-US-Neural2-F",  # Female voice
+                speaking_rate=1.0,
+                pitch=2.0  # Slightly higher pitch for female voice
+            ),
+            "david": VoiceConfig(
+                language_code="en-US",
+                voice_name="en-US-Neural2-D",  # Male voice
+                speaking_rate=1.0,
+                pitch=-2.0  # Slightly lower pitch for male voice
+            ),
+            "default": VoiceConfig(
+                language_code="en-US",
+                voice_name="en-US-Neural2-D",
+                speaking_rate=1.0,
+                pitch=0.0
+            )
+        }
 
     def _chunk_text(self, text: str) -> List[str]:
         """
@@ -110,6 +147,83 @@ class TTSConverter:
 
         return chunks
 
+    def _parse_dialogue(self, text: str) -> List[DialogueSegment]:
+        """
+        Parse text into dialogue segments, detecting speaker prefixes.
+
+        Args:
+            text: Text containing dialogue with speaker prefixes (e.g., "Chloe: Hello")
+
+        Returns:
+            List of DialogueSegment objects
+        """
+        segments = []
+        lines = text.split('\n')
+
+        for line in lines:
+            line = line.strip()
+            if not line:
+                continue
+
+            # Check for speaker prefix (e.g., "Chloe:", "David:")
+            speaker_match = re.match(r'^(Chloe|David):\s*(.+)$', line, re.IGNORECASE)
+
+            if speaker_match:
+                speaker_name = speaker_match.group(1).lower()
+                dialogue_text = speaker_match.group(2).strip()
+
+                # Get voice config for this speaker
+                voice_config = self.voice_configs.get(speaker_name, self.voice_configs["default"])
+
+                segments.append(DialogueSegment(
+                    speaker=speaker_name,
+                    text=dialogue_text,
+                    voice_config=voice_config._asdict()
+                ))
+            else:
+                # No speaker prefix detected, use default voice
+                voice_config = self.voice_configs["default"]
+                segments.append(DialogueSegment(
+                    speaker="narrator",
+                    text=line,
+                    voice_config=voice_config._asdict()
+                ))
+
+        return segments
+
+    def _has_dialogue_format(self, text: str) -> bool:
+        """
+        Check if text contains dialogue format with speaker prefixes.
+
+        Args:
+            text: Text to check
+
+        Returns:
+            True if dialogue format is detected
+        """
+        # Look for lines starting with "Chloe:" or "David:"
+        dialogue_pattern = r'^(Chloe|David):\s*'
+        lines = text.split('\n')
+
+        dialogue_lines = 0
+        total_meaningful_lines = 0
+
+        for line in lines:
+            line = line.strip()
+            if not line:
+                continue
+
+            total_meaningful_lines += 1
+            if re.match(dialogue_pattern, line, re.IGNORECASE):
+                dialogue_lines += 1
+
+        # Consider it dialogue format if more than 30% of lines have speaker prefixes
+        if total_meaningful_lines == 0:
+            return False
+
+        dialogue_ratio = dialogue_lines / total_meaningful_lines
+        return dialogue_ratio > 0.3
+
     def _synthesize_chunk(
         self,
         text: str,
@@ -151,6 +265,81 @@ class TTSConverter:
         )
 
         return response.audio_content
+
+    def _convert_dialogue_to_speech(
+        self,
+        text: str,
+        output_file: str,
+    ) -> bool:
+        """
+        Convert dialogue-formatted text to speech with multiple voices.
+
+        Args:
+            text: Text containing dialogue with speaker prefixes
+            output_file: Path to save the MP3 file
+
+        Returns:
+            True if successful, False otherwise
+        """
+        try:
+            # Parse dialogue into segments
+            segments = self._parse_dialogue(text)
+            if not segments:
+                logger.warning("No dialogue segments found")
+                return False
+
+            logger.info(f"Processing {len(segments)} dialogue segments with multiple voices")
+
+            # Process each segment and collect audio files
+            temp_files = []
+
+            for i, segment in enumerate(segments):
+                logger.info(f"Processing segment {i+1}/{len(segments)} - {segment.speaker}: {segment.text[:50]}...")
+
+                # Synthesize this segment with the appropriate voice
+                voice_config = segment.voice_config
+                audio_content = self._synthesize_chunk(
+                    segment.text,
+                    voice_config["language_code"],
+                    voice_config["voice_name"],
+                    voice_config["speaking_rate"],
+                    voice_config["pitch"],
+                )
+
+                # Save to temporary file
+                with tempfile.NamedTemporaryFile(delete=False, suffix='.mp3') as temp_file:
+                    temp_file.write(audio_content)
+                    temp_files.append(temp_file.name)
+
+            # Concatenate using ffmpeg if available, otherwise simple binary concatenation
+            logger.info("Concatenating dialogue audio segments...")
+            os.makedirs(os.path.dirname(output_file), exist_ok=True)
+
+            if self._has_ffmpeg() and len(temp_files) > 1:
+                self._concatenate_with_ffmpeg(temp_files, output_file)
+            else:
+                # Simple binary concatenation (works for MP3)
+                self._concatenate_binary(temp_files, output_file)
+
+            # Clean up temporary files
+            for temp_file in temp_files:
+                try:
+                    os.unlink(temp_file)
+                except OSError:
+                    pass
+
+            logger.info(f"🎭 Multi-voice dialogue audio written to file: {output_file}")
+            return True
+
+        except Exception as e:
+            logger.error(f"Error processing dialogue: {e}")
+            # Clean up temporary files on error
+            for temp_file in temp_files:
+                try:
+                    os.unlink(temp_file)
+                except OSError:
+                    pass
+            return False
 
     def _save_intermediate_script(self, script: str, topic: str = "") -> str:
         """
@@ -253,6 +442,12 @@ class TTSConverter:
                 logger.info(f"📄 Using transformed script from: {script_path}")
             else:
                 logger.info("⚠️  Podcast transformation disabled, using original text")
+
+            # Check if text contains dialogue format
+            if self._has_dialogue_format(text):
+                logger.info("🎭 Dialogue format detected, using multi-voice conversion")
+                success = self._convert_dialogue_to_speech(text, output_file)
+                return success, script_path
 
             # Check if we need to chunk the text
             text_bytes = len(text.encode('utf-8'))

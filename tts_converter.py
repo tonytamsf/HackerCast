@@ -6,9 +6,12 @@ import logging
 import tempfile
 import re
 import subprocess
-from typing import Optional, List
+from typing import Optional, List, Tuple
+from datetime import datetime
+from pathlib import Path
 from google.cloud import texttospeech
 from google.api_core import exceptions as gcloud_exceptions
+from podcast_transformer import PodcastTransformer
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -21,13 +24,14 @@ class TTSConverter:
     # Maximum bytes per request (leave some buffer below the 5000 limit)
     MAX_BYTES_PER_CHUNK = 4500
 
-    def __init__(self, credentials_path: Optional[str] = None):
+    def __init__(self, credentials_path: Optional[str] = None, enable_podcast_transformation: bool = True):
         """
         Initialize the TTS converter.
 
         Args:
             credentials_path: Path to Google Cloud service account key file.
                             If None, uses GOOGLE_APPLICATION_CREDENTIALS env var.
+            enable_podcast_transformation: Whether to transform text to podcast format before TTS
         """
         if credentials_path:
             os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = credentials_path
@@ -38,6 +42,17 @@ class TTSConverter:
         except Exception as e:
             logger.error(f"Failed to initialize TTS client: {e}")
             raise
+
+        # Initialize podcast transformer if enabled
+        self.enable_podcast_transformation = enable_podcast_transformation
+        self.podcast_transformer = None
+        if enable_podcast_transformation:
+            try:
+                self.podcast_transformer = PodcastTransformer()
+                logger.info("Podcast transformer initialized successfully")
+            except Exception as e:
+                logger.warning(f"Failed to initialize podcast transformer: {e}. Continuing without podcast transformation.")
+                self.enable_podcast_transformation = False
 
     def _chunk_text(self, text: str) -> List[str]:
         """
@@ -137,6 +152,66 @@ class TTSConverter:
 
         return response.audio_content
 
+    def _save_intermediate_script(self, script: str, topic: str = "") -> str:
+        """
+        Save the transformed podcast script to an intermediate file.
+
+        Args:
+            script: The podcast script to save
+            topic: Optional topic for filename
+
+        Returns:
+            Path to the saved script file
+        """
+        # Create output/data directory if it doesn't exist
+        output_dir = Path("output/data")
+        output_dir.mkdir(parents=True, exist_ok=True)
+
+        # Generate filename with timestamp
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+
+        # Clean topic for filename (remove special characters)
+        clean_topic = ""
+        if topic:
+            clean_topic = re.sub(r'[^\w\s-]', '', topic)
+            clean_topic = re.sub(r'[-\s]+', '_', clean_topic).strip('_')
+            clean_topic = f"_{clean_topic}" if clean_topic else ""
+
+        filename = f"script_{timestamp}{clean_topic}.txt"
+        script_path = output_dir / filename
+
+        # Save the script
+        with open(script_path, 'w', encoding='utf-8') as f:
+            f.write(script)
+
+        logger.info(f"💾 Podcast script saved to: {script_path}")
+        return str(script_path)
+
+    def _transform_to_podcast(self, text: str, topic: str = "") -> Tuple[str, str]:
+        """
+        Transform text to podcast format using Gemini and save intermediate output.
+
+        Args:
+            text: Text to transform
+            topic: Optional topic description
+
+        Returns:
+            Tuple of (transformed podcast script, path to saved script file)
+        """
+        if not self.enable_podcast_transformation or not self.podcast_transformer:
+            # Save original text as well for consistency
+            script_path = self._save_intermediate_script(text, f"original_{topic}")
+            return text, script_path
+
+        try:
+            transformed_script = self.podcast_transformer.transform_to_podcast(text, topic)
+            script_path = self._save_intermediate_script(transformed_script, topic)
+            return transformed_script, script_path
+        except Exception as e:
+            logger.warning(f"Podcast transformation failed: {e}. Using original text.")
+            script_path = self._save_intermediate_script(text, f"fallback_{topic}")
+            return text, script_path
+
     def convert_text_to_speech(
         self,
         text: str,
@@ -145,10 +220,12 @@ class TTSConverter:
         voice_name: str = "en-US-Neural2-D",
         speaking_rate: float = 1.0,
         pitch: float = 0.0,
-    ) -> bool:
+        topic: str = "",
+    ) -> Tuple[bool, Optional[str]]:
         """
         Convert text to speech and save as MP3. Automatically handles large texts
-        by chunking and concatenating audio segments.
+        by chunking and concatenating audio segments. Optionally transforms text
+        to podcast format before conversion.
 
         Args:
             text: Text to convert to speech
@@ -157,23 +234,34 @@ class TTSConverter:
             voice_name: Voice name to use
             speaking_rate: Speaking rate (0.25 to 4.0)
             pitch: Voice pitch (-20.0 to 20.0)
+            topic: Topic description for podcast transformation
 
         Returns:
-            True if successful, False otherwise
+            Tuple of (success boolean, path to intermediate script file if created)
         """
         try:
             # Validate input
             if not text.strip():
                 logger.error("Text input is empty")
-                return False
+                return False, None
+
+            # Transform to podcast format if enabled and save intermediate output
+            script_path = None
+            if self.enable_podcast_transformation:
+                logger.info("🎭 Transforming text to podcast format...")
+                text, script_path = self._transform_to_podcast(text, topic)
+                logger.info(f"📄 Using transformed script from: {script_path}")
+            else:
+                logger.info("⚠️  Podcast transformation disabled, using original text")
 
             # Check if we need to chunk the text
             text_bytes = len(text.encode('utf-8'))
             if text_bytes > self.MAX_BYTES_PER_CHUNK:
                 logger.info(f"Text size ({text_bytes} bytes) exceeds limit. Chunking text...")
-                return self._convert_large_text_to_speech(
+                success = self._convert_large_text_to_speech(
                     text, output_file, language_code, voice_name, speaking_rate, pitch
                 )
+                return success, script_path
 
             # Single chunk processing
             logger.info(f"Converting text to speech: {len(text)} characters")
@@ -186,18 +274,20 @@ class TTSConverter:
             with open(output_file, "wb") as out:
                 out.write(audio_content)
 
-            logger.info(f"Audio content written to file: {output_file}")
-            return True
+            logger.info(f"🎵 Audio content written to file: {output_file}")
+            if script_path:
+                logger.info(f"📄 Intermediate script available at: {script_path}")
+            return True, script_path
 
         except gcloud_exceptions.GoogleAPIError as e:
             logger.error(f"Google Cloud API error: {e}")
-            return False
+            return False, script_path
         except PermissionError as e:
             logger.error(f"Permission error writing to {output_file}: {e}")
-            return False
+            return False, script_path
         except Exception as e:
             logger.error(f"Unexpected error during TTS conversion: {e}")
-            return False
+            return False, script_path
 
     def _convert_large_text_to_speech(
         self,
@@ -330,14 +420,15 @@ class TTSConverter:
 
 def main():
     """Command-line interface for TTS conversion."""
-    if len(sys.argv) != 3:
+    if len(sys.argv) < 3 or len(sys.argv) > 4:
         print(
-            "Usage: python tts_converter.py '<text>' <output_file.mp3>", file=sys.stderr
+            "Usage: python tts_converter.py '<text>' <output_file.mp3> [topic]", file=sys.stderr
         )
         sys.exit(1)
 
     text = sys.argv[1]
     output_file = sys.argv[2]
+    topic = sys.argv[3] if len(sys.argv) == 4 else ""
 
     # Validate output file extension
     if not output_file.lower().endswith(".mp3"):
@@ -353,10 +444,12 @@ def main():
 
     try:
         converter = TTSConverter()
-        success = converter.convert_text_to_speech(text, output_file)
+        success, script_path = converter.convert_text_to_speech(text, output_file, topic=topic)
 
         if success:
             print(f"Successfully converted text to speech: {output_file}")
+            if script_path:
+                print(f"Intermediate script saved to: {script_path}")
         else:
             print("Failed to convert text to speech", file=sys.stderr)
             sys.exit(1)

@@ -1,0 +1,75 @@
+Chloe: Welcome back to HackerCast, your daily dose of all things Hacker News. Today, we’re diving into the top stories making waves, from nonprofit funding woes to hardware hiccups. Ever wonder how the tech landscape shifts from one day to the next?
+
+David: Hello, everyone. Glad to be back. Today, we have four interesting stories to dissect, each offering a unique perspective on the challenges and advancements within the tech world. Let's get started.
+
+Chloe: Okay, David, so our first story is about Slack raising charges on a nonprofit? What's going on here?
+
+David: That's right, Chloe. Hack Club, a nonprofit providing coding education to teenagers, is facing a massive price hike from Slack. After happily paying $5,000 a year, Slack is now demanding an extra $195,000 annually, or they'll deactivate the workspace and delete their message history.
+
+Chloe: Whoa, that's a huge jump! So, essentially, a massive corporation is strong-arming a small nonprofit? What impact does this have on Hack Club?
+
+David: Precisely. The short notice is causing chaos, forcing them to scramble to update systems, rebuild integrations, and migrate years of institutional knowledge. The cost of this forced migration is significant.
+
+Chloe: So, what's Hack Club doing about it?
+
+David: They are moving to Mattermost, emphasizing the importance of owning your data, especially for small businesses. They are advising others to do the same.
+
+Chloe: Makes sense. Moving on, our next story is about WASM 3.0 being completed. What exactly *is* WASM, and why should we care about version 3.0?
+
+David: WASM, or WebAssembly, is essentially a low-level binary instruction format that allows code to run efficiently in web browsers and other environments. WASM 3.0 is a significant update that brings several major new features.
+
+Chloe: Okay, so what's new in WASM 3.0? Give us the highlights.
+
+David: The big ones are a 64-bit address space, multiple memories, garbage collection, typed references, tail calls, exception handling, relaxed vector instructions, deterministic profile, and custom annotation syntax.
+
+Chloe: Okay, that sounds like a lot of technical jargon! Let's break it down. What does a 64-bit address space mean for the average listener?
+
+David: It means WASM applications can now theoretically access up to 16 exabytes of memory, a huge increase from the previous 4 gigabytes. This allows for much larger applications and datasets, especially outside of the web environment.
+
+Chloe: And what about "garbage collection"? Is that like cleaning up your digital trash?
+
+David: In a way, yes. It's an automatic memory management system where the WASM runtime handles the allocation and lifetime of data structures, relieving developers of some of the manual memory management burden.
+
+Chloe: So, with these new features, what kind of programming languages will be able to target WASM more easily?
+
+David: We're already seeing languages like Java, OCaml, Scala, Kotlin, Scheme, and Dart being compiled to WASM, taking advantage of the new garbage collection feature.
+
+Chloe: That's really interesting! Alright, moving on to our third story: Apple Photos App Corrupting Images. This sounds like a nightmare for photographers. What's happening?
+
+David: Essentially, some users are experiencing random image corruption when importing photos from their cameras using the Apple Photos app.
+
+Chloe: So, you import a photo, and it ends up garbled? How did the reporter figure it out?
+
+David: The reporter replaced all his hardware – cables, SD cards, laptops, even a new camera – and the problem persisted, indicating a software issue within the Photos app.
+
+Chloe: Wow, they went all-in on troubleshooting. How did they narrow it down to the "delete after import" feature?
+
+David: After stopping the "delete after import" option, and manually verifying the photos before allowing deletion of the files, the reporter had no corruption for months. However, then it occurred again.
+
+Chloe: So it's random, even when not deleting after import?
+
+David: Correct. And interestingly, the corrupted and non-corrupted files have the same file size, but different bytes, confirmed by checksum comparisons.
+
+Chloe: So, what's their solution now? Are they abandoning the Photos app completely?
+
+David: They've switched to using Darktable for initial import and culling, then exporting the processed images to the Photos app for viewing and sharing.
+
+Chloe: So, Darktable acts as a buffer zone, preventing the Photos app from wreaking havoc. Alright, David, our final story is about the Orange Pi RV2, a $40 RISC-V SBC. What is RISC-V, and why is it exciting that you can get a computer that runs it for $40?
+
+David: RISC-V is an open-source instruction set architecture, or ISA. Its open nature allows for customization and innovation, and its efficiency makes it suitable for various applications. A $40 SBC running RISC-V makes it accessible to hobbyists, developers, and industry professionals alike.
+
+Chloe: So, what kind of tasks can this little $40 computer handle?
+
+David: It's well-suited for specialized tasks like IoT and lightweight AI, thanks to its energy-efficient design and features like dual NVMe slots and a GPIO interface.
+
+Chloe: Okay, so not a desktop replacement, but a powerful tool for specific projects. Are there any downsides to consider?
+
+David: Software support and desktop performance are limitations. It's not a powerhouse, but it's a cost-effective way to explore RISC-V computing.
+
+Chloe: Got it. So, to recap, today we covered Slack's price hike on a nonprofit, the release of WASM 3.0 and its implications, image corruption issues with Apple Photos, and the affordability of the Orange Pi RV2 for RISC-V development. It's a wild world out there in the tech sphere.
+
+David: Indeed, Chloe. These stories highlight both the challenges and opportunities within the ever-evolving tech landscape. Remember, today's emerging technology is tomorrow's standard, so stay curious!
+
+Chloe: Thanks for tuning in to HackerCast. We'll be back tomorrow with more top stories from Hacker News.
+
+David: Thank you all. Until then!

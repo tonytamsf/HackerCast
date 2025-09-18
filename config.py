@@ -49,23 +49,6 @@ class TTSConfig:
 
 
 @dataclass
-class NotebookLMConfig:
-    """Configuration for NotebookLM API."""
-
-    project_number: str = ""
-    location: str = "global"
-    endpoint_location: str = "us"
-    podcast_length: str = "STANDARD"  # 'SHORT' or 'STANDARD'
-    language_code: str = "en-US"
-    focus_prompt: str = (
-        "Create an engaging technology podcast discussion about these Hacker News stories. "
-        "Focus on the technical implications, innovation aspects, and broader impact on the tech industry. "
-        "Make it conversational and accessible to a technical audience."
-    )
-    max_context_tokens: int = 100000
-
-
-@dataclass
 class LoggingConfig:
     """Configuration for logging."""
 
@@ -100,16 +83,12 @@ class AppConfig:
     hackernews: HackerNewsConfig = field(default_factory=HackerNewsConfig)
     scraping: ScrapingConfig = field(default_factory=ScrapingConfig)
     tts: TTSConfig = field(default_factory=TTSConfig)
-    notebooklm: NotebookLMConfig = field(default_factory=NotebookLMConfig)
     logging: LoggingConfig = field(default_factory=LoggingConfig)
     output: OutputConfig = field(default_factory=OutputConfig)
 
     # Google Cloud
     google_credentials_path: Optional[str] = None
     google_project_id: Optional[str] = None
-
-    # Audio generation preference
-    audio_generator: str = "tts"  # 'tts' or 'notebooklm'
 
 
 class ConfigManager:
@@ -172,24 +151,6 @@ class ConfigManager:
         )
         self._config.google_project_id = os.getenv("GOOGLE_CLOUD_PROJECT")
 
-        # NotebookLM
-        if os.getenv("NOTEBOOKLM_PROJECT_NUMBER"):
-            self._config.notebooklm.project_number = os.getenv("NOTEBOOKLM_PROJECT_NUMBER")
-        if os.getenv("NOTEBOOKLM_LOCATION"):
-            self._config.notebooklm.location = os.getenv("NOTEBOOKLM_LOCATION")
-        if os.getenv("NOTEBOOKLM_ENDPOINT_LOCATION"):
-            self._config.notebooklm.endpoint_location = os.getenv("NOTEBOOKLM_ENDPOINT_LOCATION")
-        if os.getenv("NOTEBOOKLM_PODCAST_LENGTH"):
-            self._config.notebooklm.podcast_length = os.getenv("NOTEBOOKLM_PODCAST_LENGTH")
-        if os.getenv("NOTEBOOKLM_LANGUAGE_CODE"):
-            self._config.notebooklm.language_code = os.getenv("NOTEBOOKLM_LANGUAGE_CODE")
-        if os.getenv("NOTEBOOKLM_FOCUS_PROMPT"):
-            self._config.notebooklm.focus_prompt = os.getenv("NOTEBOOKLM_FOCUS_PROMPT")
-
-        # Audio generator preference
-        if os.getenv("AUDIO_GENERATOR"):
-            self._config.audio_generator = os.getenv("AUDIO_GENERATOR").lower()
-
         # Logging
         if os.getenv("LOG_LEVEL"):
             self._config.logging.level = os.getenv("LOG_LEVEL").upper()
@@ -227,17 +188,6 @@ class ConfigManager:
             errors.append("TTS speaking rate must be between 0.25 and 4.0")
         if not (-20.0 <= self._config.tts.pitch <= 20.0):
             errors.append("TTS pitch must be between -20.0 and 20.0")
-
-        # Validate NotebookLM config
-        if self._config.audio_generator == "notebooklm":
-            if not self._config.notebooklm.project_number:
-                errors.append("NotebookLM project number is required when using NotebookLM")
-            if self._config.notebooklm.podcast_length not in ["SHORT", "STANDARD"]:
-                errors.append("NotebookLM podcast length must be 'SHORT' or 'STANDARD'")
-
-        # Validate audio generator choice
-        if self._config.audio_generator not in ["tts", "notebooklm"]:
-            errors.append("Audio generator must be 'tts' or 'notebooklm'")
 
         # Validate logging config
         valid_log_levels = ["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"]

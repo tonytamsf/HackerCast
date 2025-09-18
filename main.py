@@ -25,6 +25,7 @@ from config import initialize_config, get_config_manager
 from hn_api import HackerNewsAPI, HackerNewsStory
 from scraper import ArticleScraper, ScrapedContent
 from tts_converter import TTSConverter
+from interactive_selector import InteractiveStorySelector
 
 # Initialize rich console
 console = Console()
@@ -727,6 +728,97 @@ def tts(ctx, text, output_file):
         else:
             console.print("[red]Failed to generate audio[/red]")
             ctx.exit(1)
+    finally:
+        if pipeline:
+            pipeline.cleanup()
+
+
+@cli.command()
+@click.option("--limit", "-l", default=20, type=int, help="Number of stories to fetch")
+@click.pass_context
+def interactive(ctx, limit):
+    """Run HackerCast with interactive story selection (alias for 'run --interactive')."""
+    if limit <= 0:
+        console.print("[red]Error: Limit must be a positive integer[/red]")
+        raise click.Exit(1)
+
+    pipeline = None
+    try:
+        pipeline = HackerCastPipeline(ctx.obj["config"])
+        if ctx.obj["debug"]:
+            pipeline.config.debug = True
+
+        result = pipeline.run_full_pipeline(limit, interactive=True)
+
+        if result["success"]:
+            console.print("[bold green]Interactive pipeline completed successfully![/bold green]")
+            sys.exit(0)
+        else:
+            console.print("[bold red]Interactive pipeline failed![/bold red]")
+            sys.exit(1)
+    except KeyboardInterrupt:
+        console.print("\n[yellow]Cancelled by user[/yellow]")
+        sys.exit(1)
+    finally:
+        if pipeline:
+            pipeline.cleanup()
+
+
+@cli.command()
+@click.option("--limit", "-l", default=10, type=int, help="Number of stories to fetch")
+@click.pass_context
+def select(ctx, limit):
+    """Interactively select stories to process."""
+    if limit <= 0:
+        console.print("[red]Error: Limit must be a positive integer[/red]")
+        raise click.Exit(1)
+
+    pipeline = None
+    try:
+        pipeline = HackerCastPipeline(ctx.obj["config"])
+        if ctx.obj["debug"]:
+            pipeline.config.debug = True
+
+        # Fetch stories
+        stories = pipeline.fetch_top_stories(limit)
+        if not stories:
+            console.print("[red]No stories fetched![/red]")
+            raise click.Exit(1)
+
+        # Interactive selection
+        selected_stories = pipeline.select_stories_interactively(stories)
+        if selected_stories:
+            console.print(f"[green]Selected {len(selected_stories)} stories[/green]")
+
+            # Ask if user wants to continue with processing
+            if click.confirm("Continue with scraping and processing selected stories?"):
+                # Update pipeline with selected stories
+                pipeline.stories = selected_stories
+
+                # Run the rest of the pipeline
+                scraped_content = pipeline.scrape_articles(selected_stories)
+                if scraped_content:
+                    script_content = pipeline.create_script(scraped_content)
+                    if script_content:
+                        audio_file = pipeline.convert_to_audio(script_content)
+                        if audio_file:
+                            console.print(f"[bold green]Pipeline completed! Audio saved to: {audio_file}[/bold green]")
+                        else:
+                            console.print("[red]Failed to generate audio[/red]")
+                            sys.exit(1)
+                    else:
+                        console.print("[red]Failed to create script[/red]")
+                        sys.exit(1)
+                else:
+                    console.print("[red]Failed to scrape articles[/red]")
+                    sys.exit(1)
+            else:
+                console.print("[yellow]Selection completed. Exiting without processing.[/yellow]")
+        else:
+            console.print("[yellow]No stories selected[/yellow]")
+    except KeyboardInterrupt:
+        console.print("\n[yellow]Cancelled by user[/yellow]")
+        sys.exit(1)
     finally:
         if pipeline:
             pipeline.cleanup()

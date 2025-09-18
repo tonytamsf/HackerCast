@@ -49,13 +49,13 @@ class NotebookLMClient:
             logger.error(f"Failed to initialize NotebookLM client: {e}")
             raise
 
-        # API endpoints
-        self.base_url = (
-            f"https://{endpoint_location}-discoveryengine.googleapis.com"
-            f"/v1alpha/projects/{project_number}/locations/{location}"
-        )
+        # API endpoints - Use project_number for Discovery Engine API
+        # Note: Discovery Engine API uses project_number, not project_id
+        self.base_url = f"https://discoveryengine.googleapis.com/v1/projects/{project_number}/locations/{location}"
         self.notebooks_url = f"{self.base_url}/notebooks"
-        self.podcast_url = f"{self.base_url}:generatePodcast"
+        self.podcast_url = f"{self.base_url}/podcasts"
+
+        logger.info(f"Using podcast API endpoint: {self.podcast_url}")
 
     def _get_auth_headers(self) -> Dict[str, str]:
         """Get authentication headers for API requests."""
@@ -66,6 +66,35 @@ class NotebookLMClient:
             "Authorization": f"Bearer {self.credentials.token}",
             "Content-Type": "application/json",
         }
+
+    def check_api_access(self) -> bool:
+        """
+        Check if the Podcast API is accessible.
+
+        Returns:
+            True if accessible, False otherwise
+        """
+        try:
+            headers = self._get_auth_headers()
+            # Try a simple GET request to check if the endpoint exists
+            response = requests.get(self.podcast_url, headers=headers, timeout=30)
+
+            if response.status_code == 405:  # Method Not Allowed - endpoint exists but GET not supported
+                logger.info("Podcast API endpoint is accessible")
+                return True
+            elif response.status_code == 404:
+                logger.warning("Podcast API endpoint not found - may not be enabled or available")
+                return False
+            elif response.status_code == 403:
+                logger.warning("Permission denied - check IAM roles")
+                return False
+            else:
+                logger.info(f"Podcast API check returned status: {response.status_code}")
+                return True
+
+        except Exception as e:
+            logger.error(f"Error checking API access: {e}")
+            return False
 
     def create_notebook(self, title: str, description: str = "") -> Optional[Dict[str, Any]]:
         """
@@ -186,6 +215,9 @@ class NotebookLMClient:
                 payload["podcastConfig"]["focus"] = focus_prompt
 
             headers = self._get_auth_headers()
+            logger.info(f"Making request to: {self.podcast_url}")
+            logger.debug(f"Request payload: {json.dumps(payload, indent=2)}")
+
             response = requests.post(
                 self.podcast_url, json=payload, headers=headers, timeout=300
             )
@@ -195,9 +227,22 @@ class NotebookLMClient:
                 logger.info(f"Podcast generation initiated: {title}")
                 return podcast_data
             else:
-                logger.error(
-                    f"Failed to generate podcast: {response.status_code} - {response.text}"
-                )
+                error_msg = f"Failed to generate podcast: {response.status_code} - {response.text}"
+                logger.error(error_msg)
+
+                # Add specific error guidance
+                if response.status_code == 404:
+                    logger.error("404 Error - This usually means:")
+                    logger.error("1. The Podcast API is not enabled for your project")
+                    logger.error("2. You don't have the 'Podcast API User' role (roles/discoveryengine.podcastApiUser)")
+                    logger.error("3. The Podcast API is not available in your region or project")
+                    logger.error("4. You may need to be allowlisted for this feature")
+                elif response.status_code == 403:
+                    logger.error("403 Error - Permission denied. Check that:")
+                    logger.error("1. You have the 'Podcast API User' role")
+                    logger.error("2. The Discovery Engine API is enabled")
+                    logger.error("3. Your authentication credentials are valid")
+
                 return None
 
         except Exception as e:
@@ -304,6 +349,11 @@ class NotebookLMPodcastGenerator:
                     "Focus on the technical implications, innovation aspects, and broader impact on the tech industry. "
                     "Make it conversational and accessible to a technical audience."
                 )
+
+            # Check API access first
+            if not self.client.check_api_access():
+                logger.error("Podcast API is not accessible. Please check your project configuration and permissions.")
+                return None
 
             # Generate podcast
             logger.info(f"Generating podcast with {len(articles)} articles")

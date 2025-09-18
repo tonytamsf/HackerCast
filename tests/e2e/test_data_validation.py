@@ -83,10 +83,8 @@ class TestDataValidation:
                 title="High Quality Article",
                 content="This is a substantial article with plenty of content. " * 20,
                 author="Quality Author",
-                publish_date=None,
-                word_count=300,
+                published_date=None,
                 scraping_method="test",
-                success=True,
             )
         ]
 
@@ -100,10 +98,8 @@ class TestDataValidation:
                 title="Poor Article",
                 content="Too short.",  # Too little content
                 author="Poor Author",
-                publish_date=None,
-                word_count=2,
+                published_date=None,
                 scraping_method="test",
-                success=True,
             )
         ]
 
@@ -307,10 +303,8 @@ class TestDataValidation:
                 content="Content with special characters: àáâãäå æç èéêë ìíîï ñ òóôõö ùúûü ý "
                 * 10,
                 author="Special Author",
-                publish_date=None,
-                word_count=100,
+                published_date=None,
                 scraping_method="test",
-                success=True,
             )
         ]
 
@@ -380,10 +374,8 @@ class TestDataValidation:
                 content="Content with Unicode: 你好世界 こんにちは Здравствуй мир 🚀 🌟 ⭐ "
                 * 10,
                 author="Unicode Author 🌍",
-                publish_date=None,
-                word_count=150,
+                published_date=None,
                 scraping_method="test",
-                success=True,
             )
         ]
 

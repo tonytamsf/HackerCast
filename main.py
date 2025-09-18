@@ -815,6 +815,7 @@ def tts(ctx, text, output_file):
             console.print(f"[green]Audio saved to: {output_file}[/green]")
         else:
             console.print("[red]Failed to generate audio[/red]")
+            ctx.exit(1)
     finally:
         if pipeline:
             pipeline.cleanup()

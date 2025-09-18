@@ -73,13 +73,13 @@ class TTSConverter:
         self.voice_configs = {
             "chloe": VoiceConfig(
                 language_code="en-US",
-                voice_name="en-US-Neural2-F",  # Female voice
+                voice_name="en-US-Studio-O",  # Female Studio voice with pitch support
                 speaking_rate=1.0,
                 pitch=2.0  # Slightly higher pitch for female voice
             ),
             "david": VoiceConfig(
                 language_code="en-US",
-                voice_name="en-US-Neural2-D",  # Male voice
+                voice_name="en-US-Studio-Q",  # Male Studio voice with pitch support
                 speaking_rate=1.0,
                 pitch=-2.0  # Slightly lower pitch for male voice
             ),

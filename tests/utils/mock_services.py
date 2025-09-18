@@ -455,7 +455,7 @@ class E2ETestContext:
         from unittest.mock import patch
 
         self.patches = [
-            patch("requests.get", side_effect=self.mock_hn_api.mock_requests_get),
+            patch("requests.Session.get", side_effect=self.mock_hn_api.mock_requests_get),
             patch(
                 "scraper.ArticleScraper.scrape_article",
                 side_effect=self.mock_scraper.mock_scrape_article,

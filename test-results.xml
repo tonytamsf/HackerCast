@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="1" failures="12" skipped="0" tests="37" time="55.667" timestamp="2025-09-17T17:47:59.398809-10:00" hostname="Tonys-MacBook-Air.local"><testcase classname="tests.e2e.test_cli_commands.TestCLICommands" name="test_cli_help_command" time="0.911" /><testcase classname="tests.e2e.test_cli_commands.TestCLICommands" name="test_cli_subcommand_help" time="4.015" /><testcase classname="tests.e2e.test_cli_commands.TestCLICommands" name="test_fetch_command_invalid_limit" time="1.625" /><testcase classname="tests.e2e.test_cli_commands.TestCLICommands" name="test_scrape_command_invalid_url" time="3.812" /><testcase classname="tests.e2e.test_cli_commands.TestCLICommands" name="test_tts_command_basic" time="2.903" /><testcase classname="tests.e2e.test_cli_commands.TestCLICommands" name="test_tts_command_empty_text" time="2.033" /><testcase classname="tests.e2e.test_cli_commands.TestCLICommands" name="test_debug_flag" time="1.042" /><testcase classname="tests.e2e.test_cli_commands.TestCLICommands" name="test_config_file_option" time="0.932" /><testcase classname="tests.e2e.test_cli_commands.TestCLICommands" name="test_config_file_missing" time="1.093" /><testcase classname="tests.e2e.test_cli_commands.TestCLICommands" name="test_keyboard_interrupt_handling" time="1.026" /><testcase classname="tests.e2e.test_cli_commands.TestCLICommands" name="test_concurrent_command_execution" time="1.606" /><testcase classname="tests.e2e.test_cli_commands.TestCLICommands" name="test_command_output_format" time="0.965" /><testcase classname="tests.e2e.test_cli_commands.TestCLICommands" name="test_error_handling_and_exit_codes" time="3.640" /><testcase classname="tests.e2e.test_cli_commands.TestCLICommands" name="test_long_running_command_timeout" time="14.470" /><testcase classname="tests.e2e.test_cli_commands.TestCLICommands" name="test_command_line_argument_validation" time="2.690" /><testcase classname="tests.e2e.test_data_validation.TestDataValidation" name="test_hn_stories_data_structure" time="0.006" /><testcase classname="tests.e2e.test_data_validation.TestDataValidation" name="test_scraped_content_quality_validation" time="0.006" /><testcase classname="tests.e2e.test_data_validation.TestDataValidation" name="test_podcast_script_quality_validation" time="0.006" /><testcase classname="tests.e2e.test_data_validation.TestDataValidation" name="test_file_output_validation" time="0.014" /><testcase classname="tests.e2e.test_data_validation.TestDataValidation" name="test_content_completeness_validation" time="0.345"><failure message="AssertionError: Wrong number of stories fetched&#10;assert 0 == 3&#10; +  where 0 = len([])">tests/e2e/test_data_validation.py:193: in test_content_completeness_validation
+    assert len(stories) == 3, "Wrong number of stories fetched"
+E   AssertionError: Wrong number of stories fetched
+E   assert 0 == 3
+E    +  where 0 = len([])</failure></testcase><testcase classname="tests.e2e.test_data_validation.TestDataValidation" name="test_data_consistency_validation" time="0.335"><failure message="AssertionError: Pipeline should succeed&#10;assert False">tests/e2e/test_data_validation.py:229: in test_data_consistency_validation
+    assert result["success"], "Pipeline should succeed"
+E   AssertionError: Pipeline should succeed
+E   assert False</failure></testcase><testcase classname="tests.e2e.test_data_validation.TestDataValidation" name="test_edge_case_data_handling" time="0.009" /><testcase classname="tests.e2e.test_data_validation.TestDataValidation" name="test_large_dataset_validation" time="0.010" /><testcase classname="tests.e2e.test_data_validation.TestDataValidation" name="test_corrupted_data_handling" time="0.014" /><testcase classname="tests.e2e.test_data_validation.TestDataValidation" name="test_unicode_and_encoding_validation" time="0.051" /><testcase classname="tests.e2e.test_data_validation.TestDataValidation" name="test_timestamp_and_metadata_validation" time="0.207"><failure message="AssertionError: Pipeline should succeed&#10;assert False">tests/e2e/test_data_validation.py:399: in test_timestamp_and_metadata_validation
+    assert result["success"], "Pipeline should succeed"
+E   AssertionError: Pipeline should succeed
+E   assert False</failure></testcase><testcase classname="tests.e2e.test_full_pipeline.TestFullPipeline" name="test_full_pipeline_with_mocks" time="0.337"><failure message="AssertionError: Pipeline failed: No stories fetched&#10;assert False">tests/e2e/test_full_pipeline.py:51: in test_full_pipeline_with_mocks
+    assert result["success"], f"Pipeline failed: {result.get('error')}"
+E   AssertionError: Pipeline failed: No stories fetched
+E   assert False</failure></testcase><testcase classname="tests.e2e.test_full_pipeline.TestFullPipeline" name="test_pipeline_error_recovery" time="0.365" /><testcase classname="tests.e2e.test_full_pipeline.TestFullPipeline" name="test_pipeline_partial_failures" time="0.598"><failure message="AssertionError: Pipeline should handle partial failures&#10;assert False">tests/e2e/test_full_pipeline.py:110: in test_pipeline_partial_failures
+    assert result["success"], "Pipeline should handle partial failures"
+E   AssertionError: Pipeline should handle partial failures
+E   assert False</failure></testcase><testcase classname="tests.e2e.test_full_pipeline.TestFullPipeline" name="test_pipeline_performance_benchmarks" time="1.253"><failure message="AssertionError: Pipeline should succeed despite delays&#10;assert False">tests/e2e/test_full_pipeline.py:128: in test_pipeline_performance_benchmarks
+    assert result["success"], "Pipeline should succeed despite delays"
+E   AssertionError: Pipeline should succeed despite delays
+E   assert False</failure></testcase><testcase classname="tests.e2e.test_full_pipeline.TestFullPipeline" name="test_pipeline_memory_usage" time="0.005"><failure message="ModuleNotFoundError: No module named 'psutil'">tests/e2e/test_full_pipeline.py:139: in test_pipeline_memory_usage
+    import psutil
+E   ModuleNotFoundError: No module named 'psutil'</failure></testcase><testcase classname="tests.e2e.test_full_pipeline.TestFullPipeline" name="test_pipeline_concurrent_execution" time="0.297"><failure message="AssertionError: Concurrent pipeline 0 failed: No stories fetched&#10;assert False">tests/e2e/test_full_pipeline.py:182: in test_pipeline_concurrent_execution
+    assert result[
+E   AssertionError: Concurrent pipeline 0 failed: No stories fetched
+E   assert False</failure></testcase><testcase classname="tests.e2e.test_full_pipeline.TestFullPipeline" name="test_pipeline_output_validation" time="0.328"><failure message="AssertionError: Pipeline should succeed&#10;assert False">tests/e2e/test_full_pipeline.py:192: in test_pipeline_output_validation
+    assert result["success"], "Pipeline should succeed"
+E   AssertionError: Pipeline should succeed
+E   assert False</failure></testcase><testcase classname="tests.e2e.test_full_pipeline.TestFullPipeline" name="test_pipeline_script_generation_quality" time="0.343"><failure message="AssertionError: Invalid script: Script is empty&#10;assert False">tests/e2e/test_full_pipeline.py:248: in test_pipeline_script_generation_quality
+    assert is_valid, f"Invalid script: {error}"
+E   AssertionError: Invalid script: Script is empty
+E   assert False</failure></testcase><testcase classname="tests.e2e.test_full_pipeline.TestFullPipeline" name="test_pipeline_configuration_variations" time="0.212"><failure message="AssertionError: Pipeline failed with config {'hackernews': {'max_stories': 1}}: No stories fetched&#10;assert False">tests/e2e/test_full_pipeline.py:289: in test_pipeline_configuration_variations
+    assert result[
+E   AssertionError: Pipeline failed with config {'hackernews': {'max_stories': 1}}: No stories fetched
+E   assert False</failure></testcase><testcase classname="tests.e2e.test_full_pipeline.TestFullPipeline" name="test_pipeline_cleanup_behavior" time="0.211"><failure message="AssertionError: Pipeline should succeed&#10;assert False">tests/e2e/test_full_pipeline.py:300: in test_pipeline_cleanup_behavior
+    assert result["success"], "Pipeline should succeed"
+E   AssertionError: Pipeline should succeed
+E   assert False</failure></testcase><testcase time="0.002" /><testcase classname="pytest" name="internal" time="0.000"><error message="internal error">Traceback (most recent call last):
+  File "/Users/tonytam/git/HackerCast/venv/lib/python3.13/site-packages/_pytest/main.py", line 289, in wrap_session
+    session.exitstatus = doit(config, session) or 0
+                         ~~~~^^^^^^^^^^^^^^^^^
+  File "/Users/tonytam/git/HackerCast/venv/lib/python3.13/site-packages/_pytest/main.py", line 343, in _main
+    config.hook.pytest_runtestloop(session=session)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Users/tonytam/git/HackerCast/venv/lib/python3.13/site-packages/pluggy/_hooks.py", line 512, in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/tonytam/git/HackerCast/venv/lib/python3.13/site-packages/pluggy/_manager.py", line 120, in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/tonytam/git/HackerCast/venv/lib/python3.13/site-packages/pluggy/_callers.py", line 167, in _multicall
+    raise exception
+  File "/Users/tonytam/git/HackerCast/venv/lib/python3.13/site-packages/pluggy/_callers.py", line 139, in _multicall
+    teardown.throw(exception)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "/Users/tonytam/git/HackerCast/venv/lib/python3.13/site-packages/_pytest/logging.py", line 801, in pytest_runtestloop
+    return (yield)  # Run all the tests.
+            ^^^^^
+  File "/Users/tonytam/git/HackerCast/venv/lib/python3.13/site-packages/pluggy/_callers.py", line 139, in _multicall
+    teardown.throw(exception)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "/Users/tonytam/git/HackerCast/venv/lib/python3.13/site-packages/_pytest/terminal.py", line 688, in pytest_runtestloop
+    result = yield
+             ^^^^^
+  File "/Users/tonytam/git/HackerCast/venv/lib/python3.13/site-packages/pluggy/_callers.py", line 139, in _multicall
+    teardown.throw(exception)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "/Users/tonytam/git/HackerCast/venv/lib/python3.13/site-packages/pytest_cov/plugin.py", line 345, in pytest_runtestloop
+    result = yield
+             ^^^^^
+  File "/Users/tonytam/git/HackerCast/venv/lib/python3.13/site-packages/pluggy/_callers.py", line 121, in _multicall
+    res = hook_impl.function(*args)
+  File "/Users/tonytam/git/HackerCast/venv/lib/python3.13/site-packages/_pytest/main.py", line 367, in pytest_runtestloop
+    item.config.hook.pytest_runtest_protocol(item=item, nextitem=nextitem)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/tonytam/git/HackerCast/venv/lib/python3.13/site-packages/pluggy/_hooks.py", line 512, in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/tonytam/git/HackerCast/venv/lib/python3.13/site-packages/pluggy/_manager.py", line 120, in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/tonytam/git/HackerCast/venv/lib/python3.13/site-packages/pluggy/_callers.py", line 167, in _multicall
+    raise exception
+  File "/Users/tonytam/git/HackerCast/venv/lib/python3.13/site-packages/pluggy/_callers.py", line 139, in _multicall
+    teardown.throw(exception)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "/Users/tonytam/git/HackerCast/venv/lib/python3.13/site-packages/_pytest/warnings.py", line 90, in pytest_runtest_protocol
+    return (yield)
+            ^^^^^
+  File "/Users/tonytam/git/HackerCast/venv/lib/python3.13/site-packages/pluggy/_callers.py", line 139, in _multicall
+    teardown.throw(exception)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "/Users/tonytam/git/HackerCast/venv/lib/python3.13/site-packages/_pytest/assertion/__init__.py", line 192, in pytest_runtest_protocol
+    return (yield)
+            ^^^^^
+  File "/Users/tonytam/git/HackerCast/venv/lib/python3.13/site-packages/pluggy/_callers.py", line 139, in _multicall
+    teardown.throw(exception)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "/Users/tonytam/git/HackerCast/venv/lib/python3.13/site-packages/_pytest/unittest.py", line 475, in pytest_runtest_protocol
+    return (yield)
+            ^^^^^
+  File "/Users/tonytam/git/HackerCast/venv/lib/python3.13/site-packages/pluggy/_callers.py", line 139, in _multicall
+    teardown.throw(exception)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "/Users/tonytam/git/HackerCast/venv/lib/python3.13/site-packages/_pytest/faulthandler.py", line 88, in pytest_runtest_protocol
+    return (yield)
+            ^^^^^
+  File "/Users/tonytam/git/HackerCast/venv/lib/python3.13/site-packages/pluggy/_callers.py", line 121, in _multicall
+    res = hook_impl.function(*args)
+  File "/Users/tonytam/git/HackerCast/venv/lib/python3.13/site-packages/_pytest/runner.py", line 117, in pytest_runtest_protocol
+    runtestprotocol(item, nextitem=nextitem)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/tonytam/git/HackerCast/venv/lib/python3.13/site-packages/_pytest/runner.py", line 136, in runtestprotocol
+    reports.append(call_and_report(item, "call", log))
+                   ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/tonytam/git/HackerCast/venv/lib/python3.13/site-packages/_pytest/runner.py", line 250, in call_and_report
+    ihook.pytest_runtest_logreport(report=report)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/Users/tonytam/git/HackerCast/venv/lib/python3.13/site-packages/pluggy/_hooks.py", line 512, in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/tonytam/git/HackerCast/venv/lib/python3.13/site-packages/pluggy/_manager.py", line 120, in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/tonytam/git/HackerCast/venv/lib/python3.13/site-packages/pluggy/_callers.py", line 167, in _multicall
+    raise exception
+  File "/Users/tonytam/git/HackerCast/venv/lib/python3.13/site-packages/pluggy/_callers.py", line 121, in _multicall
+    res = hook_impl.function(*args)
+  File "/Users/tonytam/git/HackerCast/venv/lib/python3.13/site-packages/_pytest/terminal.py", line 666, in pytest_runtest_logreport
+    self._write_progress_information_filling_space()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/tonytam/git/HackerCast/venv/lib/python3.13/site-packages/_pytest/terminal.py", line 766, in _write_progress_information_filling_space
+    self.write(msg.rjust(fill), flush=True, **{color: True})
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/tonytam/git/HackerCast/venv/lib/python3.13/site-packages/_pytest/terminal.py", line 509, in write
+    self._tw.write(content, flush=flush, **markup)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/tonytam/git/HackerCast/venv/lib/python3.13/site-packages/_pytest/_io/terminalwriter.py", line 177, in write
+    self.flush()
+    ~~~~~~~~~~^^
+  File "/Users/tonytam/git/HackerCast/venv/lib/python3.13/site-packages/_pytest/_io/terminalwriter.py", line 184, in flush
+    self._file.flush()
+    ~~~~~~~~~~~~~~~~^^
+BrokenPipeError: [Errno 32] Broken pipe</error></testcase></testsuite></testsuites>

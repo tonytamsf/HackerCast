@@ -71,7 +71,7 @@ class TestFullPipeline:
 
             # Record metrics
             self.metrics.record_count("stories_fetched", result["stories_count"])
-            self.metrics.record_count("articles_scraped", result["scraped_content"])
+            self.metrics.record_count("articles_scraped", result["scraped_count"])
 
     def test_pipeline_error_recovery(self):
         """Test pipeline behavior during various error conditions."""

@@ -25,6 +25,7 @@ from config import initialize_config, get_config_manager
 from hn_api import HackerNewsAPI, HackerNewsStory
 from scraper import ArticleScraper, ScrapedContent
 from tts_converter import TTSConverter
+from interactive_selector import InteractiveStorySelector
 from notebooklm_client import NotebookLMPodcastGenerator
 
 # Initialize rich console
@@ -168,6 +169,139 @@ class HackerCastPipeline:
                 console.print(f"[red]Error fetching stories: {e}[/red]")
                 self.logger.error(f"Error fetching stories: {e}")
                 return []
+
+    def select_stories_interactively(self, stories: Optional[List[HackerNewsStory]] = None) -> List[HackerNewsStory]:
+        """
+        Interactive story selection interface.
+
+        Args:
+            stories: List of stories to select from (uses self.stories if None)
+
+        Returns:
+            List of selected HackerNewsStory objects
+        """
+        if stories is None:
+            stories = self.stories
+
+        # Validate input
+        if not isinstance(stories, list):
+            console.print("[red]Invalid stories data type[/red]")
+            self.logger.error("Stories parameter is not a list")
+            return []
+
+        if not stories:
+            console.print("[red]No stories available for selection![/red]")
+            return []
+
+        # Validate story objects
+        valid_stories = []
+        for story in stories:
+            try:
+                # Check required attributes
+                if hasattr(story, 'id') and hasattr(story, 'title') and hasattr(story, 'score'):
+                    valid_stories.append(story)
+                else:
+                    self.logger.warning(f"Invalid story object: missing required attributes")
+            except Exception as e:
+                self.logger.warning(f"Error validating story: {e}")
+
+        if not valid_stories:
+            console.print("[red]No valid stories found for selection![/red]")
+            return []
+
+        if len(valid_stories) < len(stories):
+            skipped = len(stories) - len(valid_stories)
+            console.print(f"[yellow]Skipped {skipped} invalid stories[/yellow]")
+
+        console.print(
+            f"[bold blue]Interactive story selection ({len(valid_stories)} stories available)[/bold blue]"
+        )
+
+        try:
+            selector = InteractiveStorySelector(console=console)
+            selected_stories = selector.select_stories(valid_stories)
+
+            if selected_stories:
+                console.print(
+                    f"[green]Selected {len(selected_stories)} stories for processing[/green]"
+                )
+                self.logger.info(f"User selected {len(selected_stories)} out of {len(valid_stories)} stories")
+
+                # Validate selected stories
+                validated_selected = self._validate_selected_stories(selected_stories)
+                if len(validated_selected) < len(selected_stories):
+                    rejected = len(selected_stories) - len(validated_selected)
+                    console.print(f"[yellow]Warning: {rejected} selected stories failed validation[/yellow]")
+
+                return validated_selected
+            else:
+                console.print("[yellow]No stories selected[/yellow]")
+                self.logger.info("User cancelled story selection or selected no stories")
+                return []
+
+        except KeyboardInterrupt:
+            console.print("\n[yellow]Selection interrupted by user[/yellow]")
+            self.logger.info("Interactive selection interrupted by user")
+            return []
+        except Exception as e:
+            console.print(f"[red]Error in interactive selection: {e}[/red]")
+            self.logger.error(f"Error in interactive selection: {e}")
+            import traceback
+            self.logger.debug(f"Traceback: {traceback.format_exc()}")
+
+            # Ask user if they want to proceed with all stories or cancel
+            from rich.prompt import Confirm
+            try:
+                fallback = Confirm.ask("Selection failed. Proceed with all stories?", default=False)
+                if fallback:
+                    console.print("[yellow]Proceeding with all stories[/yellow]")
+                    return valid_stories
+                else:
+                    console.print("[yellow]Cancelling pipeline[/yellow]")
+                    return []
+            except:
+                # If confirm fails, return empty list
+                console.print("[yellow]Cancelling pipeline due to interaction failure[/yellow]")
+                return []
+
+    def _validate_selected_stories(self, stories: List[HackerNewsStory]) -> List[HackerNewsStory]:
+        """
+        Validate selected stories for processing.
+
+        Args:
+            stories: List of selected stories
+
+        Returns:
+            List of validated stories
+        """
+        validated = []
+        for story in stories:
+            try:
+                # Check basic attributes
+                if not hasattr(story, 'id') or not story.id:
+                    self.logger.warning(f"Story missing ID: {getattr(story, 'title', 'Unknown')}")
+                    continue
+
+                if not hasattr(story, 'title') or not story.title.strip():
+                    self.logger.warning(f"Story {story.id} missing title")
+                    continue
+
+                if not hasattr(story, 'score') or story.score < 0:
+                    self.logger.warning(f"Story {story.id} has invalid score")
+                    continue
+
+                # URL is optional but if present should be valid
+                if hasattr(story, 'url') and story.url:
+                    if not story.url.startswith(('http://', 'https://')):
+                        self.logger.warning(f"Story {story.id} has invalid URL format")
+                        # Don't skip the story, just note the issue
+
+                validated.append(story)
+
+            except Exception as e:
+                self.logger.error(f"Error validating story: {e}")
+
+        return validated
 
     def scrape_articles(
         self, stories: Optional[List[HackerNewsStory]] = None
@@ -486,12 +620,13 @@ class HackerCastPipeline:
 
         return data_file
 
-    def run_full_pipeline(self, limit: Optional[int] = None) -> Dict[str, Any]:
+    def run_full_pipeline(self, limit: Optional[int] = None, interactive: bool = False) -> Dict[str, Any]:
         """
         Run the complete HackerCast pipeline.
 
         Args:
             limit: Number of stories to process
+            interactive: Whether to use interactive story selection
 
         Returns:
             Pipeline results summary
@@ -505,22 +640,26 @@ class HackerCastPipeline:
             if not stories:
                 raise ValueError("No stories fetched")
 
-            # Step 2: Scrape articles
+            # Step 2: Interactive story selection (if enabled)
+            if interactive:
+                stories = self.select_stories_interactively(stories)
+                if not stories:
+                    raise ValueError("No stories selected")
+
+            # Step 3: Scrape articles
             content = self.scrape_articles(stories)
             if not content:
                 raise ValueError("No articles scraped")
 
-            # Step 3: Generate script (only needed for TTS)
-            script = ""
-            if self.config.audio_generator == "tts":
-                script = self.generate_podcast_script(content)
-                if not script:
-                    raise ValueError("No script generated")
+            # Step 4: Generate script
+            script = self.generate_podcast_script(content)
+            if not script:
+                raise ValueError("No script generated")
 
-            # Step 4: Convert to audio
-            audio_file = self.convert_to_audio(script=script, content=content)
+            # Step 5: Convert to audio
+            audio_file = self.convert_to_audio(script)
 
-            # Step 5: Save pipeline data
+            # Step 6: Save pipeline data
             data_file = self.save_pipeline_data()
 
             # Calculate runtime
@@ -590,8 +729,11 @@ def cli(ctx, config, debug):
 @click.option(
     "--limit", "-l", default=None, type=int, help="Number of stories to fetch"
 )
+@click.option(
+    "--interactive", "-i", is_flag=True, help="Use interactive story selection"
+)
 @click.pass_context
-def run(ctx, limit):
+def run(ctx, limit, interactive):
     """Run the complete HackerCast pipeline."""
     pipeline = None
     try:
@@ -599,7 +741,7 @@ def run(ctx, limit):
         if ctx.obj["debug"]:
             pipeline.config.debug = True
 
-        result = pipeline.run_full_pipeline(limit)
+        result = pipeline.run_full_pipeline(limit, interactive=interactive)
 
         if result["success"]:
             console.print("[bold green]Pipeline completed successfully![/bold green]")
@@ -679,39 +821,103 @@ def tts(ctx, text, output_file):
 
 
 @cli.command()
-@click.option("--limit", "-l", default=5, type=int, help="Number of stories to use")
-@click.option("--length", default="STANDARD", type=click.Choice(["SHORT", "STANDARD"]), help="Podcast length")
+@click.option("--limit", "-l", default=20, type=int, help="Number of stories to fetch")
 @click.pass_context
-def notebooklm(ctx, limit, length):
-    """Generate podcast using NotebookLM."""
+def select(ctx, limit):
+    """Interactively select stories to process."""
+    if limit <= 0:
+        console.print("[red]Error: Limit must be a positive integer[/red]")
+        raise click.Exit(1)
+
     pipeline = None
     try:
         pipeline = HackerCastPipeline(ctx.obj["config"])
+        if ctx.obj["debug"]:
+            pipeline.config.debug = True
 
-        # Override audio generator to use NotebookLM
-        pipeline.config.audio_generator = "notebooklm"
-        pipeline.config.notebooklm.podcast_length = length
-
-        console.print("[bold blue]Testing NotebookLM podcast generation...[/bold blue]")
-
-        # Fetch and scrape stories
+        # Fetch stories
         stories = pipeline.fetch_top_stories(limit)
         if not stories:
-            console.print("[red]No stories fetched[/red]")
-            return
+            console.print("[red]No stories fetched![/red]")
+            raise click.Exit(1)
 
-        content = pipeline.scrape_articles(stories)
-        if not content:
-            console.print("[red]No content scraped[/red]")
-            return
+        # Interactive selection
+        selected_stories = pipeline.select_stories_interactively(stories)
+        if selected_stories:
+            console.print(f"[green]Selected {len(selected_stories)} stories[/green]")
 
-        # Generate podcast
-        audio_file = pipeline.convert_to_audio(content=content)
-        if audio_file:
-            console.print(f"[green]NotebookLM podcast generated: {audio_file}[/green]")
+            # Display selected stories
+            table = Table(title="Selected Stories")
+            table.add_column("#", style="cyan", justify="right")
+            table.add_column("Title", style="white", max_width=50)
+            table.add_column("Score", justify="right", style="green")
+            table.add_column("Author", style="yellow")
+
+            for i, story in enumerate(selected_stories[:10], 1):
+                table.add_row(
+                    str(i),
+                    story.title,
+                    str(story.score),
+                    story.by
+                )
+
+            console.print(table)
+
+            # Ask if user wants to continue with processing
+            from rich.prompt import Confirm
+            if Confirm.ask("Continue with scraping and processing selected stories?"):
+                # Run the rest of the pipeline
+                content = pipeline.scrape_articles(selected_stories)
+                if content:
+                    script = pipeline.generate_podcast_script(content)
+                    if script:
+                        audio_file = pipeline.convert_to_audio(script)
+                        pipeline.save_pipeline_data()
+                        console.print("[bold green]Processing completed![/bold green]")
         else:
-            console.print("[red]Failed to generate NotebookLM podcast[/red]")
+            console.print("[yellow]No stories selected[/yellow]")
 
+    except KeyboardInterrupt:
+        console.print("\n[yellow]Selection cancelled by user[/yellow]")
+        sys.exit(130)
+    except Exception as e:
+        console.print(f"[red]Unexpected error: {e}[/red]")
+        sys.exit(1)
+    finally:
+        if pipeline:
+            pipeline.cleanup()
+
+
+@cli.command()
+@click.option("--limit", "-l", default=20, type=int, help="Number of stories to fetch")
+@click.pass_context
+def interactive(ctx, limit):
+    """Run HackerCast with interactive story selection (alias for 'run --interactive')."""
+    if limit <= 0:
+        console.print("[red]Error: Limit must be a positive integer[/red]")
+        raise click.Exit(1)
+
+    pipeline = None
+    try:
+        pipeline = HackerCastPipeline(ctx.obj["config"])
+        if ctx.obj["debug"]:
+            pipeline.config.debug = True
+
+        result = pipeline.run_full_pipeline(limit, interactive=True)
+
+        if result["success"]:
+            console.print("[bold green]Interactive pipeline completed successfully![/bold green]")
+            sys.exit(0)
+        else:
+            console.print("[bold red]Interactive pipeline failed![/bold red]")
+            sys.exit(1)
+
+    except KeyboardInterrupt:
+        console.print("\n[yellow]Interactive pipeline interrupted by user[/yellow]")
+        sys.exit(130)
+    except Exception as e:
+        console.print(f"[red]Unexpected error: {e}[/red]")
+        sys.exit(1)
     finally:
         if pipeline:
             pipeline.cleanup()

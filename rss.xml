@@ -1,29 +1,109 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0"
-     xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd"
-     xmlns:content="http://purl.org/rss/1.0/modules/content/">
+<?xml version='1.0' encoding='UTF-8'?>
+<rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0">
   <channel>
     <title>HackerCast</title>
     <link>https://tonytamsf.github.io/HackerCast</link>
     <description>Daily audio podcasts from the top Hacker News stories</description>
-    <language>en-us</language>
-    <category>Technology</category>
-    <pubDate>Tue, 17 Sep 2024 00:00:00 GMT</pubDate>
-    <lastBuildDate>Tue, 17 Sep 2024 00:00:00 GMT</lastBuildDate>
-    <generator>HackerCast RSS Generator</generator>
-
-    <!-- iTunes-specific tags -->
+    <docs>http://www.rssboard.org/rss-specification</docs>
+    <generator>python-feedgen</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 18 Sep 2025 08:51:36 +0000</lastBuildDate>
     <itunes:author>HackerCast</itunes:author>
-    <itunes:summary>Daily audio podcasts from the top Hacker News stories</itunes:summary>
     <itunes:category text="Technology"/>
+    <itunes:explicit>no</itunes:explicit>
     <itunes:owner>
       <itunes:name>HackerCast</itunes:name>
       <itunes:email>hackercast@example.com</itunes:email>
     </itunes:owner>
-    <itunes:explicit>no</itunes:explicit>
-    <itunes:image href="https://tonytamsf.github.io/HackerCast/podcast-cover.jpg"/>
-
-    <!-- Episodes will be automatically inserted here by GitHub Actions -->
-
+    <itunes:summary>Daily audio podcasts from the top Hacker News stories</itunes:summary>
+    <item>
+      <title>HackerCast - September 16, 2025</title>
+      <description>Daily compilation of top Hacker News stories from September 16, 2025</description>
+      <guid isPermaLink="false">https://tonytamsf.github.io/HackerCast/episode/2025-09-16</guid>
+      <enclosure url="https://tonytamsf.github.io/HackerCast/episodes/hackercast_20250916_174307.mp3" length="293568" type="audio/mpeg"/>
+      <pubDate>Thu, 18 Sep 2025 08:39:59 +0000</pubDate>
+      <itunes:author>HackerCast</itunes:author>
+      <itunes:duration>36</itunes:duration>
+      <itunes:summary>Daily compilation of top Hacker News stories from September 16, 2025</itunes:summary>
+    </item>
+    <item>
+      <title>HackerCast - September 16, 2025</title>
+      <description>Daily compilation of top Hacker News stories from September 16, 2025</description>
+      <guid isPermaLink="false">https://tonytamsf.github.io/HackerCast/episode/2025-09-16</guid>
+      <enclosure url="https://tonytamsf.github.io/HackerCast/episodes/hackercast_20250916_174627.mp3" length="1480896" type="audio/mpeg"/>
+      <pubDate>Thu, 18 Sep 2025 08:39:59 +0000</pubDate>
+      <itunes:author>HackerCast</itunes:author>
+      <itunes:duration>185</itunes:duration>
+      <itunes:summary>Daily compilation of top Hacker News stories from September 16, 2025</itunes:summary>
+    </item>
+    <item>
+      <title>HackerCast - September 16, 2025</title>
+      <description>Daily compilation of top Hacker News stories from September 16, 2025</description>
+      <guid isPermaLink="false">https://tonytamsf.github.io/HackerCast/episode/2025-09-16</guid>
+      <enclosure url="https://tonytamsf.github.io/HackerCast/episodes/hackercast_20250916_205047.mp3" length="64128692" type="audio/mpeg"/>
+      <pubDate>Thu, 18 Sep 2025 08:39:59 +0000</pubDate>
+      <itunes:author>HackerCast</itunes:author>
+      <itunes:summary>Daily compilation of top Hacker News stories from September 16, 2025</itunes:summary>
+    </item>
+    <item>
+      <title>HackerCast - September 17, 2025</title>
+      <description>Daily compilation of top Hacker News stories from September 17, 2025</description>
+      <guid isPermaLink="false">https://tonytamsf.github.io/HackerCast/episode/2025-09-17</guid>
+      <enclosure url="https://tonytamsf.github.io/HackerCast/episodes/hackercast_20250917_173342.mp3" length="569280" type="audio/mpeg"/>
+      <pubDate>Thu, 18 Sep 2025 08:39:59 +0000</pubDate>
+      <itunes:author>HackerCast</itunes:author>
+      <itunes:duration>71</itunes:duration>
+      <itunes:summary>Daily compilation of top Hacker News stories from September 17, 2025</itunes:summary>
+    </item>
+    <item>
+      <title>HackerCast - September 17, 2025</title>
+      <description>Daily compilation of top Hacker News stories from September 17, 2025</description>
+      <guid isPermaLink="false">https://tonytamsf.github.io/HackerCast/episode/2025-09-17</guid>
+      <enclosure url="https://tonytamsf.github.io/HackerCast/episodes/hackercast_20250917_181218.mp3" length="3967872" type="audio/mpeg"/>
+      <pubDate>Thu, 18 Sep 2025 08:39:59 +0000</pubDate>
+      <itunes:author>HackerCast</itunes:author>
+      <itunes:duration>495</itunes:duration>
+      <itunes:summary>Daily compilation of top Hacker News stories from September 17, 2025</itunes:summary>
+    </item>
+    <item>
+      <title>HackerCast - September 17, 2025</title>
+      <description>Daily compilation of top Hacker News stories from September 17, 2025</description>
+      <guid isPermaLink="false">https://tonytamsf.github.io/HackerCast/episode/2025-09-17</guid>
+      <enclosure url="https://tonytamsf.github.io/HackerCast/episodes/hackercast_20250917_181907.mp3" length="4634496" type="audio/mpeg"/>
+      <pubDate>Thu, 18 Sep 2025 08:39:59 +0000</pubDate>
+      <itunes:author>HackerCast</itunes:author>
+      <itunes:duration>579</itunes:duration>
+      <itunes:summary>Daily compilation of top Hacker News stories from September 17, 2025</itunes:summary>
+    </item>
+    <item>
+      <title>HackerCast - September 17, 2025</title>
+      <description>Daily compilation of top Hacker News stories from September 17, 2025</description>
+      <guid isPermaLink="false">https://tonytamsf.github.io/HackerCast/episode/2025-09-17</guid>
+      <enclosure url="https://tonytamsf.github.io/HackerCast/episodes/hackercast_20250917_182726.mp3" length="4140480" type="audio/mpeg"/>
+      <pubDate>Thu, 18 Sep 2025 08:39:59 +0000</pubDate>
+      <itunes:author>HackerCast</itunes:author>
+      <itunes:duration>517</itunes:duration>
+      <itunes:summary>Daily compilation of top Hacker News stories from September 17, 2025</itunes:summary>
+    </item>
+    <item>
+      <title>HackerCast - September 17, 2025</title>
+      <description>Daily compilation of top Hacker News stories from September 17, 2025</description>
+      <guid isPermaLink="false">https://tonytamsf.github.io/HackerCast/episode/2025-09-17</guid>
+      <enclosure url="https://tonytamsf.github.io/HackerCast/episodes/hackercast_20250917_220024.mp3" length="2857536" type="audio/mpeg"/>
+      <pubDate>Thu, 18 Sep 2025 08:39:59 +0000</pubDate>
+      <itunes:author>HackerCast</itunes:author>
+      <itunes:duration>357</itunes:duration>
+      <itunes:summary>Daily compilation of top Hacker News stories from September 17, 2025</itunes:summary>
+    </item>
+    <item>
+      <title>HackerCast - September 18, 2025</title>
+      <description>Daily compilation of top Hacker News stories from September 18, 2025</description>
+      <guid isPermaLink="false">https://tonytamsf.github.io/HackerCast/episode/2025-09-18</guid>
+      <enclosure url="https://tonytamsf.github.io/HackerCast/episodes/hackercast_tts_20250916_212953.mp3" length="1570176" type="audio/mpeg"/>
+      <pubDate>Thu, 18 Sep 2025 08:39:59 +0000</pubDate>
+      <itunes:author>HackerCast</itunes:author>
+      <itunes:duration>196</itunes:duration>
+      <itunes:summary>Daily compilation of top Hacker News stories from September 18, 2025</itunes:summary>
+    </item>
   </channel>
 </rss>

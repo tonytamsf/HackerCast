@@ -463,6 +463,9 @@ class HackerCastPipeline:
             ) as progress:
                 task = progress.add_task("Converting to speech...", total=None)
 
+                # Generate topic from story titles for podcast transformation
+                topic = f"Top {len(self.stories)} Hacker News Stories"
+
                 success = self.tts_converter.convert_text_to_speech(
                     text=script,
                     output_file=str(audio_file),
@@ -470,6 +473,7 @@ class HackerCastPipeline:
                     voice_name=self.config.tts.voice_name,
                     speaking_rate=self.config.tts.speaking_rate,
                     pitch=self.config.tts.pitch,
+                    topic=topic,
                 )
 
                 if success:
@@ -715,14 +719,15 @@ def scrape(ctx, url):
 @cli.command()
 @click.argument("text")
 @click.argument("output_file")
+@click.option("--topic", default="", help="Topic description for podcast transformation")
 @click.pass_context
-def tts(ctx, text, output_file):
+def tts(ctx, text, output_file, topic):
     """Convert text to speech."""
     pipeline = None
     try:
         pipeline = HackerCastPipeline(ctx.obj["config"])
         pipeline._initialize_tts()
-        success = pipeline.tts_converter.convert_text_to_speech(text, output_file)
+        success = pipeline.tts_converter.convert_text_to_speech(text, output_file, topic=topic)
         if success:
             console.print(f"[green]Audio saved to: {output_file}[/green]")
         else:

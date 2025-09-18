@@ -26,6 +26,7 @@ from hn_api import HackerNewsAPI, HackerNewsStory
 from scraper import ArticleScraper, ScrapedContent
 from tts_converter import TTSConverter
 from interactive_selector import InteractiveStorySelector
+from podcast_publisher import PodcastPublisher, PodcastPublisherConfig
 
 # Initialize rich console
 console = Console()
@@ -55,6 +56,7 @@ class HackerCastPipeline:
         self.hn_api = HackerNewsAPI()
         self.scraper = ArticleScraper()
         self.tts_converter = None  # Initialize when needed
+        self.podcast_publisher = None  # Initialize when needed
 
         self.logger = logging.getLogger(__name__)
         self.logger.info("HackerCast pipeline initialized")
@@ -85,6 +87,22 @@ class HackerCastPipeline:
                 self.logger.info("TTS converter initialized")
             except Exception as e:
                 self.logger.error(f"Failed to initialize TTS converter: {e}")
+                raise
+
+    def _initialize_publisher(self):
+        """Initialize podcast publisher when needed."""
+        if self.podcast_publisher is None:
+            try:
+                publisher_config = PodcastPublisherConfig(
+                    self.config.podcast_publishing.__dict__ if hasattr(self.config, 'podcast_publishing') else {}
+                )
+                self.podcast_publisher = PodcastPublisher(
+                    api_key=publisher_config.api_key,
+                    base_url=publisher_config.base_url
+                )
+                self.logger.info("Podcast publisher initialized")
+            except Exception as e:
+                self.logger.error(f"Failed to initialize podcast publisher: {e}")
                 raise
 
     def fetch_top_stories(self, limit: Optional[int] = None) -> List[HackerNewsStory]:
@@ -536,6 +554,82 @@ class HackerCastPipeline:
 
         return data_file
 
+    def publish_to_podcast_host(
+        self,
+        audio_file: Path,
+        script: str,
+        story_count: int
+    ) -> Optional[Dict[str, Any]]:
+        """
+        Publish episode to podcast hosting platform.
+
+        Args:
+            audio_file: Path to the generated audio file
+            script: The podcast script
+            story_count: Number of stories in the episode
+
+        Returns:
+            Publishing result information or None if failed
+        """
+        console.print("[bold blue]Publishing episode to podcast host...[/bold blue]")
+
+        try:
+            self._initialize_publisher()
+
+            # Generate episode metadata
+            today = datetime.now()
+            title = f"HackerCast - {today.strftime('%B %d, %Y')}"
+            summary = f"Daily digest of the top {story_count} Hacker News stories for {today.strftime('%B %d, %Y')}."
+
+            # Calculate episode number based on date (days since epoch)
+            epoch_date = datetime(2024, 1, 1)  # Adjust based on when you started
+            episode_number = (today.date() - epoch_date.date()).days
+
+            # Get publisher config
+            publisher_config = PodcastPublisherConfig(
+                self.config.podcast_publishing.__dict__ if hasattr(self.config, 'podcast_publishing') else {}
+            )
+
+            if not publisher_config.default_show_id:
+                console.print("[yellow]No default show ID configured. Listing available shows...[/yellow]")
+                shows = self.podcast_publisher.get_shows()
+                if shows:
+                    console.print("[cyan]Available shows:[/cyan]")
+                    for show in shows:
+                        console.print(f"  ID: {show['id']} - {show['attributes']['title']}")
+                    console.print("[yellow]Please configure TRANSISTOR_SHOW_ID environment variable[/yellow]")
+                return None
+
+            # Publish episode
+            result = self.podcast_publisher.publish_podcast_episode(
+                audio_file_path=audio_file,
+                show_id=publisher_config.default_show_id,
+                title=title,
+                summary=summary,
+                episode_number=episode_number,
+                description=f"{summary}\n\nStories covered:\n" + "\n".join(
+                    f"- {story.title}" for story in self.stories[:10]
+                ),
+                auto_publish=publisher_config.auto_publish
+            )
+
+            if result['success']:
+                console.print(f"[green]Episode published successfully![/green]")
+                console.print(f"[cyan]Episode ID: {result['episode_id']}[/cyan]")
+                if result.get('episode_url'):
+                    console.print(f"[cyan]Episode URL: {result['episode_url']}[/cyan]")
+
+                self.logger.info(f"Published episode {result['episode_id']} to podcast host")
+                return result
+            else:
+                console.print(f"[red]Failed to publish episode: {result['error']}[/red]")
+                return None
+
+        except Exception as e:
+            console.print(f"[red]Error publishing to podcast host: {e}[/red]")
+            self.logger.error(f"Error publishing to podcast host: {e}")
+            return None
+
     def run_full_pipeline(self, limit: Optional[int] = None, interactive: bool = False) -> Dict[str, Any]:
         """
         Run the complete HackerCast pipeline.
@@ -575,6 +669,11 @@ class HackerCastPipeline:
             # Step 4: Convert to audio
             audio_file = self.convert_to_audio(script)
 
+            # Step 5: Publish to podcast host (if configured)
+            episode_info = None
+            if audio_file and hasattr(self.config, 'podcast_publishing') and self.config.podcast_publishing.enabled:
+                episode_info = self.publish_to_podcast_host(audio_file, script, len(stories))
+
             # Step 6: Save pipeline data
             data_file = self.save_pipeline_data()
 
@@ -590,6 +689,7 @@ class HackerCastPipeline:
                 "scraped_count": len(content),
                 "script_length": len(script),
                 "audio_file": str(audio_file) if audio_file else None,
+                "episode_info": episode_info,
                 "data_file": str(data_file),
                 "runtime": runtime,
             }
@@ -764,6 +864,108 @@ def interactive(ctx, limit):
     except KeyboardInterrupt:
         console.print("\n[yellow]Cancelled by user[/yellow]")
         sys.exit(1)
+    finally:
+        if pipeline:
+            pipeline.cleanup()
+
+
+@cli.command()
+@click.argument("audio_file")
+@click.option("--title", "-t", help="Episode title")
+@click.option("--summary", "-s", help="Episode summary")
+@click.option("--show-id", help="Podcast show ID (overrides config)")
+@click.option("--episode-number", "-n", type=int, help="Episode number")
+@click.option("--season", type=int, help="Season number")
+@click.option("--publish", is_flag=True, default=True, help="Publish episode immediately")
+@click.pass_context
+def publish(ctx, audio_file, title, summary, show_id, episode_number, season, publish):
+    """Publish an audio file to podcast hosting platform."""
+    audio_path = Path(audio_file)
+    if not audio_path.exists():
+        console.print(f"[red]Audio file not found: {audio_file}[/red]")
+        raise click.Exit(1)
+
+    pipeline = None
+    try:
+        pipeline = HackerCastPipeline(ctx.obj["config"])
+        pipeline._initialize_publisher()
+
+        # Use provided values or generate defaults
+        if not title:
+            title = f"HackerCast Episode - {datetime.now().strftime('%B %d, %Y')}"
+
+        if not summary:
+            summary = f"HackerCast episode for {datetime.now().strftime('%B %d, %Y')}"
+
+        # Get publisher config
+        publisher_config = PodcastPublisherConfig(
+            pipeline.config.podcast_publishing.__dict__ if hasattr(pipeline.config, 'podcast_publishing') else {}
+        )
+
+        # Use provided show_id or default
+        target_show_id = show_id or publisher_config.default_show_id
+
+        if not target_show_id:
+            console.print("[yellow]No show ID provided. Listing available shows...[/yellow]")
+            shows = pipeline.podcast_publisher.get_shows()
+            if shows:
+                console.print("[cyan]Available shows:[/cyan]")
+                for show in shows:
+                    console.print(f"  ID: {show['id']} - {show['attributes']['title']}")
+            else:
+                console.print("[red]No shows found![/red]")
+            raise click.Exit(1)
+
+        # Publish episode
+        result = pipeline.podcast_publisher.publish_podcast_episode(
+            audio_file_path=audio_path,
+            show_id=target_show_id,
+            title=title,
+            summary=summary,
+            episode_number=episode_number,
+            season=season,
+            auto_publish=publish
+        )
+
+        if result['success']:
+            console.print(f"[green]Episode published successfully![/green]")
+            console.print(f"[cyan]Episode ID: {result['episode_id']}[/cyan]")
+            if result.get('episode_url'):
+                console.print(f"[cyan]Episode URL: {result['episode_url']}[/cyan]")
+        else:
+            console.print(f"[red]Failed to publish episode: {result['error']}[/red]")
+            raise click.Exit(1)
+
+    finally:
+        if pipeline:
+            pipeline.cleanup()
+
+
+@cli.command()
+@click.pass_context
+def shows(ctx):
+    """List available podcast shows."""
+    pipeline = None
+    try:
+        pipeline = HackerCastPipeline(ctx.obj["config"])
+        pipeline._initialize_publisher()
+
+        shows = pipeline.podcast_publisher.get_shows()
+        if shows:
+            console.print("[bold cyan]Available Podcast Shows:[/bold cyan]")
+            for show in shows:
+                attrs = show['attributes']
+                console.print(f"[green]ID:[/green] {show['id']}")
+                console.print(f"[blue]Title:[/blue] {attrs['title']}")
+                console.print(f"[yellow]Description:[/yellow] {attrs.get('description', 'N/A')[:100]}...")
+                console.print(f"[cyan]Website:[/cyan] {attrs.get('website', 'N/A')}")
+                console.print("---")
+        else:
+            console.print("[yellow]No shows found[/yellow]")
+
+    except Exception as e:
+        console.print(f"[red]Error listing shows: {e}[/red]")
+        raise click.Exit(1)
     finally:
         if pipeline:
             pipeline.cleanup()

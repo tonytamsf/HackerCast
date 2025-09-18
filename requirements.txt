@@ -39,3 +39,8 @@ python-dateutil>=2.8.0
 # HTTP client with retry capabilities
 urllib3>=2.0.0
 httpx>=0.24.0
+
+# RSS Server dependencies
+flask>=2.3.0
+feedgen>=0.9.0
+mutagen>=1.47.0

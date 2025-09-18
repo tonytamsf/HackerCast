@@ -61,6 +61,18 @@ class LoggingConfig:
 
 
 @dataclass
+class PodcastPublishingConfig:
+    """Configuration for podcast publishing."""
+
+    enabled: bool = False
+    api_key: Optional[str] = None
+    default_show_id: Optional[str] = None
+    base_url: str = "https://api.transistor.fm/v1"
+    auto_publish: bool = True
+    default_season: Optional[int] = None
+
+
+@dataclass
 class OutputConfig:
     """Configuration for output files."""
 
@@ -85,6 +97,7 @@ class AppConfig:
     tts: TTSConfig = field(default_factory=TTSConfig)
     logging: LoggingConfig = field(default_factory=LoggingConfig)
     output: OutputConfig = field(default_factory=OutputConfig)
+    podcast_publishing: PodcastPublishingConfig = field(default_factory=PodcastPublishingConfig)
 
     # Google Cloud
     google_credentials_path: Optional[str] = None
@@ -160,6 +173,22 @@ class ConfigManager:
         # Output
         if os.getenv("OUTPUT_BASE_DIR"):
             self._config.output.base_dir = os.getenv("OUTPUT_BASE_DIR")
+
+        # Podcast Publishing
+        self._config.podcast_publishing.enabled = os.getenv("PODCAST_PUBLISHING_ENABLED", "").lower() in (
+            "true", "1", "yes"
+        )
+        if os.getenv("TRANSISTOR_API_KEY"):
+            self._config.podcast_publishing.api_key = os.getenv("TRANSISTOR_API_KEY")
+        if os.getenv("TRANSISTOR_SHOW_ID"):
+            self._config.podcast_publishing.default_show_id = os.getenv("TRANSISTOR_SHOW_ID")
+        if os.getenv("TRANSISTOR_BASE_URL"):
+            self._config.podcast_publishing.base_url = os.getenv("TRANSISTOR_BASE_URL")
+        self._config.podcast_publishing.auto_publish = os.getenv("PODCAST_AUTO_PUBLISH", "true").lower() in (
+            "true", "1", "yes"
+        )
+        if os.getenv("PODCAST_DEFAULT_SEASON"):
+            self._config.podcast_publishing.default_season = int(os.getenv("PODCAST_DEFAULT_SEASON"))
 
     def _load_from_file(self, config_file: str) -> None:
         """Load configuration from file (JSON/YAML)."""

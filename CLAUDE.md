@@ -169,6 +169,63 @@ The project is in Phase 1 (Proof of Concept), focusing on manual execution of ea
 - `requirements.txt` - Python dependencies
 - `venv/` - Virtual environment (excluded from version control)
 
+## Podcast Publishing Setup
+
+HackerCast now supports automatic publishing to podcast hosting platforms with dynamic ad insertion capabilities. The primary integration is with **Transistor.fm**, chosen for their superior dynamic ad insertion features.
+
+### Configuration
+
+Set these environment variables to enable podcast publishing:
+
+```bash
+# Enable podcast publishing
+export PODCAST_PUBLISHING_ENABLED=true
+
+# Transistor.fm API credentials
+export TRANSISTOR_API_KEY="your_api_key_here"
+export TRANSISTOR_SHOW_ID="your_show_id_here"
+
+# Optional configuration
+export PODCAST_AUTO_PUBLISH=true  # Auto-publish episodes (default: true)
+export PODCAST_DEFAULT_SEASON=1   # Default season number
+export TRANSISTOR_BASE_URL="https://api.transistor.fm/v1"  # API base URL (default)
+```
+
+### Getting Transistor.fm Credentials
+
+1. Sign up for a [Transistor.fm](https://transistor.fm) account
+2. Create your podcast show in the dashboard
+3. Get your API key from Settings → Developer → API Keys
+4. Find your Show ID using: `python main.py shows`
+
+### Publishing Commands
+
+**Publish existing audio file:**
+```bash
+python main.py publish audio/hackercast_20240115.mp3 --title "HackerCast January 15, 2024"
+```
+
+**List available shows:**
+```bash
+python main.py shows
+```
+
+**Run full pipeline with publishing:**
+```bash
+# Enable publishing in environment, then run:
+python main.py run --limit 20 --interactive
+```
+
+### Dynamic Ad Insertion
+
+Transistor.fm provides dynamic ad insertion capabilities that allow you to:
+- Insert pre-roll, mid-roll, and post-roll ads
+- Update ads without re-uploading episodes
+- Target ads based on listener location and demographics
+- Track ad performance and revenue
+
+Configure dynamic ads through the Transistor.fm dashboard after episodes are published.
+
 ## Development Notes
 
 - Follow PEP 8 Python style conventions

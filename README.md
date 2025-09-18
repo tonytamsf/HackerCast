@@ -101,3 +101,4 @@ python test_simple.py
 # Run comprehensive tests (requires pytest)
 pytest test_interactive_selection.py
 ```
+# Test update

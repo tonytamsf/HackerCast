@@ -31,7 +31,11 @@ jobs:
   # CLI Commands E2E Tests
   cli-e2e:
     name: CLI Commands E2E
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
 
     steps:
     - uses: actions/checkout@v4
@@ -58,7 +62,7 @@ jobs:
       run: |
         pytest tests/e2e/test_cli_commands.py -v \
           --tb=short \
-          --junit-xml=cli-e2e-results.xml \
+          --junit-xml=cli-e2e-results-${{ matrix.os }}.xml \
           --timeout=600 \
           -m "not network"
       env:
@@ -70,7 +74,7 @@ jobs:
       run: |
         pytest tests/e2e/test_cli_commands.py -v \
           --tb=short \
-          --junit-xml=cli-e2e-network-results.xml \
+          --junit-xml=cli-e2e-network-results-${{ matrix.os }}.xml \
           --timeout=900 \
           -m "network"
       env:
@@ -81,9 +85,9 @@ jobs:
       uses: actions/upload-artifact@v4
       if: always()
       with:
-        name: cli-e2e-results
+        name: cli-e2e-results-${{ matrix.os }}
         path: |
-          cli-e2e-*-results.xml
+          cli-e2e-*-results-${{ matrix.os }}.xml
           test_output/
 
   # Full Pipeline E2E Tests

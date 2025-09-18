@@ -87,11 +87,18 @@ jobs:
   # Unit Tests Matrix
   test-matrix:
     name: Unit Tests
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
         python-version: ['3.9', '3.10', '3.11', '3.12']
+        exclude:
+          # Reduce matrix size for faster CI
+          - os: windows-latest
+            python-version: '3.9'
+          - os: macos-latest
+            python-version: '3.9'
 
     steps:
     - uses: actions/checkout@v4
@@ -132,7 +139,7 @@ jobs:
       uses: actions/upload-artifact@v4
       if: always()
       with:
-        name: test-results-ubuntu-py${{ matrix.python-version }}
+        name: test-results-${{ matrix.os }}-py${{ matrix.python-version }}
         path: |
           test-results.xml
           htmlcov/
@@ -140,7 +147,7 @@ jobs:
 
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v3
-      if: matrix.python-version == env.PYTHON_VERSION_DEFAULT
+      if: matrix.os == 'ubuntu-latest' && matrix.python-version == env.PYTHON_VERSION_DEFAULT
       with:
         file: ./coverage.xml
         flags: unittests

@@ -1,0 +1,68 @@
+name: Daily HackerCast Generation
+
+on:
+  schedule:
+    # Run daily at 8 AM UTC (adjust timezone as needed)
+    - cron: '0 8 * * *'
+  workflow_dispatch:
+    # Allow manual triggering
+    inputs:
+      story_limit:
+        description: 'Number of stories to process'
+        required: false
+        default: '20'
+        type: string
+
+jobs:
+  generate-hackercast:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+        cache: 'pip'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Create Google Cloud credentials file
+      run: |
+        echo '${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}' > /tmp/google-credentials.json
+      if: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+
+    - name: Set up environment variables
+      run: |
+        echo "GOOGLE_APPLICATION_CREDENTIALS=/tmp/google-credentials.json" >> $GITHUB_ENV
+      if: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+
+    - name: Create output directories
+      run: |
+        mkdir -p data audio
+
+    - name: Run HackerCast pipeline
+      run: |
+        STORY_LIMIT="${{ github.event.inputs.story_limit || '20' }}"
+        python main.py run --limit "$STORY_LIMIT"
+      continue-on-error: true
+
+    - name: Upload generated files
+      uses: actions/upload-artifact@v4
+      with:
+        name: hackercast-${{ github.run_number }}
+        path: |
+          data/
+          audio/
+        retention-days: 30
+      if: always()
+
+    - name: Clean up credentials
+      run: |
+        rm -f /tmp/google-credentials.json
+      if: always()

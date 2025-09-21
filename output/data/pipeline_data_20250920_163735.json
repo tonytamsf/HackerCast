@@ -1,0 +1,182 @@
+{
+  "timestamp": "20250920_163735",
+  "run_date": "2025-09-20T16:37:35.825753",
+  "config": {
+    "environment": "development",
+    "max_stories": 5,
+    "tts_voice": "en-US-Neural2-D"
+  },
+  "stories": [
+    {
+      "id": 45317527,
+      "title": "$2 WeAct Display FS adds a 0.96-inch USB information display to your computer",
+      "url": "https://www.cnx-software.com/2025/09/18/2-weact-display-fs-adds-a-0-96-inch-usb-information-display-to-your-computer/",
+      "score": 182,
+      "by": "smartmic",
+      "time": 1758402287,
+      "descendants": 75,
+      "type": "story",
+      "created_at": "2025-09-20T11:04:47"
+    },
+    {
+      "id": 45314592,
+      "title": "Ultrasonic Chef's Knife",
+      "url": "https://seattleultrasonics.com/",
+      "score": 414,
+      "by": "hemloc_io",
+      "time": 1758384776,
+      "descendants": 320,
+      "type": "story",
+      "created_at": "2025-09-20T06:12:56"
+    },
+    {
+      "id": 45270861,
+      "title": "Hyperion: Minecraft game engine for custom events",
+      "url": "https://hyperion.rs/",
+      "score": 18,
+      "by": "cjcuddy",
+      "time": 1758075790,
+      "descendants": 5,
+      "type": "story",
+      "created_at": "2025-09-16T16:23:10"
+    },
+    {
+      "id": 45315312,
+      "title": "Designing NotebookLM",
+      "url": "https://jasonspielman.com/notebooklm",
+      "score": 164,
+      "by": "vinhnx",
+      "time": 1758389158,
+      "descendants": 64,
+      "type": "story",
+      "created_at": "2025-09-20T07:25:58"
+    },
+    {
+      "id": 45317526,
+      "title": "A brief history of threads and threading",
+      "url": "https://eclecticlight.co/2025/09/20/a-brief-history-of-threads-and-threading/",
+      "score": 48,
+      "by": "emschwartz",
+      "time": 1758402278,
+      "descendants": 8,
+      "type": "story",
+      "created_at": "2025-09-20T11:04:38"
+    },
+    {
+      "id": 45277052,
+      "title": "Knitted Anatomy",
+      "url": "https://www.knitted-anatomy.at/cardiovascular-system/",
+      "score": 69,
+      "by": "blikstiender",
+      "time": 1758123051,
+      "descendants": 5,
+      "type": "story",
+      "created_at": "2025-09-17T05:30:51"
+    },
+    {
+      "id": 45318559,
+      "title": "Teen Suspect Surrenders in 2023 Las Vegas Casino Cyberattack Case",
+      "url": "https://www.casino.org/news/teen-suspect-surrenders-in-2023-las-vegas-strip-cyberattack-case/",
+      "score": 23,
+      "by": "campuscodi",
+      "time": 1758410997,
+      "descendants": 9,
+      "type": "story",
+      "created_at": "2025-09-20T13:29:57"
+    },
+    {
+      "id": 45316744,
+      "title": "A revolution in English bell ringing",
+      "url": "https://harpers.org/archive/2025/10/a-change-of-tune-veronique-greenwood-bell-ringing/",
+      "score": 52,
+      "by": "ascertain",
+      "time": 1758397896,
+      "descendants": 23,
+      "type": "story",
+      "created_at": "2025-09-20T09:51:36"
+    },
+    {
+      "id": 45289150,
+      "title": "Teardown of Apple 40W dynamic power adapter with 60W max",
+      "url": "https://www.chargerlab.com/teardown-of-apple-40w-dynamic-power-adapter-with-60w-max-a3365/",
+      "score": 94,
+      "by": "givinguflac",
+      "time": 1758200667,
+      "descendants": 71,
+      "type": "story",
+      "created_at": "2025-09-18T03:04:27"
+    },
+    {
+      "id": 45263035,
+      "title": "I’m Not a Robot",
+      "url": "https://neal.fun/not-a-robot/",
+      "score": 333,
+      "by": "meetpateltech",
+      "time": 1758034044,
+      "descendants": 177,
+      "type": "story",
+      "created_at": "2025-09-16T04:47:24"
+    }
+  ],
+  "scraped_content": [
+    {
+      "url": "https://www.cnx-software.com/2025/09/18/2-weact-display-fs-adds-a-0-96-inch-usb-information-display-to-your-computer/",
+      "title": "$2 WeAct Display FS adds a 0.96-inch USB information display to your computer",
+      "content": "WeAct Display FS is an inexpensive 0.96-inch USB display dongle designed to add an information display or a tiny secondary display to your computer or SBC.We’ve seen this type of information display with products such as the Turing Smart Screen, a larger 3.5-inch color display, or small OLEDs integrated into cases such as the Pironman 5 Max to disable text. The WeAct Display FS V1 may be tiny, but it’s also a full-color 160×80 resolution display that can be customized with software provided by WeAct.\nText and image on display for illustration only. Not an actual photo, as I could not find any with the display connected to a host\nWeAct Display FS V1 specifications:\nDisplay – 0.96-inch RGB565 display with 160×80 resolution\nHost interface – “Reversible” USB 2.0 Type-A Full Speed (FS) port showing as a CDC device\nDimensions – 43 x 14.5 mm\nSince you wouldn’t want to get a display only for it to face the wrong direction, for instance, the desk or the wall, the company made the USB-A port reversible, and the user only needs to install one of the two provided pads on the unused side of the port to avoid short circuits.WeAct provides two programs for it. The first one is the WeAct Studio System Monitor based on a fork of Matthieu Houdebine’s Turing Smart Screen Python project. This allows users to create UIs/themes with text, images, weather, and other features… WeAct says the little device only works on Windows, but the open-source project is supposed to also work on macOS, Linux (including Raspberry Pi OS), and essentially any operating system with support for Python 3.9+.\nWeAct Studio System Monitor\nThe second program is called WeAct Studio Screen Projection, and as I understand it, it emulates an actual display, so you could move any window/program to the USB display.  I’m just not sure how a desktop OS like Windows will handle a tiny 160×80 “monitor”… I suppose it could be used to play a full-screen YouTube video or display photos for whatever reason. That one only works on Windows, and there’s no source code.\nWeAct Studio Screen Projection\nYou’ll find the WeAct Display FS V1 (0.96-inch) on AliExpress for about $2 plus shipping, but while looking for information, I also noticed a 3.5-inch variant with 480×320 resolution for about $11.\nJean-Luc Aufranc (CNXSoft)Jean-Luc started CNX Software in 2010 as a part-time endeavor, before quitting his job as a software engineering manager, and starting to write daily news, and reviews full time later in 2011.\nShare this:\nSupport CNX Software! Donate via cryptocurrencies, become a Patron on Patreon, or purchase goods on Amazon or Aliexpress. We also use affiliate links in articles to earn commissions if you make a purchase after clicking on those links.",
+      "author": "Jean-Luc Aufranc (CNXSoft)",
+      "published_date": null,
+      "meta_description": "WeAct Display FS is an inexpensive 0.96-inch USB display dongle designed to add an information display or a tiny secondary display to your computer or",
+      "word_count": 461,
+      "scraping_method": "beautifulsoup"
+    },
+    {
+      "url": "https://seattleultrasonics.com/",
+      "title": "Ultrasonic Chef's Knife",
+      "content": "The World's First\nUltrasonic Chef's Knife\nFor Home Cooks\nPre-Order Now\nSwitch on the ultrasonics and feel the blade glide effortlessly through food. Clean cuts, minimal force, less sticking.\nLength\n200mm\nSteel\nJapanese san mai AUS-10\nBattery\nUSB-C & wireless charging\nSkip to product information\nOpen media 1 in modal\n1\n/\nof\n4\nSeattle Ultrasonics\nC-200 Ultrasonic 8\" Chef's Knife\nRegular price\n$399.00\nRegular price\n$399.00\nSale price\n$399.00\nSale\nSold out\nPre-Order now for estimated shipping by\nJanuary, 2026 (Batch 1). Cancel anytime before your order ships. What is a Pre-Order?\nView full details\nSkip to product information\nOpen media 1 in modal\n1\n/\nof\n4\nSeattle Ultrasonics\nKnife and Charger Bundle\nRegular price\n$499.00\nRegular price\n$548.00\nSale price\n$499.00\nSale\nSold out\nPre-Order now for estimated shipping by\nJanuary 2026 (Batch 1). Cancel anytime before your order ships. What is a Pre-Order?\nView full details\nBe the first to learn more. All facts, no spam.",
+      "author": null,
+      "published_date": null,
+      "meta_description": "Discover Seattle Ultrasonics, a startup founded by culinary technologist Scott Heimendinger. We're on a mission to make happy home cooks, and we're starting by building a better knife.",
+      "word_count": 160,
+      "scraping_method": "beautifulsoup"
+    },
+    {
+      "url": "https://eclecticlight.co/2025/09/20/a-brief-history-of-threads-and-threading/",
+      "title": "A brief history of threads and threading",
+      "content": "The original 128K Mac from 1984 came with a single Motorola 68000 processor running at 8 MHz that could only run one app at a time. Yet today’s Macs come with multiple CPU cores that can comfortably run several substantial apps simultaneously, while running a Time Machine backup and other tasks in the background. This brief history outlines the journey between them.\nA processor with a single core and no support for multi-tasking runs one sequence of instructions at a time. When those call for an operating system function to be performed, the running app is interrupted to hand control over to the system, and once that has completed, control is passed back to the app. That’s what the first Macs did until Andy Hertzfeld wrote Switcher, released by Apple in April 1985. This allowed the user to switch between running more than one app, but was still limited to running just one of them at a time.\nMultitasking\nOver the next couple of years, some third-party utilities were produced to go further than Switcher, but it wasn’t until 1987 that MultiFinder replaced Switcher, and was integrated into System 7 in 1991. Developed by Erich Ringewald and Phil Goldman, this brought cooperative multitasking, which was to become the mainstay of classic Mac OS.\nIn computers with a single processor core, multitasking is a way of cheating to give the impression that the processor is doing several things at once, when in fact all it’s doing is switching rapidly between two or more different programs. There are two fundamental models for doing that:\ncooperative multitasking, in which individual tasks yield to give others processing time;\npreemptive multitasking, in which a scheduler switches between tasks at regular intervals.\nWhen a processor switches from one task to the next, the current task state must be saved so it can be resumed later. Once that’s complete, the next task is loaded to complete the context switch. That incurs overhead, both in terms of processing and in memory storage, which are less when switching between lightweight tasks. Different strategies have been adopted to determine the optimum size of tasks and overhead imposed by context switching, and terminology differs between them, variously using words such as processes, threads and even fibres, which can prove thoroughly confusing.\nClassic Mac OS thus has a Process Manager that launches apps in cooperative multitasking. This works well much of the time, but lets badly behaved tasks hog the processor and block other tasks from getting their fair share. It’s greatly aided by the main event loop at the heart of Mac apps that waits for control input to direct the app to perform work for the user. But when an app charges off to spend many seconds tackling a demanding task without polling its main event loop, that app could lock the user out for what seems like an age.\nIn February 1988 Apple released the first Unix for Macintosh, A/UX, which came with preemptive multitasking. That was added to Mac OS in 1996 in System 7.5.3, in Multiprocessing Services, and further enhanced in Mac OS 8.6 three years later. Cooperative multitasking was also supported by the Thread Manager.\nThreads\nIn 2000 Apple’s hardware and software changed radically. Its first Macs with dual processors came in PowerPC 7400 (G4) chips in Power Mac G4 desktop systems, and Mac OS X brought several types of thread that could be used to manage processing on multiple processors or CPU cores, together with preemptive multitasking. Thread types include low-level Mach threads, higher-level POSIX threads or Pthreads that replaced Multiprocessing Services, Java Threads, Cocoa’s NSThreads, and cooperatively scheduled threads using the Carbon Thread Manager. The following diagram summarises Apple’s current terminology.\nIn most cases, we’re considering applications with a GUI, normally run from a bundle structure. These can in turn run their own code, such as privileged helper apps used to perform work that requires elevated privileges. In recent years, there has been a proliferation of additional executable code associated with many apps.\nWhen that app is run, there’s a single runtime instance created from its single executable code, and given its own virtual memory and access to system resources that it needs. This is a process, and listed as such in Activity Monitor, for example.\nEach process has a main thread, a single flow of code execution, and may create additional threads, perhaps to run in the background. Threads don’t get their own virtual memory, but share that allocated to the process, although they have their own stack. On Apple silicon Macs they’re easy to tell apart as they can only run on a single core, although they may be moved between cores, sometimes rapidly.\nWithin each thread are individual tasks, each a quantity of work to be performed. These can be brief sections of code and are more interdependent than threads. They’re often divided into synchronous and asynchronous tasks, depending on whether they need to be run as part of a strict sequence.\nIn 2005 the Power Mac G5 was the first Mac to use dual-core PowerPC G5 processors, then the iMac 17-inch of the following year used Apple’s first Intel Core Duo processor with two cores.\nGrand Central Dispatch\nIn 2009 Mac OS X 10.6 Snow Leopard introduced a new dispatcher, named Grand Central Dispatch (GCD) after Grand Central Terminal in New York City, and that was enhanced in macOS Sierra a decade later. More recently it has been referred to simply as Dispatch.\nAt its heart, GCD is a dispatcher managing queues of tasks, activating those that need most to be run, and leaving the less pressing to wait a bit longer. It has its own queues, as well as those assembled by apps. Some are run as simple queues with a first in first out rule, others using sophisticated heuristics to determine relative priorities. There’s a detailed account of GCD internals in Jonathan Levin’s book *OS Internals volume 1, and Apple’s current developer documentation is here.\nGCD was introduced for Macs with multiple identical cores, to support their symmetric multiprocessing (SMP), and with the release of the first Apple silicon Macs in November 2020 it has managed queues of threads to be dispatched for execution on two CPU core types, Performance and Efficiency. Core allocation is now managed according to the Quality of Service (QoS) assigned to each thread. When used on SMP processors with no contention for core availability, QoS has limited effects on thread performance, but performance on P and E cores may differ by a factor of 10.\nOver the last 41 years, macOS has gained thorough support for getting the best performance from multiple tasks, threads, and processes in chips that contain up to 32 CPU cores of two types – a far cry from that single 68000 processor.\nShare this:\nClick to share on X (Opens in new window)\nX\nClick to share on Facebook (Opens in new window)\nFacebook\nClick to share on Reddit (Opens in new window)\nReddit\nClick to share on Pinterest (Opens in new window)\nPinterest\nClick to share on Threads (Opens in new window)\nThreads\nClick to share on Mastodon (Opens in new window)\nMastodon\nClick to share on Bluesky (Opens in new window)\nBluesky\nClick to email a link to a friend (Opens in new window)\nEmail\nClick to print (Opens in new window)\nPrint\nLike Loading...\nRelated",
+      "author": null,
+      "published_date": null,
+      "meta_description": "From Switcher and MultiFinder, with Process Manager and Thread Manager in Classic Mac OS, to Pthreads, NSThreads, and Grand Central Dispatch.",
+      "word_count": 1230,
+      "scraping_method": "beautifulsoup"
+    },
+    {
+      "url": "https://www.casino.org/news/teen-suspect-surrenders-in-2023-las-vegas-strip-cyberattack-case/",
+      "title": "Teen Suspect Surrenders in 2023 Las Vegas Casino Cyberattack Case",
+      "content": "Share this:\nTeen Suspect Surrenders in 2023 Las Vegas Casino Cyberattack Case\nPosted on: September 19, 2025, 07:04h.\nLast updated on: September 19, 2025, 07:04h.\nCorey Levitan\nRead More\nExpertise:\nCommercial Gaming,\nEntertainment,\nExpert Insight,\nLas Vegas,\nRestaurants,\nVegas Myths Busted.\nA teenage boy suspected of involvement in the 2023 cyberattacks that disrupted the two largest Las Vegas casino companies has surrendered to authorities, according to the Las Vegas Metropolitan Police Department (LVMPD).\nIn 2023, hackers used vishing (voice phishing) to impersonate employees and gain access to the internal systems of MGM Resorts International and Caesars Entertainment on the Las Vegas Strip, causing hundreds of millions of dollars in financial losses. (Image: Shutterstock)\nThe suspect, whose name has not been released due to his status as a minor, is currently being held at the Clark County Juvenile Detention Center.\nHe faces six felony charges:\nThree counts of obtaining and using personal identifying information to harm or impersonate another person\nOne count of extortion\nOne count of conspiracy to commit extortion\nOne count of unlawful acts regarding computers\nAccording to police, prosecutors from the Clark County District Attorney’s Office seek to transfer his case to the criminal division, where he would face the charges as an adult.\nThe arrest stems from a broader investigation led by the FBI’s Las Vegas Cyber Task Force, which includes LVMPD cyber investigators. In November 2024, federal prosecutors indicted four men, aged 20 to 23, in connection with similar cyber attacks, though those charges were not formally linked to the MGM and Caesars incidents.\nLVMPD’s latest statement did not name MGM Resorts International or Caesars Entertainment directly, instead referring to “multiple Las Vegas casino properties” targeted between August and October 2023.\nCybersecurity experts have attributed the attacks to a loosely organized hacker group known as Scattered Spider, which also operates under aliases such as Octo Tempest, UNC3944 and 0ktapus3.\nMGM reportedly refused to pay a ransom, resulting in an estimated $100 million in losses and roughly 10 days of system outages affecting reservations, slot machines, room keys and websites. Caesars, in contrast, was reported by the Wall street Journal to have paid $15 million of a $30 million ransom demand and experienced less operational disruption.\nNo comments yet\nWrite a comment\nWrite a comment Cancel reply\nRelated News Articles\nResorts World Las Vegas Searching Rooms Daily for Hacking Tech\nCorey Levitan\n— August 7, 2024\nMGM, Caesars in Las Vegas Sued Over Inadequate Cyberattack Preparedness\nCorey Levitan\n— September 25, 2023\nLOST VEGAS: That Time Caesars Ent. Almost Brought the Mob Back\nCorey Levitan\n— March 17, 2025\nMGM vs. Caesars: Cybersecurity Expert Rates Hacking Responses\nCorey Levitan\n— September 21, 2023\nMost Popular\nCharlie Kirk Honored in Las Vegas by Station Casinos, Steve Wynn Gave to Turning Point\nDevin O'Connor\n— September 11, 2025\nPublishers Clearing House ‘$5,000 A Week Forever’ Ends After Company Bankruptcy\nDevin O'Connor\n— September 10, 2025\nVegas Comic Hit Up Audiences to Fund His Gambling Addiction for 20 Years\nCorey Levitan\n— September 16, 2025\nBally’s Selling Rhode Island Casino for $735 Million, Will Lease Back Property\nTodd Shriber\n— September 16, 2025\nUp Next at the Vegas Sphere: ‘Harry Potter’? ‘Star Wars’?\nCorey Levitan\n— September 11, 2025\nMost Commented\nWeaknesses in Las Vegas Tourism Forces Strategic Re-Think, Especially Regarding Canada\nMark Keast\n— August 23, 2025\n— 59 Comments\nLayoffs at The Venetian Las Vegas Raise More Questions\nCorey Levitan\n— September 2, 2025\n— 49 Comments\nBally’s Atlantic City, IGT Given 30 Days to Explain Why $1.2 Million Jackpot Wasn’t Paid\nDevin O'Connor\n— August 22, 2025\n— 45 Comments\nPublishers Clearing House Bankruptcy Leaves Sweeps Winners Out to Dry\nDevin O'Connor\n— August 14, 2025\n— 40 Comments\nAnthony Marnell, the “M” in M Resort, to Open Spite Casino Across the Street\nCorey Levitan\n— September 4, 2025\n— 13 Comments\nMost Read\nNeon Museum to Relight Only Surviving Dunes Las Vegas Sign\nCorey Levitan\n— September 8, 2025\nReform Alliance Atlantic City Gala at Ocean Raises Millions for Criminal Justice Reform\nDevin O'Connor\n— September 15, 2025\nSimilar Guides On This Topic\nReal Money Online CasinosNew Online CasinosOnline GamblingCasino BonusesCasino Reviews",
+      "author": "Corey Levitan",
+      "published_date": null,
+      "meta_description": "A teenage boy suspected of involvement in the 2023 cyberattacks that disrupted the two largest Las Vegas casino companies has surrendered to authorities,",
+      "word_count": 696,
+      "scraping_method": "beautifulsoup"
+    },
+    {
+      "url": "https://www.chargerlab.com/teardown-of-apple-40w-dynamic-power-adapter-with-60w-max-a3365/",
+      "title": "Teardown of Apple 40W dynamic power adapter with 60W max",
+      "content": "Introduction\nOn September 10th, Apple held its 2025 Fall Event, unveiling the iPhone 17 lineup alongside a brand-new product category—iPhone Air. Among the announcements, one product that stood out was Apple’s new 40W Dynamic Power Adapter, which gained attention for its compact design and ability to dynamically deliver up to 60W of total output power.\nThe charger is now available on Apple’s official website, priced at $39 USD. According to Apple, when used with an iPhone 17 series device, the adapter can charge the phone to 50% in approximately 20 minutes—offering significantly faster charging performance compared to the previous generation. Despite the substantial power upgrade, the adapter maintains a highly compact form factor—roughly the same size as Apple’s standard 20W charger. It also features foldable prongs for improved portability and travel convenience. In the following teardown, we take a closer look at the internal design and power distribution architecture of Apple’s latest fast charger.\nProduct Appearance\nThe front of the packaging features the Apple logo, product name, and an image of the adapter.\nThe back of the packaging displays a simplified diagram of the adapter and its ports, along with CE certification and other information.\nOne side of the packaging has a specification label attached.\nThe opposite side features a label indicating the manufacturing date and \"Made in China\" origin.\nThe packaging includes the charger along with the user manual and other documentation.\nThe charger is wrapped in protective paper.\nIt features a design similar to the 35W dual USB-C charger (model A2579).\nThe small recessed areas on both sides of the body facilitate easy plugging and unplugging.\nThe output side features a single USB-C port with a white plastic insert.\nThe bottom is printed with specification details.\nModel: A3365\nInput: 100-240V\\~ 50/60Hz 1.5A (USB PD)\nOutput: (AVS) 15-20V 2A \\[3.0A DPS] or (AVS) 9-15V 2.67A \\[3.0A DPS] or 9V 3A or 5V 3A\nMaximum total output power: 60W LPS\nThe charger has passed CCC certification and Level VI energy efficiency certification.\nIt features foldable prongs.\nThe length of the charger is about 45.72 mm (1.8 inches).\nThe width is about 45.73 mm (1.8 inches).\nThe thickness is about 28.11 mm (1.11 inches).\nIts size is nearly identical to that of the Apple 20W charger.\nIt is slightly smaller than the 35W dual USB-C charger.\nThat's how big it is in the hand.\nThe weight is about 80 g (2.82 oz).\nChargerLAB POWER-Z KM003C shows that it supports PD3.0 and DCP charging protocols.\nAnd it has four fixed PDOs of 5V3A, 9V3A, 15V2.67A, and 20V2A.\nWhen used to charge the iPhone 16 Pro Max, the charging power is about 27.23W.\nWhen charging the MacBook Air M3 2024, the charging power is about 55.94W, successfully activating the 60W dynamic fast charging feature.\nTeardown\nNext, let's take it apart to see its internal components and structure.\nRemove the bottom casing, and it is revealed that the enclosure uses a combination of snap-fit clips and ultrasonic welding for sealing.\nThe input side features a contact-based power delivery design. The inner side of the casing is lined with a graphite thermal pad and has been treated for insulation.\nRemove the PCBA module.\nThe inner side of the other half of the casing is lined with the graphite thermal insulation pad and the protective rubber cushion.\nHigh-temperature resistant insulating tape is also applied along the sides.\nThe length of the PCBA module is about 42.12 mm (1.66 inches).\nThe width is about 39.66 mm (1.56 inches).\nThe thickness is about 23.27 mm (0.92 inches).\nOne side of the PCBA module and the top of the output end are covered with protective foam pads.\nA protective pad is also placed between the two high-voltage electrolytic filter capacitors on the other side.\nThe top-mounted high-voltage electrolytic filter capacitor and the transformer are secured with adhesive for added stability and insulation.\nThe solid capacitors for output filtering are also secured with adhesive, and an insulating sheet is attached to the left side of the plastic casing.\nRemove the foam pads and black adhesive. The transformer is wrapped in copper foil, and the side near the secondary winding is reinforced and insulated with a plastic casing.\nThe PCBA module's input side features metal contact plates for power delivery along with a supporting plastic frame.\nThis side contains common mode chokes, a capacitor supplying power to the master control chip, and Y capacitors.\nOn the opposite side, two high-voltage electrolytic capacitors are mounted horizontally.\nOn both sides of the output, there are Y capacitors and solid capacitors, respectively.\nRemove the capacitors, transformer, and other components. A plastic bracket is installed at the bottom to provide support and isolate the PCB.\nThe front side of the PCB features an SMD fuse and the master control chip.\nThe back side of the PCB contains the bridge rectifier, differential mode choke, synchronous rectifier, protocol chip, and output VBUS MOSFET.\nDisassemble the capacitors, transformer, and other components. Let’s take a closer look at the specifications and functions of these individual components.\nThe SMD fuse is from WalterFuse with a rated current of 3.15A.\nThe two common mode chokes are arranged in a two-stage design to more effectively filter out EMI interference.\nThe safety X2 capacitor is wrapped with copper foil for shielding.\nIt has a specification of 0.1μF.\nIt is connected via soldered copper strips.\nThe input-side bridge rectifier is from DIODES, model RTT10KL, and uses a TTL package.\nThe high-voltage filter capacitors are from NCC, each rated at 400V 47μF, connected in parallel.\nThe differential mode choke has a specification of 13μH.\nThe master control chip is from PI, marked with ZN1612F, a custom model for Apple. It integrates the primary controller, high-voltage MOSFET, synchronous rectifier controller, and feedback functions, offering high integration and reduced external components. This simplifies fast charging power circuit design. The chip uses an InSOP-T28D package.\nThe capacitor supplying power to the master control chip is from Lelon.\nIt is rated at 50V, 22μF.\nThe transformer is manufactured by Sumida.\nClose-up of three black Y capacitors.\nThe synchronous rectifier is from RECTRON, model RM85N100DF. It is an NMOS transistor with a voltage rating of 100V and an on-resistance of 4.6mΩ, packaged in a DFN 5x6-8L form factor.\nThe three solid capacitors for output filtering are from Nichicon, each rated at 25V 270μF.\nThe protocol chip is from Infineon, model CYPDC1185B2-32E, housed in a 32-pin QFN package.\nThe TI TLV9001 is a single-channel, 1MHz, rail-to-rail input and output operational amplifier with a voltage range of 1.8–5.5V, packaged in a SOT-23 (5) form factor.\nThe VBUS MOSFET is also from RECTRON, model RM80N30DN. It is an NMOS transistor rated for 30V with an on-resistance of 3.8mΩ, packaged in a DFN 3x3 form factor.\nThe thermistor monitors the internal temperature and dynamically adjusts the power level to reduce output power when the temperature rises.\nClose-up of the sampling resistor used to detect the output current.\nThe pins of the USB-C socket are extended and soldered onto the PCBA.\nWell, those are all components of the Apple 40W Dynamic Power Adapter with 60W Max.\nSummary of ChargerLAB\nHere is the component list of the Apple 40W Dynamic Power Adapter with 60W Max for your convenience.\nIt features a design similar to the 35W dual USB-C charger and comes with foldable prongs. The unique dynamic power delivery can be understood as \"peak 60W, stable 40W,\" intelligently adjusting output power based on the device’s needs. This ensures it meets the charging requirements of the iPhone while also accommodating high-power charging scenarios for the MacBook. Given the increased charging power of the iPhone 17 series, this new adapter is definitely worth considering for new device users.\nAfter taking it apart, we found that it uses the highly integrated PI power chip ZN1612F, paired with the RECTRON RM85N100DF synchronous rectifier. The output is controlled by an Infineon CYPDC1185B2-32E protocol chip, with filtering handled by capacitors from NCC and Nichicon.\nThe internal thermistor monitors the internal temperature to enable dynamic power switching. The charger’s casing remains robust as usual, with graphite thermal pads and foam cushions applied on the inside to assist with heat dissipation and protection. The PCBA module is further reinforced and insulated with foam pads and a plastic bracket, demonstrating reliable workmanship.\nRelated Articles：1.  Apple iPhone 17 Series Debuts With 40W Dynamic Power Adapter and PD 3.2 AVS Fast Charging2.  Hands-On Guide: ChargerLAB POWER-Z KM003C Load Test of Apple’s 40W Dynamic Power Adapter3. What's Difference Between Two Apple 35W Charger (Compact and Traditional)",
+      "author": null,
+      "published_date": null,
+      "meta_description": "IntroductionOnSeptember10th,Appleheldits2025FallEvent,unveilingtheiPhone17lineupalongsideabrand-newproductcategory—iPhoneAir.Amongtheannounc",
+      "word_count": 1418,
+      "scraping_method": "beautifulsoup"
+    }
+  ],
+  "audio_files": [
+    "output/audio/hackercast_20250920_163620.mp3"
+  ],
+  "stats": {
+    "stories_fetched": 10,
+    "articles_scraped": 5,
+    "total_words": 3965,
+    "audio_files_generated": 1
+  }
+}

@@ -166,7 +166,22 @@ Notion now includes AI connectors for a variety of sources like GitHub, Gmail, J
 
 Next up...
 
+<<<<<<< HEAD
 Story 6: Show HN: WeUseElixir - Elixir project directory
+=======
+Story 6: Feedmaker: URL + CSS selectors = RSS feed
+Quickly generate an RSS feed from any website
+
+Enter your own options, or choose an example:
+• The most read stories from Washington Post
+• The most emailed stories from the New York Times
+• The most read stories from the Wall Street Journal
+• Best of jazz articles on Bandcamp
+
+Next up...
+
+Story 7: Show HN: WeUseElixir - Elixir project directory
+>>>>>>> 775e1f4 (sync)
 We can't find the internet Hang in there while we get back on track
 
 Find apps, libraries and companies that use Elixir

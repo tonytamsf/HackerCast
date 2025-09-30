@@ -1,0 +1,1155 @@
+Welcome to HackerCast, your daily digest of the top stories from Hacker News. Today is September 30, 2025, and we have 16 fascinating stories to share with you.
+
+Story 1: Kagi News
+Introducing Kagi News
+30 Sep, 2025
+A comprehensive daily press review with global news. Fully private, with sources openly curated by our community.
+News is broken. We all know it, but we’ve somehow accepted it as inevitable. The endless notifications. The clickbait headlines designed to trigger rather than inform, driven by relentless ad monetization. The exhausting cycle of checking multiple apps throughout the day, only to feel more anxious and less informed than when we started. This isn’t what news was supposed to be.
+We can do better, and create what news should have been all along: pure, essential information that respects your intelligence and time.
+Our approach: Signal over noise
+Kagi News operates on a simple principle: understanding the world requires hearing from the world. Every day, our system reads thousands of community curated RSS feeds from publications across different viewpoints and perspectives. We then distill this massive information into one comprehensive daily briefing, while clearly citing sources.
+We strive for diversity and transparency of resources and welcome your contributions to widen perspectives. This multi-source approach helps reveal the full picture beyond any single viewpoint.
+Design principles that put readers first
+One daily update: We publish once per day around noon UTC, creating a natural endpoint to news consumption. This is a deliberate design choice that turns news from an endless habit into a contained ritual.
+Five-minute complete understanding: Our briefings cover everything important in just five minutes. No endless scrolling. No attention hijacking. You read, understand, and move on with your day.
+Diversity over echo chambers: Rather than personalizing feeds to match existing preferences, we expose readers to the full spectrum of global perspectives. This approach breaks down information silos instead of reinforcing them.
+Privacy by design: Your reading habits belong to you. We don’t track, profile, or monetize your attention. You remain the customer and not the product.
+Community-driven sources: Our news sources are open source and community-curated through our public GitHub repository. Anyone can propose additions, flag problems, or suggest improvements.
+Customizable: In your settings, you can select and reorder categories to match your interests and priorities. You can also adjust the number of stories shown, as well as dragging to re-order various sections, so that your briefing is focused on the depth and topics that matter most to you.
+News in your language: You can choose your preferred interface and content language. News stories are generated in their original source language, and then translated using Kagi Translate. The default mode shows regional stories in their original language without translation, and all other ones in your browser’s language.
+Technical implementation that respects publishers
+We don’t scrape content from websites. Instead, we use publicly available RSS feeds that publishers choose to provide. Publishers decide what content appears in their feeds; some include full articles, others only titles or summaries. We respect those choices completely. We’re working within the ecosystem publishers have created rather than circumventing their intentions.
+Ready to experience news differently?
+If you’re tired of news that makes you feel worse about the world while teaching you less about it, we invite you to try a different approach with Kagi News, so download it today:
+Web
+iOS
+Android
+
+Next up...
+
+Story 2: Launch HN: Airweave (YC X25) – Let agents search any app
+Airweave is a tool that lets agents search any app. It connects to apps, productivity tools, databases, or document stores and transforms their contents into searchable knowledge bases, accessible through a standardized interface for agents.
+
+The search interface is exposed via REST API or MCP. When using MCP, Airweave essentially builds a semantically searchable MCP server. The platform handles everything from auth and extraction to embedding and serving.
+
+Make sure docker and docker-compose are installed, then...
+
+That's it! Access the dashboard at http://localhost:8080
+
+We welcome contributions! Please check CONTRIBUTING.md for details.
+
+Airweave is released under the MIT license.
+• Discord - Get help and discuss features
+
+Next up...
+
+Story 3: A $196 fine-tuned 7B model outperforms OpenAI o3 on document extraction
+Computer Science > Computation and Language
+arXiv:2509.22906 (cs)
+[Submitted on 26 Sep 2025]
+Title:Extract-0: A Specialized Language Model for Document Information Extraction
+Authors:Henrique Godoy View a PDF of the paper titled Extract-0: A Specialized Language Model for Document Information Extraction, by Henrique Godoy
+View PDF
+HTML (experimental)
+Abstract:This paper presents Extract-0, a 7-billion parameter language model specifically optimized for document information extraction that achieves performance exceeding models with parameter counts several orders of magnitude larger. Through a novel combination of synthetic data generation, supervised fine-tuning with Low-Rank Adaptation (LoRA), and reinforcement learning via Group Relative Policy Optimization (GRPO), Extract-0 achieves a mean reward of 0.573 on a benchmark of 1,000 diverse document extraction tasks, outperforming GPT-4.1 (0.457), o3 (0.464), and GPT-4.1-2025 (0.459). The training methodology employs a memory-preserving synthetic data generation pipeline that produces 280,128 training examples from diverse document sources, followed by parameterefficient fine-tuning that modifies only 0.53% of model weights (40.4M out of 7.66B parameters). The reinforcement learning phase introduces a novel semantic similarity-based reward function that handles the inherent ambiguity in information extraction tasks. This research demonstrates that task-specific optimization can yield models that surpass general-purpose systems while requiring substantially fewer computational resource.
+Subjects:
+Computation and Language (cs.CL); Artificial Intelligence (cs.AI)
+Cite as:
+arXiv:2509.22906 [cs.CL]
+(or
+arXiv:2509.22906v1 [cs.CL] for this version)
+https://doi.org/10.48550/arXiv.2509.22906
+Focus to learn more
+arXiv-issued DOI via DataCite (pending registration)
+Submission history From: Henrique Godoy [view email]
+[v1]
+Fri, 26 Sep 2025 20:34:43 UTC (1,102 KB)
+Full-text links:
+Access Paper:
+View a PDF of the paper titled Extract-0: A Specialized Language Model for Document Information Extraction, by Henrique GodoyView PDFHTML (experimental)TeX SourceOther Formats
+view license
+Current browse context: cs.CL
+< prev
+|
+next >
+new
+|
+recent
+| 2025-09
+Change to browse by:
+cs
+cs.AI
+References & Citations
+NASA ADSGoogle Scholar
+Semantic Scholar
+export BibTeX citation
+Loading...
+BibTeX formatted citation
+×
+loading...
+Data provided by:
+Bookmark
+Bibliographic Tools
+Bibliographic and Citation Tools
+Bibliographic Explorer Toggle
+Bibliographic Explorer (What is the Explorer?)
+Connected Papers Toggle
+Connected Papers (What is Connected Papers?)
+Litmaps Toggle
+Litmaps (What is Litmaps?)
+scite.ai Toggle
+scite Smart Citations (What are Smart Citations?)
+Code, Data, Media
+Code, Data and Media Associated with this Article
+alphaXiv Toggle
+alphaXiv (What is alphaXiv?)
+Links to Code Toggle
+CatalyzeX Code Finder for Papers (What is CatalyzeX?)
+DagsHub Toggle
+DagsHub (What is DagsHub?)
+GotitPub Toggle
+Gotit.pub (What is GotitPub?)
+Huggingface Toggle
+Hugging Face (What is Huggingface?)
+Links to Code Toggle
+Papers with Code (What is Papers with Code?)
+ScienceCast Toggle
+ScienceCast (What is ScienceCast?)
+Demos
+Demos
+Replicate Toggle
+Replicate (What is Replicate?)
+Spaces Toggle
+Hugging Face Spaces (What is Spaces?)
+Spaces Toggle
+TXYZ.AI (What is TXYZ.AI?)
+Related Papers
+Recommenders and Search Tools
+Link to Influence Flower
+Influence Flower (What are Influence Flowers?)
+Core recommender toggle
+CORE Recommender (What is CORE?)
+Author
+Venue
+Institution
+Topic
+About arXivLabs
+arXivLabs: experimental projects with community collaborators
+arXivLabs is a framework that allows collaborators to develop and share new arXiv features directly on our website.
+Both individuals and organizations that work with arXivLabs have embraced and accepted our values of openness, community, excellence, and user data privacy. arXiv is committed to these values and only works with partners that adhere to them.
+Have an idea for a project that will add value for arXiv's community? Learn more about arXivLabs.
+Which authors of this paper are endorsers? |
+Disable MathJax (What is MathJax?)
+
+Next up...
+
+Story 4: Leaked Apple M5 9 core Geekbench scores
+iPad17,3
+4133
+Single-Core Score
+15437
+Multi-Core Score
+Geekbench 6.5.0 for iOS AArch64
+Result Information
+Upload Date
+September 30 2025 12:36 PM
+Views
+6279
+System Information
+System Information
+Operating System
+iOS 26.0
+Model
+iPad17,3
+Model IDiPad17,3
+Motherboard
+J820AP
+CPU Information
+Name
+ARM
+Topology
+1 Processor, 9 Cores
+Identifier
+ARM
+Base Frequency
+4.42 GHz
+Cluster 13 Cores
+Cluster 26 Cores
+L1 Instruction Cache128 KB x 1
+L1 Data Cache64.0 KB x 1
+L2 Cache6.00 MB x 1
+Instruction Setsneon aes sha1 sha2 neon-fp16 neon-dotprod i8mm sme-i8i32 sme-f32f32 sme2
+Memory Information
+Size
+11.20 GB
+Single-Core Performance
+Single-Core Score
+4133
+File Compression
+3552
+510.1 MB/sec
+Navigation
+3659
+22.0 routes/sec
+HTML5 Browser
+4260
+87.2 pages/sec
+PDF Renderer
+3734
+86.1 Mpixels/sec
+Photo Library
+3719
+50.5 images/sec
+Clang
+4649
+22.9 Klines/sec
+Text Processing
+3822
+306.1 pages/sec
+Asset Compression
+3547
+109.9 MB/sec
+Object Detection
+6032
+180.5 images/sec
+Background Blur
+4104
+17.0 images/sec
+Horizon Detection
+4139
+128.8 Mpixels/sec
+Object Remover
+5276
+405.6 Mpixels/sec
+HDR
+4678
+137.3 Mpixels/sec
+Photo Filter
+5061
+50.2 images/sec
+Ray Tracer
+3302
+3.20 Mpixels/sec
+Structure from Motion
+3836
+121.4 Kpixels/sec
+Multi-Core Performance
+Multi-Core Score
+15437
+File Compression
+12308
+1.73 GB/sec
+Navigation
+17065
+102.8 routes/sec
+HTML5 Browser
+17958
+367.6 pages/sec
+PDF Renderer
+15774
+363.8 Mpixels/sec
+Photo Library
+18268
+247.9 images/sec
+Clang
+23236
+114.4 Klines/sec
+Text Processing
+4956
+396.9 pages/sec
+Asset Compression
+18577
+575.6 MB/sec
+Object Detection
+14896
+445.7 images/sec
+Background Blur
+13114
+54.3 images/sec
+Horizon Detection
+19111
+594.7 Mpixels/sec
+Object Remover
+15968
+1.23 Gpixels/sec
+HDR
+18909
+554.9 Mpixels/sec
+Photo Filter
+15246
+151.3 images/sec
+Ray Tracer
+18888
+18.3 Mpixels/sec
+Structure from Motion
+16186
+512.5 Kpixels/sec
+Compare
+Set Baseline
+
+Next up...
+
+Story 5: Frank Chimero: I think we're in the lemon stage of the internet
+I’ve been researching a new talk the last few weeks and along the way stumbled across a concept that’s been rattling around in my head. I am writing to share, because I find it a satisfying description for the tech flop era.
+The idea is called “a market for lemons.” The phrase comes from a 1970 paper by George Akerlof that explains how information asymmetry between buyers and sellers can undermine a marketplace. Akerlof asks us to imagine ourselves buying a used car. Some cars on the lot are reliable, well-maintained gems. Others cars are lemons, the kinds of cars that can make it off the lot but are disasters waiting to happen. The sellers know which cars are which, but you, as a buyer, can’t tell the difference. That information asymmetry affects the average price in the market and eventually impacts the overall market dynamics.
+The thinking goes like this: if a buyer can’t distinguish between good and bad, everything gets priced somewhere in the middle. If you’re selling junk, this is fantastic news—you’ll probably get paid more than your lemon is worth. If you’re selling a quality used car, this price is insultingly low. As a result, people with good cars leave the market to sell their stuff elsewhere, which pushes the overall quality and price down even further, until eventually all that’s left on the market are lemons.
+I think we’re in the lemon stage of the internet.
+I thought about this last week while shopping online for a sleep mask. Brands like MZOO, YFONG, WAOAW popped up, and these seemed less like companies and more like vowel smoke ejected from a factory flue hole, then slotted into a distribution platform. The long tail of generic brands on e-commerce platforms is a textbook lemons market: good products get drowned out by these alphabet soup products, who use their higher margins to buy sponsored placement in search results. Both buyers and sellers eventually lose (and perhaps the platforms win, as long as they don’t wear out their reputation).
+For shoppers, buying online now feels like rolling the dice on the quality of the product. For sellers, the gamble is that their survival relies more on gaming the system than actually improving the product.
+I think the post-pandemic experience has been a collective realization that the value that drew us to certain digital products and marketplaces is gone. Much of this reduction in value gets pinned to ZIRP, but there’s another critical factor—the natural flight of value creators. As platforms matured, the users and sellers who generated real value were squeezed out by players focused on capturing value rather than creating it.
+Once you identify a lemon market, you start to see it all over the place.
+Online dating. A lemon market where participants have no familiarity with one another participate in strategic self-presentation. High-quality partners (emotionally available, looking for genuine connection) can’t effectively distinguish themselves from those just seeking validation and eventually leave.
+Search results. A lemon market where platforms profit from sponsored placement, misaligning incentives with user needs. The first page is a minefield: sponsored listings posing as organic results, SEO content farms, affiliate aggregators. You add “reddit” to work around this, but even that has less success these days.
+Social media. Your feed is now professional content creators, low-effort podcast video clips, algorithmic filler reaction videos, stand-up chaff, and animals. Good ideas don’t happen frequently enough to satisfy the pace of the algorithm, so many have pivoted to newsletters or stopped posting.
+What makes the Market for Lemons concept so appealing (and what differentiates it in my mind from enshittification is that everyone can be acting reasonably, pursuing their own interests, and things still get worse for everyone. No one has to be evil or stupid: the platform does what’s profitable, sellers do what works, buyers try to make smart decisions, and yet the whole system degrades into something nobody actually wants.
+I was first introduced to the Market of Lemons by Dan Luu in an essay titled, Why is it so hard to buy things that work well?. Luu applies the market of lemons as a metaphor, and specifically identifies hiring as a market of lemons, because of the information asymmetry for both companies and individuals.
+Companies have always struggled to tell the difference between great individual contributors and mediocre ones. Lacking a clear way to separate the two, they lump everyone together and rely on proxy games to evaluate skill. Candidates, for their part, walk into interviews without crucial information: whether the company is quietly dysfunctional, whether the manager they liked during interviews is about to quit, or whether the open role itself is little more than a vestige of an abandoned strategy that’s likely to be cut once the other foot drops. The usual signals of strength or weakness don’t signify much at all when it comes to hiring. Layer on the automated scale of the application process—candidates firing off applications by the hundreds, companies screening by the thousands—and the result is a highly inefficient market that wastes everyone’s time. Meaningful signals get drowned out, everyone gets lumped together, rational players opt out to the extent they are able, and the market slides steadily downward.
+There have been countless attempts to make hiring more rational and efficient—the stuff of startup pitch deck lore. But I’m not sure hiring can ever be much more efficient, because neither side has reason to show themselves as they really are, warts and all. Idealistically, both would come straight; pragmatically, it is a game of chicken. Candidates polish résumés and present curated versions of their abilities, listing outcomes and impact statistics with dubious accuracy and provenance. Companies do the same, putting culture and mission front and center while hiding systematic dysfunctions and looming existential risks. When neither side is forthcoming, you’re left with proxies: a famous logo on a resume, a polished culture deck. Gaming the meta of the system supersedes the actual development or evaluation of skill. And, much to my disappointment, gaming the meta may, in fact, be an essential aspect of most jobs.
+At this point, it should be obvious how the market for lemons applies to ill-considered AI-generated content. I’ll let you sketch out that argument yourself since it’s fairly straightforward, and this thing is already long enough.
+Instead, let’s zag and revisit my point earlier about system-gaming becoming the most viable playbook instead of focusing on the product. As a consumer and as a designer, I hope this is a temporary state before a massive recalibration. The primacy of meta-activities—optimizing for algorithms, visibility theater, consumer entrapment, externalization of costs, performative internal alignment, horse-trading amongst a set of DOA ideas—is poison. It is a road to nowhere worth going.
+This reflects a business culture obsessed with outcomes while treating outputs as speed bumps. But outputs (code, design, the products themselves) are the load-bearing work—the actual prerequisites for the outcomes desired. Focusing on outcomes while ignoring outputs means hiding in abstractions and absolving oneself of accountability. If any output is acceptable to hit your targets, what awful things emerge at scale? What horrors happen when success detaches completely from the necessity of being good—having both skill and ethics?
+The safest, smartest path is also the most mundane: keep the main thing the main thing. Outcomes matter, but output literally comes first. Outputs are the business to everyone outside it—what customers see, buy, and use. You can’t stay safe in abstractions forever. Eventually, you must attend to the reality of what’s in front of you, because that’s where work gets done and where assumptions get validated or falsified (because reality has a surprising amount of detail).
+In other words, the meta ruins things for everyone. To hide in abstractions is to dodge the reality of your choices. These tactics may get you profit, but you sacrifice benefit. The climb may feel like progress, but at the end you’ll find yourself at the top of a mountain of lemons, perhaps not of your own making, but almost certainly of your own doing.
+
+Next up...
+
+Story 6: Visualizations of Random Attractors Found Using Lyapunov Exponents
+Written by Paul Bourke
+
+ October 2001 Contribution by Philip Ham: attractor.basic
+
+ and Python implementation by Johan Bichel Lindegaard. This document is "littered" with a selection of attractors found using the techniques described. In order for a system to exhibit chaotic behaviour it must be non linear. Representing chaotic systems on a screen or on paper leads one to considering a two dimensional system, an equation in two variables. One possible two dimensional non-linear system, the one used here, is the quadratic map defined as follows. The standard measure for determining whether or not a system is chaotic is the Lyapunov exponent, normally represented by the lambda symbol. Consider two close points at step n, x and x +dx . At the next time step they will have diverged, namely to x and x +dx . It is this average rate of divergence (or convergence) that the Lyapunov exponent captures. Another way to think about the Lyapunov exponent is as the rate at which information about the initial conditions is lost. There are as many Lyapunov exponents as dimensions of the phase space. Considering a region (circle, sphere, hypersphere, etc) in phase space then at a later time all trajectories in this region form an n-dimensional elliptical region. The Lyapunov exponent can be calculated for each dimension. When talking about a single exponent one is normally referring to the largest, this convention will be assumed from now onwards. If the Lyapunov exponent is positive then the system is chaotic and unstable. Nearby points will diverge irrespective of how close they are. Although there is no order the system is still deterministic! The magnitude of the Lyapunov exponent is a measure of the sensitivity to initial conditions, the primary characteristic of a chaotic system. If the Lyapunov exponent is less than zero then the system attracts to a fixed point or stable periodic orbit. These systems are non conservative (dissipative). The absolute value of the exponent indicates the degree of stability. If the Lyapunov exponent is zero then the system is neutrally stable, such systems are conservative and in a steady state mode. To create the chaotic attractors shown on this page each parameter a and b in the quadratic equation above is chosen at random between some bounds (+- 2 say). The system so specified is generated by iterating for some suitably large number of time steps (eg; 100000) steps during which time the image is created and the Lyapunov exponent computed. Note that the first few (1000) timesteps are ignored to allow the system to settle into its "natural" behaviour. If the Lyapunov exponent indicates chaos then the image is saved and the program moves on to the next random parameter set. There are a number of ways the series may behave.
+• It may converge to a single point, called a fixed point. These can be detected by comparing the distances between successive points. For numerical reasons this is safer than relying on the Lyapunov exponent which may be infinite (logarithm of 0)
+• It may diverge to infinity, for the range (+- 2) used here for each parameter this is the most likely event. These are also easy to detect and discard, indeed they need to be in order to avoid numerical errors.
+• It will form a periodic orbit, these are identified by their negative Lyapunov exponent.
+• It will exhibit chaos, filling in some region of the plane. These are the solutions that "look good" and the ones we wish to identify with the Lyapunov exponent. It should be noted that there may be visually appealing structures that are not chaotic attractors. That is, the resulting image is different for different initial conditions and there is no single basin of attraction. It's interesting how we "see" 3 dimensional structures in these essentially 2 dimensional systems. The software used to create these images is given here: gen.c. On average 98% of the random selections of (a , b ) result in an infinite series. This is so common because of the range (-2 <= a,b <= 2) for each of the parameters a and b, the number of infinite cases will reduce greatly with a smaller range. About 1% were point attractors, and about 0.5% were periodic basins of attraction. 
+
+ Image courtesy of Robert McGregor, Space Coast of Florida. Launch trail perhaps 30 minutes after the shuttle launch (June 2007) dispersing from a column into a smoke ring due to some unusual air currents in the upper atmosphere. Das, A., Das, Pritha, Roy, A
+
+ Applicability of Lyapunov Exponent in EEG data analysis. Complexity International, draft manuscript. Peitgen, H., Jurgens, H., Saupe, D
+
+ Lyapunov exponents and chaotic attractors in Chaos and fractals - new frontiers of science. Springer, new York, 1992.
+
+Next up...
+
+Story 7: Hedge Funds Have to Be Big
+Opinion NewsletterMatt Levine, ColumnistSeptember 30, 2025 at 5:03 PM UTCBy Matt LevineMatt Levine is a Bloomberg Opinion columnist. A former investment banker at Goldman Sachs, he was a mergers and acquisitions lawyer at Wachtell, Lipton, Rosen & Katz; a clerk for the U.S. Court of Appeals for the 3rd Circuit; and an editor of Dealbreaker.FacebookXLinkedInEmailLinkGiftFacebookXLinkedInEmailLinkGiftGift this articleContact us:Provide news feedback or report an errorSite feedback:Take our SurveyNew WindowFacebookXLinkedInEmailLinkGiftBookmarkSaveOne possibility is that investing skill exists but is very hard to identify. The biggest asset managers would love to hire the people with the most investing skill, and they have the most money to pay those people, but they can’t find them in any particularly reliable or comprehensive way. Somewhere out there is a person who’s spent years running a 4 Sharpe ratio at her $5 million friends-and-family hedge fund, or her Robinhood personal account, but she never gets a job at a big hedge fund. Why? Perhaps there is no way for information about her performance to diffuse through the market; perhaps the big funds have some set of biases or constraints — they only hire people with the right background, etc. — that prevent them from hiring some of the most skilled people.And so the skilled investors are distributed somewhat haphazardly. Some of them run multibillion-dollar portfolios at big multimanager multistrategy “pod shops” like Citadel or Millennium. Some of them run their own multibillion-dollar hedge funds with their names on the door. Others manage mutual funds, or the local teachers’ pension fund, or their personal accounts, or the investment opportunity that you just saw advertised on Instagram.
+
+Next up...
+
+Story 8: dgsh – Directed Graph Shell
+The dgsh suite has been tested under Debian and Ubuntu Linux, FreeBSD, and Mac OS X. A Cygwin port is underway.
+
+An installation of GraphViz will allow you to visualize the dgsh graphs that you specify in your programs.
+
+By default, the program and its documentation are installed under /usr/local . You can modify this by setting the PREFIX variable in the `config` step, for example:
+
+To compile and run dgsh you will need to have the following packages installed in your system:
+
+By default, the program and its documentation are installed under /usr/local . You can modify this by setting the PREFIX variable in the `config` step, for example:
+
+To compile and run dgsh you will need to have the following commands installed on your system:
+
+These are the manual pages for dgsh, the associated helper programs and the API in formats suitable for browsing and printing. The commands are listed in the order of usefulness in everyday scenarios.
+
+Report file type, length, and compression performance for data received from the standard input. The data never touches the disk. Demonstrates the use of an output multipipe to source many commands from one followed by an input multipipe to sink to one command the output of many and the use of dgsh-tee that is used both to propagate the same input to many commands and collect output from many commands orderly in a way that is transparent to users.
+
+Process the Git history, and list the authors and days of the week ordered by the number of their commits. Demonstrates streams and piping through a function.
+
+Process a directory containing C source code, and produce a summary of various metrics. Demonstrates nesting, commands without input.
+
+List the names of duplicate files in the specified directory. Demonstrates the combination of streams with a relational join.
+
+Highlight the words that are misspelled in the command's first argument. Demonstrates stream processing with multipipes and the avoidance of pass-through constructs to avoid deadlocks.
+
+Read text from the standard input and list words containing a two-letter palindrome, words containing four consonants, and words longer than 12 characters.
+
+Creates a report for a fixed-size web log file read from the standard input. Demonstrates the combined use of multipipe blocks, writeval and readval to store and retrieve values, and functions in the scatter block. Used to measure throughput increase achieved through parallelism.
+
+Read text from the standard input and create files containing word, character, digram, and trigram frequencies.
+
+Given as an argument a directory containing object files, show which symbols are declared with global visibility, but should have been declared with file-local (static) visibility instead. Demonstrates the use of dgsh-capable comm (1) to combine data from two sources.
+
+Given two directory hierarchies A and B passed as input arguments (where these represent a project at different parts of its lifetime) copy the files of hierarchy A to a new directory, passed as a third argument, corresponding to the structure of directories in B. Demonstrates the use of join to process results from two inputs and the use of gather to order asynchronously produced results.
+
+Process the Git history, and create two PNG diagrams depicting committer activity over time. The most active committers appear at the center vertical of the diagram. Demonstrates image processing, mixining of synchronous and asynchronous processing in a scatter block, and the use of an dgsh-compliant join command.
+
+Count number of times each word appears in the specified input file(s) Demonstrates parallel execution mirroring the Hadoop WordCount example via the dgsh-parallel command. In contrast to GNU parallel, the block generated by dgsh-parallel has N input and output streams, which can be combined by any dgsh-compatible tool, such as dgsh-merge-sum or sort -m.
+
+Given the specification of two publication venues, read a compressed DBLP computer science bibliography from the standard input (e.g. piped from curl -s http://dblp.uni-trier.de/xml/dblp.xml.gz or from a locally cached copy) and output the number of papers published in each of the two venues as well as the number of authors who have published only in the first venue, the number who have published only in the second one, and authors who have published in both. The venues are specified through the script's first two command-line arguments as a DBLP key prefix, e.g. journals/acta/, conf/icse/, journals/software/, conf/iwpc/, or conf/msr/. Demonstrates the use of dgsh-wrap -e to have sed(1) create two output streams and the use of tee to copy a pair of streams into four ones.
+
+Create two graphs: 1) a broadened pulse and the real part of its 2D Fourier transform, and 2) a simulated air wave and the amplitude of its 2D Fourier transform. Demonstrates using the tools of the Madagascar shared research environment for computational data analysis in geophysics and related fields. Also demonstrates the use of two scatter blocks in the same script, and the used of named streams.
+
+Nuclear magnetic resonance in-phase/anti-phase channel conversion and processing in heteronuclear single quantum coherence spectroscopy. Demonstrate processing of NMR data using the NMRPipe family of programs.
+
+Calculate the iterative FFT for n = 8 in parallel. Demonstrates combined use of permute and multipipe blocks.
+
+Reorder columns in a CSV document. Demonstrates the combined use of tee, cut, and paste.
+
+Windows-like DIR command for the current directory. Nothing that couldn't be done with . Demonstrates use of wrapped commands with no input (df, echo).
+
+Next up...
+
+Story 9: Computer Vision: Algorithms and Applications, 2nd ed
+Welcome to the website (https://szeliski.org/Book) for the second edition of my computer vision textbook, which is now available for purchase at Amazon, Springer, and other booksellers.
+
+To download an electronic version of the book, please fill in your information on this page. You are welcome to download the PDF website for personal use, but not to repost it on any other website; please post a link to this URL instead.
+
+Note that while the content of this electronic version and the hardcopy versions are the same, the page layout is different, since the electronic version is optimized for online reading. The PDF should be enabled for commenting in your viewer. Also, hyper-links to sections, equations, and references are enabled. To get back to where you were, use the Previous View (Alt-Left-Arrow) command in Acrobat.
+
+The current download count is 179616 (since 1/23/2022).
+
+This book is largely based on the computer vision courses that I have co-taught at the University of Washington (2020, 2008, 2005, 2001) with Steve Seitz and Harpreet Sawhney and at Stanford (2003) with David Fleet.
+
+If you're curious about the process that went into writing my book, I did an interview with Computer Vision News (March 2022).
+
+You can still download the first edition or potentially purchase it online. The first edition is also available in Chinese and Japanese (translated by Prof. Toru Tamaki).
+
+Additional good sources for related courses (sorted roughly by most recent first) include:
+• Bill Freeman, Antonio Torralba, and Phillip Isola's 6.8300/6.8301: Advances in Computer Vision class at MIT (Spring 2023)
+• Alyosha Efros' CS194-26/294-26: Intro to Computer Vision and Computational Photography class at Berkeley (Fall 2024)
+• Justin Johnson's EECS 498.008 / 598.008: Deep Learning for Computer Vision class at the University of Michigan (Winter 2022), which is an outstanding introduction to deep learning and visual recognition
+• Luiz Velho's Fundamentals and Trends in Vision and Image Processing class at IMPA (Spring 2021)
+• Andrew Owens' EECS 504: Foundations of Computer Vision class at the University of Michigan (Winter 2020)
+
+If you would like your course listed here, please contact me.
+
+Next up...
+
+Story 10: Deml: The Directed Acyclic Graph Elevation Markup Language
+Languages designed to represent all types of graph data structures, such as Graphviz's DOT Language and Mermaid JS's flowchart syntax, don't take advantage of the properties specific to DAGs (Directed Acyclic Graphs).
+
+DAGs act like rivers. Water doesn't flow upstream (tides and floods being exceptions). Sections of a river at the same elevation can't be the inputs or outputs of each other, like the nodes C, D, and E in the image below. Their input is B. C outputs to F, while D and E output to G.
+
+DEML's goal is to use this ordering as part of the file syntax to make it easier for humans to parse. In DEML we represent an elevation marker with on a new line. The order of elevation clusters is significant, but the order of nodes between two elevation markers is not significant.
+
+Nodes are defined by the first word on a line. The defined node can point to its outputs with and to its inputs with . Inputs and outputs are separated by .
+
+Dagrs is a library for running multiple tasks with dependencies defined in a DAG. In DEML, shell commands can be assigned to a node with . DEML files can be run via dag-rs with the comand .
+
+To compare the difference in readability, here is the Dagrs YAML example in both YAML and DEML
+
+To convert DEML files to Mermaid Diagram files (.mmd) use the command . The mermaid file can be used to generate an image at mermaid.live
+• Put my idea for an elevation based DAG representation into the wild
+
+I was thinking about how it's annoying in languages like C when function declaration order matters. Then I wondered if there could be a case when it would be a nice feature for declaration order to matter and I thought of DAGs.
+
+Licensed under either of
+
+Unless you explicitly state otherwise, any contribution intentionally submitted for inclusion in the work by you, as defined in the Apache-2.0 license, shall be dual licensed as above, without any additional terms or conditions.
+
+Next up...
+
+Story 11: A Gentle Introduction to CUDA PTX
+Introduction
+As a CUDA developer, you might not interact with Parallel Thread Execution (PTX) every day, but it is the fundamental layer between your CUDA code and the hardware. Understanding it is essential for deep performance analysis and for accessing the latest hardware features, sometimes long before they are exposed in C++. For example, the wgmma↗ instructions, which perform warpgroup-level matrix operations and are used in some of the most performant GEMM kernels, are available only through PTX instructions.
+This post serves as a gentle introduction to PTX and its place in the CUDA ecosystem. We will set up a simple playground environment and walk through a complete kernel in PTX. My goal is not only to give you the foundation to use PTX but to also share my mental model of how PTX fits into the CUDA landscape.
+PTX and the CUDA ecosystem
+Every processor has an instruction set architecture (ISA), which is the specific set of commands the hardware can execute. NVIDIA GPUs are no different, their native, hardware-specific ISA is called SASS (streaming assembly). However, the SASS for one GPU generation can be incompatible with another, meaning a program compiled for an older GPU might not run on a newer one. In other words, there is no forward compatibility. This is one of the problems that PTX solves. PTX is an ISA for a virtual machine: an abstract GPU that represents the common features of all NVIDIA hardware. When you compile your CUDA code, a tool called ptxas↗ translates your hardware-agnostic PTX into the specific SASS for your target GPU. This two-stage design is a common pattern in modern compilers. The LLVM (Low Level Virtual Machine) project↗ is a well-known example of this architecture.
+We can utilize the PTX forward compatibility by using just-in-time (JIT) compilation. You can choose to embed the PTX code directly into your final executable (I will cover this later in the post). When your application runs on a new GPU for which it doesn’t have pre-compiled SASS, the NVIDIA driver on the system acts as a JIT compiler. It’s important to note that this provides forward compatibility only. For example, PTX generated for compute_70 can run on any future GPU (8.x, 9.x, etc.), but it cannot be run on an older 6.x GPU. This is different from the SASS binary itself, which has much stricter rules and is generally only compatible with GPUs of the same major version number. Tools like Triton↗ rely on this. They generate PTX and leave the final, hardware-specific compilation to the driver. By default, nvcc includes both PTX and SASS in your executable, giving you both immediate performance and future compatibility.
+The PTX playground
+The best way to learn PTX is to see it in action. To do that, we need a simple environment that lets us write PTX code and see it run. I have created precisely that in this repository↗.
+The repository contains two main files:
+add_kernel.ptx↗: This is the text file that contains the raw PTX instructions for our kernel.
+main.cu↗: This is a C++ program that runs on the host to load, run, and verify the result of our PTX kernel.
+Our C++ host code needs a way to load and run the .ptx file at runtime. This requires the CUDA Driver API↗, a lower-level interface than the more common Runtime API. This is why the code in main.cu uses functions like cuLaunchKernel instead of the familiar <<<...>>> syntax. While a full explanation of the Driver API is outside the scope of this post, the main.cu file handles all the necessary setup for you, allowing us to focus entirely on the PTX code.
+To compile the program, use the following command:
+nvcc main.cu -o ptx_runner -lcuda
+(notice the -lcuda which ensures the CUDA Driver API library is included)
+Then, run the executable:
+./ptx_runner
+If everything works correctly, you should see a success message as the output.
+Kernel walkthrough
+Now that we have a working environment, we can dive into the PTX kernel itself. Our goal is to implement a classic kernel that performs an element-wise addition of two vectors, a and b, and stores the result in a third vector, c. Before we look at the assembly, let’s first look at the equivalent logic in standard CUDA C++:
+__global__ void add_kernel(const float* a, const float* b, float* c, int n) {
+int idx = blockIdx.x * blockDim.x + threadIdx.x;
+if (idx < n) {
+c[idx] = a[idx] + b[idx];
+}
+}
+Here is the complete add_kernel.ptx file that accomplishes this exact same task. Don’t worry if you don’t understand what is happening in this file, by the end of this post that will change.
+.version 7.0
+.target sm_70
+.address_size 64
+.visible .entry add_kernel (
+// Kernel parameters passed from the host
+.param .u64 in_a,
+.param .u64 in_b,
+.param .u64 out_c,
+.param .u32 n
+)
+{
+// Setup registers
+.reg .b64
+%rd<8>;
+// %rd for 64-bit addresses and pointers
+.reg .b32
+%r<2>;
+// %r for signed 32-bit integers
+.reg .u32
+%u<5>;
+// %u for unsigned 32-bit integers
+.reg .f32
+%f<4>;
+// %f for 32-bit floating point values
+.reg .pred
+%p<2>;
+// %p for predicates (booleans)
+// Load kernel parameters into registers
+ld.param.u64
+%rd1, [in_a];
+// %rd1 = base pointer for 'a'
+ld.param.u64
+%rd2, [in_b];
+// %rd2 = base pointer for 'b'
+ld.param.u64
+%rd3, [out_c];
+// %rd3 = base pointer for 'c'
+ld.param.u32
+%u1, [n];
+// %u1 = size 'n'
+// Move special register values to general registers to use them
+mov.u32
+%u2, %ctaid.x;
+// %u2 = blockIdx.x
+mov.u32
+%u3, %ntid.x;
+// %u3 = blockDim.x
+mov.u32
+%u4, %tid.x;
+// %u4 = threadIdx.x
+// Calculate the global thread ID by
+// idx = blockIdx.x * blockDim.x + threadIdx.x
+mad.lo.s32
+%r1, %u2, %u3, %u4;
+// %r1 = idx
+// Terminate if idx >= n
+setp.ge.s32
+%p1, %r1, %u1;
+// Set predicate %p1 if idx >= n
+@%p1 bra
+DONE;
+// Branch to DONE if %p1 is true
+// Compute how many bytes to offset for the current index,
+// use 4 because we're dealing with 32-bit (4-byte) floats
+mul.wide.s32
+%rd4, %r1, 4;
+// %rd4 = byte offset
+// Calculate addresses for a[idx], b[idx], and c[idx]
+// by using the base address + offset
+add.s64
+%rd5, %rd1, %rd4;
+// %rd5 = address of a[idx]
+add.s64
+%rd6, %rd2, %rd4;
+// %rd6 = address of b[idx]
+add.s64
+%rd7, %rd3, %rd4;
+// %rd7 = address of c[idx]
+// Load vector values at the target position
+ld.global.f32
+%f1, [%rd5];
+// %f1 = a[idx]
+ld.global.f32
+%f2, [%rd6];
+// %f2 = b[idx]
+// Perform the addition and store the result
+add.f32
+%f3, %f1, %f2;
+// %f3 = a[idx] + b[idx]
+st.global.f32
+[%rd7], %f3;
+// c[idx] = %f3
+DONE:
+ret;
+}
+(You can also compare this with how nvcc compiles the C++ version of our kernel into PTX on the Compiler Explorer (Godbolt)↗)
+Preamble and signature
+The first thing to notice is that the .ptx file contains only the code for our GPU kernel. The host code you saw in main.cu is compiled separately by nvcc and then linked together with the GPU binary at the end.
+Let’s look at the first part of the file, which defines the kernel’s properties and the arguments it expects:
+.version 7.0
+.target sm_70
+.address_size 64
+.visible .entry add_kernel (
+// Kernel parameters passed from the host
+.param .u64 in_a,
+.param .u64 in_b,
+.param .u64 out_c,
+.param .u32 n
+)
+The file begins with a preamble that sets up the compilation environment using several directives. A directive is a command for the PTX assembler that starts with a dot (.). The .version directive specifies the PTX language version we are using. The .target directive declares the minimum GPU architecture required, which in our case is sm_70. Thanks to PTX’s forward compatibility, this means our kernel will run correctly on any NVIDIA GPU from the Volta generation (sm_70) or newer. Finally, .address_size confirms that we are working with 64-bit pointers.
+Following this is the kernel’s signature. The .visible and .entry keywords declare that this is a kernel that can be seen and launched by the host. The name of our kernel, add_kernel, is what we reference from our C++ code. When nvcc compiles a C++ kernel, it normally generates a “mangled” name that encodes the function’s arguments, resulting in a long, unreadable string like _Z10add_kernelPKfS0_Pfi. Since we are writing the PTX by hand, we can choose a simple name for clarity.
+Inside the parentheses are the kernel’s parameters, declared with the .param directive. These must match the order and type of the arguments we pass from the host. We use .u64 for the pointers, as they are 64-bit addresses, and .u32 for the size of the vectors.
+Register declarations
+After the kernel signature, we define the virtual registers that will serve as our working variables.
+Registers are a small amount of extremely fast, on-chip storage. For a processor to perform any computation, such as adding two numbers, the data must first be loaded from main memory into these registers. After that, the processor does the work and stores the results from the registers back to memory.
+Our kernel declares a pool of registers using the .reg directive:
+// Setup registers
+.reg .b64
+%rd<8>;
+// %rd for 64-bit addresses and pointers
+.reg .b32
+%r<2>;
+// %r for signed 32-bit integers
+.reg .u32
+%u<5>;
+// %u for unsigned 32-bit integers
+.reg .f32
+%f<4>;
+// %f for 32-bit floating point values
+.reg .pred
+%p<2>;
+// %p for predicates (booleans)
+The prefixes like %rd, %r, and %u are not rules but a common convention that makes the code much easier to read by signaling the intended use of a register.
+The <N> syntax declares a count of N registers, which are indexed from 0 to N-1. For example, .reg .pred %p<2> declares two predicate registers: %p0 and %p1.
+You might notice that we have declared more registers than we actually use, and we don’t always start our indexing at 0. This is perfectly fine. The final executable binary will only allocate physical hardware registers for the virtual registers that are part of the program’s logic.
+Data movement instructions
+After the register declarations, we get to the main body of our kernel, which consists of a sequence of instructions. In PTX, an instruction is an operation that the GPU will execute, like loading data or performing addition. They all follow a similar pattern:
+opcode{.modifier} destination_operand, source_operand_A, source_operand_B, ...;
+The opcode is the name of the operation (e.g. ld for load). This is often followed by one or more .modifiers that specify the data type and other options. The destination operand is almost always a register where the result will be stored, and it is followed by one or more source operands. Keep in mind the output is always before the input in these instructions.
+Let’s start by looking at the core data movement instructions in our kernel: ld, st, and mov.
+ld↗ (Load): Reading from memory
+The ld instruction is used to load data from a memory location into a register. If you look at the official PTX documentation, the full syntax for ld is quite complex, with many optional modifiers for controlling caching, memory synchronization, and more:
+ld{.weak}{.ss}{...}.type d, [a]{...};
+While this looks intimidating, the vast majority of these modifiers are for advanced usage. For our purposes, we can simplify this down to a form that we will actually be using:
+ld{.ss}.type d, [a];
+Here’s how you can read this:
+ld: The opcode.
+{.ss}: The curly braces {} mean this part is an optional modifier. The .ss stands for “state space” and is where you would put .global, .shared, or .param to tell the instruction where to load from.
+.type: This is a mandatory modifier where you specify the data type, like .f32 or .u64.
+d: The destination operand, which must be a register.
+[a]: The source operand. The square brackets [] mean this is a memory address. The a inside is a register that holds the address. This syntax means “dereference the pointer in register a.”
+Now, let’s look at the ld instructions from our kernel. The first ones load the kernel parameters passed from the host into our general-purpose registers:
+// Load kernel parameters into registers
+ld.param.u64
+%rd1, [in_a];
+// %rd1 = base pointer for 'a'
+ld.param.u64
+%rd2, [in_b];
+// %rd2 = base pointer for 'b'
+ld.param.u64
+%rd3, [out_c];
+// %rd3 = base pointer for 'c'
+ld.param.u32
+%u1, [n];
+// %u1 = size 'n'
+Here you can see the pattern in action. For the first instruction, we are loading from the .param state space, the data type is a .u64, the destination is the register %rd1, and the source address is the one associated with the parameter in_a.
+st↗ (Store): Writing to memory
+The st instruction is the mirror image of ld. It is used to store data from a register to a memory location. Its simplified syntax is very similar, but the order of the operands is reversed:
+st{.ss}.type [a], b;
+Here, the memory address [a] is the destination, and the register b is the source. Our kernel uses st at the very end to write the final result back to global memory:
+// Perform the addition and store the result
+add.f32
+%f3, %f1, %f2;
+// %f3 = a[idx] + b[idx]
+st.global.f32
+[%rd7], %f3;
+// c[idx] = %f3
+This instruction stores the 32-bit float (.f32) value from the source register %f3 into the destination address [%rd7] in global (.global) memory.
+mov↗ (Move): Working with registers
+Finally, the mov instruction is used to move data between registers or to get the address of a variable. It has a much simpler syntax:
+mov.type d, a;
+Our kernel uses mov to copy the values from special registers (see below) into the general-purpose registers that our other instructions can use.
+// Move special register values to general registers to use them
+mov.u32
+%u2, %ctaid.x;
+// %u2 = blockIdx.x
+mov.u32
+%u3, %ntid.x;
+// %u3 = blockDim.x
+mov.u32
+%u4, %tid.x;
+// %u4 = threadIdx.x
+Special registers↗ (in this example %ctaid.x, %ntid.x, and %tid.x) are predefined, read-only registers that the GPU uses to give our kernel information about its environment. They live in a special state space called .sreg. As a programmer, you don’t declare them, you simply read from them to get essential values like the thread’s ID or the dimensions of the grid.
+In PTX, these special registers have direct analogs to the built-in variables you would use in a CUDA C++ kernel:
+PTX Special RegisterCUDA C++ Built-in Variable%tid.xthreadIdx.x%ntid.xblockDim.x%ctaid.xblockIdx.x%nctaid.xgridDim.x
+Most arithmetic instructions cannot use these special registers directly. This is why we first use mov to copy these values into our general-purpose registers (%u2, %u3, and %u4), where we can then use them for our address calculations.
+Computation and control flow
+Now that we have loaded our parameters and identified our thread, we can move on to the core logic of the kernel. This involves calculating the thread’s index, checking if it’s within the bounds of our vectors, and finally, performing the addition.
+The first step is to calculate the global index for the current thread, which corresponds to the following C++ line:
+int idx = blockIdx.x * blockDim.x + threadIdx.x;
+PTX has a dedicated instruction for this common pattern:
+// Calculate the global thread ID by
+// idx = blockIdx.x * blockDim.x + threadIdx.x
+mad.lo.s32
+%r1, %u2, %u3, %u4;
+// %r1 = idx
+The mad↗ instruction performs a multiply-add operation. It multiplies the first two source operands (%u2 and %u3) and adds the third (%u4), storing the result in the destination (%r1). When two 32-bit numbers are multiplied, the full result can be up to 64 bits long. Since we know our thread index will not exceed the 32-bit limit, the .lo modifier tells the instruction to take only the lower 32 bits of the full multiplication result before performing the addition. The .s32 modifier tells the instruction to treat the operands as 32-bit signed integers.
+Next, we need to implement the boundary check from our C++ code:
+if (idx < n)
+In assembly, this is typically done by checking for the opposite condition and skipping the work if it’s met:
+// Terminate if idx >= n
+setp.ge.s32
+%p1, %r1, %u1;
+// Set predicate %p1 if idx >= n
+@%p1 bra
+DONE;
+// Branch to DONE if %p1 is true
+First, the setp↗ (set predicate) instruction performs a comparison. Here, it compares %r1 (the index) with %u1 (the vector size). The .ge modifier means “greater than or equal to.” If idx >= n, the 1-bit predicate register %p1 is set to true.
+The next instruction, bra↗ (branch), is a jump to a label. The @%p1 at the beginning is a predicate guard, meaning the instruction only executes if %p1 is true. Together, these two lines mean: “If idx is greater than or equal to n, jump to the DONE label at the end of the kernel.” This is how we skip the main logic for out-of-bounds threads.
+Before we can load our data, we need to calculate the exact memory address for a[idx], b[idx], and c[idx]. This requires converting our logical index into a physical byte offset:
+// Compute how many bytes to offset for the current index,
+// use 4 because we're dealing with 32-bit (4-byte) floats
+mul.wide.s32
+%rd4, %r1, 4;
+// %rd4 = byte offset
+This instruction multiplies our index in %r1 by 4, because each float takes up 4 bytes in memory. We use mul.wide.s32↗, which takes two 32-bit inputs but produces a full 64-bit result, preventing any potential overflow. The result, our byte offset, is stored in %rd4.
+Then, we simply use the integer add↗ instruction to add this 64-bit offset to our 64-bit base pointers (%rd1, %rd2, and %rd3) to get the final addresses for the elements we need to access:
+// Calculate addresses for a[idx], b[idx], and c[idx]
+// by using the base address + offset
+add.s64
+%rd5, %rd1, %rd4;
+// %rd5 = address of a[idx]
+add.s64
+%rd6, %rd2, %rd4;
+// %rd6 = address of b[idx]
+add.s64
+%rd7, %rd3, %rd4;
+// %rd7 = address of c[idx]
+Finally, with all our addresses calculated and data loaded, we can perform the core task of the kernel:
+// Load vector values at the target position
+ld.global.f32
+%f1, [%rd5];
+// %f1 = a[idx]
+ld.global.f32
+%f2, [%rd6];
+// %f2 = b[idx]
+// Perform the addition and store the result
+add.f32
+%f3, %f1, %f2;
+// %f3 = a[idx] + b[idx]
+This is the simplest part. The float add.f32↗ instruction takes the two float values we loaded into registers %f1 and %f2 and adds them, storing the final result in %f3.
+The last two lines of our kernel handle the exit path:
+DONE:
+ret;
+DONE is a label. It is not an instruction, but a bookmark in the code. Its only purpose is to serve as a target for the bra (branch) instruction we saw earlier. Threads that are out-of-bounds will jump directly to this line.
+The ret↗ instruction is the final command. It returns from the kernel, ending the execution for the current thread. All threads, whether they performed the addition or branched to DONE, will eventually execute this instruction.
+This completes the walkthrough of all the instructions in our kernel.
+Conclusion
+Congratulations! If you reached this point, you should now have a solid foundation and a practical mental model of how PTX works, from the virtual machine concepts down to the individual instructions.
+While the workflow we used (using a full .ptx file as a kernel) is the best way to learn the fundamentals, in practice, the most common way you will use PTX is through inline assembly directly inside your CUDA __global__ functions. You can learn more about inline PTX here↗. This technique is used for specific optimizations, allowing you to inject a few specific PTX instructions to perform a task that C++ cannot express. This is exactly how you would use instructions like the wgmma operations we mentioned in the introduction.
+You should now possess the knowledge to navigate the dense official PTX documentation↗. It is best to use it as a reference manual. When you need to know the exact syntax of a specific instruction or explore a new hardware feature, you can read the documentation and understand the instructions.
+Appendix A: Controlling the fatbin with nvcc
+To have precise control over what gets embedded in your final executable (called fatbin), you need to understand the terminology used by nvcc. The target for the PTX virtual machine is called a compute capability, specified with flags like compute_70. The target for the final, hardware-specific SASS is the streaming multiprocessor (SM) architecture, specified with sm_70.
+The -arch flag used with sm_XX (e.g. -arch sm_86) results in both PTX and SASS for that specific architecture being included. If you use -arch compute_86, then only PTX will be included. If you want to specify exactly what goes into the binary, you can use the more powerful -gencode flag. For instance, you could ship an application with pre-compiled SASS (and no PTX) for both Ampere (sm_86) and Hopper (sm_90) by using this command:
+nvcc program.cu \
+-gencode arch=compute_86,code=sm_86 \
+-gencode arch=compute_90,code=sm_90
+By including multiple SASS files you can prevent JIT compilation which can for example eliminate startup latency.
+To see what’s inside your final executable, you can use the cuobjdump↗ utility. Running cuobjdump -ptx <executable> will extract and print the embedded PTX, while cuobjdump -sass <executable> will disassemble and show you the native SASS machine code for each architecture it contains. While you can inspect these to make performance adjustments, more commonly you generate a report using Nsight Compute (NCU)↗ and inspect the PTX and SASS there. The advantage is that NCU can link specific lines from your kernel code to their compiled PTX and SASS representations, making performance analysis easier. For interactive exploration, a fantastic online tool is the previously mentioned Compiler Explorer (Godbolt)↗, which can show you the PTX or SASS generated by nvcc in real-time as you type CUDA C++ code.
+Appendix B: The full compilation pipeline and NVVM IR
+As we’ve seen, CUDA C++ is compiled to PTX, and this PTX is then assembled into SASS machine code for a specific GPU. However, there is one more step in this process: the NVVM IR↗. This is another internal representation that sits between your C++ code and the final PTX. NVVM IR is NVIDIA’s specialized version of the popular LLVM IR, and it’s converted to PTX using an NVIDIA library called libnvvm.
+So what is the purpose of this extra layer? By building their compiler on LLVM, NVIDIA makes it much easier for other programming languages to target their GPUs. If someone wants to write a compiler for a new language that runs on NVIDIA hardware, they don’t need to become experts in generating PTX. Instead, they can target the much higher-level NVVM IR, allowing them to utilize the entire mature LLVM infrastructure. This is exactly how tools like Triton↗ and the Rust GPU compiler↗ work.
+This translation from CUDA C++ to NVVM IR is handled by a Clang-based C++ frontend used by nvcc. However, nvcc treats this NVVM IR as a purely internal representation. This makes PTX the first stage in the compilation pipeline where we can reliably inspect the output, making it an essential tool for performance analysis.
+
+Next up...
+
+Story 12: Google CTF 2025 – webz : Exploiting zlib's Huffman Code Table
+is a zlib exploitation challenge from Google CTF 2025. The Google-zlib implementation provided in the challenge is not upstream; it’s a version with an arbitrary patch applied. Whereas typical open‑source exploit challenges ship a patch that clearly introduces a vulnerability, ’s Google-zlib patch appears—at first glance—to be a normal optimization.
+
+In practice, the vulnerability in this Google-zlib can be found quickly via fuzzing. However, in this write‑up we’ll derive the precise root cause through source analysis.
+
+The Google-zlib codebase isn’t large, but it is quite tricky. Because it implements compression algorithms, manipulates data at the bit level, and contains optimizations that sacrifice readability, analysis can be difficult.
+
+First, let’s look at the provided . It’s simply a wrapper around Google-zlib. It receives raw Deflate-compressed data from the user and decompresses it using Google-zlib’s . Therefore, we must identify vulnerabilities in the code that implements : , , and .
+
+The Google-zlib source shipped with the challenge contains a . From that patch we can see the code has been modified as above.
+
+The patch removes some checks in and greatly increases the values of and . From the comments, the patch increases the sizes of Huffman tables and removes related checks to achieve a memory/speed tradeoff optimization. At this point we don’t yet know exactly what issues this introduces, but it’s clear the vulnerability will be related to Huffman tables and Huffman coding.
+
+Before analyzing the code, let’s review the Deflate compression algorithm. Deflate uses Huffman coding and the LZ77 algorithm to compress data.
+
+The principle of the LZ77 algorithm is very simple: repeated data is replaced by (length, distance) pairs.
+
+The length is how many bytes to copy, and the distance is how far back from the current position the source data lies.
+
+Huffman coding is a bit more involved. The basic idea is to replace original data with compressed bit sequences. While the minimum unit of data is typically a byte (8 bits), replacing values with shorter bit sequences reduces size.
+
+In this example there are only two symbols, A and B, which can be encoded with 1-bit Huffman codes (0 and 1). If there are more than two symbols, you obviously cannot compress them all with 1-bit codes.
+
+A Huffman code cannot be the prefix of another Huffman code. For example, if 111 is a code, then 11 cannot be a code; since codes have variable length, a prefix collision like 1110 would be ambiguous—unclear whether it’s 111 + 0 or 11 + 10.
+
+Also, the minimum and maximum code lengths vary depending on the number of distinct data values. Huffman coding assigns shorter codes (e.g., 2 bits) to high-frequency values (A, B, C) and longer codes (e.g., 3 bits) to low-frequency values (D, E) to compress effectively.
+
+Additionally, consider this: if Deflate generates efficient Huffman codes tailored to the input, then the decoder needs the corresponding Huffman table to decode. Therefore, Deflate uses either fixed Huffman tables or dynamic Huffman tables depending on the situation.
+
+Let’s elaborate on “including the Huffman table in the final compressed data.” In the standard implementation, the Huffman table can be represented using only code lengths.
+
+Rather than storing the entire codes as above, you can store just the code lengths:
+
+Since actual Huffman codes have lengths in the range 3–15 bits, storing only lengths reduces the size of the embedded Huffman tables.
+
+This works for a simple reason. A Huffman table is an array indexed by the original symbol. Assign the first 2-bit code 00 to A; then B gets 01, C gets 10, and so on. Using only lengths and order, all codes are recoverable. In other words, if Deflate assigns codes in order, Inflate can reconstruct them from just the lengths.
+
+is a virtual finite-state machine. It treats the compressed data stream ( ) as opcodes and executes like a VM. Since sets , it transitions to , and then hits the .
+
+Before the main loop, let’s note some macros and variables used by Inflate. Members of the structure don’t benefit from register optimization, so these macros copy them into locals for faster operations.
+
+Unlike byte-oriented data, compressed data is processed at bit granularity because of packing and Huffman coding. The Inflate implementation uses macros like these to fill a bit buffer ( ) and manipulate it bitwise.
+
+The basic logic is: use to pull bits from ( ) into ( ), decreasing ( ) accordingly. Then extract as many bits as needed with , and drop consumed bits with .
+
+Using this bit-level handling, the code decodes the compressed data and appends the decoded bytes to ( ), decreasing ( ) by the number of bytes written.
+
+Back in , compressed data is processed in blocks, starting at . After ensuring at least 3 bits in the buffer ( ), it reads 1 bit with to set , which indicates whether this block is the last one. It then drops that bit and uses the next two bits to select the block type.
+
+Blocks have the following forms:
+
+The compressed stream consists of one or more blocks, and decodes each according to the code above.
+
+Let’s look at how a dynamic Huffman table is built. As noted earlier, a dynamic codes block includes a Code Huffman table, and compressed Literal/Length and Distance tables. The code above reads the lengths for those three tables.
+
+The Literal/Length table contains codes for literal bytes (A, B, …) and for LZ77 lengths; the Distance table holds codes for LZ77 distances. Using these two tables, the decoder performs Huffman and LZ77 decoding. So what is the Code Huffman table? The Literal/Length and Distance tables are stored compressed in the stream—again via Huffman coding. The Code Huffman table is the dynamic Huffman table used to decode the Huffman tables (lengths) themselves.
+
+First, we read the Code Huffman table lengths. We loop times and read 3 bits each time into . These 3-bit values are code lengths—the Huffman table is represented by lengths, not the full bit patterns, as discussed earlier. Thus, records the Code Huffman table’s code lengths in the permutation.
+
+Here, reduces the size of the encoded Code Huffman table. The Code table decodes original values 0–18. Storing lengths for all 19 values would be inefficient.
+
+Typically, codes are used more frequently in the same order as . If we stored lengths in plain 0–18 order, we’d need to write zeros for many unused values (e.g., 0–15) before the frequently used 16, 17, 18. By ordering them as above, we can store just the lengths for the frequently used codes and leave the rest implicit. The code reflects this: it reads lengths, and sets the remaining entries to zero.
+
+We then set to point into , and call to build the Huffman table. The resulting table is written at ( ). We’ll cover shortly. For now, note the parameters: (build the Code table), (length array), (number of symbols, 0–18), (output pointer for the constructed table), (table index bit width—initially 7, but may be adjusted by ), and (a temporary array for sorting).
+
+Once the Code table is built, we decode the compressed lengths of the Literal/Length and Distance tables. We read bits and use the Code table to decode entries, retrieving a struct from the table.
+
+Values 0–18 decoded via the Code table are not literal decoded bytes. Based on the code, they behave as follows:
+
+Here “original value” refers to the value decoded by Huffman coding, not necessarily the final decompressed byte. Some values (0–15) correspond to actual lengths, others (16–18) are special symbols.
+
+We’ll explain this struct in the Huffman table construction section. Depending on its members, various actions occur to ultimately decode each value.
+
+As before, we call to build the final and tables for Literal/Length and Distance respectively.
+
+We now enter the decoding process. Again, we fetch a from the table and take actions based on its fields to decode the original value.
+
+A quick check shows that when , we switch to and append (the literal byte) to ( ). Also, is the number of bits consumed to decode that symbol; i.e., it’s the code length, and the decoder uses to consume bits. This is standard Huffman decoding. But there are other decoding forms depending on —we’ll explain this in the table construction section.
+
+Back to the code snippet above. If and are large enough, calls for high-speed decoding. The in-function Huffman decoding is slower because it transitions through VM-like states; operates with full buffers and fewer checks. Therefore, requires sufficiently large input/output buffers to be safe.
+• : pointer to the number of index bits for the table (may be adjusted)
+
+Now, the struct. The Huffman table is an array of structs; determines how to decode, is the code length, and holds the value. As the comment indicates, these fields can play different roles depending on .
+
+Let’s step through table construction. First we count, for each code length, how many symbols use that length.
+
+We then determine the minimum and maximum code lengths from and set , the table’s index bit width. initially comes from the argument but may be adjusted based on min/max. That’s why is a pointer: any adjustments made in must also be visible to the caller.
+
+The Huffman table is a simple 1D array, indexed by bits: table[huffman_code] = decoded_value (actually a code struct to decode it) . Thus, is really the number of index bits—i.e., the size of the primary table. If , the table has entries up to .
+
+If , set to avoid wasting space. If , set ; otherwise you couldn’t store any codes at all.
+
+But if , how do we store codes longer than ? Using multi-level tables. As we’ve seen, the field can indicate a second-level lookup. For example, suppose there are ten 8‑bit codes and one 9‑bit code. You don’t want to double the table size (from 256 to 512 entries) just for one symbol. So the primary table has 256 entries; all 8‑bit codes and the prefixes of any longer codes are stored there. For longer codes, entries in the primary table point to sub-tables that hold the remaining bits.
+
+We’ll see the exact mechanics below.
+
+Once is decided, we build the array to sort symbols by code length and symbol order into . The array is needed to reconstruct the full Huffman codes from the lengths.
+
+To reconstruct codes from lengths, group symbols with the same length and assign codes in order:
+
+is the array that encodes this ordering; the build loop will walk to assign codes.
+
+Depending on , we set , , and . These support the Base/Extra decoding mode described below.
+
+Dynamic Huffman table lengths in the stream are usually stored by position (index), since that index is the original value—e.g., index 65 corresponds to ‘A’. This is efficient for literals (0–255). But what about LZ77 length/distance values? Deflate specifies length range 3–258 and distance range 1–32,768, making a direct per‑value table impractical. So lengths and distances use Base/Extra coding.
+
+indicates where Base/Extra decoding begins. For Literal/Length, 0–255 are literals and 256 is End of Block; from 257 upward (LZ77 lengths), Base/Extra applies—so . The Code table doesn’t use Base/Extra at all, so (greater than the largest code index). Distance uses Base/Extra for all symbols, so .
+
+and select the arrays used for Base/Extra depending on whether we’re building the length or distance table.
+
+This is the main construction loop. We iterate through , creating a entry for each symbol. If , it’s a normal entry: , . As we saw in , decoding such an entry emits .
+
+If , we create an entry using the Base/Extra scheme: holds the number of extra bits, holds the base.
+
+To understand Base/Extra, look at the length-decoding routine in . First, (the base). Then, based on , if it’s not a literal/end/invalid, we go to length decoding.
+
+extracts the number of extra bits. We then read that many bits and add them to the base to get the final length.
+
+For example, suppose we want to decode length 20. Its code length entry would be at .
+
+The length routine then computes . If the stream provides as the extra bits, we decode .
+
+The key idea of Base/Extra: values like 20 (and the range ) are all represented by the same Huffman symbol (index 269); the exact value is determined by reading the extra bits. The table groups ranges by base and uses extra bits to resolve within the range.
+
+After creating a entry, we write it into the table at multiple positions. is used for sub-tables (multi-level); it’s 0 in the primary table.
+
+The loop writes into . Before explaining why, let’s note something important:
+
+The compressed bits for (0b0110) match those for (0b110). Even though the code set is prefix-free when read left-to-right, Deflate uses a bitstream where the trailing bits act as prefixes due to LSB-first packing. To handle this, we reverse the bit order when building indices:
+
+So the correct index order is 0,2,1,3,7 rather than 0,1,2,6,7.
+
+Back to the loop. holds the (bit-reversed) Huffman code in progress. We don’t just store at ; we fill out all positions differing only in the unused high bits of the primary table.
+
+is (table size), and is (or for sub-tables). So the effect is:
+
+We’re enumerating the higher bits that are irrelevant to this code length. This allows constant-time decoding:
+
+When decoding (0b0100), we can immediately index with and decode ‘A’ without checking code lengths; then drop 2 bits and continue.
+
+This implements the same idea: index with fixed and decode immediately. The loop plus achieve this optimization.
+
+Move to the next symbol and update the working code length.
+
+Let’s illustrate with the earlier example:
+
+Codes of length ≤2 fit in the primary table.
+
+We set (the number of lower bits to ignore when indexing sub-tables) and advance to the end of the current table—this is where the sub-table will live.
+
+Now the sub-table is ready: points to it, and causes future indices to ignore the lower bits.
+
+On subsequent iterations, entries for the longer codes are placed into the sub-table:
+
+Note , so the sub-table stores only the remaining bits.
+
+We also write into the primary table an entry that points to the sub-table. The final multi-level table looks like:
+
+Decoding a 3‑bit code like ‘E’ works like this: first-level lookup at yields , so we consume 2 bits and jump to the sub-table ( ). Then we use the next bit (1) to index the sub-table, yielding ; we consume 1 bit and emit ‘E’.
+
+Finally, if the code set is incomplete, the remaining entry is filled with an invalid code marker, then is updated and the function returns.
+
+It loops until the preconditions fail. At the start of each iteration, if fewer than 15 bits are available in , it preloads 16 bits. This reduces overhead in the inner loop.
+
+The logic mirrors : look up a in . If it’s a literal, emit it and continue; if it’s a length, decode the length and then decode the distance next, preloading more bits first.
+
+Distance decoding follows. After that, the LZ77 copy routine (not shown here) copies bytes from the window; the code is messy because it optimizes for various cases.
+
+After the LZ77 copy, the code handles second-level table lookups and invalid codes.
+
+We analyzed the principal parts of , the decoder for . Do you see the bug? Everything looks well designed.
+
+There’s a subtle issue in the Huffman table construction. A Huffman table can be incomplete. For example, if is 8 and the maximum code length is 10, there will be no entries for length‑9 codes; i.e., some table entries remain unset. Are such NULL entries handled correctly during decoding?
+
+No. As we’ve seen, incomplete entries should be filled with (invalid).
+
+As a result, any NULL entries get treated as if they were structures with . Or, they may retain stale values from a previous block.
+
+To achieve high speed, omits many checks; it can therefore cause memory corruption when encountering incomplete Huffman tables. Let’s explore how.
+
+The first memory bug identified was an integer overflow, but it wasn’t exploitable. The second was a stream overflow, which we ultimately exploited. We’ll describe both.
+
+Let’s see what happens when a zero‑initialized table entry ( ) is used in decoding.
+
+In the literal path, a with consumes zero bits and decodes a null byte. Since no bits are consumed, would loop forever decoding that same entry.
+
+However, the loop is bounded by , so no overflow occurs here.
+
+What about the length path? Because of the checks, the code falls into the second-level table lookup. With zero bits consumed, it indexes the 0th entry again.
+
+Distance decoding behaves similarly, but worse: the second-level lookup jumps back into the distance decode path. The “0th table entry” behavior is dangerous, because the second-level lookup is designed to read a sub-table (with smaller ), but instead it’s indexing the primary table. keeps at least 16 bits in and assumes no codes exceed 15 bits, so it omits checks. The erroneous “0th entry” lookup breaks this assumption.
+
+As noted, the distance path jumps back into distance decoding after the second-level lookup, so the primary table (not sub-table) is indexed next, consuming too many bits. Ultimately, the counter underflows—an integer overflow.
+
+At the end of , the code adjusts / by the number of unused bits. Thus, the integer overflow in corrupts and , affecting subsequent decoding.
+
+We reproduce the case described above. The Distance table has with a maximum code length of 12, so there are unfilled entries with . By crafting the stream to force a multilevel lookup, we can trigger the vulnerability.
+
+These are key. The first is a valid 15‑bit length code. The second is an invalid 12‑bit distance code.
+
+The valid distance‑5 code is . Instead, forces a second‑level lookup that reads an uninitialized entry.
+
+However, this particular memory corruption was not exploitable. If we first decompress dummy data in block one, and then in a second block trigger the bug with a Literal/Length table that only contains EOB, we can corrupt / without crashing. But since these are input stream variables (not output buffer variables), we couldn’t achieve an overflow or OOB write on the decompressed output buffer.
+
+So what should we target to exploit uninitialized table entries? The most promising avenue in zlib is to abuse the copy routines. The stored-block copy and the LZ77 copy are powerful overwrite primitives—if we can disable the checks that constrain them.
+
+In other words, we need to corrupt , not . Let’s inspect ’s LZ77 decode.
+
+The LZ77 decode in has almost no checks. The only guard is , behind .
+
+How can it still be safe?
+
+The maximum copy length (LZ77 length) is → 258. Earlier we noted that is entered only when , and the loop exits as soon as that’s no longer true. Thus, can safely omit length checks because it guarantees there are at least 258 bytes of space.
+
+In , tables are written into , which is not cleared between blocks. The tables’ boundaries aren’t fixed either; advances dynamically, so different blocks can lay out different tables at different offsets.
+
+Therefore, stale entries from a previous block can persist in uninitialized slots of later tables—even of different types.
+
+If a Distance-table entry from a previous block remains in an uninitialized slot of the subsequent Literal/Length table, we’re in trouble. Deflate limits lengths to 258, but distances can be much larger. If a stale Distance entry is misinterpreted as a Length entry in , its length can exceed 258, breaking the invariant that made safe.
+
+Ultimately, when the LZ77 decode interprets a stale Distance entry as a Length, suffers an integer overflow. Unlike , reflects the remaining size of the output buffer, so this immediately leads to a buffer overflow.
+
+The decompressed bytes are written into the global in . To actually corrupt memory, we must write more than bytes and overflow into the following , overwriting its fields.
+
+The PoC uses six blocks. Let’s walk through them.
+
+Block 1: writes dummy bytes to the output buffer so that later copies with large distances won’t misbehave.
+
+Block 2: prepares the ground for the bug by filling the table area with Distance symbols. Those entries will persist in uninitialized slots later.
+
+Block 3: creates an incomplete Huffman table and references the uninitialized entry to perform LZ77 decoding. This actually triggers the bug and causes integer overflow in . From this point on, boundary checks for the decompression buffer malfunction, enabling buffer overflow.
+
+As noted, to overwrite , we must first fill the 8192‑byte output buffer. We use LZ77 and a stored block to push ~8120 bytes of padding.
+
+The final block performs the actual overflow to overwrite , letting us set its members arbitrarily.
+
+First, by partially overwriting the pointer in or setting it arbitrarily, we get arbitrary read.
+
+Additionally, since and call / , control‑flow hijacking is easy.
+
+This is the final exploit. It successfully retrieves the flag.
+
+Next up...
+
+Story 13: Comprehension debt: A ticking time bomb of LLM-generated code
+An effect that’s being more and more widely reported is the increase in time it’s taking developers to modify or fix code that was generated by Large Language Models.
+If you’ve worked on legacy systems that were written by other people, perhaps decades ago, you’ll recognise this phenomenon. Before we can safely change code, we first need to understand it – understand what it does, and also oftentimes why it does it the way it does. In that sense, this is nothing new.
+What is new is the scale of the problem being created as lightning-speed code generators spew reams of unread code into millions of projects.
+Teams that care about quality will take the time to review and understand (and more often than not, rework) LLM-generated code before it makes it into the repo. This slows things down, to the extent that any time saved using the LLM coding assistant is often canceled out by the downstream effort.
+But some teams have opted for a different approach. They’re the ones checking in code nobody’s read, and that’s only been cursorily tested – if it’s been tested at all. And, evidently, there’s a lot of them.
+When teams produce code faster than they can understand it, it creates what I’ve been calling “comprehension debt”. If the software gets used, then the odds are high that at some point that generated code will need to change. The “A.I.” boosters will say “We can just get the tool to do that”. And that might work maybe 70% of the time.
+But those of us who’ve experimented a lot with using LLMs for code generation and modification know that there will be times when the tool just won’t be able to do it.
+“Doom loops”, when we go round and round in circles trying to get an LLM, or a bunch of different LLMs, to fix a problem that it just doesn’t seem to be able to, are an everyday experience using this technology. Anyone claiming it doesn’t happen to them has either been extremely lucky, or is fibbing.
+It’s pretty much guaranteed that there will be many times when we have to edit the code ourselves. The “comprehension debt” is the extra time it’s going to take us to understand it first.
+And we’re sitting on a rapidly growing mountain of it.
+Share this:
+Click to share on X (Opens in new window)
+X
+Click to share on Facebook (Opens in new window)
+Facebook
+Click to share on LinkedIn (Opens in new window)
+LinkedIn
+Click to share on Reddit (Opens in new window)
+Reddit
+Click to email a link to a friend (Opens in new window)
+Email
+Like Loading...
+Related
+Author: codemanship
+Founder of Codemanship Ltd and code craft coach and trainer
+View all posts by codemanship
+
+Next up...
+
+Story 14: BrowserPod: In-browser full-stack environments for IDEs and Agents via WASM
+X
+Facebook
+Y Combinator
+LinkedIn
+Reddit
+Email
+WhatsApp
+We’re excited to introduce BrowserPod a WebAssembly-based, in-browser container technology that runs full-stack development environments across multiple languages.
+Learn more
+Join the Discord server
+BrowserPod is a generalised, more powerful alternative to WebContainers, with advanced networking capabilities and flexible multi-runtime support. Containers, called Pods, run completely client-side. At their core there is a flexible WebAssembly-based engine that can execute multiple programming languages.
+Each Pod can:
+Run multiple processes or services in parallel, with real concurrency powered by WebWorkers
+Access a scalable block-based filesystem with privacy-preserving browser-local persistence.
+Expose virtualized HTTP / REST services to the internet via Portals
+Pods are fast booting, since no provision of server-side resources is required. Moreover, multiple Pods can run in each browser tab, enabling complex deployments.
+BrowserPod is conceptually similar to WebContainers, but is designed from the ground up to be language-agnostic, to support inbound networking, and to be integrated within the Leaning Technologies ecosystem.
+BrowserPod will be released in late November, with an initial focus on Node.js environments and a well defined path to support additional stacks, with Python and Ruby as immediate priorities.
+Further capabilities will become available later by integrating BrowserPod with CheerpX, our x86-to-WebAssembly virtualization engine. In particular, we plan to support React Native environments in 2026.
+What is BrowserPod for?
+BrowserPod is designed to run complete development environments in the browser, without installing local helper applications or dedicated server-side resources.
+A typical use case of BrowserPod, exemplified by this demo, would be a browser-based IDE that can run a preview server, for example via npm run dev. The preview server runs fully in the browser, with each update to files being reflected in the virtualized environment. As files are updated the normal Hot Module Replacement triggers, updating the preview.
+The application preview is not just available in the same browser session, but is exposed to the internet via a Portal, a seamless solution to allow direct public access to any HTTP service running inside a Pod.
+Portals make it possible to achieve real cross-device testing of applications and even pre-release sharing of test URLs with external users, including early adopters, stakeholders and clients.
+BrowserPod’s initial focus will be on Node.js environments, which are supported via a complete build of Node.js, compiled to WebAssembly and virtualized in the browser. BrowserPod will support multiple versioned runtimes, with Node.js 22 being included in the first release.
+This high-fidelity approach ensures that applications developed in BrowserPod containers will behave the same when migrated to production, making it possible to build real-world applications in Pods, not just prototypes.
+BrowserPod is a great fit for web-based IDEs, educational environments, interactive documentation websites and AI coding Agents.
+How does BrowserPod work?
+BrowserPod builds on our years long experience in delivering high performance in-browser virtualization via WebVM. WebVM is powered by CheerpX, our x86-to-WebAssembly virtualization engine, and it has been the most popular tool we have released so far, with 15k+ stars on GitHub.
+To make BrowserPod possible we have rearchitectured CheerpX to separate its two main components: the x86-to-WebAssembly JIT compiler engine, and the Linux system call emulation layer. This emulation layer, that we are calling CheerpOS internally, is now shared across CheerpX and BrowserPod and, down the line, it will become a foundation layer across all our products.
+CheerpOS is effectively a WebAssembly kernel that allows unmodified C/C++ code for Linux to run in the browser. In the context of BrowserPod it is used to provide a unified view of filesystem and access to networking across the multiple processes running in a Pod.
+On top of this kernel layer, we compile the C++ source code of Node.js, with minimal changes, to a combination of WebAssembly and JavaScript. The use of JavaScript is specific to Node.js and provides the required shortcut to run JavaScript payloads natively in the browser itself, which is critical for high performance execution of Node.js environments.
+Other stacks, such as Python and Ruby on Rails, will instead run as pure WebAssembly applications on top of the CheerpOS kernel.
+Licensing
+BrowserPod will come with a generous free license with attribution, available for non-commercial users and technical evaluations.
+A transparent pay-as-you-go model will be available for any use and purpose, including companies working on AI codegen tools. Pricing will be announced at release time and it will be very affordable to maximize the adoption of this technology, with discounts available for educational and non-profit use.
+An Enterprise license will also be available for self-hosting and commercial support.
+General Availability
+The initial release of BrowserPod will become generally available in late November - early December 2025, with support for Node.js 22.
+Over the course of the following year, we have planned several additional releases, including support for multiple Node.js versions, support for Python and Ruby on Rails, and eventually support for React Native environments.
+To receive up-to-date information on BrowserPod, make sure to register on our website. We plan to extend an early adopter program to a selected subset of registered users and organizations.
+For more information on all our products and technologies, please join our Discord. Most members of the development team are active there and ready to answer any question you might have. You can also follow us on X and LinkedIn for updates.
+Conclusions
+BrowserPod is currently in the final stages of development, and we are thrilled to see what the community will build on top of this technology when it is released in late November.
+Leaning Technologies mission statement is “Run anything on the browser”, and BrowserPod is an important milestone along this journey. It will also not be the last and we have great ambitions for our ecosystem as we migrate to the unified CheerpOS foundational layer. Stay tuned!
+Join us on Discord
+
+Next up...
+
+Story 15: Not only am I losing my livelihood to AI – now it's stealing my em dashes too
+‘Oh, em dash—what will we do without you?’ Illustration: Victoria Hart/Guardian DesignView image in fullscreen‘Oh, em dash—what will we do without you?’ Illustration: Victoria Hart/Guardian DesignMy petty gripe: not only am I losing my livelihood to AI – now it’s stealing my em dashes tooJames ShackellThe humble em dash is being used as a tell that something is written by a large language model. But it’s James Shackell’s favourite piece of punctuation, and he’s not ready to lose it
+Read more petty gripes
+My editor’s email started off friendly enough, but then came the hammer blow: “We need you to remove all the em dashes. People assume that means it’s written by AI.” I looked back at the piece I’d just written. There were dashes all over it—and for good bloody reason. Em dashes—often used to connect explanatory phrases, and so named because they’re the width of your average lowercase ‘m’—are probably my favourite bit of punctuation. I’ve been option + shift + hyphening them for years.A person’s writing often reflects how their brain works, and mine (when it works) tends to work in fits and starts. My thoughts don’t arrive in perfectly rendered prose, so I don’t write them down that way. And here I was being told the humble em dash—friend to poorly paid internet hacks everywhere—was now considered a sign not of genuine intelligence, but the other sort. The artificial sort. To the extent that I have to go through and manually remove them one by one, like nits. The absolute cheek. Not only am I losing my livelihood to AI—I’m losing grammar too.My petty gripe: bands naming themselves as puns on other bands – will it never end?Read moreWhy couldn’t machines have embraced the semicolon? No one gives a fig about those.The reason AI is so hung up on em dashes–as you might expect–is because humans were first. Large language models were trained on vast swathes of actual writing, including mine, I suppose, with the result that em dashes got baked into algorithms from the beginning. It’s flattering, in a way. “Humans used them so often that AIs learned them as a default natural flow,” Brent Csutoras notes on Medium. “It’s like asking a bird not to chirp.”Well, my chirping days are over. It seems I have two choices now—keep using em dashes with a sort of stubborn, curmudgeonly pride until all my clients stop exchanging money for words, or start writing incredibly long run-on sentences, like this, with commas all over the place … and maybe ellipses too; ideas connected by semicolons. Staccato flow. Full stops everywhere. Nope, that sucks too. Sounds like someone flicking between radio stations.Oh, em dash—what will we do without you?Explore more on these topicsArtificial intelligence (AI)Petty gripesChatGPTcommentShareReuse this content
+
+Next up...
+
+Story 16: Bcachefs removed from the mainline kernel
+LWN.net
+News from the source
+ContentWeekly EditionArchivesSearchKernelSecurityEvents calendarUnread commentsLWN FAQWrite for us
+|
+|
+Subscribe /
+Log in /
+New account
+Bcachefs removed from the mainline kernel
+[Posted September 30, 2025 by corbet]
+After marking bcachefs "externally maintained" in 6.17, Linus Torvalds has
+removed
+it entirely for 6.18.
+"It's now a DKMS module, making the in-kernel
+code stale, so remove it to avoid any version confusion."
+Risks
+Posted Sep 30, 2025 10:30 UTC (Tue)
+by patrakov (subscriber, #97174)
+[Link] (1 responses)
+Before Bcachefs getting mainlined, one had to get the whole kernel source tree from the Bcachefs author. This happened because this filesystem relied on changes in other subsystems, and was not just a self-contained add-on. Upon upstreaming, the required changes were applied to these subsystems, making Bcachefs self-contained, and then it was split out as a module that can be compiled via DKMS.
+Here I see the risk of the mainline kernel reverting the changes in other subsystems, because they might no longer have an in-tree user. Am I paranoid? What's the Bcachefs project's position on this risk if it is material - are they going to adapt, or go back to telling the user to compile their tree, as opposed to compiling just their module against an existing kernel?
+Risks
+Posted Sep 30, 2025 16:45 UTC (Tue)
+by georgh-cat (guest, #158897)
+[Link]
+That's exactly my thought as well, and the kind of conversation that is impossible in phoronix (but it should)
+Decision process
+Posted Sep 30, 2025 12:44 UTC (Tue)
+by daeler (subscriber, #130460)
+[Link] (3 responses)
+Just curious, no judgement: How is this decision made? Can Linus just decide that he removes something from the kernel?
+Decision process
+Posted Sep 30, 2025 12:56 UTC (Tue)
+by corbet (editor, #1)
+[Link]
+Yes, Linus can make that kind of decision.
+He doesn't just do it on his own, though; there was a long series of public and private discussions that led up to this one.
+Decision process
+Posted Sep 30, 2025 12:57 UTC (Tue)
+by pizza (subscriber, #46)
+[Link] (1 responses)
+> Can Linus just decide that he removes something from the kernel?
+Linus (just like everyone else with the Linux sources, can add or remove anything he wants.
+Of course, nobody else is forced to get "Linux" from him directly.
+Indeed, the vastly overwhelming majority of Linux users get their kernel from someone else, with features, drivers, and fixes not present in, or removed outright from, Linus's Linux.
+Decision process
+Posted Sep 30, 2025 13:37 UTC (Tue)
+by Lionel_Debroux (subscriber, #30014)
+[Link]
+Note that things go the other way round as well: security fixes available in Linus' Linux but missing from other kernels because the backporting process didn't occur for some reason (difficulty, interest, etc.).
+The older a third-party kernel version is, the more it is likely to be missing both backports for security fixes, and vulnerabilities in code introduced in newer versions but not backported to the given third-party kernel (some vendors perform large amounts of backports to their franken-kernels).
+I think this was the right thing
+Posted Sep 30, 2025 15:41 UTC (Tue)
+by DemiMarie (subscriber, #164188)
+[Link] (2 responses)
+I don’t think that experimental filesystems belong upstream.
+The need to get fixes out super quickly to recover user’s data does not mix well with the upstream kernel’s release cycle.
+Once a filesystem has settled down and emergency fixes are less likely, upstreaming makes a lot more sense.
+The only exception I can think of is if recovery is handled almost entirely in userspace, which is not tied to the kernel release cycle.
+I think this was the right thing
+Posted Sep 30, 2025 15:45 UTC (Tue)
+by intelfx (subscriber, #130118)
+[Link]
+The problem is that according to Linus' et al. philosophy (which subsequently dictates their actions), everything belongs upstream and out-of-tree modules kinda sorta "do not exist". No changes to kernel internals are accepted (or, conversely, refused) to accommodate out-of-tree modules, and the mentioned people are kind of very vocal in asserting that.
+So if you're developing something that "does not belong upstream", the second you need an in-kernel API modified to suit your code (or, conversely, the second an in-kernel API is modified in such a way that harms your code) — you are SOL.
+I think this was the right thing
+Posted Sep 30, 2025 17:29 UTC (Tue)
+by roryi (subscriber, #25099)
+[Link]
+It was very clearly marked as being experimental, though. I find it hard to understand who could possibly be using an experimental filesystem in a bleeding-edge kernel for important data without backups. And, honestly, it feels like there's potentially a more serious problem here than any of the much-aired interpersonal issues.
+Has someone been actively recommending use of bcachefs to naive end users? Is there such a thing as a meme filesystem - and if so, has bcachefs somehow become one? Is there a rogue forum poster / youtuber / tiktoker out there tricking people into such risky behaviour without realising the implications?
+Copyright © 2025, Eklektix, Inc.
+Comments and public postings are copyrighted by their creators.
+Linux
+is a registered trademark of Linus Torvalds
+
+That wraps up today's HackerCast. Thank you for listening, and we'll see you tomorrow with more stories from the world of technology.

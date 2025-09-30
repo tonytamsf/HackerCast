@@ -51,9 +51,17 @@ class TTSConverter:
         if credentials_path:
             os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = credentials_path
 
+        # Hardcode Google Cloud project for this repo
+        os.environ["GOOGLE_CLOUD_PROJECT"] = "hackercast-472403"
+
         try:
-            self.client = texttospeech.TextToSpeechClient()
-            logger.info("TTS client initialized successfully")
+            # Override project ID using client_options
+            from google.api_core import client_options as client_options_lib
+            client_options = client_options_lib.ClientOptions(
+                quota_project_id="hackercast-472403"
+            )
+            self.client = texttospeech.TextToSpeechClient(client_options=client_options)
+            logger.info("TTS client initialized successfully with project: hackercast-472403")
         except Exception as e:
             logger.error(f"Failed to initialize TTS client: {e}")
             raise

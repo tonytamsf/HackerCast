@@ -4,231 +4,167 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-HackerCast is a Python-based serverless application that creates daily audio podcasts from the top 20 Hacker News stories. The project follows a three-phase development approach from PoC to full automation.
+HackerCast is a Python application that creates daily audio podcasts from top Hacker News stories. The pipeline fetches stories, scrapes content, transforms it to podcast dialogue format using Gemini AI, and converts to multi-voice audio using Google Cloud Text-to-Speech.
+
+## Quick Start
+
+```bash
+# Run complete pipeline (requires activation)
+source venv/bin/activate
+python main.py run --limit 20
+
+# Or use the convenience script
+./RUN 20
+```
+
+## Required Environment Variables
+
+```bash
+# Google Cloud TTS (required for audio generation)
+export GOOGLE_APPLICATION_CREDENTIALS="/path/to/credentials.json"
+export GOOGLE_CLOUD_PROJECT="hackercast-472403"
+
+# Gemini AI (required for podcast script transformation)
+export GEMINI_API_KEY="your_gemini_api_key"
+
+# Podcast Publishing (optional)
+export PODCAST_PUBLISHING_ENABLED=true
+export TRANSISTOR_API_KEY="your_transistor_key"
+export TRANSISTOR_SHOW_ID="your_show_id"
+```
 
 ## Architecture
 
-The application consists of three main Python modules in the root directory:
+### Pipeline Flow
+1. **hn_api.py** - Fetches story metadata from Hacker News API
+2. **scraper.py** - Extracts article content from URLs (BeautifulSoup + Goose3)
+3. **podcast_transformer.py** - Uses Gemini 2.0 Flash to transform raw content into podcast dialogue format (Chloe & David)
+4. **tts_converter.py** - Multi-voice TTS using Google Cloud (Chloe: en-US-Studio-O, David: en-US-Journey-D)
+5. **podcast_publisher.py** - Publishes to Transistor.fm (optional)
 
-- `hn_api.py` - Fetches top story IDs from Hacker News API
-- `scraper.py` - Scrapes article content from URLs using BeautifulSoup
-- `tts_converter.py` - Converts text to MP3 using Google Cloud Text-to-Speech
+### Key Components
+- **main.py** - CLI orchestrator using Click, coordinates full pipeline
+- **config.py** - Configuration management with dataclasses and environment variables
+- **interactive_selector.py** - Rich-based TUI for manual story curation
+- **story_selection.py** - Data models for story selection state
+- **rss_server.py** - Flask RSS feed server for podcast distribution
 
-The planned serverless architecture will use Google Cloud Functions for orchestration, with browser automation (Puppeteer/Selenium) to interact with NotebookLM for script generation, since NotebookLM lacks a public API.
+### Voice Configuration
+Voice configs are in `tts_converter.py` (lines 81-100). To change voices:
+- Chloe uses Studio-O (female, supports pitch)
+- David uses Journey-D (deep male, no pitch support)
+- Journey voices don't support pitch parameters - always set pitch=0.0
 
-## Development Environment
-
-### Virtual Environment
-The project uses a Python virtual environment located in `venv/`. To activate:
-```bash
-source venv/bin/activate  # On macOS/Linux
+### Podcast Script Format
+Scripts are dialogue-formatted with speaker prefixes:
+```
+Chloe: Welcome to HackerCast...
+David: Thanks Chloe, today we have...
 ```
 
-### Dependencies
-Install required packages:
+Prompt template is in `prompts/podcast-prompt-1.md`.
+
+## Common Commands
+
+### Running the Pipeline
 ```bash
-pip install -r requirements.txt
-```
-
-Key dependencies:
-- `requests` - HTTP requests for APIs and web scraping
-- `beautifulsoup4` - HTML parsing
-- `goose3` - Article extraction (alternative to BeautifulSoup)
-- `selenium` - Browser automation for NotebookLM interaction
-- `google-cloud-texttospeech` - Google Cloud TTS API
-
-### Authentication
-Google Cloud Text-to-Speech requires authentication. Set the `GOOGLE_APPLICATION_CREDENTIALS` environment variable to point to your service account key file.
-
-## Running Individual Components
-
-### Fetch Top Stories
-```bash
-python hn_api.py [limit]
-# Example: python hn_api.py 5
-```
-
-### Scrape Article Content
-```bash
-python scraper.py <URL>
-# Example: python scraper.py "https://example.com/article"
-```
-
-### Convert Text to Speech
-```bash
-python tts_converter.py "<text>" <output_file.mp3>
-# Example: python tts_converter.py "Hello world" output.mp3
-```
-
-## HackerCast CLI Usage
-
-The main application provides a comprehensive CLI interface through `main.py`:
-
-### Complete Pipeline
-```bash
-# Run full automated pipeline
+# Simple automated run
 python main.py run --limit 20
 
-# Run with interactive story selection
-python main.py run --interactive --limit 20
+# Interactive story selection
+python main.py run --interactive --limit 30
 
-# Debug mode for detailed output
-python main.py --debug run --interactive
+# Debug mode
+python main.py --debug run --limit 10
 ```
 
-### Interactive Story Selection
+### Interactive Selection
 ```bash
-# Launch interactive selection mode
-python main.py interactive --limit 30
+python main.py interactive --limit 50
 
-# Select stories and optionally continue processing
-python main.py select --limit 20
+# Commands in interactive mode:
+# - s/select: toggle selection
+# - a/all, n/none: select/deselect all
+# - score:150: select stories with score ≥ 150
+# - hours:12: select stories from last 12 hours
+# - f/filter: search by text
+# - u/urls: show only stories with URLs
+# - c/confirm: proceed with selection
 ```
 
-### Individual Commands
+### Individual Components
 ```bash
-# Fetch and display top stories
+# Fetch stories only
 python main.py fetch --limit 10
 
-# Scrape a single URL
+# Scrape single URL
 python main.py scrape "https://example.com/article"
 
 # Convert text to speech
-python main.py tts "Hello world" output.mp3
-```
+python main.py tts "Text to convert" output.mp3
 
-### Interactive Selection Commands
-When in interactive mode, use these commands:
+# Publish episode
+python main.py publish audio.mp3 --title "Episode Title"
 
-**Basic Selection:**
-- `s`, `select` - Toggle current story selection
-- `d`, `deselect` - Deselect current story
-- `a`, `all` - Select all filtered stories
-- `n`, `none` - Deselect all filtered stories
-- `i`, `invert` - Invert selection for filtered stories
-
-**Smart Selection:**
-- `score:100` - Select stories with score ≥ 100
-- `hours:12` - Select stories newer than 12 hours
-- `score` - Interactive score selection
-- `recent` - Interactive time-based selection
-
-**Filtering & Navigation:**
-- `f`, `filter` - Set text filter (title/author search)
-- `u`, `urls` - Toggle showing only stories with URLs
-- `p`, `preview` - Preview current story details
-- `<number>` - Jump to story number
-- `next`, `>` - Next page
-- `prev`, `<` - Previous page
-
-**Actions:**
-- `c`, `confirm` - Confirm selection and proceed
-- `h`, `help` - Show detailed help
-- `q`, `quit` - Cancel and quit
-
-### Configuration Options
-```bash
-# Use custom config file
-python main.py --config custom.json run
-
-# Enable debug logging
-python main.py --debug interactive
-
-# Combine options
-python main.py --debug --config dev.json run --interactive --limit 50
-```
-
-### Common Workflows
-
-**High-Quality Curation:**
-```bash
-python main.py interactive --limit 50
-# Use: score:150, u (URLs only), manual review, confirm
-```
-
-**Quick Recent News:**
-```bash
-python main.py interactive --limit 20
-# Use: hours:6, score:100, confirm
-```
-
-**Topic-Focused:**
-```bash
-python main.py select --limit 30
-# Use: f (filter for "AI" or "Python"), manual selection
-```
-
-## Current Development Phase
-
-The project is in Phase 1 (Proof of Concept), focusing on manual execution of each pipeline step to validate technology choices. No automated build, test, or deployment processes are currently implemented.
-
-## File Structure
-
-- `docs/prd.md` - Detailed Product Requirements Document
-- `GEMINI.md` - Project overview and development conventions
-- `requirements.txt` - Python dependencies
-- `venv/` - Virtual environment (excluded from version control)
-
-## Podcast Publishing Setup
-
-HackerCast now supports automatic publishing to podcast hosting platforms with dynamic ad insertion capabilities. The primary integration is with **Transistor.fm**, chosen for their superior dynamic ad insertion features.
-
-### Configuration
-
-Set these environment variables to enable podcast publishing:
-
-```bash
-# Enable podcast publishing
-export PODCAST_PUBLISHING_ENABLED=true
-
-# Transistor.fm API credentials
-export TRANSISTOR_API_KEY="your_api_key_here"
-export TRANSISTOR_SHOW_ID="your_show_id_here"
-
-# Optional configuration
-export PODCAST_AUTO_PUBLISH=true  # Auto-publish episodes (default: true)
-export PODCAST_DEFAULT_SEASON=1   # Default season number
-export TRANSISTOR_BASE_URL="https://api.transistor.fm/v1"  # API base URL (default)
-```
-
-### Getting Transistor.fm Credentials
-
-1. Sign up for a [Transistor.fm](https://transistor.fm) account
-2. Create your podcast show in the dashboard
-3. Get your API key from Settings → Developer → API Keys
-4. Find your Show ID using: `python main.py shows`
-
-### Publishing Commands
-
-**Publish existing audio file:**
-```bash
-python main.py publish audio/hackercast_20240115.mp3 --title "HackerCast January 15, 2024"
-```
-
-**List available shows:**
-```bash
+# List Transistor shows
 python main.py shows
 ```
 
-**Run full pipeline with publishing:**
+### Testing
 ```bash
-# Enable publishing in environment, then run:
-python main.py run --limit 20 --interactive
+# Run simple tests
+python test_simple.py
+
+# Run comprehensive test suite
+pytest
+
+# Run specific test file
+pytest tests/test_hn_api.py
+
+# Run with coverage
+pytest --cov=. --cov-report=html
 ```
 
-### Dynamic Ad Insertion
+## Output Structure
 
-Transistor.fm provides dynamic ad insertion capabilities that allow you to:
-- Insert pre-roll, mid-roll, and post-roll ads
-- Update ads without re-uploading episodes
-- Target ads based on listener location and demographics
-- Track ad performance and revenue
-
-Configure dynamic ads through the Transistor.fm dashboard after episodes are published.
+```
+output/
+├── audio/
+│   └── hackercast_YYYYMMDD_HHMMSS.mp3  # Final podcast audio
+└── data/
+    ├── script_YYYYMMDD_HHMMSS_Topic.txt  # Generated podcast script
+    └── pipeline_data_YYYYMMDD_HHMMSS.json  # Pipeline metadata
+```
 
 ## Development Notes
 
-- Follow PEP 8 Python style conventions
-- Sensitive information (API keys) should use environment variables, not hardcoded values
-- The project targets serverless deployment on Google Cloud Platform
-- Browser automation is used as a workaround for NotebookLM's lack of public API
+### Google Cloud Project
+The codebase is hardcoded to use project `hackercast-472403` (see tts_converter.py:55). This cannot be overridden via environment variables.
+
+### Scraping Limitations
+- Some sites (OpenAI, WSJ, Cell.com) return 403/401 errors
+- Goose3 has issues with date parsing ('str' object has no attribute 'isoformat')
+- BeautifulSoup fallback is used when Goose3 fails
+
+### TTS Chunking
+Google Cloud TTS has a 5000 byte limit per request. Large texts are automatically:
+1. Chunked by sentences (see `_chunk_text`)
+2. Processed individually
+3. Concatenated using ffmpeg (or binary concat if ffmpeg unavailable)
+
+### Multi-Voice Dialogue
+Dialogue format is auto-detected (>30% lines with "Chloe:" or "David:"). Each speaker gets separate voice configs and segments are concatenated.
+
+### Podcast Transformation
+Uses Gemini 2.0 Flash model with a detailed prompt to transform raw article content into engaging dialogue between two hosts. The transformation is enabled by default but can be disabled in TTSConverter initialization.
+
+## Configuration Files
+
+- `config.py` - Main configuration with dataclasses
+- `.env` - Environment variables (not in repo)
+- `pytest.ini` - Test configuration
+- `prompts/podcast-prompt-1.md` - Gemini transformation prompt
+
+## Git LFS
+
+The `output/` directory uses Git LFS for large audio files. Ensure Git LFS is installed and initialized before committing MP3 files.

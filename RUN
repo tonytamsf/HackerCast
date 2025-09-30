@@ -1,0 +1,59 @@
+#!/bin/bash
+
+# HackerCast Pipeline Runner
+# Sets up environment and runs the daily podcast generation
+
+set -e  # Exit on error
+
+# Colors for output
+GREEN='\033[0;32m'
+BLUE='\033[0;34m'
+YELLOW='\033[1;33m'
+RED='\033[0;31m'
+NC='\033[0m' # No Color
+
+echo -e "${BLUE}=== HackerCast Pipeline ===${NC}"
+
+# Check if virtual environment exists
+if [ ! -d "venv" ]; then
+    echo -e "${RED}Error: Virtual environment not found${NC}"
+    echo "Please create it with: python3 -m venv venv"
+    exit 1
+fi
+
+# Activate virtual environment
+echo -e "${GREEN}Activating virtual environment...${NC}"
+source venv/bin/activate
+
+# Check for required environment variables
+if [ -z "$GOOGLE_APPLICATION_CREDENTIALS" ]; then
+    echo -e "${YELLOW}Warning: GOOGLE_APPLICATION_CREDENTIALS not set${NC}"
+    echo "Google Cloud TTS may not work without credentials"
+fi
+
+if [ -z "$GEMINI_API_KEY" ]; then
+    echo -e "${YELLOW}Warning: GEMINI_API_KEY not set${NC}"
+    echo "Podcast transformation will be disabled"
+fi
+
+# Default to 20 stories if no argument provided
+LIMIT=${1:-20}
+
+echo -e "${GREEN}Running HackerCast pipeline with limit: ${LIMIT}${NC}"
+echo ""
+
+# Run the pipeline
+python main.py run --limit "$LIMIT"
+
+# Check if it succeeded
+if [ $? -eq 0 ]; then
+    echo ""
+    echo -e "${GREEN}=== Pipeline completed successfully! ===${NC}"
+    echo ""
+    echo "Output files:"
+    ls -lht output/audio/*.mp3 | head -1
+    ls -lht output/data/script_*.txt | head -1
+else
+    echo -e "${RED}=== Pipeline failed ===${NC}"
+    exit 1
+fi

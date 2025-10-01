@@ -28,12 +28,12 @@ jobs:
       issues: write
       contents: read
 
-    # Only run for @hackercast mentions or scheduled runs
+    # Only run for @hackercast mentions (case-insensitive) or scheduled runs
     if: |
       github.event_name == 'schedule' ||
       github.event_name == 'workflow_dispatch' ||
-      (github.event_name == 'issues' && contains(toLower(github.event.issue.body), '@hackercast')) ||
-      (github.event_name == 'issue_comment' && contains(toLower(github.event.comment.body), '@hackercast'))
+      (github.event_name == 'issues' && (contains(github.event.issue.body, '@hackercast') || contains(github.event.issue.body, '@HackerCast'))) ||
+      (github.event_name == 'issue_comment' && (contains(github.event.comment.body, '@hackercast') || contains(github.event.comment.body, '@HackerCast')))
 
     steps:
       - name: Checkout code

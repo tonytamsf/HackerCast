@@ -35,14 +35,15 @@ jobs:
     - name: Create Google Cloud credentials file
       run: |
         echo '${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}' > /tmp/google-credentials.json
-      if: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS != '' }}
+      if: secrets.GOOGLE_APPLICATION_CREDENTIALS != ''
 
     - name: Set up environment variables
       run: |
         echo "GOOGLE_APPLICATION_CREDENTIALS=/tmp/google-credentials.json" >> $GITHUB_ENV
         echo "GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}" >> $GITHUB_ENV
         echo "GOOGLE_CLOUD_PROJECT=hackercast-472403" >> $GITHUB_ENV
-        echo "NOTEBOOKLM_PROJECT_NUMBER=${{secrets.NOTEBOOKLM_PROJECT_NUMBER }}" >> $GITHUB_ENV if: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS != '' }}
+        echo "NOTEBOOKLM_PROJECT_NUMBER=${{ secrets.NOTEBOOKLM_PROJECT_NUMBER }}" >> $GITHUB_ENV
+      if: secrets.GOOGLE_APPLICATION_CREDENTIALS != ''
 
     - name: Create output directories
       run: |

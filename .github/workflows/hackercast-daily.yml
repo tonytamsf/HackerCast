@@ -1,0 +1,131 @@
+name: HackerCast Daily Pipeline
+
+on:
+  # Run daily at 6am PST (14:00 UTC / 2:00 PM UTC)
+  schedule:
+    - cron: '0 14 * * *'
+
+  # Run when @hackercast is mentioned in issues
+  issues:
+    types: [opened, edited]
+
+  issue_comment:
+    types: [created, edited]
+
+  # Allow manual trigger
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: 'Number of stories to process'
+        required: false
+        default: '20'
+
+jobs:
+  run-pipeline:
+    runs-on: ubuntu-latest
+
+    # Only run for @hackercast mentions or scheduled runs
+    if: |
+      github.event_name == 'schedule' ||
+      github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'issues' && contains(github.event.issue.body, '@hackercast')) ||
+      (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@hackercast'))
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Create virtual environment
+        run: python -m venv venv
+
+      - name: Install dependencies
+        run: |
+          source venv/bin/activate
+          pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Set up Google Cloud credentials
+        env:
+          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+        run: |
+          echo "$GOOGLE_CREDENTIALS" > google-credentials.json
+          echo "GOOGLE_APPLICATION_CREDENTIALS=$(pwd)/google-credentials.json" >> $GITHUB_ENV
+
+      - name: Set environment variables
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GOOGLE_CLOUD_PROJECT: ${{ secrets.GOOGLE_CLOUD_PROJECT }}
+          PODCAST_PUBLISHING_ENABLED: ${{ secrets.PODCAST_PUBLISHING_ENABLED }}
+          TRANSISTOR_API_KEY: ${{ secrets.TRANSISTOR_API_KEY }}
+          TRANSISTOR_SHOW_ID: ${{ secrets.TRANSISTOR_SHOW_ID }}
+        run: |
+          echo "GEMINI_API_KEY=$GEMINI_API_KEY" >> $GITHUB_ENV
+          echo "GOOGLE_CLOUD_PROJECT=$GOOGLE_CLOUD_PROJECT" >> $GITHUB_ENV
+          echo "PODCAST_PUBLISHING_ENABLED=$PODCAST_PUBLISHING_ENABLED" >> $GITHUB_ENV
+          echo "TRANSISTOR_API_KEY=$TRANSISTOR_API_KEY" >> $GITHUB_ENV
+          echo "TRANSISTOR_SHOW_ID=$TRANSISTOR_SHOW_ID" >> $GITHUB_ENV
+
+      - name: Install ffmpeg (for audio processing)
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+
+      - name: Run HackerCast pipeline
+        run: |
+          chmod +x ./RUN
+          ./RUN ${{ github.event.inputs.limit || '20' }}
+
+      - name: Upload artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: hackercast-output-${{ github.run_number }}
+          path: |
+            output/audio/*.mp3
+            output/data/*.txt
+            output/data/*.json
+          retention-days: 30
+
+      - name: Clean up credentials
+        if: always()
+        run: rm -f google-credentials.json
+
+      - name: Comment on issue (if triggered by issue)
+        if: |
+          success() &&
+          (github.event_name == 'issues' || github.event_name == 'issue_comment')
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issueNumber = context.issue.number;
+            const runUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issueNumber,
+              body: `✅ HackerCast pipeline completed successfully!\n\nView the run: ${runUrl}\n\nArtifacts are available in the workflow run.`
+            });
+
+      - name: Comment on issue (if failed)
+        if: |
+          failure() &&
+          (github.event_name == 'issues' || github.event_name == 'issue_comment')
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issueNumber = context.issue.number;
+            const runUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issueNumber,
+              body: `❌ HackerCast pipeline failed.\n\nView the run: ${runUrl}`
+            });

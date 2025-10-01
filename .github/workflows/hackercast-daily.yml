@@ -24,6 +24,10 @@ jobs:
   run-pipeline:
     runs-on: ubuntu-latest
 
+    permissions:
+      issues: write
+      contents: read
+
     # Only run for @hackercast mentions or scheduled runs
     if: |
       github.event_name == 'schedule' ||

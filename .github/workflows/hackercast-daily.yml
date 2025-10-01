@@ -32,8 +32,8 @@ jobs:
     if: |
       github.event_name == 'schedule' ||
       github.event_name == 'workflow_dispatch' ||
-      (github.event_name == 'issues' && contains(github.event.issue.body, '@hackercast')) ||
-      (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@hackercast'))
+      (github.event_name == 'issues' && contains(toLower(github.event.issue.body), '@hackercast')) ||
+      (github.event_name == 'issue_comment' && contains(toLower(github.event.comment.body), '@hackercast'))
 
     steps:
       - name: Checkout code

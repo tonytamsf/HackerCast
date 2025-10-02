@@ -437,10 +437,8 @@ class HackerCastPipeline:
 
         script = "".join(script_parts)
 
-        # Save script to file
-        script_file = self.config_manager.get_output_path(
-            "data", f'script_{datetime.now().strftime("%Y%m%d")}.txt'
-        )
+        # Save script to file with date-based directory and latest naming
+        script_file = self.config_manager.get_dated_output_path("data", "txt")
         with open(script_file, "w", encoding="utf-8") as f:
             f.write(script)
 
@@ -468,11 +466,8 @@ class HackerCastPipeline:
         try:
             self._initialize_tts()
 
-            # Generate filename
-            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-            audio_file = self.config_manager.get_output_path(
-                "audio", f"hackercast_{timestamp}.mp3"
-            )
+            # Generate audio file path with date-based directory and latest naming
+            audio_file = self.config_manager.get_dated_output_path("audio", "mp3")
 
             with Progress(
                 SpinnerColumn(),
@@ -520,10 +515,11 @@ class HackerCastPipeline:
         """
         console.print("[bold blue]Saving pipeline data...[/bold blue]")
 
+        # Use date-based directory and latest naming for pipeline data
+        data_file = self.config_manager.get_dated_output_path("data", "json")
+
+        # Generate timestamp for metadata
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        data_file = self.config_manager.get_output_path(
-            "data", f"pipeline_data_{timestamp}.json"
-        )
 
         pipeline_data = {
             "timestamp": timestamp,

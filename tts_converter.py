@@ -351,38 +351,53 @@ class TTSConverter:
 
     def _save_intermediate_script(self, script: str, topic: str = "") -> str:
         """
-        Save the transformed podcast script to an intermediate file.
+        Save the transformed podcast script to an intermediate file using date-based subdirectories.
 
         Args:
             script: The podcast script to save
-            topic: Optional topic for filename
+            topic: Optional topic for filename (used in archived files)
 
         Returns:
             Path to the saved script file
         """
-        # Create output/data directory if it doesn't exist
-        output_dir = Path("output/data")
+        import shutil
+
+        # Get date string for directory
+        date_str = datetime.now().strftime("%Y%m%d")
+
+        # Create date-based subdirectory in output/data
+        output_dir = Path("output/data") / date_str
         output_dir.mkdir(parents=True, exist_ok=True)
 
-        # Generate filename with timestamp
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        # Path for the latest podcast script
+        latest_script_path = output_dir / "latest_podcast.txt"
 
-        # Clean topic for filename (remove special characters)
-        clean_topic = ""
-        if topic:
-            clean_topic = re.sub(r'[^\w\s-]', '', topic)
-            clean_topic = re.sub(r'[-\s]+', '_', clean_topic).strip('_')
-            clean_topic = f"_{clean_topic}" if clean_topic else ""
+        # If latest file exists, archive it with a timestamp
+        if latest_script_path.exists():
+            # Get modification time of existing file
+            mtime = latest_script_path.stat().st_mtime
+            time_mod = datetime.fromtimestamp(mtime).strftime("%H%M%S")
 
-        filename = f"script_{timestamp}{clean_topic}.txt"
-        script_path = output_dir / filename
+            # Clean topic for filename if provided
+            clean_topic = ""
+            if topic:
+                clean_topic = re.sub(r'[^\w\s-]', '', topic)
+                clean_topic = re.sub(r'[-\s]+', '_', clean_topic).strip('_')
+                clean_topic = f"_{clean_topic}" if clean_topic else ""
 
-        # Save the script
-        with open(script_path, 'w', encoding='utf-8') as f:
+            archived_filename = f"{time_mod}_podcast{clean_topic}.txt"
+            archived_script_path = output_dir / archived_filename
+
+            # Rename existing latest to timestamped version
+            shutil.move(str(latest_script_path), str(archived_script_path))
+            logger.info(f"📦 Archived existing podcast script: {archived_script_path}")
+
+        # Save the new script as latest
+        with open(latest_script_path, 'w', encoding='utf-8') as f:
             f.write(script)
 
-        logger.info(f"💾 Podcast script saved to: {script_path}")
-        return str(script_path)
+        logger.info(f"💾 Podcast script saved to: {latest_script_path}")
+        return str(latest_script_path)
 
     def _transform_to_podcast(self, text: str, topic: str = "") -> Tuple[str, str]:
         """

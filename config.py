@@ -267,6 +267,60 @@ class ConfigManager:
         else:
             raise ValueError(f"Unknown file type: {file_type}")
 
+    def get_dated_output_path(self, file_type: str, extension: str, date_str: Optional[str] = None) -> Path:
+        """
+        Get a date-based output path with 'latest' naming convention.
+
+        This creates paths like: output/audio/YYYYMMDD/latest.mp3
+
+        If a 'latest' file already exists for today, it will be renamed to a timestamped
+        version before the new file is created.
+
+        Args:
+            file_type: Type of file ('audio', 'data', 'logs')
+            extension: File extension (e.g., 'mp3', 'txt', 'json')
+            date_str: Optional date string in YYYYMMDD format (defaults to today)
+
+        Returns:
+            Path object for the latest file
+        """
+        from datetime import datetime
+        import shutil
+
+        if date_str is None:
+            date_str = datetime.now().strftime("%Y%m%d")
+
+        # Get base directory for this file type
+        base_path = Path(self._config.output.base_dir)
+        if file_type == "audio":
+            type_dir = base_path / self._config.output.audio_dir
+        elif file_type == "data":
+            type_dir = base_path / self._config.output.data_dir
+        elif file_type == "logs":
+            type_dir = base_path / self._config.output.logs_dir
+        else:
+            raise ValueError(f"Unknown file type: {file_type}")
+
+        # Create date-based subdirectory
+        date_dir = type_dir / date_str
+        date_dir.mkdir(parents=True, exist_ok=True)
+
+        # Path for the latest file
+        latest_file = date_dir / f"latest.{extension}"
+
+        # If latest file exists, archive it with a timestamp
+        if latest_file.exists():
+            # Get modification time of existing file
+            mtime = latest_file.stat().st_mtime
+            time_mod = datetime.fromtimestamp(mtime).strftime("%H%M%S")
+            archived_file = date_dir / f"{time_mod}.{extension}"
+
+            # Rename existing latest to timestamped version
+            shutil.move(str(latest_file), str(archived_file))
+            logger.info(f"Archived existing file: {latest_file} -> {archived_file}")
+
+        return latest_file
+
     def get_log_config_dict(self) -> Dict[str, Any]:
         """Get logging configuration as a dictionary for logging.dictConfig."""
         config_dict = {

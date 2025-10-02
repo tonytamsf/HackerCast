@@ -47,14 +47,8 @@ jobs:
           python-version: '3.11'
           cache: 'pip'
 
-      - name: Create virtual environment
-        run: python -m venv venv
-
       - name: Install dependencies
-        run: |
-          source venv/bin/activate
-          pip install --upgrade pip
-          pip install -r requirements.txt
+        run: make install
 
       - name: Set up Google Cloud credentials
         env:
@@ -80,15 +74,8 @@ jobs:
       - name: Install ffmpeg (for audio processing)
         run: sudo apt-get update && sudo apt-get install -y ffmpeg
 
-      - name: Run HackerCast pipeline
-        run: |
-          chmod +x ./RUN
-          ./RUN ${{ github.event.inputs.limit || '20' }}
-
-      - name: Generate RSS feed
-        run: |
-          source venv/bin/activate
-          python rss_generator.py --output-dir output --output-file output/rss.xml --base-url "https://raw.githubusercontent.com/${{ github.repository }}/main/output"
+      - name: Run HackerCast pipeline and generate RSS
+        run: make all LIMIT=${{ github.event.inputs.limit || '20' }} REPO=${{ github.repository }}
 
       - name: Commit RSS feed and output files
         run: |

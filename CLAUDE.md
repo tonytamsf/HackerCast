@@ -129,11 +129,74 @@ pytest --cov=. --cov-report=html
 
 ```
 output/
+├── rss.xml                                      # RSS feed for podcast
 ├── audio/
-│   └── hackercast_YYYYMMDD_HHMMSS.mp3  # Final podcast audio
+│   └── YYYYMMDD/
+│       ├── latest.mp3                           # Latest episode for the day
+│       └── HHMMSS.mp3                           # Archived episodes (timestamped)
 └── data/
-    ├── script_YYYYMMDD_HHMMSS_Topic.txt  # Generated podcast script
-    └── pipeline_data_YYYYMMDD_HHMMSS.json  # Pipeline metadata
+    └── YYYYMMDD/
+        ├── latest.txt                           # Latest script
+        ├── latest.json                          # Latest pipeline data
+        ├── latest_podcast.txt                   # Latest podcast script
+        └── HHMMSS.* (archived files)
+```
+
+When running multiple times per day, existing `latest.*` files are automatically archived with timestamps (e.g., `210717.mp3`).
+
+## RSS Feed & Podcast Server
+
+HackerCast automatically generates an RSS feed that's compatible with podcast players and can be served via a simple HTTP server.
+
+### Generating RSS Feed
+
+The RSS feed is automatically generated during the pipeline run. To manually generate:
+
+```bash
+# Generate RSS feed
+python rss_generator.py --output-dir output --output-file output/rss.xml --base-url http://localhost:5000
+
+# Custom configuration
+python rss_generator.py \
+  --output-dir output \
+  --output-file output/rss.xml \
+  --base-url https://podcast.example.com \
+  --title "My HackerCast" \
+  --author "My Name" \
+  --email "my@email.com"
+```
+
+### Running Podcast Server
+
+Start the Flask server to serve the RSS feed and audio files:
+
+```bash
+# Start server on default port (5000)
+python podcast_server.py
+
+# Custom port and base URL
+python podcast_server.py --port 8080 --base-url https://podcast.example.com
+
+# Specify output directory
+python podcast_server.py --output-dir output --host 0.0.0.0 --port 8080
+```
+
+Server endpoints:
+- `http://localhost:5000/` - Web interface showing episodes
+- `http://localhost:5000/rss.xml` - RSS feed for podcast players
+- `http://localhost:5000/audio/YYYYMMDD/latest.mp3` - Audio files
+- `http://localhost:5000/data/YYYYMMDD/latest.json` - Episode metadata
+
+### Subscribing to Podcast
+
+1. Start the podcast server
+2. Copy the RSS feed URL: `http://localhost:5000/rss.xml`
+3. Add the URL to your podcast player (e.g., Apple Podcasts, Overcast, Pocket Casts)
+
+For production deployment, set `HACKERCAST_BASE_URL` environment variable to your public URL:
+```bash
+export HACKERCAST_BASE_URL=https://podcast.example.com
+python podcast_server.py --host 0.0.0.0 --port 80
 ```
 
 ## Development Notes

@@ -550,6 +550,45 @@ class HackerCastPipeline:
 
         return data_file
 
+    def generate_rss_feed(self) -> Optional[Path]:
+        """
+        Generate RSS feed for podcast.
+
+        Returns:
+            Path to RSS feed file or None if failed
+        """
+        console.print("[bold blue]Generating RSS feed...[/bold blue]")
+
+        try:
+            from rss_generator import RSSFeedGenerator
+
+            # Determine base URL (use environment variable or default)
+            base_url = os.getenv('HACKERCAST_BASE_URL', 'http://localhost:5000')
+
+            # Create RSS generator
+            generator = RSSFeedGenerator(
+                output_dir=str(self.config_manager.config.output.base_dir),
+                base_url=base_url,
+                podcast_title="HackerCast",
+                podcast_description="Your daily digest of the top stories from Hacker News",
+                podcast_author="HackerCast",
+            )
+
+            # Generate and save RSS feed
+            rss_file = generator.generate_and_save(
+                output_file=str(self.config_manager.get_output_path("data", "../rss.xml"))
+            )
+
+            console.print(f"[green]RSS feed generated: {rss_file}[/green]")
+            self.logger.info(f"Generated RSS feed: {rss_file}")
+
+            return rss_file
+
+        except Exception as e:
+            console.print(f"[yellow]Warning: Failed to generate RSS feed: {e}[/yellow]")
+            self.logger.warning(f"Failed to generate RSS feed: {e}")
+            return None
+
     def publish_to_podcast_host(
         self,
         audio_file: Path,
@@ -672,6 +711,9 @@ class HackerCastPipeline:
 
             # Step 6: Save pipeline data
             data_file = self.save_pipeline_data()
+
+            # Step 7: Generate RSS feed
+            rss_file = self.generate_rss_feed()
 
             # Calculate runtime
             runtime = time.time() - pipeline_start

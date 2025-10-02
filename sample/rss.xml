@@ -1,0 +1,58 @@
+<?xml version="1.0" ?>
+<rss xmlns:ns0="http://www.w3.org/2005/Atom" xmlns:ns1="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+  <channel>
+    <title>HackerCast</title>
+    <description>Your daily digest of the top stories from Hacker News</description>
+    <language>en-us</language>
+    <link>http://localhost:8080</link>
+    <ns0:link href="http://localhost:8080/rss.xml" rel="self" type="application/rss+xml"/>
+    <ns1:author>HackerCast</ns1:author>
+    <ns1:summary>Your daily digest of the top stories from Hacker News</ns1:summary>
+    <ns1:owner>
+      <ns1:name>HackerCast</ns1:name>
+      <ns1:email>hackercast@example.com</ns1:email>
+    </ns1:owner>
+    <ns1:explicit>no</ns1:explicit>
+    <ns1:category text="Technology"/>
+    <item>
+      <title>HackerCast - 20251002 - Top 16 Stories</title>
+      <description>Today's top Hacker News stories:
+
+• Signal Protocol and Post-Quantum Ratchets
+• The strangest letter of the alphabet: The rise and fall of yogh
+• Launching Solveit – an antidote to AI fatigue
+• Babel is why I keep blogging with Emacs
+• Why most product planning is bad and what to do about it</description>
+      <pubDate>Thu, 02 Oct 2025 00:00:00 GMT</pubDate>
+      <guid isPermaLink="false">hackercast-20251002</guid>
+      <enclosure url="http://localhost:8080/audio/20251002/latest.mp3" length="2260748" type="audio/mpeg"/>
+      <ns1:author>HackerCast</ns1:author>
+      <ns1:summary>Today's top Hacker News stories:
+
+• Signal Protocol and Post-Quantum Ratchets
+• The strangest letter of the alphabet: The rise and fall of yogh
+• Launching Solveit – an antidote to AI fatigue
+• Babel is why I keep blogging with Emacs
+• Why most product planning is bad and what to do about it</ns1:summary>
+      <ns1:duration>00:06:59</ns1:duration>
+    </item>
+    <item>
+      <title>HackerCast - 20251001 - Top 1 Stories</title>
+      <description>Today's top Hacker News stories:
+
+• Cormac McCarthy's personal library
+• F3: Open-source data file format for the future [pdf]
+• Keyhive – Local-first access control</description>
+      <pubDate>Wed, 01 Oct 2025 00:00:00 GMT</pubDate>
+      <guid isPermaLink="false">hackercast-20251001</guid>
+      <enclosure url="http://localhost:8080/audio/20251001/latest.mp3" length="2511404" type="audio/mpeg"/>
+      <ns1:author>HackerCast</ns1:author>
+      <ns1:summary>Today's top Hacker News stories:
+
+• Cormac McCarthy's personal library
+• F3: Open-source data file format for the future [pdf]
+• Keyhive – Local-first access control</ns1:summary>
+      <ns1:duration>00:08:03</ns1:duration>
+    </item>
+  </channel>
+</rss>

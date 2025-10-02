@@ -67,7 +67,7 @@ class RSSFeedGenerator:
     def __init__(
         self,
         output_dir: str = "output",
-        base_url: str = "http://localhost:5000",
+        base_url: Optional[str] = None,
         podcast_title: str = "HackerCast",
         podcast_description: str = "Your daily digest of the top stories from Hacker News",
         podcast_author: str = "HackerCast",
@@ -76,6 +76,8 @@ class RSSFeedGenerator:
         podcast_category: str = "Technology",
     ):
         self.output_dir = Path(output_dir)
+        if base_url is None:
+            base_url = os.environ.get("HACKERCAST_BASE_URL", "http://localhost:8080")
         self.base_url = base_url.rstrip('/')
         self.podcast_title = podcast_title
         self.podcast_description = podcast_description
@@ -281,8 +283,8 @@ def main():
     )
     parser.add_argument(
         '--base-url',
-        default='http://localhost:5000',
-        help='Base URL for podcast server'
+        default=None,
+        help='Base URL for podcast server. Defaults to HACKERCAST_BASE_URL env var or http://localhost:8080'
     )
     parser.add_argument(
         '--title',

@@ -99,6 +99,105 @@ class TTSConverter:
             )
         }
 
+    def _get_audio_duration(self, file_path: str) -> float:
+        """
+        Get the duration of an audio file using ffprobe.
+
+        Args:
+            file_path: Path to the audio file
+
+        Returns:
+            Duration in seconds
+        """
+        if not self._has_ffmpeg():
+            logger.warning("ffmpeg not found, cannot get audio duration")
+            return 0.0
+
+        try:
+            result = subprocess.run([
+                'ffprobe', '-v', 'error', '-show_entries',
+                'format=duration', '-of',
+                'default=noprint_wrappers=1:nokey=1', file_path
+            ],
+                                    capture_output=True,
+                                    text=True,
+                                    check=True)
+            return float(result.stdout)
+        except (subprocess.CalledProcessError, ValueError) as e:
+            logger.error(f"Error getting duration for {file_path}: {e}")
+            return 0.0
+
+    def convert_segments_to_audio(
+        self,
+        segments: List[Dict[str, str]],
+        output_file: str,
+        language_code: str = "en-US",
+        voice_name: str = "en-US-Neural2-D",
+        speaking_rate: float = 1.0,
+        pitch: float = 0.0
+    ) -> Tuple[Optional[Path], List[Dict[str, Any]]]:
+        """
+        Convert a list of text segments to a single audio file with chapters.
+
+        Args:
+            segments: List of dictionaries, each with "text" and "title" keys.
+            output_file: Path to save the final MP3 file.
+            ... other TTS parameters ...
+
+        Returns:
+            A tuple containing the path to the final audio file and a list of chapter data.
+        """
+        temp_files = []
+        chapters = []
+        total_duration = 0.0
+
+        try:
+            for i, segment in enumerate(segments):
+                logger.info(f"Processing segment {i+1}/{len(segments)}: {segment['title']}")
+
+                # Synthesize audio for the segment
+                audio_content = self._synthesize_chunk(
+                    segment["text"],
+                    language_code,
+                    voice_name,
+                    speaking_rate,
+                    pitch
+                )
+
+                # Save to a temporary file
+                with tempfile.NamedTemporaryFile(delete=False, suffix='.mp3') as temp_file:
+                    temp_file.write(audio_content)
+                    temp_files.append(temp_file.name)
+
+                # Get duration and create chapter
+                duration = self._get_audio_duration(temp_file.name)
+                chapters.append({
+                    "startTime": total_duration,
+                    "title": segment["title"]
+                })
+                total_duration += duration
+
+            # Concatenate all temporary audio files
+            os.makedirs(os.path.dirname(output_file), exist_ok=True)
+            if self._has_ffmpeg():
+                self._concatenate_with_ffmpeg(temp_files, output_file)
+            else:
+                self._concatenate_binary(temp_files, output_file)
+
+            logger.info(f"Combined audio file created at: {output_file}")
+            return Path(output_file), chapters
+
+        except Exception as e:
+            logger.error(f"Error converting segments to audio: {e}")
+            return None, []
+        finally:
+            # Clean up temporary files
+            for temp_file in temp_files:
+                try:
+                    os.unlink(temp_file)
+                except OSError:
+                    pass
+
     def _chunk_text(self, text: str) -> List[str]:
         """
         Split text into chunks that fit within the API byte limit.

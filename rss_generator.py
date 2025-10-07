@@ -25,6 +25,7 @@ class PodcastEpisode:
         description: str,
         duration_seconds: int = 0,
         file_size: int = 0,
+        chapters_url: Optional[str] = None,
     ):
         self.date = date  # YYYYMMDD format
         self.audio_file = audio_file
@@ -32,6 +33,7 @@ class PodcastEpisode:
         self.description = description
         self.duration_seconds = duration_seconds
         self.file_size = file_size
+        self.chapters_url = chapters_url
 
         # Parse date
         self.pub_date = datetime.strptime(date, "%Y%m%d")
@@ -114,6 +116,13 @@ class RSSFeedGenerator:
             # Get file size
             file_size = audio_file.stat().st_size
 
+            # Check for chapter file
+            chapters_file = audio_file.with_suffix('.chapters.json')
+            chapters_url = None
+            if chapters_file.exists():
+                chapters_url = f"/audio/{date_str}/latest.chapters.json"
+                logger.info(f"Found chapters file for {date_str}")
+
             # Try to load metadata from pipeline data
             data_dir = self.output_dir / "data" / date_str
             metadata_file = data_dir / "latest.json"
@@ -168,6 +177,7 @@ class RSSFeedGenerator:
                 description=description,
                 duration_seconds=duration,
                 file_size=file_size,
+                chapters_url=chapters_url,
             )
             episodes.append(episode)
             logger.info(f"Found episode: {episode.title} ({file_size} bytes)")
@@ -181,6 +191,7 @@ class RSSFeedGenerator:
             'version': '2.0',
             'xmlns:itunes': 'http://www.itunes.com/dtds/podcast-1.0.dtd',
             'xmlns:atom': 'http://www.w3.org/2005/Atom',
+            'xmlns:podcast': 'https://podcastindex.org/namespace/1.0',
         })
 
         # Create channel
@@ -235,6 +246,13 @@ class RSSFeedGenerator:
 
             if episode.duration_seconds > 0:
                 ET.SubElement(item, '{http://www.itunes.com/dtds/podcast-1.0.dtd}duration').text = episode.duration_formatted
+
+            # Add podcast namespace chapters if available
+            if episode.chapters_url:
+                ET.SubElement(item, '{https://podcastindex.org/namespace/1.0}chapters', {
+                    'url': f"{self.base_url}{episode.chapters_url}",
+                    'type': 'application/json+chapters'
+                })
 
         # Convert to pretty-printed XML string
         xml_str = ET.tostring(rss, encoding='unicode')

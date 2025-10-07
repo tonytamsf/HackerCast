@@ -27,6 +27,7 @@ from scraper import ArticleScraper, ScrapedContent
 from tts_converter import TTSConverter
 from interactive_selector import InteractiveStorySelector
 from podcast_publisher import PodcastPublisher, PodcastPublisherConfig
+from podcast_chapters import create_chapter_file
 
 # Initialize rich console
 console = Console()
@@ -65,6 +66,8 @@ class HackerCastPipeline:
         self.stories: List[HackerNewsStory] = []
         self.scraped_content: List[ScrapedContent] = []
         self.audio_files: List[Path] = []
+        self.chapters: List[Dict[str, Any]] = []
+        self.chapter_file: Optional[Path] = None
 
     def _setup_logging(self):
         """Configure logging based on configuration."""
@@ -393,117 +396,118 @@ class HackerCastPipeline:
         self.scraped_content = scraped_content
         return scraped_content
 
-    def generate_podcast_script(self, content: List[ScrapedContent]) -> str:
+    def prepare_podcast_segments(self, content: List[ScrapedContent]) -> List[Dict[str, str]]:
         """
-        Generate a podcast script from scraped content.
+        Prepare podcast segments from scraped content.
 
         Args:
             content: List of scraped content
 
         Returns:
-            Generated podcast script
+            List of segments, where each segment is a dictionary with "title" and "text".
         """
         if not content:
-            return ""
+            return []
 
-        console.print("[bold blue]Generating podcast script...[/bold blue]")
-
-        script_parts = []
+        console.print("[bold blue]Preparing podcast segments...[/bold blue]")
+        segments = []
 
         # Introduction
-        script_parts.append(
+        intro_text = (
             f"Welcome to HackerCast, your daily digest of the top stories from Hacker News. "
             f"Today is {datetime.now().strftime('%B %d, %Y')}, and we have {len(content)} "
             f"fascinating stories to share with you."
         )
+        segments.append({"title": "Introduction", "text": intro_text})
 
         # Story segments
         for i, article in enumerate(content, 1):
-            script_parts.append(f"\n\nStory {i}: {article.title}")
-
-            # Add full article content
-            if article.content.strip():
-                script_parts.append(f"\n{article.content}")
-
-            # Add transition
-            if i < len(content):
-                script_parts.append("\n\nNext up...")
+            story_text = f"Story {i}: {article.title}\n\n{article.content}"
+            segments.append({"title": article.title, "text": story_text})
 
         # Conclusion
-        script_parts.append(
-            f"\n\nThat wraps up today's HackerCast. Thank you for listening, "
+        outro_text = (
+            f"That wraps up today's HackerCast. Thank you for listening, "
             f"and we'll see you tomorrow with more stories from the world of technology."
         )
+        segments.append({"title": "Conclusion", "text": outro_text})
 
-        script = "".join(script_parts)
+        console.print(f"[green]Prepared {len(segments)} segments.[/green]")
+        return segments
 
-        # Save script to file with date-based directory and latest naming
-        script_file = self.config_manager.get_dated_output_path("data", "txt")
-        with open(script_file, "w", encoding="utf-8") as f:
-            f.write(script)
-
-        console.print(f"[green]Script generated and saved to: {script_file}[/green]")
-        self.logger.info(f"Generated script with {len(script)} characters")
-
-        return script
-
-    def convert_to_audio(self, script: str) -> Optional[Path]:
+    def convert_to_audio(self, segments: List[Dict[str, str]]) -> Optional[Path]:
         """
-        Convert script to audio using TTS.
+        Convert segments to audio using TTS and generate chapters.
 
         Args:
-            script: Podcast script text
+            segments: A list of podcast segments with title and text.
 
         Returns:
-            Path to generated audio file or None if failed
+            Path to generated audio file or None if failed.
         """
-        if not script.strip():
-            console.print("[red]No script to convert![/red]")
+        if not segments:
+            console.print("[red]No segments to convert![/red]")
             return None
 
-        console.print("[bold blue]Converting script to audio...[/bold blue]")
+        console.print("[bold blue]Converting segments to audio...[/bold blue]")
 
         try:
             self._initialize_tts()
-
-            # Generate audio file path with date-based directory and latest naming
             audio_file = self.config_manager.get_dated_output_path("audio", "mp3")
 
-            with Progress(
-                SpinnerColumn(),
-                TextColumn("[progress.description]{task.description}"),
-                console=console,
-            ) as progress:
-                task = progress.add_task("Converting to speech...", total=None)
+            audio_path, chapters = self.tts_converter.convert_segments_to_audio(
+                segments=segments,
+                output_file=str(audio_file),
+                language_code=self.config.tts.language_code,
+                voice_name=self.config.tts.voice_name,
+                speaking_rate=self.config.tts.speaking_rate,
+                pitch=self.config.tts.pitch,
+            )
 
-                # Generate topic from story titles for podcast transformation
-                topic = f"Top {len(self.stories)} Hacker News Stories"
-
-                success = self.tts_converter.convert_text_to_speech(
-                    text=script,
-                    output_file=str(audio_file),
-                    language_code=self.config.tts.language_code,
-                    voice_name=self.config.tts.voice_name,
-                    speaking_rate=self.config.tts.speaking_rate,
-                    pitch=self.config.tts.pitch,
-                    topic=topic,
-                )
-
-                if success:
-                    progress.update(task, description=f"Audio saved: {audio_file.name}")
-                    console.print(
-                        f"[green]Audio generated successfully: {audio_file}[/green]"
-                    )
-                    self.logger.info(f"Generated audio file: {audio_file}")
-                    self.audio_files.append(audio_file)
-                    return audio_file
-                else:
-                    console.print("[red]Failed to generate audio![/red]")
-                    return None
+            if audio_path:
+                console.print(f"[green]Audio generated successfully: {audio_path}[/green]")
+                self.audio_files.append(audio_path)
+                self.chapters = chapters
+                return audio_path
+            else:
+                console.print("[red]Failed to generate audio![/red]")
+                return None
 
         except Exception as e:
             console.print(f"[red]Error generating audio: {e}[/red]")
             self.logger.error(f"Error generating audio: {e}")
+            return None
+
+    def generate_chapter_file(self) -> Optional[Path]:
+        """
+        Generate a chapter file from the chapter data.
+
+        Returns:
+            Path to the generated chapter file or None if failed.
+        """
+        if not self.chapters:
+            console.print("[yellow]No chapter data available to generate chapter file.[/yellow]")
+            return None
+
+        console.print("[bold blue]Generating chapter file...[/bold blue]")
+
+        try:
+            # Generate chapter file path, sibling to the audio file
+            if not self.audio_files:
+                self.logger.error("Cannot generate chapter file without an audio file.")
+                return None
+
+            audio_file = self.audio_files[-1]
+            chapter_file_path = audio_file.with_suffix('.chapters.json')
+
+            # Create the chapter file
+            self.chapter_file = create_chapter_file(self.chapters, chapter_file_path)
+
+            console.print(f"[green]Chapter file generated successfully: {self.chapter_file}[/green]")
+            return self.chapter_file
+        except Exception as e:
+            console.print(f"[red]Error generating chapter file: {e}[/red]")
+            self.logger.error(f"Error generating chapter file: {e}")
             return None
 
     def save_pipeline_data(self) -> Path:
@@ -532,6 +536,8 @@ class HackerCastPipeline:
             "stories": [story.to_dict() for story in self.stories],
             "scraped_content": [content.to_dict() for content in self.scraped_content],
             "audio_files": [str(file) for file in self.audio_files],
+            "chapters": self.chapters,
+            "chapter_file": str(self.chapter_file) if self.chapter_file else None,
             "stats": {
                 "stories_fetched": len(self.stories),
                 "articles_scraped": len(self.scraped_content),
@@ -696,18 +702,24 @@ class HackerCastPipeline:
             if not content:
                 raise ValueError("No articles scraped")
 
-            # Step 3: Generate script
-            script = self.generate_podcast_script(content)
-            if not script:
-                raise ValueError("No script generated")
+            # Step 3: Prepare podcast segments
+            segments = self.prepare_podcast_segments(content)
+            if not segments:
+                raise ValueError("No segments prepared")
 
             # Step 4: Convert to audio
-            audio_file = self.convert_to_audio(script)
+            audio_file = self.convert_to_audio(segments)
+
+            # Step 4.5: Generate chapter file
+            if audio_file:
+                self.generate_chapter_file()
 
             # Step 5: Publish to podcast host (if configured)
             episode_info = None
             if audio_file and hasattr(self.config, 'podcast_publishing') and self.config.podcast_publishing.enabled:
-                episode_info = self.publish_to_podcast_host(audio_file, script, len(stories))
+                # For publishing, we can just pass an empty script for now.
+                # In a future iteration, we could generate a summary.
+                episode_info = self.publish_to_podcast_host(audio_file, "", len(stories))
 
             # Step 6: Save pipeline data
             data_file = self.save_pipeline_data()

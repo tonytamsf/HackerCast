@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@automattic/mcp-wordpress-remote": "^0.2.18"
+  }
+}

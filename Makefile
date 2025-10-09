@@ -7,6 +7,16 @@ LIMIT ?= 20
 REPO ?= "TonyTam/HackerCast"
 BASE_URL ?= "https://raw.githubusercontent.com/$(REPO)/main/output"
 
+# Detect if we're in CI environment (GitHub Actions sets CI=true)
+# In CI, use Python directly; locally, use venv
+ifdef CI
+    PYTHON := python
+    PIP := pip
+else
+    PYTHON := . venv/bin/activate && python
+    PIP := . venv/bin/activate && pip
+endif
+
 # Phony targets prevent conflicts with files of the same name
 .PHONY: all install audio rss clean
 
@@ -15,18 +25,20 @@ all: audio rss
 
 # Sets up the development environment
 install:
+ifndef CI
 	test -d venv || python3 -m venv venv
-	. venv/bin/activate; pip install -r requirements.txt
+endif
+	$(PIP) install -r requirements.txt
 
 # Generates the podcast audio file
 # Usage: make audio [LIMIT=N]
 audio:
-	. venv/bin/activate; python main.py run --limit $(LIMIT)
+	$(PYTHON) main.py run --limit $(LIMIT)
 
 # Generates the RSS feed
 # Usage: make rss [REPO=owner/repo]
 rss:
-	. venv/bin/activate; python rss_generator.py --output-dir output --output-file output/rss.xml --base-url $(BASE_URL)
+	$(PYTHON) rss_generator.py --output-dir output --output-file output/rss.xml --base-url $(BASE_URL)
 
 # Removes generated files
 clean:

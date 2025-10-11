@@ -4,8 +4,8 @@
 LIMIT ?= 20
 # Default repository, can be overridden.
 # In GitHub Actions, this will be provided by the workflow.
-REPO ?= "tonytamsf/HackerCast"
-BASE_URL ?= "https://raw.githubusercontent.com/$(REPO)/main/output"
+REPO ?= tonytamsf/HackerCast
+BASE_URL ?= https://raw.githubusercontent.com/$(REPO)/main/output
 
 # Detect if we're in CI environment (GitHub Actions sets CI=true)
 # In CI, use Python directly; locally, use venv

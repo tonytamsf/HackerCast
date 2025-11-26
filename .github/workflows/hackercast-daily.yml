@@ -2,8 +2,8 @@ name: HackerCast Daily Pipeline
 
 on:
   # Run daily at 6am PST (14:00 UTC / 2:00 PM UTC)
-  schedule:
-    - cron: '0 14 * * *'
+  #schedule:
+  #  - cron: '0 14 * * *'
 
   # Run when @hackercast is mentioned in issues
   issues:
